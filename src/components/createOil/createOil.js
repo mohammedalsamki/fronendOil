@@ -23,7 +23,7 @@ export default function CreateOil() {
 
          
   const creatOil = ()=>{
-    axios.post(`https://backoil.herokuapp.com/api/oil`,{OilUsage,Brand,Capasity,OilGrade,Unit,UnitPrice,StockQuantiti}).then( () => {
+    axios.post('https://backoil.herokuapp.com/api/oil',{OilUsage,Brand,Capasity,OilGrade,Unit,UnitPrice,StockQuantiti}).then( () => {
       window.location.reload(false);
     })
   }

@@ -1,4 +1,6 @@
 import * as React from 'react';
+import ReactDOM from 'react-dom';
+
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -7,8 +9,64 @@ import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import axios from 'axios';
-import 'dotenv/config'
 
+import 'dotenv/config'
+import { grid } from '@mui/system';
+
+let demo = React.createElement(
+  "h1", { style: { color: "green" } }, "Welcome to GeeksforGeeks"
+)
+ReactDOM.render(
+  demo,
+  document.getElementById('root')
+);
+
+
+ function addOil(e) {
+  const btnAdd = document.querySelector('#btnAdd');
+  const btnRemove = document.querySelector('#btnRemove');
+  const sb = document.querySelector('#list');
+  const name = document.querySelector('#name');
+  btnAdd.onclick = (e) => {
+
+      e.preventDefault();
+
+      // validate the option
+      if (name.value == '') {
+          alert('Please enter the name.');
+          return;
+      }
+      // create a new option
+      const option = new Option(name.value, name.value);
+      // add it to the list
+      sb.add(option, undefined);
+
+      // reset the value of the input
+      name.value = '';
+      name.focus();
+
+    };
+    btnRemove.onclick = (e) => {
+      e.preventDefault();
+
+      // save the selected option
+      let selected = [];
+
+      for (let i = 0; i < sb.options.length; i++) {
+          selected[i] = sb.options[i].selected;
+      }
+
+      // remove all selected option
+      let index = sb.options.length;
+      while (index--) {
+          if (selected[index]) {
+              sb.remove(index);
+          }
+      }
+  };
+  
+
+  }
 
 export default function CreateOil() {
   const [OilUsage, setOilUsage]= React.useState('');
@@ -32,25 +90,40 @@ export default function CreateOil() {
   console.log(OilUsage,Brand,Capasity,OilGrade,Unit)
 
   return (
+    
     <>
       <h2>Add Oil to stock</h2>
     <Box sx={{ minWidth: 120 }}>
-      <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Oil Usage</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          // value={OilUsage}
-          label="OilUsage"
-          onChange={(event)=>setOilUsage(event.target.value)}
-        >
-          <MenuItem value={'EngineOil'}>EngineOil</MenuItem>
-          <MenuItem value={'BrakeFluid'}>BrakeFluid</MenuItem>
-          <MenuItem value={'TransmissionFluid'}>TransmissionFluid</MenuItem>
-        </Select>
-      </FormControl>
+
+
+    <FormControl fullWidth >
+      <div style={{display:grid }}>
+      <br></br>
+      {/* <TextField  label="add oil " variant="standard" id="name"/> */}
+      <label for="name">OilUseg:</label>
+      <br></br>
+            <input type="text" id="name" placeholder="Enter a OilUseg" autocomplete="off"></input>
+      <br></br>
+      <Button id="btnAdd" variant="contained" onClick={addOil}>add</Button>
+      </div>
+      <label for="list">OilUseg List:</label>
+            <select id="list" name="list" multiple onChange={(event)=>setOilUsage(event.target.value)} >
+
+            </select>
+
+
+     
+    <br></br>
+
+      <Button id="btnRemove" variant="contained">remove</Button>
+      <br></br>
+
+    </FormControl>
     <br></br>
     <br></br>
+
+     
+   
 
       <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">Brand</InputLabel>

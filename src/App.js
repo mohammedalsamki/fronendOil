@@ -1,44 +1,63 @@
 import React from 'react';
-
-import { Container,AppBar,Typography, Grow,Grid } from '@material-ui/core';
+import { BrowserRouter as Router,Route,Switch,Link } from 'react-router-dom';
 import './App.css';
-import ShowOil from './components/showOIl/showOil.js';
-import CreatOil from './components/createOil/createOil.js';
+import { Container,AppBar,Typography } from '@material-ui/core';
+
+import OilGrade from './components/OilGrade/OilGrade';
+import Brand from './components/Brand/Brand';
+import OilUseg from './components/OilUseg/OilUseg';
+import Capacity from './components/Capacity/Capacity';
+import Home from './Home';
 import useStyles from './styles';
+
+
 function App() {
   const classes= useStyles();
   return (
+  
+  <Router>
     <div className="App">
-      <Container maxWidth="lg">
+    <Container maxWidth="lg">
          <AppBar className={classes.appBar} position="static" color='inherit'>
-         <Typography className={classes.heading} variant='h2' align='center'> oil creat and show </Typography>
+          
+          <Typography className={classes.heading} variant='h2' align='center'> oil creat and show </Typography>
+          <div className="App">
+              <ul>
+                <li>
+                  <Link to="/">Home</Link>
+                </li>
+                <li>
+                  <Link to="/OilGrade">OilGrade</Link>
+                </li>
+                <li>
+                  <Link to="/Brand">Brand</Link>
+                </li>                <li>
+                  <Link to="/OilUseg">OilUseg</Link>
+                </li>                <li>
+                  <Link to="/Capacity">Capacity</Link>
+                </li>
+              </ul>
+          </div>
          </AppBar>
-         <Grow in>
-           <Container>
-             <Grid container justify="space-between" alignItems='strect'>
-               <Grid item xs={12} sm={7}>
-                 <AppBar className={classes.appBar} position='static' color='inherit'>
-
-                     <ShowOil/> 
-
-                 </AppBar>
-              </Grid>
-
-              <Grid item xs={12} sm={4}>
-              <AppBar className={classes.appBar} position='static' color='inherit'>
-
-                  <CreatOil/> 
-
-              </AppBar>
-              </Grid>
+          <div>
+           <Switch>
+           <Route path="/" exact component={Home}></Route>
+            <Route path="/OilGrade" component={OilGrade}></Route>
+            <Route path="/Brand" component={Brand}></Route>
+            <Route path="/OilUseg" component={OilUseg}></Route>
+            <Route path="/Capacity" component={Capacity}></Route>
 
 
-             </Grid>
-           </Container>
-         </Grow>
-        </Container>
+            
+            <Home/>
+           </Switch>
 
+          </div>
+
+          </Container>
+        
     </div>
+    </Router>
   );
 }
 

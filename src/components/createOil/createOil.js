@@ -10,7 +10,6 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import axios from 'axios';
 
-import 'dotenv/config'
 import { grid } from '@mui/system';
 
 let demo = React.createElement(
@@ -160,7 +159,7 @@ export default function CreateOil() {
     <br></br>
 
       <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Capasity</InputLabel>
+        <InputLabel id="demo-simple-select-label">Capacity</InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"

@@ -7,7 +7,8 @@ import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import axios from 'axios';
-import AsyncSelect from 'react-select/async';
+// import AsyncSelect from 'react-select/async';
+import Test from './test';
 
 
 
@@ -16,46 +17,31 @@ import AsyncSelect from 'react-select/async';
  
 
 export default function CreateOil() {
-  const [OilUsage, setOilUsage]= React.useState(null);
+  let [OilUsage, setOilUsage]= React.useState('');
   const [Brand,setBrand]= React.useState('');
   const [Capasity,setCapasity]= React.useState('');
   const [OilGrade,setOilGrade]= React.useState('');
   const [Unit,setunit]= React.useState('');
   const [UnitPrice,setUnitPrice]= React.useState('');
   const [StockQuantiti,setStockQuantiti]= React.useState('');
-  const [inputValue, setValue] = React.useState('');
-  const [selectedValue, setSelectedValue] = React.useState(null);
-  // handle input change event
-  const handleInputChange = value => {
-    setValue(value);
-  };
+ 
+  OilUsage=('test')
+  // const apiURL = "https://backoil.herokuapp.com/api/oil/oilUseg";
+  // const fetchData = async () => {
+  //   const response = await axios.get(apiURL)
 
-  // handle selection
-  const handleChange = value => {
-    setSelectedValue(value);
-  }
-
-  const apiURL = "https://backoil.herokuapp.com/api/oil/oilUseg";
-  const fetchData = async () => {
-    const response = await axios.get(apiURL)
-
-    setOilUsage(response.data)
-    let oilEn=response.data 
-    for(let i = 0 ;i<oilEn.length;i++){
-    console.log(oilEn[i].OilUsageEn)
-    }
-  }
-  const fetchDatanew =async () => {
-    return  await axios.get(apiURL).then(result => {
-      const res =  result.data.data;
-      return res;
-    });
-  }
-  
-
+  //   setOilUsage(response.data)
+  //   let datanew= []
+  //   let oilEn=response.data 
+  //   for(let i = 0 ;i<oilEn.length;i++){
+  //   // console.log(oilEn[i].OilUsageEn)
+  //   datanew.push(oilEn)
+  //   }
+  //   return datanew;
+  // }
          
   const creatOil = ()=>{
-    axios.post('https://backoil.herokuapp.com/api/oil',{OilUsage,Brand,Capasity,OilGrade,Unit,UnitPrice,StockQuantiti}).then( () => {
+    axios.post('https://backendoil.vercel.app/api/oil/',{OilUsage,Brand,Capasity,OilGrade,Unit,UnitPrice,StockQuantiti}).then( () => {
       window.location.reload(false);
     })
   }
@@ -66,52 +52,10 @@ export default function CreateOil() {
   return (
     
     <>
-      <h2>Add Oil to stock</h2>
-      <div className="container">
-    <div className="row alert alert-info">Selected Value: {JSON.stringify(selectedValue || {}, null, 2)}</div>
-    <div className="row">
-      <div className="col-md-4"></div>
-      <div className="col-md-4">
-        <AsyncSelect
-        cacheOptions
-        defaultOptions
-        value={selectedValue}
-        getOptionLabel={e => e.first_name + ' ' + e.last_name}
-        getOptionValue={e => e.id}
-        loadOptions={fetchDatanew}
-        onInputChange={handleInputChange}
-        onChange={handleChange}
-      />
-      </div>
-      <div className="col-md-4"></div>
-    </div>
 
-  </div>
     <Box sx={{ minWidth: 120 }}>
-   
-    <Button variant="contained"  onClick={fetchData}>
-        check
-      </Button>
+    <Test OilUsage={OilUsage}/>
 
-    <br></br>
-    <br></br>
-
-    <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">OilUsage</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          // value={Brand}
-          label="Brand"
-          onChange={(event)=>setOilUsage(event.target.value)}
-        >
-
-          <MenuItem value={"Toyota"}>Toyota</MenuItem>
-          <MenuItem value={'Bmw'}>Bmw</MenuItem>
-          <MenuItem value={'Tesla'}>Tesla</MenuItem>
-        </Select>
-      </FormControl>
-      <br></br>
     <br></br>
 
       <FormControl fullWidth>

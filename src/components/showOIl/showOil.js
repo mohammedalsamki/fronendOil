@@ -41,12 +41,12 @@ export default function ShowOilsData() {
   
 
   const deleteOil=(id)=>{
-    axios.delete(`https://backoil.herokuapp.com/api/oil/${id}`).then( () =>{
+    axios.delete(`https://backendoil.vercel.app/api/oil/${id}`).then( () =>{
       window.location.reload(false);
     } )
   }
   useEffect(()=>{
-    axios.get(`https://backoil.herokuapp.com/api/oil`).then( (allOils) =>{
+    axios.get(`https://backendoil.vercel.app/api/oil/`).then( (allOils) =>{
       setOilList(allOils.data);
     })
   },[]);

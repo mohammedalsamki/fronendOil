@@ -4,11 +4,13 @@ import './App.css';
 import { Container,AppBar,Typography } from '@material-ui/core';
 
 import OilGrade from './components/OilGrade/OilGrade';
-import Brand from './components/Brand/Brand';
+// import Brand from './components/Brand/Brand';
 import OilUseg from './components/OilUseg/OilUseg';
-import Capacity from './components/Capacity/Capacity';
+// import Capacity from './components/Capacity/Capacity';
 import Home from './Home';
 import useStyles from './styles';
+import Test from './components/createOil/test';
+import Test1 from './components/createOil/test2';
 
 
 function App() {
@@ -30,11 +32,11 @@ function App() {
                   <Link to="/OilGrade">OilGrade</Link>
                 </li>
                 <li>
-                  <Link to="/Brand">Brand</Link>
+                  <Link to="/Test">Brand</Link>
                 </li>                <li>
                   <Link to="/OilUseg">OilUseg</Link>
                 </li>                <li>
-                  <Link to="/Capacity">Capacity</Link>
+                  <Link to="/Test1">Test1</Link>
                 </li>
               </ul>
           </div>
@@ -43,9 +45,9 @@ function App() {
            <Switch>
            <Route path="/" exact component={Home}></Route>
             <Route path="/OilGrade" component={OilGrade}></Route>
-            <Route path="/Brand" component={Brand}></Route>
+            <Route path="/Test" component={Test}></Route>
             <Route path="/OilUseg" component={OilUseg}></Route>
-            <Route path="/Capacity" component={Capacity}></Route>
+            <Route path="/Test1" component={Test1}></Route>
 
 
             

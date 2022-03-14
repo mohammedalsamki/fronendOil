@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import Select from 'react-select'
 import axios from 'axios'
 import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+
 
 
 export default class Test extends Component {
@@ -11,13 +13,32 @@ export default class Test extends Component {
     super(props)
     this.state = {
       OilUsag:'',
-
+      Brand:'',
+      OilGrade:'',
+      Capasity:0,
+      StockQuantiti:0,
+      UnitPrice:0,
+      Unit:'',
+      unitselectOptions:[],
+      brandselectOptions : [],
       selectOptions : [],
+      capacityselectOptions:[],
       id: "",
       name: '',
     }
   }
+  async getOptionsunit(){
 
+    const res = await axios.get('https://backendoil.vercel.app/api/oil/unit')
+    const data = res.data
+    const options = data.map(d => ({
+      "value" : d._id,
+      "label" : d.UnitName
+
+    }))
+
+    this.setState({unitselectOptions: options})
+  }
  async getOptions(){
 
     const res = await axios.get('https://backendoil.vercel.app/api/oil/oilUseg')
@@ -31,33 +52,91 @@ export default class Test extends Component {
     this.setState({selectOptions: options})
 
   }
+  async getOptionsbrand(){
+
+    const res = await axios.get('https://backendoil.vercel.app/api/oil/brand')
+    const data = res.data
+    const options = data.map(d => ({
+      "value" : d._id,
+      "label" : d.BrandEn
+
+    }))
+    this.setState({brandselectOptions: options})
+  }
+  async getOptionsoilGrade(){
+
+    const res = await axios.get('https://backendoil.vercel.app/api/oil/oilGrade')
+    const data = res.data
+    const options = data.map(d => ({
+      "value" : d._id,
+      "label" : d.OilGradeName
+
+    }))
+
+    this.setState({oilGradeselectOptions: options})
+
+  }
+  async getOptionsCapasity(){
+
+    const res = await axios.get('https://backendoil.vercel.app/api/oil/capacity')
+    const data = res.data
+    const options = data.map(d => ({
+      "value" : d._id,
+      "label" : d.capacityNumber
+
+    }))
+
+    this.setState({capacityselectOptions: options})
+
+  }
   
+  handleChangecapacity(e){
+    this.setState({Capasity:e.label})
+    this.setState({id:e.value, name:e.label})
+ 
+   }
   handleChange(e){
    this.setState({OilUsag:e.label})
-    let OilUsag=e.label
-    console.log(OilUsag)
    this.setState({id:e.value, name:e.label})
-   let OilUsag1 = e.label
-   console.log(e.label)
-   return OilUsag1
+
   }
+  oilGradehandleChange(e){
+    this.setState({OilGrade:e.label})
+    this.setState({id:e.value, name:e.label})
+   }
+   brandhandleChange(e){
+    this.setState({Brand:e.label})
+    this.setState({id:e.value, name:e.label})
+   }
+   unithandleChange(e){
+    this.setState({Unit:e.label})
+    this.setState({id:e.value, name:e.label})
+   }
+
 
   componentDidMount(){
       this.getOptions()
+      this.getOptionsbrand()
+      this.getOptionsoilGrade()
+      this.getOptionsunit()
+      this.getOptionsCapasity()
+
+
+
+
   }
 
   creatOill (e){
     this.setState({OilUsag:e.label})
-    console.log(this.state.OilUsag)
 
     let x= {
       OilUsage:this.state.OilUsag,
-      Brand:'String',
-      OilGrade:'String',
-      Capasity:3,
-      StockQuantiti:5,
-      UnitPrice:7,
-      Unit:'String'
+      Brand:this.state.Brand,
+      OilGrade:this.state.OilGrade,
+      Capasity:this.state.Capasity,
+      StockQuantiti:this.state.StockQuantiti,
+      UnitPrice:this.state.UnitPrice,
+      Unit:this.state.Unit
     }
     axios.post('https://backendoil.vercel.app/api/oil',x).then( () => {
       window.location.reload(false);
@@ -70,7 +149,48 @@ export default class Test extends Component {
       <div>
           <p>oilUseg</p>
         <Select options={this.state.selectOptions} onChange={this.handleChange.bind(this)} />
-    <p>You have selected <strong>{this.state.name} </strong></p>
+    <br></br>
+    <p>Brand</p>
+        <Select options={this.state.brandselectOptions} onChange={this.brandhandleChange.bind(this)} />
+
+        <br></br>
+    <p>oilGrade</p>
+
+        <Select options={this.state.oilGradeselectOptions} onChange={this.oilGradehandleChange.bind(this)} />
+        <br></br>
+        <p>Unit</p>
+
+         <Select options={this.state.unitselectOptions} onChange={this.unithandleChange.bind(this)} />
+      <br></br>
+           <p>Capasity</p>
+
+      <Select options={this.state.capacityselectOptions} onChange={this.handleChangecapacity.bind(this)} />
+           <br></br>
+           <TextField
+          id="outlined-number"
+          label="StockQuantiti"
+          type="number"
+          onChange={(e)=>this.setState({StockQuantiti:e.target.value})}
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+        <br></br>
+        <br></br>
+
+        <TextField
+          id="outlined-number"
+          label="StockQuantiti"
+          type="UnitPrice"
+          onChange={(e)=>this.setState({UnitPrice:e.target.value})}
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+        <br></br>
+        <br></br>
+
+
     <Button variant="contained" color="success" onClick={this.creatOill.bind(this)}>
         save
       </Button>

@@ -9,7 +9,6 @@ import OilUseg from './components/OilUseg/OilUseg';
 import Capacity from './components/Capacity/Capacity';
 import Home from './Home';
 import useStyles from './styles';
-import Test from './components/createOil/test';
 import Unit from './components/Unit/Unit'
 
 

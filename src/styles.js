@@ -7,7 +7,7 @@ export default makeStyles(()=>({
         margin:'30px 0',
         display:'flex',
         flexDirection:'column',
-        justifyContent:'center',
+        // justifyContent:'center',
         alignItems:'center',
 
     }

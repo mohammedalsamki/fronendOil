@@ -26,19 +26,7 @@ export default function CreateOil() {
   const [StockQuantiti,setStockQuantiti]= React.useState('');
  
   OilUsage=('test')
-  // const apiURL = "https://backoil.herokuapp.com/api/oil/oilUseg";
-  // const fetchData = async () => {
-  //   const response = await axios.get(apiURL)
 
-  //   setOilUsage(response.data)
-  //   let datanew= []
-  //   let oilEn=response.data 
-  //   for(let i = 0 ;i<oilEn.length;i++){
-  //   // console.log(oilEn[i].OilUsageEn)
-  //   datanew.push(oilEn)
-  //   }
-  //   return datanew;
-  // }
          
   const creatOil = ()=>{
     axios.post('https://backendoil.vercel.app/api/oil/',{OilUsage,Brand,Capasity,OilGrade,Unit,UnitPrice,StockQuantiti}).then( () => {

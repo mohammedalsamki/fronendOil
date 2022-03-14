@@ -18,10 +18,7 @@ export default class Test extends Component {
     }
   }
 
-//   console.log(OilUsage,Brand,Capasity,OilGrade,Unit)
  async getOptions(){
-
-
 
     const res = await axios.get('https://backendoil.vercel.app/api/oil/oilUseg')
     const data = res.data
@@ -48,26 +45,21 @@ export default class Test extends Component {
   componentDidMount(){
       this.getOptions()
   }
-  createoilUsege (e){
-    this.setState({OilUsag:e.label})
-    console.log(this.state.OilUsag)
-    let OilUsag=e.OilUsag
-    const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ OilUsag: OilUsag })
-    };
-    fetch('https://backendoil.vercel.app/api/oil', requestOptions)
-        .then(response => response.json())
-        .then(data => this.setState({ OilUsag: data}));
-        console.log(e.OilUsag)
-  }
+
   creatOill (e){
     this.setState({OilUsag:e.label})
     console.log(this.state.OilUsag)
-    let OilUsag=e.OilUsag
-    console.log(OilUsag)
-    axios.post('https://backendoil.vercel.app/api/oil',{OilUsag}).then( () => {
+
+    let x= {
+      OilUsage:this.state.OilUsag,
+      Brand:'String',
+      OilGrade:'String',
+      Capasity:3,
+      StockQuantiti:5,
+      UnitPrice:7,
+      Unit:'String'
+    }
+    axios.post('https://backendoil.vercel.app/api/oil',x).then( () => {
       window.location.reload(false);
 
     })
@@ -79,7 +71,7 @@ export default class Test extends Component {
           <p>oilUseg</p>
         <Select options={this.state.selectOptions} onChange={this.handleChange.bind(this)} />
     <p>You have selected <strong>{this.state.name} </strong></p>
-    <Button variant="contained" color="success" onClick={this.createoilUsege.bind(this)}>
+    <Button variant="contained" color="success" onClick={this.creatOill.bind(this)}>
         save
       </Button>
       </div>

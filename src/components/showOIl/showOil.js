@@ -36,6 +36,7 @@ let BAC_URL=process.env.BACE_URL
 console.log(BAC_URL)
 
 export default function ShowOilsData() {
+  
   const [oilList, setOilList]= React.useState([]);
   
 

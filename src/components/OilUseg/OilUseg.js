@@ -1,16 +1,23 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { styled } from '@mui/material/styles';
+import TextField from '@mui/material/TextField';
+import axios from 'axios';
+import { useEffect } from 'react';
+import { IconButton } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 
+
+
+import { ClassNames } from '@emotion/react';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -31,100 +38,108 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
+ 
 
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
+export default function CreateOilUsge() {
+  const [OiUsgelList, setOiUsgelList]= React.useState([]);
+  
+
+  const deleteOilUsge=(id)=>{
+    axios.delete(`https://backoil.herokuapp.com/api/oil/oilUseg/${id}`).then( () =>{
+      window.location.reload(false);
+    } )
+  }
+  useEffect(()=>{
+    axios.get(`https://backoil.herokuapp.com/api/oil/oilUseg`).then( (allOilsUseg) =>{
+      setOiUsgelList(allOilsUseg.data);
+    })
+  },[]);
+  const [OilUsageAr, setOilUsageAr]= React.useState('');
+  const [OilUsageEn,setOilUsageEn]= React.useState('');
 
 
 
-export default function OilUseg() {
+
+         
+  const creatOilusgefun = ()=>{
+    axios.post('https://backoil.herokuapp.com/api/oil/oilUseg',{OilUsageAr,OilUsageEn}).then( () => {
+      window.location.reload(false);
+    })
+  }
+
+
+  console.log(OilUsageAr,OilUsageEn)
+
   return (
-      <>    
-      <h2> OilUsage category</h2>
-      <Box
+    
+    <>
+      <h2>Add Oil to stock</h2>
+    <Box sx={{ minWidth: 120 }}>
+
+
+
+    <br></br>
+    <br></br>
+    <Box
       component="form"
       sx={{
-        '& .MuiTextField-root': { m: 1, width: '25ch' },
+        '& > :not(style)': { m: 1, width: '25ch' },
       }}
       noValidate
       autoComplete="off"
     >
-      <div>
-        <TextField
-          label="Oil Name EN"
-          id="outlined-size-small"
-          defaultValue="Oil Name EN"
-          size="small"
-        />
-          <TextField
-          label="Oil Name AR"
-          id="outlined-size-small"
-          defaultValue="Oil Name AR"
-          size="small"
-        />
-      </div>
+      <TextField
+        id="outlined-name"
+        label="OilUsageAr"
+        onChange={(event)=>setOilUsageAr(event.target.value)}
+      />
+            <TextField
+        id="outlined-name"
+        label="OilUsageEn"
+        onChange={(event)=>setOilUsageEn(event.target.value)}
+      />
 
-      {/* <div>
-        <TextField
-          label="Oil Name"
-          id="standard-size-small"
-          defaultValue="Small"
-          size="small"
-          variant="standard"
-        />
-        <TextField
-          label="Size"
-          id="standard-size-normal"
-          defaultValue="Normal"
-          variant="standard"
-        />
-      </div> */}
-      <br></br>
-      <div>
-      <Button variant="contained"  >
-        update 
-      </Button>
-      <Button variant="contained" color="success" >
+    </Box>
+
+    <br></br>
+    <br></br>
+    <Button variant="contained" color="success" onClick={creatOilusgefun}>
         save
       </Button>
-      </div>
-    </Box>
     <br></br>
+    <br></br>
+
+    </Box>
+    <h2>All Oil in Stock</h2>
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 700 }} aria-label="customized table">
+      <Table sx={{ minWidth: 650 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>Dessert (100g serving)</StyledTableCell>
-            <StyledTableCell align="right">Calories</StyledTableCell>
-            <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell>
+            <StyledTableCell align="right">OilUsageAr</StyledTableCell>
+            <StyledTableCell align="right">OilUsageEn</StyledTableCell>
+            <StyledTableCell align="right">Action</StyledTableCell>
+
+
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.name}>
-              <StyledTableCell component="th" scope="row">
-                {row.name}
-              </StyledTableCell>
-              <StyledTableCell align="right">{row.calories}</StyledTableCell>
-              <StyledTableCell align="right">{row.fat}</StyledTableCell>
-              <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-              <StyledTableCell align="right">{row.protein}</StyledTableCell>
+          {OiUsgelList.map((oil,key) => (
+            <StyledTableRow key={key}>
+
+              <StyledTableCell align="right">{oil.OilUsageAr}</StyledTableCell>
+              <StyledTableCell align="right">{oil.OilUsageEn}</StyledTableCell>
+
+              <StyledTableCell align="right">
+                <IconButton aria-label='delete' className={ClassNames.margin} onClick={()=> deleteOilUsge(oil._id)}>
+                  <DeleteIcon fontSize="small"/>
+                  </IconButton>
+                </StyledTableCell>
+
             </StyledTableRow>
           ))}
         </TableBody>
       </Table>
     </TableContainer>
     </>
-
   );
 }

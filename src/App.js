@@ -10,8 +10,11 @@ import Capacity from './components/Capacity/Capacity';
 import Home from './Home';
 import useStyles from './styles';
 import Unit from './components/Unit/Unit'
-import OilUsageUpdate from './components/OilGrade/oilUsageUpdate';
-
+import  AddEdit  from './components/CRUD/Update';
+import UpdateUnit from './components/Unit/UpdateUnit';
+import UpdateOilGrade from './components/OilGrade/UpdateOilGrade';
+import UpdateCapacity from './components/Capacity/UpdateCapacity';
+import UpdateBrand from './components/Brand/UpdateBrand';
 
 function App() {
   const classes= useStyles();
@@ -42,10 +45,7 @@ function App() {
 
                   <Link to="/unit">Unit</Link>
                 </li>
-                <li>
 
-                 <Link to="/OilUsageUpdate">OilUsageUpdate</Link>
-                </li>
               </ul>
           </div>
          </AppBar>
@@ -57,7 +57,19 @@ function App() {
             <Route path="/OilUseg" component={OilUseg}></Route>
             <Route path="/Brand" component={Brand}></Route>
             <Route path="/unit" component={Unit}></Route>
-            <Route path="/OilUsageUpdate" component={OilUsageUpdate}></Route>
+            <Route path="/update" component={AddEdit}></Route>
+            <Route path="/delete" component={Unit}></Route>
+            <Route path="/UpdateUnit" component={UpdateUnit}></Route>
+            <Route path="/UpdateOilGrade" component={UpdateOilGrade}></Route>
+            <Route path="/UpdateCapacity" component={UpdateCapacity}></Route>
+            <Route path="/UpdateBrand" component={UpdateBrand}></Route>
+            
+
+            
+
+            
+
+
 
 
 

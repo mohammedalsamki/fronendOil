@@ -14,6 +14,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
+import { Link } from 'react-router-dom';
+
 
 
 
@@ -57,7 +59,12 @@ export default function CreateCapacity() {
   const [capacityName, setcapacityName]= React.useState('');
   const [capacityNumber,setcapacityNumber]= React.useState('');
 
-
+  const setID=(id,capacityName,capacityNumber)=>{
+    console.log(id)
+    localStorage.setItem('ID', id)
+    localStorage.setItem('capacityName', capacityName)
+    localStorage.setItem('capacityNumber', capacityNumber)
+  }
 
 
          
@@ -121,8 +128,12 @@ export default function CreateCapacity() {
       <Table sx={{ minWidth: 650 }} aria-label="customized table">
         <TableHead>
           <TableRow>
+          <StyledTableCell align="right">ID</StyledTableCell>
+
             <StyledTableCell align="right">capacityName</StyledTableCell>
             <StyledTableCell typeof='number' align="right">capacityNumber</StyledTableCell>
+            <StyledTableCell align="right">Edit</StyledTableCell>
+
             <StyledTableCell align="right">Action</StyledTableCell>
 
 
@@ -131,9 +142,15 @@ export default function CreateCapacity() {
         <TableBody>
           {CapacityList.map((cityList,key) => (
             <StyledTableRow key={key}>
+              <StyledTableCell align="right">{cityList._id}</StyledTableCell>
 
               <StyledTableCell align="right">{cityList.capacityName}</StyledTableCell>
               <StyledTableCell align="right">{cityList.capacityNumber}</StyledTableCell>
+              <Link to = './UpdateCapacity'>
+                <Button onClick={()=>setID(cityList._id,cityList.capacityName,cityList.capacityNumber)}>
+                  update
+                </Button>
+                </Link>
 
               <StyledTableCell align="right">
                 <IconButton aria-label='delete' className={ClassNames.margin} onClick={()=> deletecapacity(cityList._id)}>

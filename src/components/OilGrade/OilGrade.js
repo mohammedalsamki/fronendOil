@@ -14,6 +14,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
+import { Link } from 'react-router-dom';
+
 
 
 
@@ -59,7 +61,12 @@ export default function CreateOilGrade() {
 
 
 
-
+  const setID=(id,OilGradeName,OilGradeDis)=>{
+    console.log(id)
+    localStorage.setItem('ID', id)
+    localStorage.setItem('OilGradeName', OilGradeName)
+    localStorage.setItem('OilGradeDis', OilGradeDis)
+  }
          
   const creatOilGrade = ()=>{
     axios.post('https://backendoil.vercel.app/api/oil/oilGrade',{OilGradeName,OilGradeDis}).then( () => {
@@ -115,8 +122,12 @@ export default function CreateOilGrade() {
       <Table sx={{ minWidth: 650 }} aria-label="customized table">
         <TableHead>
           <TableRow>
+          <StyledTableCell align="right">ID</StyledTableCell>
+
             <StyledTableCell align="right">OilGradeName</StyledTableCell>
             <StyledTableCell align="right">OilGrade Discription</StyledTableCell>
+            <StyledTableCell align="right">Edit</StyledTableCell>
+
             <StyledTableCell align="right">Action</StyledTableCell>
 
 
@@ -125,9 +136,17 @@ export default function CreateOilGrade() {
         <TableBody>
           {OilGradeList.map((oilGrade,key) => (
             <StyledTableRow key={key}>
+              <StyledTableCell align="right">{oilGrade._id}</StyledTableCell>
 
               <StyledTableCell align="right">{oilGrade.OilGradeName}</StyledTableCell>
               <StyledTableCell align="right">{oilGrade.OilGradeDis}</StyledTableCell>
+              <StyledTableCell align="cinter">
+                <Link to = './UpdateOilGrade'>
+                <Button onClick={()=>setID(oilGrade._id,oilGrade.OilGradeName,oilGrade.OilGradeDis)}>
+                  update
+                </Button>
+                </Link>
+              </StyledTableCell>
 
               <StyledTableCell align="right">
                 <IconButton aria-label='delete' className={ClassNames.margin} onClick={()=> deleteOilGrade(oilGrade._id)}>

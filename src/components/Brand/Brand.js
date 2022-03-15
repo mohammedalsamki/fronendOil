@@ -14,6 +14,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
+import { Link } from 'react-router-dom';
+
 
 
 
@@ -58,7 +60,13 @@ export default function CreateBrand() {
   const [BrandEn,setBrandEn]= React.useState('');
 
 
-
+  const setID=(id,BrandAr,BrandEn)=>{
+    console.log(id)
+    localStorage.setItem('ID', id)
+    localStorage.setItem('BrandAr', BrandAr)
+    localStorage.setItem('BrandEn', BrandEn)
+  }
+  
 
          
   const creatBrandfun = ()=>{
@@ -115,8 +123,12 @@ export default function CreateBrand() {
       <Table sx={{ minWidth: 650 }} aria-label="customized table">
         <TableHead>
           <TableRow>
+          <StyledTableCell align="right">ID</StyledTableCell>
+
             <StyledTableCell align="right">BrandAr</StyledTableCell>
             <StyledTableCell align="right">BrandEn</StyledTableCell>
+            <StyledTableCell align="right">Edit</StyledTableCell>
+
             <StyledTableCell align="right">Action</StyledTableCell>
 
 
@@ -125,9 +137,15 @@ export default function CreateBrand() {
         <TableBody>
           {BrandlList.map((brand,key) => (
             <StyledTableRow key={key}>
+              <StyledTableCell align="right">{brand._id}</StyledTableCell>
 
               <StyledTableCell align="right">{brand.BrandAr}</StyledTableCell>
               <StyledTableCell align="right">{brand.BrandEn}</StyledTableCell>
+              <Link to = './UpdateBrand'>
+                <Button onClick={()=>setID(brand._id,brand.BrandAr,brand.BrandEn)}>
+                  update
+                </Button>
+                </Link>
 
               <StyledTableCell align="right">
                 <IconButton aria-label='delete' className={ClassNames.margin} onClick={()=> deleteBrand(brand._id)}>

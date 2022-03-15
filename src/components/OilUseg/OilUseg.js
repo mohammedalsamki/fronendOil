@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useRef, useState } from "react";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import axios from 'axios';
@@ -14,13 +13,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
-import { Modal, Button } from "react-bootstrap";
-
-// import EditIcon from '@mui/icons-material/Edit';
-// import Form from '../OilGrade/Form';
-// import FavouriteCards from '../OilGrade/FavouriteCards';
-import Favourite from '../OilGrade/oilUsageUpdate';
-
+import { Button } from "react-bootstrap";
+import { Link } from 'react-router-dom';
 
 
 import { ClassNames } from '@emotion/react';
@@ -48,32 +42,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 export default function CreateOilUsge() {
   const [OiUsgelList, setOiUsgelList]= React.useState([]);
-  const [put_id, setputid]= React.useState([]);
-  const [put_OiUsgeAr, setputOiUsgeAr]= React.useState([]);
-  let [put_OiUsgeEn, setputOiUsgeEn]= React.useState([]);
-
-  // const [putResult, setPutResult] = useState(null);
-  const [showForm, setShowForm] = useState(false);
-  const showFormm = () => {
-    setShowForm(!showForm);
-  }
-const putData=(e)=> {
-  e.preventDefault();
-
-
-      // const putData = {
-      //   OilUsageAr: put_OiUsgeAr.current.value,
-      //   OilUsageEn: put_OiUsgeEn.current.value,
-      // }
-    
-         axios.put(`https://backendoil.vercel.app/api/oil/oilUseg/${put_id}`,put_id, put_OiUsgeAr,put_OiUsgeEn)
-        .then((put_id, put_OiUsgeAr,put_OiUsgeEn)=>{
-          console.log(put_id, put_OiUsgeAr,put_OiUsgeEn)
-        }).catch((err)=>{
-          console.log(err)
-        })
-      }
-  
 
   const deleteOilUsge=(id)=>{
     axios.delete(`https://backendoil.vercel.app/api/oil/oilUseg/${id}`).then( () =>{
@@ -93,7 +61,12 @@ const putData=(e)=> {
 
 
 
-
+const setID=(id,OilUsageAr,OilUsageEn)=>{
+  console.log(id)
+  localStorage.setItem('ID', id)
+  localStorage.setItem('OilUsageAr', OilUsageAr)
+  localStorage.setItem('OilUsageEn', OilUsageEn)
+}
 
          
   const creatOilusgefun = ()=>{
@@ -108,54 +81,7 @@ const putData=(e)=> {
   return (
     
     <>
-    			<div>
-
-				<Modal show={showForm} >
-					<Modal.Header closeButton>
-						<Modal.Title>Modal heading</Modal.Title>
-					</Modal.Header>
-					<Modal.Body>
-          {OiUsgelList.map((oil,key) => (
-
-						<form >
-              
-							<input
-								type="text"
-								onChange={setputid}
-								value={oil._id}
-							/>
-							<br />
-							<input
-								type="text"
-               onChange={(e)=>setputOiUsgeEn(e.target.value) }
-               
-
-							/>
-							<br />
-							<input
-								type="text"
-								onChange={setputOiUsgeAr}
-								value={oil.OilUsageAr}
-							/>
-
-							<br />
-							
-
-							<input type="submit" value="update" onSubmit={putData} />
-						</form>
-          ),)}
-
-					</Modal.Body>
-					<Modal.Footer>
-						<Button variant="secondary" >
-							Close
-						</Button>
-						<Button variant="primary" >
-							Save Changes
-						</Button>
-					</Modal.Footer>
-				</Modal>
-			</div>
+    	
       <h2>Add Oil to stock</h2>
 
     <Box sx={{ minWidth: 120 }}>
@@ -218,10 +144,11 @@ const putData=(e)=> {
               <StyledTableCell align="cinter">{oil.OilUsageAr}</StyledTableCell>
               <StyledTableCell align="cinter">{oil.OilUsageEn}</StyledTableCell>
               <StyledTableCell align="cinter">
-                <Button onClick={showFormm}>
+                <Link to = './update'>
+                <Button onClick={()=>setID(oil._id,oil.OilUsageAr,oil.OilUsageEn)}>
                   update
                 </Button>
-                
+                </Link>
               </StyledTableCell>
 
               <StyledTableCell align="cinter">

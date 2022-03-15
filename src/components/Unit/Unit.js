@@ -14,6 +14,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
+import { Link } from 'react-router-dom';
+
 
 
 
@@ -56,19 +58,19 @@ export default function CreateUnit() {
   },[]);
   const [UnitName, setUnitName]= React.useState('');
   const [UnitDis,setUnitDis]= React.useState('');
-
-
-
-
-         
+      
   const creatUnitFun = ()=>{
     axios.post('https://backendoil.vercel.app/api/oil/unit',{UnitName,UnitDis}).then( () => {
       window.location.reload(false);
     })
   }
-
-
-  console.log(UnitName,UnitDis)
+  const setID=(id,UnitName,UnitDis)=>{
+    console.log(id)
+    localStorage.setItem('ID', id)
+    localStorage.setItem('UnitName', UnitName)
+    localStorage.setItem('UnitDis', UnitDis)
+  }
+  
 
   return (
     
@@ -115,8 +117,11 @@ export default function CreateUnit() {
       <Table sx={{ minWidth: 650 }} aria-label="customized table">
         <TableHead>
           <TableRow>
+          <StyledTableCell align="right">ID</StyledTableCell>
+
             <StyledTableCell align="right">UnitName</StyledTableCell>
             <StyledTableCell align="right">UnitDis</StyledTableCell>
+            <StyledTableCell align="cinter">Update</StyledTableCell>
             <StyledTableCell align="right">Action</StyledTableCell>
 
 
@@ -125,10 +130,15 @@ export default function CreateUnit() {
         <TableBody>
           {UnitList.map((unit,key) => (
             <StyledTableRow key={key}>
+              <StyledTableCell align="right">{unit._id}</StyledTableCell>
 
               <StyledTableCell align="right">{unit.UnitName}</StyledTableCell>
               <StyledTableCell align="right">{unit.UnitDis}</StyledTableCell>
-
+              <Link to = './UpdateUnit'>
+                <Button onClick={()=>setID(unit._id,unit.UnitName,unit.UnitDis)}>
+                  update
+                </Button>
+                </Link>
               <StyledTableCell align="right">
                 <IconButton aria-label='delete' className={ClassNames.margin} onClick={()=> deleteUnit(unit._id)}>
                   <DeleteIcon fontSize="small"/>

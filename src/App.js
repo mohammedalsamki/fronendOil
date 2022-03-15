@@ -10,6 +10,7 @@ import Capacity from './components/Capacity/Capacity';
 import Home from './Home';
 import useStyles from './styles';
 import Unit from './components/Unit/Unit'
+import OilUsageUpdate from './components/OilGrade/oilUsageUpdate';
 
 
 function App() {
@@ -41,6 +42,10 @@ function App() {
 
                   <Link to="/unit">Unit</Link>
                 </li>
+                <li>
+
+                 <Link to="/OilUsageUpdate">OilUsageUpdate</Link>
+                </li>
               </ul>
           </div>
          </AppBar>
@@ -52,6 +57,8 @@ function App() {
             <Route path="/OilUseg" component={OilUseg}></Route>
             <Route path="/Brand" component={Brand}></Route>
             <Route path="/unit" component={Unit}></Route>
+            <Route path="/OilUsageUpdate" component={OilUsageUpdate}></Route>
+
 
 
 

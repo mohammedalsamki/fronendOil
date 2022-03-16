@@ -15,6 +15,7 @@ import TableRow from '@mui/material/TableRow';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import { Link } from 'react-router-dom';
+import EditIcon from '@mui/icons-material/Edit';
 
 
 
@@ -122,13 +123,13 @@ export default function CreateOilGrade() {
       <Table sx={{ minWidth: 650 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-          <StyledTableCell align="right">ID</StyledTableCell>
+          <StyledTableCell align="center">ID</StyledTableCell>
 
-            <StyledTableCell align="right">OilGradeName</StyledTableCell>
-            <StyledTableCell align="right">OilGrade Discription</StyledTableCell>
-            <StyledTableCell align="right">Edit</StyledTableCell>
+            <StyledTableCell align="center">OilGradeName</StyledTableCell>
+            <StyledTableCell align="center">OilGrade Discription</StyledTableCell>
+            <StyledTableCell align="center">Edit</StyledTableCell>
 
-            <StyledTableCell align="right">Action</StyledTableCell>
+            <StyledTableCell align="center">Action</StyledTableCell>
 
 
           </TableRow>
@@ -136,19 +137,20 @@ export default function CreateOilGrade() {
         <TableBody>
           {OilGradeList.map((oilGrade,key) => (
             <StyledTableRow key={key}>
-              <StyledTableCell align="right">{oilGrade._id}</StyledTableCell>
+              <StyledTableCell align="center">{oilGrade._id}</StyledTableCell>
 
-              <StyledTableCell align="right">{oilGrade.OilGradeName}</StyledTableCell>
-              <StyledTableCell align="right">{oilGrade.OilGradeDis}</StyledTableCell>
-              <StyledTableCell align="cinter">
+              <StyledTableCell align="center">{oilGrade.OilGradeName}</StyledTableCell>
+              <StyledTableCell align="center">{oilGrade.OilGradeDis}</StyledTableCell>
+              <StyledTableCell align="center">
                 <Link to = './UpdateOilGrade'>
-                <Button onClick={()=>setID(oilGrade._id,oilGrade.OilGradeName,oilGrade.OilGradeDis)}>
-                  update
-                </Button>
+                <IconButton aria-label='edit' onClick={()=>setID(oilGrade._id,oilGrade.OilGradeName,oilGrade.OilGradeDis)}>
+
+                <EditIcon fontSize="small"/>
+                  </IconButton>
                 </Link>
               </StyledTableCell>
 
-              <StyledTableCell align="right">
+              <StyledTableCell align="center">
                 <IconButton aria-label='delete' className={ClassNames.margin} onClick={()=> deleteOilGrade(oilGrade._id)}>
                   <DeleteIcon fontSize="small"/>
                   </IconButton>

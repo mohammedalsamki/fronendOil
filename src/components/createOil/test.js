@@ -149,19 +149,15 @@ export default class Test extends Component {
       <div>
           <p>oilUseg</p>
         <Select options={this.state.selectOptions} onChange={this.handleChange.bind(this)} />
-    <br></br>
     <p>Brand</p>
         <Select options={this.state.brandselectOptions} onChange={this.brandhandleChange.bind(this)} />
 
-        <br></br>
     <p>oilGrade</p>
 
         <Select options={this.state.oilGradeselectOptions} onChange={this.oilGradehandleChange.bind(this)} />
-        <br></br>
         <p>Unit</p>
 
          <Select options={this.state.unitselectOptions} onChange={this.unithandleChange.bind(this)} />
-      <br></br>
            <p>Capasity</p>
 
       <Select options={this.state.capacityselectOptions} onChange={this.handleChangecapacity.bind(this)} />

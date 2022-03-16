@@ -15,6 +15,7 @@ import UpdateUnit from './components/Unit/UpdateUnit';
 import UpdateOilGrade from './components/OilGrade/UpdateOilGrade';
 import UpdateCapacity from './components/Capacity/UpdateCapacity';
 import UpdateBrand from './components/Brand/UpdateBrand';
+import './components/style/naz.css'
 
 function App() {
   const classes= useStyles();
@@ -26,28 +27,18 @@ function App() {
          <AppBar className={classes.appBar} position="static" color='inherit'>
           
           <Typography className={classes.heading} variant='h2' align='center'> oil creat and show </Typography>
-          <div className="App">
-              <ul>
-                <li>
-                  <Link to="/">Home</Link>
-                </li>
-                <li>
-                  <Link to="/OilGrade">OilGrade</Link>
-                </li>
-                <li>
-                  <Link to="/Brand">Brand</Link>
-                </li>                <li>
-                  <Link to="/OilUseg">OilUseg</Link>
-                </li>                <li>
-                  <Link to="/Capacity">Capacity</Link>
-                </li>
-                <li>
+         <br></br>
 
-                  <Link to="/unit">Unit</Link>
-                </li>
+          <div class="topnav">
+            <a class="active" href="/">Home</a>
+            <a href="/OilGrade">OilGrade</a>
+            <a href="/Brand">Brand</a>
+            <a href="/OilUseg">OilUseg</a>
+            <a href="/Unit">Unit</a>
+            <a href="/Capacity">Capacity</a>
 
-              </ul>
           </div>
+         <br></br>
          </AppBar>
           <div>
            <Switch>

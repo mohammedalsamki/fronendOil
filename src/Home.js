@@ -14,9 +14,9 @@ export default function  Home() {
 
          <Grow in>
            <Container>
-             <Grid container  alignItems='strect' style={{color: "red", margin: "0px 20px 0px 0px"}}>
+             <Grid container  alignItems='strect' style={{ margin: "0px 20px 0px 0px"}}>
                <Grid item xs={15} sm={7} >
-                 <AppBar className={classes.appBar} position='static' color='inherit' style={{color: "red", margin: "30px 100px 0px 0px"}}>
+                 <AppBar className={classes.appBar} position='static' color='inherit' style={{ margin: "30px 100px 0px 0px"}}>
 
                      <ShowOil style={{color: "red", margin: "100px 25px 75px 100px"}}/> 
 

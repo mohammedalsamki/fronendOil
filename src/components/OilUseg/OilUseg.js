@@ -13,8 +13,10 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
-import { Button } from "react-bootstrap";
+import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
+import EditIcon from '@mui/icons-material/Edit';
+
 
 
 import { ClassNames } from '@emotion/react';
@@ -126,12 +128,12 @@ const setID=(id,OilUsageAr,OilUsageEn)=>{
         <TableHead>
         <TableRow>
 
-            <StyledTableCell align="cinter">id</StyledTableCell>
-            <StyledTableCell align="cinter">OilUsageAr</StyledTableCell>
-            <StyledTableCell align="cinter">OilUsageEn</StyledTableCell>
-            <StyledTableCell align="cinter">Update</StyledTableCell>
+            <StyledTableCell align="center">id</StyledTableCell>
+            <StyledTableCell align="center">OilUsageAr</StyledTableCell>
+            <StyledTableCell align="center">OilUsageEn</StyledTableCell>
+            <StyledTableCell align="center">Update</StyledTableCell>
 
-            <StyledTableCell align="cinter">Delete</StyledTableCell>
+            <StyledTableCell align="center">Delete</StyledTableCell>
 
 
           </TableRow>
@@ -139,19 +141,21 @@ const setID=(id,OilUsageAr,OilUsageEn)=>{
         <TableBody>
           {OiUsgelList.map((oil,key) => (
             <StyledTableRow key={key}>
-              <StyledTableCell align="cinter">{oil._id}</StyledTableCell>
+              <StyledTableCell align="center">{oil._id}</StyledTableCell>
 
-              <StyledTableCell align="cinter">{oil.OilUsageAr}</StyledTableCell>
-              <StyledTableCell align="cinter">{oil.OilUsageEn}</StyledTableCell>
-              <StyledTableCell align="cinter">
+              <StyledTableCell align="center">{oil.OilUsageAr}</StyledTableCell>
+              <StyledTableCell align="center">{oil.OilUsageEn}</StyledTableCell>
+
+              <StyledTableCell align="center">
                 <Link to = './update'>
-                <Button onClick={()=>setID(oil._id,oil.OilUsageAr,oil.OilUsageEn)}>
-                  update
-                </Button>
+                <IconButton aria-label='edit' onClick={()=>setID(oil._id,oil.OilUsageAr,oil.OilUsageEn)}>
+
+                <EditIcon fontSize="small"/>
+                  </IconButton>
                 </Link>
               </StyledTableCell>
 
-              <StyledTableCell align="cinter">
+              <StyledTableCell align="center">
                 <IconButton aria-label='delete' className={ClassNames.margin} onClick={()=> deleteOilUsge(oil._id,oil.OilUsageAr)}>
                   <DeleteIcon fontSize="small"/>
                   </IconButton>

@@ -14,6 +14,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
+import EditIcon from '@mui/icons-material/Edit';
 import { Link } from 'react-router-dom';
 
 
@@ -128,13 +129,13 @@ export default function CreateCapacity() {
       <Table sx={{ minWidth: 650 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-          <StyledTableCell align="right">ID</StyledTableCell>
+          <StyledTableCell align="center">ID</StyledTableCell>
 
-            <StyledTableCell align="right">capacityName</StyledTableCell>
-            <StyledTableCell typeof='number' align="right">capacityNumber</StyledTableCell>
-            <StyledTableCell align="right">Edit</StyledTableCell>
+            <StyledTableCell align="center">capacityName</StyledTableCell>
+            <StyledTableCell typeof='number' align="center">capacityNumber</StyledTableCell>
+            <StyledTableCell align="center">Edit</StyledTableCell>
 
-            <StyledTableCell align="right">Action</StyledTableCell>
+            <StyledTableCell align="center">Action</StyledTableCell>
 
 
           </TableRow>
@@ -142,17 +143,20 @@ export default function CreateCapacity() {
         <TableBody>
           {CapacityList.map((cityList,key) => (
             <StyledTableRow key={key}>
-              <StyledTableCell align="right">{cityList._id}</StyledTableCell>
+              <StyledTableCell align="center">{cityList._id}</StyledTableCell>
 
-              <StyledTableCell align="right">{cityList.capacityName}</StyledTableCell>
-              <StyledTableCell align="right">{cityList.capacityNumber}</StyledTableCell>
-              <Link to = './UpdateCapacity'>
-                <Button onClick={()=>setID(cityList._id,cityList.capacityName,cityList.capacityNumber)}>
-                  update
-                </Button>
+              <StyledTableCell align="center">{cityList.capacityName}</StyledTableCell>
+              <StyledTableCell align="center">{cityList.capacityNumber}</StyledTableCell>
+
+                <StyledTableCell align="center">
+                <Link to = './UpdateCapacity'>
+                <IconButton aria-label='edit' onClick={()=>setID(cityList._id,cityList.capacityName,cityList.capacityNumber)}>
+
+                <EditIcon fontSize="small"/>
+                  </IconButton>
                 </Link>
-
-              <StyledTableCell align="right">
+              </StyledTableCell>
+              <StyledTableCell align="center">
                 <IconButton aria-label='delete' className={ClassNames.margin} onClick={()=> deletecapacity(cityList._id)}>
                   <DeleteIcon fontSize="small"/>
                   </IconButton>

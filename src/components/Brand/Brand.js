@@ -14,6 +14,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
+import EditIcon from '@mui/icons-material/Edit';
 import { Link } from 'react-router-dom';
 
 
@@ -123,13 +124,13 @@ export default function CreateBrand() {
       <Table sx={{ minWidth: 650 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-          <StyledTableCell align="right">ID</StyledTableCell>
+          <StyledTableCell align="center">ID</StyledTableCell>
 
-            <StyledTableCell align="right">BrandAr</StyledTableCell>
-            <StyledTableCell align="right">BrandEn</StyledTableCell>
-            <StyledTableCell align="right">Edit</StyledTableCell>
+            <StyledTableCell align="center">BrandAr</StyledTableCell>
+            <StyledTableCell align="center">BrandEn</StyledTableCell>
+            <StyledTableCell align="center">Edit</StyledTableCell>
 
-            <StyledTableCell align="right">Action</StyledTableCell>
+            <StyledTableCell align="center">Action</StyledTableCell>
 
 
           </TableRow>
@@ -137,17 +138,23 @@ export default function CreateBrand() {
         <TableBody>
           {BrandlList.map((brand,key) => (
             <StyledTableRow key={key}>
-              <StyledTableCell align="right">{brand._id}</StyledTableCell>
+              <StyledTableCell align="center">{brand._id}</StyledTableCell>
 
-              <StyledTableCell align="right">{brand.BrandAr}</StyledTableCell>
-              <StyledTableCell align="right">{brand.BrandEn}</StyledTableCell>
-              <Link to = './UpdateBrand'>
-                <Button onClick={()=>setID(brand._id,brand.BrandAr,brand.BrandEn)}>
-                  update
-                </Button>
+              <StyledTableCell align="center">{brand.BrandAr}</StyledTableCell>
+              <StyledTableCell align="center">{brand.BrandEn}</StyledTableCell>
+
+
+              <StyledTableCell align="center">
+                <Link to = './UpdateBrand'>
+                <IconButton aria-label='edit' onClick={()=>setID(brand._id,brand.BrandAr,brand.BrandEn)}>
+
+                <EditIcon fontSize="small"/>
+                  </IconButton>
                 </Link>
+                </StyledTableCell>
+              <StyledTableCell align="center">
 
-              <StyledTableCell align="right">
+
                 <IconButton aria-label='delete' className={ClassNames.margin} onClick={()=> deleteBrand(brand._id)}>
                   <DeleteIcon fontSize="small"/>
                   </IconButton>

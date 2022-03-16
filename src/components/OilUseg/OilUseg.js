@@ -20,6 +20,7 @@ import EditIcon from '@mui/icons-material/Edit';
 
 
 import { ClassNames } from '@emotion/react';
+import { async } from 'q';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -62,14 +63,23 @@ export default function CreateOilUsge() {
   const [OilUsageEn,setOilUsageEn]= React.useState('');
 
 
-
 const setID=(id,OilUsageAr,OilUsageEn)=>{
   console.log(id)
   localStorage.setItem('ID', id)
   localStorage.setItem('OilUsageAr', OilUsageAr)
   localStorage.setItem('OilUsageEn', OilUsageEn)
 }
+let newTest=[]
+const objtest= async()=>{
+newTest =await OiUsgelList[2].Specs;
+console.log(newTest);
 
+for (let index = 0; index < newTest.length; index++) {
+console.log(newTest[index]);
+  
+}
+return newTest;
+}
          
   const creatOilusgefun = ()=>{
     axios.post('https://backendoil.vercel.app/api/oil/oilUseg',{OilUsageAr,OilUsageEn}).then( () => {
@@ -124,6 +134,10 @@ const setID=(id,OilUsageAr,OilUsageEn)=>{
 
     </Box>
     <h2>All Oil in Stock</h2>
+    <IconButton aria-label='edit' onClick={()=>objtest()}>
+
+<EditIcon fontSize="small"/>
+  </IconButton>
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="customized table">
         <TableHead>
@@ -141,11 +155,12 @@ const setID=(id,OilUsageAr,OilUsageEn)=>{
         </TableHead>
         <TableBody>
           {OiUsgelList.map((oil,key) => (
+            
             <StyledTableRow key={key}>
               <StyledTableCell align="center">{oil._id}</StyledTableCell>
               <StyledTableCell align="center">{oil.OilUsageEn}</StyledTableCell>
 
-              <StyledTableCell align="center">{oil.OilUsageAr}</StyledTableCell>
+              <StyledTableCell align="center">{oil.Specs}</StyledTableCell>
 
               <StyledTableCell align="center">
                 <Link to = './update'>

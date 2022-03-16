@@ -100,15 +100,16 @@ const setID=(id,OilUsageAr,OilUsageEn)=>{
       noValidate
       autoComplete="off"
     >
-      <TextField
-        id="outlined-name"
-        label="OilUsageAr"
-        onChange={(event)=>setOilUsageAr(event.target.value)}
-      />
+
             <TextField
         id="outlined-name"
         label="OilUsageEn"
         onChange={(event)=>setOilUsageEn(event.target.value)}
+      />
+            <TextField
+        id="outlined-name"
+        label="OilUsageAr"
+        onChange={(event)=>setOilUsageAr(event.target.value)}
       />
 
     </Box>
@@ -129,8 +130,8 @@ const setID=(id,OilUsageAr,OilUsageEn)=>{
         <TableRow>
 
             <StyledTableCell align="center">id</StyledTableCell>
-            <StyledTableCell align="center">OilUsageAr</StyledTableCell>
             <StyledTableCell align="center">OilUsageEn</StyledTableCell>
+            <StyledTableCell align="center">OilUsageAr</StyledTableCell>
             <StyledTableCell align="center">Update</StyledTableCell>
 
             <StyledTableCell align="center">Delete</StyledTableCell>
@@ -142,9 +143,9 @@ const setID=(id,OilUsageAr,OilUsageEn)=>{
           {OiUsgelList.map((oil,key) => (
             <StyledTableRow key={key}>
               <StyledTableCell align="center">{oil._id}</StyledTableCell>
+              <StyledTableCell align="center">{oil.OilUsageEn}</StyledTableCell>
 
               <StyledTableCell align="center">{oil.OilUsageAr}</StyledTableCell>
-              <StyledTableCell align="center">{oil.OilUsageEn}</StyledTableCell>
 
               <StyledTableCell align="center">
                 <Link to = './update'>

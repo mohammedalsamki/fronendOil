@@ -97,16 +97,17 @@ export default function CreateBrand() {
       noValidate
       autoComplete="off"
     >
+                  <TextField
+        id="outlined-name"
+        label="BrandEn"
+        onChange={(event)=>setBrandEn(event.target.value)}
+      />
       <TextField
         id="outlined-name"
         label="BrandAr"
         onChange={(event)=>setBrandAr(event.target.value)}
       />
-            <TextField
-        id="outlined-name"
-        label="BrandEn"
-        onChange={(event)=>setBrandEn(event.target.value)}
-      />
+
 
     </Box>
 
@@ -126,8 +127,8 @@ export default function CreateBrand() {
           <TableRow>
           <StyledTableCell align="center">ID</StyledTableCell>
 
-            <StyledTableCell align="center">BrandAr</StyledTableCell>
             <StyledTableCell align="center">BrandEn</StyledTableCell>
+            <StyledTableCell align="center">BrandAr</StyledTableCell>
             <StyledTableCell align="center">Edit</StyledTableCell>
 
             <StyledTableCell align="center">Action</StyledTableCell>
@@ -140,8 +141,8 @@ export default function CreateBrand() {
             <StyledTableRow key={key}>
               <StyledTableCell align="center">{brand._id}</StyledTableCell>
 
-              <StyledTableCell align="center">{brand.BrandAr}</StyledTableCell>
               <StyledTableCell align="center">{brand.BrandEn}</StyledTableCell>
+              <StyledTableCell align="center">{brand.BrandAr}</StyledTableCell>
 
 
               <StyledTableCell align="center">

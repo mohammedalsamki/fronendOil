@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Form, Button } from 'semantic-ui-react';
 import axios from 'axios';
 import { useHistory } from 'react-router';
+import '../style/form.css'
 export default function UpdateOilGrade() {
     let history = useHistory();
     const [OilGradeName, setFirstName] = useState('');
@@ -24,11 +25,12 @@ export default function UpdateOilGrade() {
     }, [])
 
     return (
-        <div>
+        <div className='form'>
             <Form>
                 <Form.Field>
                     <label>OilGradeName</label>
                     <input name="fname"
+                    className='inputform'
                         value={OilGradeName}
                         onChange={(e) => setFirstName(e.target.value)}
                         placeholder='First Name' />
@@ -37,12 +39,14 @@ export default function UpdateOilGrade() {
                     <label>OilGradeDis</label>
                     <input
                         name="lname"
+                    className='inputform'
+
                         value={OilGradeDis}
                         placeholder='Last Name'
                         onChange={(e) => setLastName(e.target.value)}
                     />
                 </Form.Field>
-                <Button type='submit' onClick={sendDataToAPI}>Update</Button>
+                <Button type='submit' className='submitform' onClick={sendDataToAPI} >Update</Button>
             </Form>
         </div>
     )

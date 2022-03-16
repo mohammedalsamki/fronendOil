@@ -10,10 +10,9 @@ export default function CreateOil() {
     
     <>
 
-    <Box sx={{ minWidth: 120 }}>
+    <Box sx={{ minWidth: 100 }}>
     <Test />
 
-    <br></br>
 
 
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button } from 'semantic-ui-react';
 import axios from 'axios';
+import '../style/form.css'
 import { useHistory } from 'react-router';
 export default function UpdateUnit() {
     let history = useHistory();
@@ -24,12 +25,13 @@ export default function UpdateUnit() {
     }, [])
 
     return (
-        <div>
+        <div className='form'>
             <Form>
                 <Form.Field>
                     <label>UnitName</label>
                     <input name="fname"
-                        value={UnitName}
+                    className='inputform'
+                    value={UnitName}
                         onChange={(e) => setFirstName(e.target.value)}
                         placeholder='UnitName' />
                 </Form.Field>
@@ -37,12 +39,13 @@ export default function UpdateUnit() {
                     <label>UnitDis</label>
                     <input
                         name="lname"
-                        value={UnitDis}
+                    className='inputform'
+                    value={UnitDis}
                         placeholder='UnitDis'
                         onChange={(e) => setLastName(e.target.value)}
                     />
                 </Form.Field>
-                <Button type='submit' onClick={sendDataToAPI}>Update</Button>
+                <Button type='submit' className='submitform' onClick={sendDataToAPI}>Update</Button>
             </Form>
         </div>
     )

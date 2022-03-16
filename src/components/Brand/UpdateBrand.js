@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button } from 'semantic-ui-react';
+import '../style/form.css'
 import axios from 'axios';
 import { useHistory } from 'react-router';
 export default function UpdateBrand() {
@@ -24,25 +25,27 @@ export default function UpdateBrand() {
     }, [])
 
     return (
-        <div>
+        <div className='form'>
             <Form>
                 <Form.Field>
                     <label>BrandAr</label>
                     <input name="fname"
-                        value={BrandAr}
+                    className='inputform'
+                    value={BrandAr}
                         onChange={(e) => setFirstName(e.target.value)}
                         placeholder='' />
                 </Form.Field>
                 <Form.Field>
                     <label>BrandEn</label>
                     <input
-                        name="lname"
+                    className='inputform'
+                    name="lname"
                         value={BrandEn}
                         placeholder=''
                         onChange={(e) => setLastName(e.target.value)}
                     />
                 </Form.Field>
-                <Button type='submit' onClick={sendDataToAPI}>Update</Button>
+                <Button type='submit' className='submitform' onClick={sendDataToAPI}>Update</Button>
             </Form>
         </div>
     )

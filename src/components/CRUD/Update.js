@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Form, Button } from 'semantic-ui-react';
 import axios from 'axios';
 import { useHistory } from 'react-router';
+import '../style/form.css'
+
 export default function AddEdit() {
     let history = useHistory();
     const [OilUsageAr, setFirstName] = useState('');
@@ -24,11 +26,13 @@ export default function AddEdit() {
     }, [])
 
     return (
-        <div>
+        <div className='form'>
             <Form>
                 <Form.Field>
                     <label>OilUsageAr</label>
                     <input name="fname"
+                    className='inputform'
+
                         value={OilUsageAr}
                         onChange={(e) => setFirstName(e.target.value)}
                         placeholder='First Name' />
@@ -36,13 +40,14 @@ export default function AddEdit() {
                 <Form.Field>
                     <label>OilUsageEn</label>
                     <input
-                        name="lname"
+                    className='inputform'
+                    name="lname"
                         value={OilUsageEn}
                         placeholder='Last Name'
                         onChange={(e) => setLastName(e.target.value)}
                     />
                 </Form.Field>
-                <Button type='submit' onClick={sendDataToAPI}>Update</Button>
+                <Button type='submit' className='submitform' onClick={sendDataToAPI}>Update</Button>
             </Form>
         </div>
     )

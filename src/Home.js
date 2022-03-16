@@ -14,19 +14,19 @@ export default function  Home() {
 
          <Grow in>
            <Container>
-             <Grid container  alignItems='strect'>
-               <Grid item xs={12} sm={7}>
-                 <AppBar className={classes.appBar} position='static' color='inherit'>
+             <Grid container  alignItems='strect' style={{color: "red", margin: "0px 20px 0px 0px"}}>
+               <Grid item xs={15} sm={7} >
+                 <AppBar className={classes.appBar} position='static' color='inherit' style={{color: "red", margin: "30px 100px 0px 0px"}}>
 
-                     <ShowOil/> 
+                     <ShowOil style={{color: "red", margin: "100px 25px 75px 100px"}}/> 
 
                  </AppBar>
               </Grid>
+             <div></div>
+              <Grid item xs={7} sm={3} style={{   padding: "0px 0px 10px 15px"}}>
+              <AppBar className={classes.appBar} position='static' color='black' >
 
-              <Grid item xs={12} sm={4}>
-              <AppBar className={classes.appBar} position='static' color='inherit'>
-
-                  <CreatOil/> 
+                  <CreatOil /> 
 
               </AppBar>
               </Grid>

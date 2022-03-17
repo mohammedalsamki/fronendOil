@@ -16,7 +16,6 @@ import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import EditIcon from '@mui/icons-material/Edit';
-import ModalUnstyledDemo from './OilUsageModal';
 import { ClassNames } from '@emotion/react';
 
 
@@ -58,22 +57,26 @@ export default function CreateOilUsge() {
   },[]);
   const [OilUsageAr, setOilUsageAr]= React.useState('');
   const [OilUsageEn,setOilUsageEn]= React.useState('');
+  let [Specs,setSpecs]= React.useState('');
 
 
-const setID=(id,OilUsageAr,OilUsageEn)=>{
+
+const setID=(id,OilUsageAr,OilUsageEn,Specs)=>{
   console.log(id)
   localStorage.setItem('ID', id)
   localStorage.setItem('OilUsageAr', OilUsageAr)
   localStorage.setItem('OilUsageEn', OilUsageEn)
+  localStorage.setItem('Specs', Specs)
+
 }
        
   const creatOilusgefun = ()=>{
-    axios.post('https://backendoil.vercel.app/api/oil/oilUseg',{OilUsageAr,OilUsageEn}).then( () => {
+    axios.post('https://backendoil.vercel.app/api/oil/oilUseg',{OilUsageAr,OilUsageEn,Specs}).then( () => {
       window.location.reload(false);
     })
   }
 
-  console.log(OilUsageAr,OilUsageEn)
+  console.log(OiUsgelList)
 
   return (
     
@@ -137,10 +140,10 @@ const setID=(id,OilUsageAr,OilUsageEn)=>{
             <StyledTableRow key={key}>
               <StyledTableCell align="center">{oil._id}</StyledTableCell>
               <StyledTableCell align="center">{oil.OilUsageEn}</StyledTableCell>
-              <StyledTableCell align="center">{oil.OilUsageEn}</StyledTableCell>
+              <StyledTableCell align="center">{oil.OilUsageAr}</StyledTableCell>
               <StyledTableCell align="center">
                 <Link to = './update'>
-                <IconButton aria-label='edit' onClick={()=>setID(oil._id,oil.OilUsageAr,oil.OilUsageEn)}>
+                <IconButton aria-label='edit' onClick={()=>setID(oil._id,oil.OilUsageAr,oil.OilUsageEn,oil.Specs)}>
                 <EditIcon fontSize="small"/>
                   </IconButton>
                 </Link>
@@ -151,11 +154,13 @@ const setID=(id,OilUsageAr,OilUsageEn)=>{
                   <DeleteIcon fontSize="small"/>
                   </IconButton>
                 </StyledTableCell>
-                <StyledTableCell align="center">   
-                <Button onClick={()=>setID(oil._id,oil.OilUsageAr,oil.OilUsageEn)}>
-                  <ModalUnstyledDemo  parentToChild={oil._id} ToChild={oil.OilUsageEn}/>   
-                  </Button>   
-                 </StyledTableCell>
+                <StyledTableCell align="center">
+                <Link to = './spec'>
+                <IconButton aria-label='edit' onClick={()=>setID(oil._id,oil.OilUsageAr,oil.OilUsageEn,oil.Specs)}>
+                <EditIcon fontSize="small"/>
+                  </IconButton>
+                </Link>
+              </StyledTableCell>
 
             </StyledTableRow>
           ))}

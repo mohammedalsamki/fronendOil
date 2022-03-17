@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter as Router,Route,Switch} from 'react-router-dom';
 import './App.css';
 import { Container,AppBar,Typography } from '@material-ui/core';
-
 import OilGrade from './components/OilGrade/OilGrade';
 import Brand from './components/Brand/Brand';
 import OilUseg from './components/OilUseg/OilUseg';
@@ -16,6 +15,7 @@ import UpdateOilGrade from './components/OilGrade/UpdateOilGrade';
 import UpdateCapacity from './components/Capacity/UpdateCapacity';
 import UpdateBrand from './components/Brand/UpdateBrand';
 import './components/style/naz.css'
+import AddSpec from './components/OilUseg/OilUsageModal';
 
 function App() {
   const classes= useStyles();
@@ -49,6 +49,8 @@ function App() {
             <Route path="/Brand" component={Brand}></Route>
             <Route path="/unit" component={Unit}></Route>
             <Route path="/update" component={AddEdit}></Route>
+            <Route path="/spec" component={AddSpec}></Route>
+
             <Route path="/delete" component={Unit}></Route>
             <Route path="/UpdateUnit" component={UpdateUnit}></Route>
             <Route path="/UpdateOilGrade" component={UpdateOilGrade}></Route>

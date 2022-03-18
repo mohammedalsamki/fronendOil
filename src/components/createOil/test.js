@@ -25,6 +25,7 @@ export default class Test extends Component {
       capacityselectOptions:[],
       id: "",
       name: '',
+      ID:"6232eed2073d7ddc71abba9c"
     }
   }
   async getOptionsunit(){
@@ -48,7 +49,6 @@ export default class Test extends Component {
       "label" : d.OilUsageEn
 
     }))
-
     this.setState({selectOptions: options})
 
   }
@@ -65,11 +65,11 @@ export default class Test extends Component {
   }
   async getOptionsoilGrade(){
 
-    const res = await axios.get('https://backendoil.vercel.app/api/oil/oilGrade')
-    const data = res.data
-    const options = data.map(d => ({
-      "value" : d._id,
-      "label" : d.OilGradeName
+    const res = await axios.get(`https://backendoil.vercel.app/api/oil/tours/${this.state.ID}`)
+    const data = res.data.Specs
+    const options = data.map(name => ({
+      "value" : name,
+      "label" : name
 
     }))
 
@@ -87,6 +87,7 @@ export default class Test extends Component {
     }))
 
     this.setState({capacityselectOptions: options})
+    console.log("reload grade")
 
   }
   
@@ -96,8 +97,13 @@ export default class Test extends Component {
  
    }
   handleChange(e){
+    
+   this.setState({ID:e.value})
+   console.log(this.state.ID)
    this.setState({OilUsag:e.label})
+
    this.setState({id:e.value, name:e.label})
+   this.getOptionsoilGrade()
 
   }
   oilGradehandleChange(e){
@@ -152,7 +158,7 @@ export default class Test extends Component {
     <p>Brand</p>
         <Select options={this.state.brandselectOptions} onChange={this.brandhandleChange.bind(this)} />
 
-    <p>oilGrade</p>
+    <p>oil Specifications</p>
 
         <Select options={this.state.oilGradeselectOptions} onChange={this.oilGradehandleChange.bind(this)} />
         <p>Unit</p>

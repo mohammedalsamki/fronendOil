@@ -32,4 +32,20 @@
   .submitform:hover {
     background-color: #45a049;
   }
-  
+  .ButtonForm{
+    background-color: #555555;
+        border: none;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 12px;
+  }
+  .ButtonForm:hover {
+    background-color: #4CAF50; /* Green */
+    color: white;
+  }

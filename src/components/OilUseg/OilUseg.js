@@ -17,6 +17,8 @@ import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import EditIcon from '@mui/icons-material/Edit';
 import { ClassNames } from '@emotion/react';
+import AddIcon from '@mui/icons-material/Add';
+
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -157,7 +159,7 @@ const setID=(id,OilUsageAr,OilUsageEn,Specs)=>{
                 <StyledTableCell align="center">
                 <Link to = './spec'>
                 <IconButton aria-label='edit' onClick={()=>setID(oil._id,oil.OilUsageAr,oil.OilUsageEn,oil.Specs)}>
-                <EditIcon fontSize="small"/>
+                <AddIcon fontSize="small"/>
                   </IconButton>
                 </Link>
               </StyledTableCell>

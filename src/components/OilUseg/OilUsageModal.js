@@ -4,7 +4,6 @@ import axios from 'axios';
 import { useHistory } from 'react-router';
 import '../style/form.css'
 import Box from '@mui/material/Box';
-
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
@@ -13,12 +12,9 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
-import { Link } from 'react-router-dom';
-import EditIcon from '@mui/icons-material/Edit';
 import { ClassNames } from '@emotion/react';
 import { IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import ReactDOM from 'react-dom'
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 
@@ -58,11 +54,17 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 export default function AddSpec() {
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
+  const handleOpen = () => {
+    setID(localStorage.getItem('ID'))
+
+    setOpen(true);
+  };
   const handleClose = () => setOpen(false);
 
     let history = useHistory();
     const [Specs, setOilSpec] = useState('');
+    // const [SpecsChiled, setSpecsChiled] = useState('');
+
     const [OilUsageEn, setOilUsageEn] = useState('');
     const [test, setlist] = useState('');
 
@@ -77,31 +79,35 @@ export default function AddSpec() {
         }).then(() => {
           window.location.reload(false);
             history.push('/OilUseg');
-            localStorage.clear();
+            // localStorage.clear();
             // console.log(Specs)
         }).catch(error => {
           console.log(error.response)
       });
     }
-    const deleteOilUsge=(id)=>{
-      axios.delete(`https://backendoil.vercel.app/api/oil/oilUseg/${id}`).then( () =>{
+    const deleteSpec=(name)=>{
+      axios.put(`https://backendoil.vercel.app/api/oil/specDelete/${ID}`, {
+        OilUsageEn,
+        SpecsChiled:name
+      }).then(() => {
         window.location.reload(false);
-      } )
+          console.log(name)
+      }).catch(error => {
+        console.log(error.response)
+    });
     }
-    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-      axios.get(`https://backendoil.vercel.app/api/oil/tours/6232eed2073d7ddc71abba9c`).then( (allOilsUseg) =>{
-        setOiUsgelList(allOilsUseg.data);
+      axios.get(`https://backendoil.vercel.app/api/oil/tours/${ID}`).then( (allOilsUseg) =>{
+        setOiUsgelList(allOilsUseg.data.Specs);
         setlist(allOilsUseg.data.Specs);
-        setIsLoading(false);
       })
     
-        setID(localStorage.getItem('ID'))
-        setOilUsageEn(localStorage.getItem('OilUsageEn'));
-    
-        setOilSpec(localStorage.getItem('Specs'))
-    }, [])
+      setID(localStorage.getItem('ID'))
+      setOilUsageEn(localStorage.getItem('OilUsageEn'));
+  
+      setOilSpec(localStorage.getItem('Specs'))
+    }, [ID])
 
 
       console.log("test",test)
@@ -109,22 +115,17 @@ export default function AddSpec() {
         console.log("array",test);
         
       }
-      const NameList=()=> {
-        const element = <StyledTableCell id="root">{test.map((name) =>( <h2>{name}</h2>))}</StyledTableCell>;
-          ReactDOM.render(element, document.getElementById('root'));
 
-      }
 
       return (
       <>
         <div className='form'>
             <Form>
                 <Form.Field>
-                    <label>Specs</label>
+                    <label>add Specifications for {OilUsageEn}</label>
                     <input name="Specs"
                     className='inputform'
 
-                        value={Specs}
                         onChange={(e) => setOilSpec(e.target.value)}
                         placeholder='Specs' />
                 </Form.Field>
@@ -135,7 +136,7 @@ export default function AddSpec() {
 
         </div>
 <div>
-<Button onClick={handleOpen}>Open modal</Button>
+<Button className='ButtonForm' onClick={handleOpen}>Show all {OilUsageEn} Specifications</Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -144,21 +145,17 @@ export default function AddSpec() {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
+          all {OilUsageEn} Specifications
           </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
+
           <TableContainer component={Paper}>
 
       <Table sx={{ minWidth: 650 }} aria-label="customized table">
         <TableHead>
         <TableRow>
-        <Button onClick={NameList}><div>test</div></Button>
 
-            <StyledTableCell align="center">id</StyledTableCell>
-            <StyledTableCell align="center">OilUsageEn</StyledTableCell>
-            <StyledTableCell align="center">Update</StyledTableCell>
+            <StyledTableCell align="center">ID</StyledTableCell>
+            <StyledTableCell align="center">Specification</StyledTableCell>
             <StyledTableCell align="center">Delete</StyledTableCell>
 
 
@@ -166,26 +163,17 @@ export default function AddSpec() {
         </TableHead>
         <TableBody>
 
-            
+        {OiUsgelList.map((name) =>(
             <StyledTableRow >
-              <StyledTableCell id="root" align="center"></StyledTableCell>
-              <div ></div>
-              <StyledTableCell align="center">
-                <IconButton aria-label='delete' className={ClassNames.margin}>
+              <StyledTableCell id="root" align="center">{ID}</StyledTableCell>
+              <StyledTableCell align="center" > {name}</StyledTableCell>              <StyledTableCell align="center">
+                <IconButton aria-label='delete' className={ClassNames.margin} onClick={()=> deleteSpec(name)}>
                   <DeleteIcon fontSize="small"/>
                   </IconButton>
                 </StyledTableCell>
 
-
-                <StyledTableCell align="center">
-                <Link to = './spec'>
-                <IconButton aria-label='edit' >
-                <EditIcon fontSize="small"/>
-                  </IconButton>
-                </Link>
-              </StyledTableCell>
-
             </StyledTableRow>
+            ))}
         </TableBody>
       </Table>
     </TableContainer>

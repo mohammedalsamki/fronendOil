@@ -22,7 +22,7 @@ function App() {
     <Container maxWidth="lg">
          <AppBar className={classes.appBar} position="static" color='inherit'>
           
-          <Typography className={classes.heading} variant='h2' align='center'> oil creat and show </Typography>
+          <Typography className={classes.heading} variant='h2' align='center'> Oil & Fluid Add and Show </Typography>
          <br></br>
 
           <div class="topnav">

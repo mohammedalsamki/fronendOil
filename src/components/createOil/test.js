@@ -18,6 +18,7 @@ export default class Test extends Component {
       Capasity:0,
       StockQuantiti:0,
       UnitPrice:0,
+      SaelsPrice:0,
       Unit:'',
       unitselectOptions:[],
       brandselectOptions : [],
@@ -103,7 +104,6 @@ export default class Test extends Component {
     this.setState({id:e.value, name:e.label})
    }
 
-
   componentDidMount(){
       this.getOptions()
       this.getOptionsbrand()
@@ -125,7 +125,8 @@ export default class Test extends Component {
       Capasity:this.state.Capasity,
       StockQuantiti:this.state.StockQuantiti,
       UnitPrice:this.state.UnitPrice,
-      Unit:this.state.Unit
+      Unit:this.state.Unit,
+      SaelsPrice:this.state.SaelsPrice
     }
     axios.post('https://backendoil.vercel.app/api/oil',x).then( () => {
       window.location.reload(false);
@@ -136,31 +137,33 @@ export default class Test extends Component {
     
     return (
       <div>
+            <p>Brand</p>
+        <Select options={this.state.brandselectOptions} onChange={this.brandhandleChange.bind(this)} />
           <p>Oil & Fluid Usges</p>
         <Select options={this.state.selectOptions} onChange={this.handleChange.bind(this)} />
         
     <p>oil Specifications</p>
 
 <Select options={this.state.oilGradeselectOptions} onChange={this.oilGradehandleChange.bind(this)} />
-    <p>Brand</p>
-        <Select options={this.state.brandselectOptions} onChange={this.brandhandleChange.bind(this)} />
+<p>Capacity</p>
+
+
+<TextField
+id="outlined-number"
+label="Capacity"
+type="number"
+onChange={(e)=>this.setState({Capasity:e.target.value})}
+InputLabelProps={{
+ shrink: true,
+}}
+/>
+<br></br>
 
         <p>Unit</p>
 
          <Select options={this.state.unitselectOptions} onChange={this.unithandleChange.bind(this)} />
-           <p>Capacity</p>
+         <br></br>
 
-
-           <TextField
-          id="outlined-number"
-          label="capacity"
-          type="number"
-          onChange={(e)=>this.setState({Capasity:e.target.value})}
-          InputLabelProps={{
-            shrink: true,
-          }}
-        />
-        <br></br>
            <br></br>
            <TextField
           id="outlined-number"
@@ -184,6 +187,18 @@ export default class Test extends Component {
           }}
         />
         <br></br>
+        <br></br>
+
+<TextField
+  id="outlined-number"
+  label="SaelsPrice"
+  type="SaelsPrice"
+  onChange={(e)=>this.setState({SaelsPrice:e.target.value})}
+  InputLabelProps={{
+    shrink: true,
+  }}
+/>
+<br></br>
         <br></br>
 
 

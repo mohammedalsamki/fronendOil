@@ -132,50 +132,36 @@ export default function AddSpec() {
 
         </div>
 <div>
-  <br></br>
-<Button className='ButtonForm' onClick={handleOpen}>Show all {OilUsageEn} Specifications</Button>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-          all {OilUsageEn} Specifications
-          </Typography>
+<TableContainer component={Paper}>
 
-          <TableContainer component={Paper}>
+<Table sx={{ minWidth: 650 }} aria-label="customized table">
+  <TableHead>
+  <TableRow>
 
-      <Table sx={{ minWidth: 650 }} aria-label="customized table">
-        <TableHead>
-        <TableRow>
-
-            <StyledTableCell align="center">ID</StyledTableCell>
-            <StyledTableCell align="center">Specification</StyledTableCell>
-            <StyledTableCell align="center">Delete</StyledTableCell>
+      <StyledTableCell align="center">ID</StyledTableCell>
+      <StyledTableCell align="center">Specification</StyledTableCell>
+      <StyledTableCell align="center">Delete</StyledTableCell>
 
 
-          </TableRow>
-        </TableHead>
-        <TableBody>
+    </TableRow>
+  </TableHead>
+  <TableBody>
 
-        {OiUsgelList.map((name) =>(
-            <StyledTableRow >
-              <StyledTableCell id="root" align="center">{IDSpec}</StyledTableCell>
-              <StyledTableCell align="center" > {name}</StyledTableCell>              <StyledTableCell align="center">
-                <IconButton aria-label='delete' className={ClassNames.margin} onClick={()=> deleteSpec(name)}>
-                  <DeleteIcon fontSize="small"/>
-                  </IconButton>
-                </StyledTableCell>
+  {OiUsgelList.map((name) =>(
+      <StyledTableRow >
+        <StyledTableCell id="root" align="center">{IDSpec}</StyledTableCell>
+        <StyledTableCell align="center" > {name}</StyledTableCell>              <StyledTableCell align="center">
+          <IconButton aria-label='delete' className={ClassNames.margin} onClick={()=> deleteSpec(name)}>
+            <DeleteIcon fontSize="small"/>
+            </IconButton>
+          </StyledTableCell>
 
-            </StyledTableRow>
-            ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-        </Box>
-      </Modal>
+      </StyledTableRow>
+      ))}
+  </TableBody>
+</Table>
+</TableContainer>
+  
 </div>
 
         </>

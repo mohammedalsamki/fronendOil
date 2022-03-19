@@ -89,7 +89,8 @@ export default class Test extends Component {
 
   }
 
-  handleChange(e){
+  async handleChange(e){
+   await this.setState({ID:e.value})
     
    this.setState({ID:e.value})
    console.log(this.state.ID)
@@ -99,16 +100,17 @@ export default class Test extends Component {
    this.getOptionsoilGrade()
 
   }
-  oilGradehandleChange(e){
-    this.setState({OilGrade:e.label})
+  async  oilGradehandleChange(e){
+   await this.setState({OilGrade:e.label})
     this.setState({id:e.value, name:e.label})
    }
-   brandhandleChange(e){
-    this.setState({Brand:e.label})
+   async brandhandleChange(e){
+     
+    await this.setState({Brand:e.label})
     this.setState({id:e.value, name:e.label})
    }
-   unithandleChange(e){
-    this.setState({Unit:e.label})
+   async  unithandleChange(e){
+    await this.setState({Unit:e.label})
     this.setState({id:e.value, name:e.label})
    }
 

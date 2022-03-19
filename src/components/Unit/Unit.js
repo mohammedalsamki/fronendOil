@@ -58,19 +58,19 @@ export default function CreateUnit() {
         setUnitList(allOilsUnit.data);
     })
   },[]);
-  const [UnitName, setUnitName]= React.useState('');
-  const [UnitDis,setUnitDis]= React.useState('');
+  const [UnitNameEn, setUnitNameEn]= React.useState('');
+  const [UnitNameAr,setUnitNameAr]= React.useState('');
       
   const creatUnitFun = ()=>{
-    axios.post('https://backendoil.vercel.app/api/oil/unit',{UnitName,UnitDis}).then( () => {
+    axios.post('https://backendoil.vercel.app/api/oil/unit',{UnitNameEn,UnitNameAr}).then( () => {
       window.location.reload(false);
     })
   }
-  const setID=(id,UnitName,UnitDis)=>{
+  const setID=(id,UnitNameEn,UnitNameAr)=>{
     console.log(id)
     localStorage.setItem('ID', id)
-    localStorage.setItem('UnitName', UnitName)
-    localStorage.setItem('UnitDis', UnitDis)
+    localStorage.setItem('UnitNameEn', UnitNameEn)
+    localStorage.setItem('UnitNameAr', UnitNameAr)
   }
   
 
@@ -94,13 +94,13 @@ export default function CreateUnit() {
     >
       <TextField
         id="outlined-name"
-        label="UnitName"
-        onChange={(event)=>setUnitName(event.target.value)}
+        label="UnitNameEn"
+        onChange={(event)=>setUnitNameEn(event.target.value)}
       />
             <TextField
         id="outlined-name"
-        label="UnitDis"
-        onChange={(event)=>setUnitDis(event.target.value)}
+        label="UnitNameAr"
+        onChange={(event)=>setUnitNameAr(event.target.value)}
       />
 
     </Box>
@@ -121,8 +121,8 @@ export default function CreateUnit() {
           <TableRow>
           <StyledTableCell align="center">ID</StyledTableCell>
 
-            <StyledTableCell align="center">UnitName</StyledTableCell>
-            <StyledTableCell align="center">UnitDis</StyledTableCell>
+            <StyledTableCell align="center">UnitNameEn</StyledTableCell>
+            <StyledTableCell align="center">UnitNameAr</StyledTableCell>
             <StyledTableCell align="cinter">Update</StyledTableCell>
             <StyledTableCell align="center">Action</StyledTableCell>
 
@@ -134,12 +134,12 @@ export default function CreateUnit() {
             <StyledTableRow key={key}>
               <StyledTableCell align="center">{unit._id}</StyledTableCell>
 
-              <StyledTableCell align="center">{unit.UnitName}</StyledTableCell>
-              <StyledTableCell align="center">{unit.UnitDis}</StyledTableCell>
+              <StyledTableCell align="center">{unit.UnitNameEn}</StyledTableCell>
+              <StyledTableCell align="center">{unit.UnitNameAr}</StyledTableCell>
 
                 <StyledTableCell align="center">
                 <Link to = './UpdateUnit'>
-                <IconButton aria-label='edit' onClick={()=>setID(unit._id,unit.UnitName,unit.UnitDis)}>
+                <IconButton aria-label='edit' onClick={()=>setID(unit._id,unit.UnitNameEn,unit.UnitNameAr)}>
 
                 <EditIcon fontSize="small"/>
                   </IconButton>

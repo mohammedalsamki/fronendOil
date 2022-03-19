@@ -18,6 +18,7 @@ import { Link } from 'react-router-dom';
 import EditIcon from '@mui/icons-material/Edit';
 import { ClassNames } from '@emotion/react';
 import AddIcon from '@mui/icons-material/Add';
+import AddSpec from './OilUsageModal';
 
 
 
@@ -45,6 +46,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 export default function CreateOilUsge() {
   const [OiUsgelList, setOiUsgelList]= React.useState([]);
+  
 
   const deleteOilUsge=(id)=>{
     axios.delete(`https://backendoil.vercel.app/api/oil/oilUseg/${id}`).then( () =>{
@@ -60,7 +62,6 @@ export default function CreateOilUsge() {
   const [OilUsageAr, setOilUsageAr]= React.useState('');
   const [OilUsageEn,setOilUsageEn]= React.useState('');
   let [Specs,setSpecs]= React.useState('');
-
 
 
 const setID=(id,OilUsageAr,OilUsageEn,Specs)=>{
@@ -83,7 +84,7 @@ const setID=(id,OilUsageAr,OilUsageEn,Specs)=>{
   return (
     
     <>   	
-      <h2>Add Oil to stock</h2>
+      <h2>Add Oil & Fluid Usges</h2>
     <Box sx={{ minWidth: 120 }}>
     <br></br>
     <br></br>
@@ -118,7 +119,6 @@ const setID=(id,OilUsageAr,OilUsageEn,Specs)=>{
     <br></br>
 
     </Box>
-    <h2>All Oil in Stock</h2>
  
 
     <TableContainer component={Paper}>
@@ -127,8 +127,8 @@ const setID=(id,OilUsageAr,OilUsageEn,Specs)=>{
         <TableRow>
 
             <StyledTableCell align="center">id</StyledTableCell>
-            <StyledTableCell align="center">OilUsageEn</StyledTableCell>
-            <StyledTableCell align="center">OilUsageAr</StyledTableCell>
+            <StyledTableCell align="center">Oil & Fluid Usges En</StyledTableCell>
+            <StyledTableCell align="center">Oil & Fluid Usges Ar</StyledTableCell>
             <StyledTableCell align="center">Update</StyledTableCell>
             <StyledTableCell align="center">Delete</StyledTableCell>
             <StyledTableCell align="center">add Spec</StyledTableCell>

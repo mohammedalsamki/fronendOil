@@ -5,13 +5,13 @@ import '../style/form.css'
 import { useHistory } from 'react-router';
 export default function UpdateUnit() {
     let history = useHistory();
-    const [UnitName, setFirstName] = useState('');
-    const [UnitDis, setLastName] = useState('');
+    const [UnitNameEn, setFirstName] = useState('');
+    const [UnitNameAr, setLastName] = useState('');
     const [ID, setID] = useState(null);
     const sendDataToAPI = () => {
         axios.put(`https://backendoil.vercel.app/api/oil/unit/${ID}`, {
-            UnitName,
-            UnitDis
+            UnitNameEn,
+            UnitNameAr
         }).then(() => {
             history.push('/unit');
             localStorage.clear();
@@ -19,8 +19,8 @@ export default function UpdateUnit() {
     }
 
     useEffect(() => {
-        setFirstName(localStorage.getItem('UnitName'));
-        setLastName(localStorage.getItem('UnitDis'));
+        setFirstName(localStorage.getItem('UnitNameEn'));
+        setLastName(localStorage.getItem('UnitNameAr'));
         setID(localStorage.getItem('ID'))
     }, [])
 
@@ -28,20 +28,20 @@ export default function UpdateUnit() {
         <div className='form'>
             <Form>
                 <Form.Field>
-                    <label>UnitName</label>
+                    <label>UnitNameEn</label>
                     <input name="fname"
                     className='inputform'
-                    value={UnitName}
+                    value={UnitNameEn}
                         onChange={(e) => setFirstName(e.target.value)}
-                        placeholder='UnitName' />
+                        placeholder='UnitNameEn' />
                 </Form.Field>
                 <Form.Field>
-                    <label>UnitDis</label>
+                    <label>UnitNameAr</label>
                     <input
                         name="lname"
                     className='inputform'
-                    value={UnitDis}
-                        placeholder='UnitDis'
+                    value={UnitNameAr}
+                        placeholder='UnitNameAr'
                         onChange={(e) => setLastName(e.target.value)}
                     />
                 </Form.Field>

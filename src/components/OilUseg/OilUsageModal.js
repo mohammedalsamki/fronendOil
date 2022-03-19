@@ -55,7 +55,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 export default function AddSpec() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
-    setID(localStorage.getItem('ID'))
+    setIDSpec(localStorage.getItem('ID'))
 
     setOpen(true);
   };
@@ -63,7 +63,6 @@ export default function AddSpec() {
 
     let history = useHistory();
     const [Specs, setOilSpec] = useState('');
-    // const [SpecsChiled, setSpecsChiled] = useState('');
 
     const [OilUsageEn, setOilUsageEn] = useState('');
     const [test, setlist] = useState('');
@@ -71,9 +70,9 @@ export default function AddSpec() {
   const [OiUsgelList, setOiUsgelList]= React.useState([]);
 
   
-    const [ID, setID] = useState(null);
+    const [IDSpec, setIDSpec] = useState(null);
     const sendDataToAPI = () => {
-        axios.put(`https://backendoil.vercel.app/api/oil/spec/${ID}`, {
+        axios.put(`https://backendoil.vercel.app/api/oil/spec/${IDSpec}`, {
           OilUsageEn,
           Specs
         }).then(() => {
@@ -86,7 +85,7 @@ export default function AddSpec() {
       });
     }
     const deleteSpec=(name)=>{
-      axios.put(`https://backendoil.vercel.app/api/oil/specDelete/${ID}`, {
+      axios.put(`https://backendoil.vercel.app/api/oil/specDelete/${IDSpec}`, {
         OilUsageEn,
         SpecsChiled:name
       }).then(() => {
@@ -98,23 +97,20 @@ export default function AddSpec() {
     }
 
     useEffect(() => {
-      axios.get(`https://backendoil.vercel.app/api/oil/tours/${ID}`).then( (allOilsUseg) =>{
+      axios.get(`https://backendoil.vercel.app/api/oil/tours/${IDSpec}`).then( (allOilsUseg) =>{
         setOiUsgelList(allOilsUseg.data.Specs);
         setlist(allOilsUseg.data.Specs);
       })
     
-      setID(localStorage.getItem('ID'))
+      setIDSpec(localStorage.getItem('ID'))
       setOilUsageEn(localStorage.getItem('OilUsageEn'));
   
       setOilSpec(localStorage.getItem('Specs'))
-    }, [ID])
+    }, [IDSpec])
 
 
       console.log("test",test)
-      for (let index = 0; index < OiUsgelList.length; index++) {
-        console.log("array",test);
-        
-      }
+
 
 
       return (
@@ -136,6 +132,7 @@ export default function AddSpec() {
 
         </div>
 <div>
+  <br></br>
 <Button className='ButtonForm' onClick={handleOpen}>Show all {OilUsageEn} Specifications</Button>
       <Modal
         open={open}
@@ -165,7 +162,7 @@ export default function AddSpec() {
 
         {OiUsgelList.map((name) =>(
             <StyledTableRow >
-              <StyledTableCell id="root" align="center">{ID}</StyledTableCell>
+              <StyledTableCell id="root" align="center">{IDSpec}</StyledTableCell>
               <StyledTableCell align="center" > {name}</StyledTableCell>              <StyledTableCell align="center">
                 <IconButton aria-label='delete' className={ClassNames.margin} onClick={()=> deleteSpec(name)}>
                   <DeleteIcon fontSize="small"/>
@@ -180,12 +177,7 @@ export default function AddSpec() {
         </Box>
       </Modal>
 </div>
-        <div>
-        {/* <div id="root"></div> */}
 
-        {/* {test.map((name) =>( <h2>{name}</h2>))} */}
-    
-        </div>
         </>
     )
 }

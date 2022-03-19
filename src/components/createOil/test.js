@@ -25,7 +25,7 @@ export default class Test extends Component {
       capacityselectOptions:[],
       id: "",
       name: '',
-      ID:"6232eed2073d7ddc71abba9c"
+      ID:""
     }
   }
   async getOptionsunit(){
@@ -34,7 +34,7 @@ export default class Test extends Component {
     const data = res.data
     const options = data.map(d => ({
       "value" : d._id,
-      "label" : d.UnitName
+      "label" : d.UnitNameEn
 
     }))
 
@@ -44,6 +44,7 @@ export default class Test extends Component {
 
     const res = await axios.get('https://backendoil.vercel.app/api/oil/oilUseg')
     const data = res.data
+    
     const options = data.map(d => ({
       "value" : d._id,
       "label" : d.OilUsageEn
@@ -56,6 +57,8 @@ export default class Test extends Component {
 
     const res = await axios.get('https://backendoil.vercel.app/api/oil/brand')
     const data = res.data
+   this.setState({ID:data._id})
+
     const options = data.map(d => ({
       "value" : d._id,
       "label" : d.BrandEn
@@ -76,26 +79,7 @@ export default class Test extends Component {
     this.setState({oilGradeselectOptions: options})
 
   }
-  async getOptionsCapasity(){
 
-    const res = await axios.get('https://backendoil.vercel.app/api/oil/capacity')
-    const data = res.data
-    const options = data.map(d => ({
-      "value" : d._id,
-      "label" : d.capacityNumber
-
-    }))
-
-    this.setState({capacityselectOptions: options})
-    console.log("reload grade")
-
-  }
-  
-  handleChangecapacity(e){
-    this.setState({Capasity:e.label})
-    this.setState({id:e.value, name:e.label})
- 
-   }
   handleChange(e){
     
    this.setState({ID:e.value})
@@ -125,7 +109,6 @@ export default class Test extends Component {
       this.getOptionsbrand()
       this.getOptionsoilGrade()
       this.getOptionsunit()
-      this.getOptionsCapasity()
 
 
 
@@ -153,20 +136,31 @@ export default class Test extends Component {
     
     return (
       <div>
-          <p>oilUseg</p>
+          <p>Oil & Fluid Usges</p>
         <Select options={this.state.selectOptions} onChange={this.handleChange.bind(this)} />
+        
+    <p>oil Specifications</p>
+
+<Select options={this.state.oilGradeselectOptions} onChange={this.oilGradehandleChange.bind(this)} />
     <p>Brand</p>
         <Select options={this.state.brandselectOptions} onChange={this.brandhandleChange.bind(this)} />
 
-    <p>oil Specifications</p>
-
-        <Select options={this.state.oilGradeselectOptions} onChange={this.oilGradehandleChange.bind(this)} />
         <p>Unit</p>
 
          <Select options={this.state.unitselectOptions} onChange={this.unithandleChange.bind(this)} />
-           <p>Capasity</p>
+           <p>Capacity</p>
 
-      <Select options={this.state.capacityselectOptions} onChange={this.handleChangecapacity.bind(this)} />
+
+           <TextField
+          id="outlined-number"
+          label="capacity"
+          type="number"
+          onChange={(e)=>this.setState({Capasity:e.target.value})}
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+        <br></br>
            <br></br>
            <TextField
           id="outlined-number"
@@ -182,7 +176,7 @@ export default class Test extends Component {
 
         <TextField
           id="outlined-number"
-          label="StockQuantiti"
+          label="UnitPrice"
           type="UnitPrice"
           onChange={(e)=>this.setState({UnitPrice:e.target.value})}
           InputLabelProps={{

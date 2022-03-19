@@ -2,17 +2,13 @@ import React from 'react';
 import { BrowserRouter as Router,Route,Switch} from 'react-router-dom';
 import './App.css';
 import { Container,AppBar,Typography } from '@material-ui/core';
-import OilGrade from './components/OilGrade/OilGrade';
 import Brand from './components/Brand/Brand';
 import OilUseg from './components/OilUseg/OilUseg';
-import Capacity from './components/Capacity/Capacity';
 import Home from './Home';
 import useStyles from './styles';
 import Unit from './components/Unit/Unit'
 import  AddEdit  from './components/CRUD/Update';
 import UpdateUnit from './components/Unit/UpdateUnit';
-import UpdateOilGrade from './components/OilGrade/UpdateOilGrade';
-import UpdateCapacity from './components/Capacity/UpdateCapacity';
 import UpdateBrand from './components/Brand/UpdateBrand';
 import './components/style/naz.css'
 import AddSpec from './components/OilUseg/OilUsageModal';
@@ -31,11 +27,9 @@ function App() {
 
           <div class="topnav">
             <a class="active" href="/">Home</a>
-            <a href="/OilGrade">OilGrade</a>
             <a href="/Brand">Brand</a>
-            <a href="/OilUseg">OilUseg</a>
+            <a href="/OilUseg">Oil & Fluid Usges</a>
             <a href="/Unit">Unit</a>
-            <a href="/Capacity">Capacity</a>
 
           </div>
          <br></br>
@@ -43,8 +37,6 @@ function App() {
           <div>
            <Switch>
            <Route path="/" exact component={Home}></Route>
-            <Route path="/OilGrade" component={OilGrade}></Route>
-            <Route path="/Capacity" component={Capacity}></Route>
             <Route path="/OilUseg" component={OilUseg}></Route>
             <Route path="/Brand" component={Brand}></Route>
             <Route path="/unit" component={Unit}></Route>
@@ -53,8 +45,6 @@ function App() {
 
             <Route path="/delete" component={Unit}></Route>
             <Route path="/UpdateUnit" component={UpdateUnit}></Route>
-            <Route path="/UpdateOilGrade" component={UpdateOilGrade}></Route>
-            <Route path="/UpdateCapacity" component={UpdateCapacity}></Route>
             <Route path="/UpdateBrand" component={UpdateBrand}></Route>
             
 

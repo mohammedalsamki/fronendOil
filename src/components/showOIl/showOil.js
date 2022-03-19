@@ -55,13 +55,13 @@ export default function ShowOilsData() {
     < >
     <h2>All Oil in Stock</h2>
     <TableContainer component={Paper} >
-      <Table  sx={{ minWidth: 650 }} aria-label="customized table">
+      <Table  sx={{ minWidth: 800 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>OilUsage</StyledTableCell>
+            <StyledTableCell>Oil & Fluid Usges</StyledTableCell>
             <StyledTableCell align="right">Brand</StyledTableCell>
             <StyledTableCell align="right">OilGrade</StyledTableCell>
-            <StyledTableCell align="right">Capasity</StyledTableCell>
+            <StyledTableCell align="right">Capacity</StyledTableCell>
             <StyledTableCell align="right">Unit</StyledTableCell>
             <StyledTableCell align="right">StockQuantiti</StyledTableCell>
             <StyledTableCell align="right">UnitPrice</StyledTableCell>

@@ -59,6 +59,9 @@ export default function CreateBrand() {
   },[]);
   const [BrandAr, setBrandAr]= React.useState('');
   const [BrandEn,setBrandEn]= React.useState('');
+  const [BrandImage,setBrandImage]= React.useState('');
+  const [BrandDiscr,setBrandDiscr]= React.useState('');
+
 
 
   const setID=(id,BrandAr,BrandEn)=>{
@@ -66,12 +69,15 @@ export default function CreateBrand() {
     localStorage.setItem('ID', id)
     localStorage.setItem('BrandAr', BrandAr)
     localStorage.setItem('BrandEn', BrandEn)
+    localStorage.setItem('BrandImage', BrandEn)
+    localStorage.setItem('BrandDiscr', BrandEn)
+
   }
   
 
          
   const creatBrandfun = ()=>{
-    axios.post('https://backendoil.vercel.app/api/oil/brand',{BrandAr,BrandEn}).then( () => {
+    axios.post('https://backendoil.vercel.app/api/oil/brand',{BrandAr,BrandEn,BrandImage,BrandDiscr}).then( () => {
       window.location.reload(false);
     })
   }
@@ -107,6 +113,16 @@ export default function CreateBrand() {
         label="BrandAr"
         onChange={(event)=>setBrandAr(event.target.value)}
       />
+            <TextField
+        id="outlined-name"
+        label="BrandImage"
+        onChange={(event)=>setBrandImage(event.target.value)}
+      />
+            <TextField
+        id="outlined-name"
+        label="BrandDiscr"
+        onChange={(event)=>setBrandDiscr(event.target.value)}
+      />
 
 
     </Box>
@@ -126,9 +142,12 @@ export default function CreateBrand() {
         <TableHead>
           <TableRow>
           <StyledTableCell align="center">ID</StyledTableCell>
+          <StyledTableCell align="center">BrandImage</StyledTableCell>
 
             <StyledTableCell align="center">BrandEn</StyledTableCell>
             <StyledTableCell align="center">BrandAr</StyledTableCell>
+            <StyledTableCell align="center">BrandDiscr</StyledTableCell>
+
             <StyledTableCell align="center">Edit</StyledTableCell>
 
             <StyledTableCell align="center">Action</StyledTableCell>
@@ -140,9 +159,14 @@ export default function CreateBrand() {
           {BrandlList.map((brand,key) => (
             <StyledTableRow key={key}>
               <StyledTableCell align="center">{brand._id}</StyledTableCell>
+              <StyledTableCell align="center">
+                <img src={brand.BrandImage} alt="not found" width="70" height="70"></img>
+                </StyledTableCell>
 
               <StyledTableCell align="center">{brand.BrandEn}</StyledTableCell>
               <StyledTableCell align="center">{brand.BrandAr}</StyledTableCell>
+              <StyledTableCell align="center">{brand.BrandDiscr}</StyledTableCell>
+
 
 
               <StyledTableCell align="center">

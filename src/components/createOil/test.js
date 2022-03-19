@@ -3,7 +3,10 @@ import Select from 'react-select'
 import axios from 'axios'
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import { Container,AppBar, Grow,Grid } from '@material-ui/core';
 
+
+const ulStyle = {  padding: "12px 10px",  width:'40%', listStyleType:'none'}
 
 
 export default class Test extends Component {
@@ -26,7 +29,11 @@ export default class Test extends Component {
       capacityselectOptions:[],
       id: "",
       name: '',
-      ID:""
+      ID:"",
+      Note:'',
+      PartNumber:'',
+      StockNumber:'',
+      ItemImage:''
     }
   }
   async getOptionsunit(){
@@ -126,7 +133,11 @@ export default class Test extends Component {
       StockQuantiti:this.state.StockQuantiti,
       UnitPrice:this.state.UnitPrice,
       Unit:this.state.Unit,
-      SaelsPrice:this.state.SaelsPrice
+      SaelsPrice:this.state.SaelsPrice,
+      PartNumber:this.state.PartNumber,
+      StockNumber:this.state.StockNumber,
+      ItemImage:this.state.ItemImage,
+      Note:this.state.Note
     }
     axios.post('https://backendoil.vercel.app/api/oil',x).then( () => {
       window.location.reload(false);
@@ -137,18 +148,20 @@ export default class Test extends Component {
     
     return (
       <div>
-            <p>Brand</p>
-        <Select options={this.state.brandselectOptions} onChange={this.brandhandleChange.bind(this)} />
-          <p>Oil & Fluid Usges</p>
-        <Select options={this.state.selectOptions} onChange={this.handleChange.bind(this)} />
+            <p justifyContent="center">Brand</p>
+        <Select justifyContent="center" options={this.state.brandselectOptions} onChange={this.brandhandleChange.bind(this)} />
+          <p justifyContent="center">Usges</p>
+        <Select justifyContent="center" options={this.state.selectOptions} onChange={this.handleChange.bind(this)} />
         
-    <p>oil Specifications</p>
+    <p justifyContent="center">oil Specifications</p>
 
-<Select options={this.state.oilGradeselectOptions} onChange={this.oilGradehandleChange.bind(this)} />
-<p>Capacity</p>
+<Select justifyContent="center" options={this.state.oilGradeselectOptions} onChange={this.oilGradehandleChange.bind(this)} />
+<p   alignItems="center"
+>Capacity</p>
 
 
 <TextField
+justifyContent="center"
 id="outlined-number"
 label="Capacity"
 type="number"
@@ -157,16 +170,72 @@ InputLabelProps={{
  shrink: true,
 }}
 />
-<br></br>
 
         <p>Unit</p>
 
-         <Select options={this.state.unitselectOptions} onChange={this.unithandleChange.bind(this)} />
+         <Select justifyContent="center" options={this.state.unitselectOptions} onChange={this.unithandleChange.bind(this)} />
          <br></br>
+         
+         <Grid container  justifyContent="center" style={{ margin: "0px 20px 0px 0px"}}>
 
-           <br></br>
            <TextField
-          id="outlined-number"
+         style={ulStyle}
+        id="outlined-number"
+          label="ItemImage"
+          type="text"
+          onChange={(e)=>this.setState({ItemImage:e.target.value})}
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+
+
+           <TextField
+         
+        id="outlined-number"
+         style={ulStyle}
+         label="Note"
+          type="text"
+          onChange={(e)=>this.setState({Note:e.target.value})}
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+
+
+           <TextField
+         
+        id="outlined-number"
+         style={ulStyle}
+         label="StockNumber"
+          type="number"
+          onChange={(e)=>this.setState({StockNumber:e.target.value})}
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+
+
+
+           <TextField
+         
+        id="outlined-number"
+         style={ulStyle}
+         label="PartNumber"
+          type="number"
+          onChange={(e)=>this.setState({PartNumber:e.target.value})}
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+                      </Grid>
+
+         <Grid container  justifyContent="center" style={{ margin: "0px 20px 0px 0px"}}>
+
+           <TextField
+         style={ulStyle}
+         
+        id="outlined-number"
           label="StockQuantiti"
           type="number"
           onChange={(e)=>this.setState({StockQuantiti:e.target.value})}
@@ -174,37 +243,43 @@ InputLabelProps={{
             shrink: true,
           }}
         />
-        <br></br>
-        <br></br>
 
         <TextField
+         style={ulStyle}
+         
+
           id="outlined-number"
           label="UnitPrice"
-          type="UnitPrice"
+          type="number"
           onChange={(e)=>this.setState({UnitPrice:e.target.value})}
           InputLabelProps={{
             shrink: true,
           }}
         />
-        <br></br>
-        <br></br>
 
-<TextField
-  id="outlined-number"
-  label="SaelsPrice"
-  type="SaelsPrice"
-  onChange={(e)=>this.setState({SaelsPrice:e.target.value})}
-  InputLabelProps={{
-    shrink: true,
-  }}
-/>
-<br></br>
-        <br></br>
 
+        <TextField
+         style={ulStyle}
+         
+          id="outlined-number"
+          label="SaelsPrice"
+          type="number"
+          onChange={(e)=>this.setState({SaelsPrice:e.target.value})}
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+
+
+        </Grid>
+
+        <Grid container justifyContent="center" style={{ margin: "0px 0px 0px 0px"}}>
 
     <Button variant="contained" color="success" onClick={this.creatOill.bind(this)}>
         save
       </Button>
+      </Grid>
+
       </div>
     )
   }

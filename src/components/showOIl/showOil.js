@@ -129,7 +129,13 @@ export default function ShowOilsData() {
   let [StockQuantiti,setStockQuantiti]= React.useState('');
   let [UnitPrice,setUnitPrice]= React.useState('');
   let [SaelsPrice,setSaelsPrice]= React.useState('');
-  const setID=(_id,Brand,OilUsage,OilGrade,Capasity,Unit,StockQuantiti,UnitPrice,SaelsPrice)=>{
+
+  let [ItemImage,setItemImage]= React.useState('');
+  let [Note,setNote]= React.useState('');
+  let [StockNumber,setStockNumber]= React.useState('');
+  let [PartNumber,setPartNumber]= React.useState('');
+
+  const setID=(_id,Brand,OilUsage,OilGrade,Capasity,Unit,StockNumber,ItemImage,Note,StockQuantiti,UnitPrice,SaelsPrice,PartNumber)=>{
     console.log(_id)
     localStorage.setItem('_id', _id)
     localStorage.setItem('Brand', Brand)
@@ -140,6 +146,12 @@ export default function ShowOilsData() {
     localStorage.setItem('StockQuantiti', StockQuantiti)
     localStorage.setItem('UnitPrice', UnitPrice)
     localStorage.setItem('SaelsPrice', SaelsPrice)
+
+    localStorage.setItem('ItemImage', setItemImage)
+    localStorage.setItem('Note', setNote)
+    localStorage.setItem('StockNumber', setStockNumber)
+    localStorage.setItem('PartNumber', setPartNumber)
+
     setBrand(localStorage.getItem('Brand'));
     set_id(localStorage.getItem('_id'));
     setOilUsage(localStorage.getItem('OilUsage'))
@@ -148,6 +160,11 @@ export default function ShowOilsData() {
     setStockQuantiti(localStorage.getItem('StockQuantiti'))
     setUnitPrice(localStorage.getItem('UnitPrice'))
     setSaelsPrice(localStorage.getItem('UnitPrice'))
+
+    setCapasity(localStorage.getItem('ItemImage'))
+    setStockQuantiti(localStorage.getItem('Note'))
+    setUnitPrice(localStorage.getItem('StockNumber'))
+    setSaelsPrice(localStorage.getItem('PartNumber'))
   
   }
   const sendDataToAPI = () => {
@@ -174,12 +191,17 @@ console.log(SaelsPrice)
       <Table  sx={{ minWidth: 800 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-          <StyledTableCell align="center">ID</StyledTableCell>
           <StyledTableCell align="center">Brand</StyledTableCell>
+          <StyledTableCell align="center">Item Image</StyledTableCell>
+
             <StyledTableCell>Usges</StyledTableCell>
             <StyledTableCell align="center">Specifications</StyledTableCell>
             <StyledTableCell align="center">Capacity</StyledTableCell>
             <StyledTableCell align="center">Unit</StyledTableCell>
+            <StyledTableCell align="center">Note</StyledTableCell>
+            <StyledTableCell align="center">PartNumber</StyledTableCell>
+            <StyledTableCell align="center">StockNumber</StyledTableCell>
+
             <StyledTableCell align="center">StockQuantiti</StyledTableCell>
             <StyledTableCell align="center">UnitPrice</StyledTableCell>
             <StyledTableCell align="center">SaelsPrice</StyledTableCell>
@@ -193,15 +215,21 @@ console.log(SaelsPrice)
         <TableBody>
           {oilList.map((oil,key) => (
             <StyledTableRow key={key}>
-              <StyledTableCell align="center">{oil._id}</StyledTableCell>
               <StyledTableCell align="center">{oil.Brand}</StyledTableCell>
-
+              <StyledTableCell align="center">
+                <img src={oil.ItemImage} alt="not found" width="70" height="70"></img>
+                </StyledTableCell>
               <StyledTableCell component="th" scope="row">
                 {oil.OilUsage}
               </StyledTableCell>
               <StyledTableCell align="center">{oil.OilGrade}</StyledTableCell>
               <StyledTableCell align="center">{oil.Capasity}</StyledTableCell>
               <StyledTableCell align="center">{oil.Unit}</StyledTableCell>
+
+              <StyledTableCell align="center">{oil.Note}</StyledTableCell>
+              <StyledTableCell align="center">{oil.PartNumber}</StyledTableCell>
+              <StyledTableCell align="center">{oil.StockNumber}</StyledTableCell>
+
               <StyledTableCell align="center">{oil.StockQuantiti}</StyledTableCell>
               <StyledTableCell align="center">{oil.UnitPrice}</StyledTableCell>
               <StyledTableCell align="center">{oil.SaelsPrice}</StyledTableCell>

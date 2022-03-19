@@ -3,10 +3,11 @@ import Select from 'react-select'
 import axios from 'axios'
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import { Container,AppBar, Grow,Grid } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 
 
 const ulStyle = {  padding: "12px 10px",  width:'40%', listStyleType:'none'}
+const selectStyle = { padding: "12px 10px", width: "50%",marginTop: "20px" }
 
 
 export default class Test extends Component {
@@ -153,28 +154,35 @@ export default class Test extends Component {
           <p justifyContent="center">Usges</p>
         <Select justifyContent="center" options={this.state.selectOptions} onChange={this.handleChange.bind(this)} />
         
-    <p justifyContent="center">oil Specifications</p>
+        <p justifyContent="center">oil Specifications</p>
 
-<Select justifyContent="center" options={this.state.oilGradeselectOptions} onChange={this.oilGradehandleChange.bind(this)} />
-<p   alignItems="center"
->Capacity</p>
+        <Select justifyContent="center" options={this.state.oilGradeselectOptions} onChange={this.oilGradehandleChange.bind(this)} />
+        
+        <Grid container    style={{  margin: "10px",justifyContent: "space-around",
+    marginLeft: "0",
+    paddingLeft: "0"}}>
+        
+        
 
 
-<TextField
-justifyContent="center"
-id="outlined-number"
-label="Capacity"
-type="number"
-onChange={(e)=>this.setState({Capasity:e.target.value})}
-InputLabelProps={{
- shrink: true,
-}}
-/>
+        <TextField
+        // justifyContent="center"
+        id="outlined-number"
+        label="Capacity"
+        type="number"
+        style={ulStyle}
 
-        <p>Unit</p>
+        onChange={(e)=>this.setState({Capasity:e.target.value})}
+        InputLabelProps={{
+        shrink: true,
+        }}
+        />
 
-         <Select justifyContent="center" options={this.state.unitselectOptions} onChange={this.unithandleChange.bind(this)} />
-         <br></br>
+
+
+         
+         <Select   options={this.state.unitselectOptions} onChange={this.unithandleChange.bind(this)} placeholder="Unit"  style={selectStyle}  />
+         </Grid>
          
          <Grid container  justifyContent="center" style={{ margin: "0px 20px 0px 0px"}}>
 
@@ -228,7 +236,7 @@ InputLabelProps={{
             shrink: true,
           }}
         />
-                      </Grid>
+          </Grid>
 
          <Grid container  justifyContent="center" style={{ margin: "0px 20px 0px 0px"}}>
 

@@ -76,13 +76,7 @@ export default function  Home() {
 
                  </AppBar>
               </Grid>
-              {/* <Grid item xs={7} sm={3} style={{   padding: "0px 0px 10px 15px"}}>
-              <AppBar className={classes.appBar} position='static' color='black' >
 
-                  <CreatOil /> 
-
-              </AppBar>
-              </Grid> */}
 
           
            </Container>

@@ -92,8 +92,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     border: 0,
   },
 }));
-let BAC_URL=process.env.BACE_URL
-console.log(BAC_URL)
+
 
 export default function ShowOilsData() {
   let history = useHistory();
@@ -117,6 +116,20 @@ export default function ShowOilsData() {
   useEffect(()=>{
     axios.get(`https://backendoil.vercel.app/api/oil/`).then( (allOils) =>{
       setOilList(allOils.data);
+      localStorage.setItem('_id', _id)
+    localStorage.setItem('Brand', Brand)
+    localStorage.setItem('OilUsage', OilUsage)
+    localStorage.setItem('OilGrade', OilGrade)
+    localStorage.setItem('Capasity', Capasity)
+    localStorage.setItem('Unit', Unit)
+    localStorage.setItem('StockQuantiti', StockQuantiti)
+    localStorage.setItem('UnitPrice', UnitPrice)
+    localStorage.setItem('SaelsPrice', SaelsPrice)
+
+    localStorage.setItem('ItemImage', ItemImage)
+    localStorage.setItem('Note', Note)
+    localStorage.setItem('StockNumber', StockNumber)
+    localStorage.setItem('PartNumber', PartNumber)
 
     })
   },[]);
@@ -147,10 +160,10 @@ export default function ShowOilsData() {
     localStorage.setItem('UnitPrice', UnitPrice)
     localStorage.setItem('SaelsPrice', SaelsPrice)
 
-    localStorage.setItem('ItemImage', setItemImage)
-    localStorage.setItem('Note', setNote)
-    localStorage.setItem('StockNumber', setStockNumber)
-    localStorage.setItem('PartNumber', setPartNumber)
+    localStorage.setItem('ItemImage', ItemImage)
+    localStorage.setItem('Note', Note)
+    localStorage.setItem('StockNumber', StockNumber)
+    localStorage.setItem('PartNumber', PartNumber)
 
     setBrand(localStorage.getItem('Brand'));
     set_id(localStorage.getItem('_id'));
@@ -161,32 +174,29 @@ export default function ShowOilsData() {
     setUnitPrice(localStorage.getItem('UnitPrice'))
     setSaelsPrice(localStorage.getItem('UnitPrice'))
 
-    setCapasity(localStorage.getItem('ItemImage'))
-    setStockQuantiti(localStorage.getItem('Note'))
-    setUnitPrice(localStorage.getItem('StockNumber'))
-    setSaelsPrice(localStorage.getItem('PartNumber'))
+    setItemImage(localStorage.getItem('ItemImage'))
+    setNote(localStorage.getItem('Note'))
+    setStockNumber(localStorage.getItem('StockNumber'))
+    setPartNumber(localStorage.getItem('PartNumber'))
   
   }
   const sendDataToAPI = () => {
     axios.put(`https://backendoil.vercel.app/api/oil/${_id}`, {
-      Brand,
-      OilUsage,
-      OilGrade,
-      Capasity,
-      Unit,
+ 
       StockQuantiti,
       UnitPrice,
-      SaelsPrice,
-      ItemImage,
-      Note,
-      StockNumber,
-      PartNumber
+      SaelsPrice
+ 
     }).then(() => {
+alert("Updated")
+
       window.location.reload(false);
+
         localStorage.clear();
     })
 }
-console.log(SaelsPrice)
+
+console.log(SaelsPrice,_id,UnitPrice,StockQuantiti)
 
   return (
     < >
@@ -239,9 +249,7 @@ console.log(SaelsPrice)
               <StyledTableCell align="center">{oil.SaelsPrice}</StyledTableCell>
               <StyledTableCell align="center">
       <IconButton type="button"  onClick={()=>{
-{        setID(oil._id,oil.Brand,oil.OilUsage,oil.OilGrade,
-          oil.Capasity,oil.Unit,oil.StockNumber,oil.ItemImage,oil.Note,oil.StockQuantiti,oil.UnitPrice,oil.SaelsPrice,
-          oil.PartNumber)}
+      setID(oil._id,oil.Brand,oil.OilUsage,oil.OilGrade,oil.Capasity,oil.Unit,oil.StockNumber,oil.ItemImage,oil.Note,oil.StockQuantiti,oil.UnitPrice,oil.SaelsPrice,oil.PartNumberoil);
         handleOpen()}} >
                         <EditIcon fontSize="small"/>
 

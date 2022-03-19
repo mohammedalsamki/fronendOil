@@ -176,7 +176,11 @@ export default function ShowOilsData() {
       Unit,
       StockQuantiti,
       UnitPrice,
-      SaelsPrice
+      SaelsPrice,
+      ItemImage,
+      Note,
+      StockNumber,
+      PartNumber
     }).then(() => {
       window.location.reload(false);
         localStorage.clear();
@@ -236,7 +240,8 @@ console.log(SaelsPrice)
               <StyledTableCell align="center">
       <IconButton type="button"  onClick={()=>{
 {        setID(oil._id,oil.Brand,oil.OilUsage,oil.OilGrade,
-          oil.Capasity,oil.Unit,oil.StockQuantiti,oil.UnitPrice,oil.SaelsPrice)}
+          oil.Capasity,oil.Unit,oil.StockNumber,oi.ItemImage,oil.Noteoil.oilStockQuantiti,oil.UnitPrice,oil.SaelsPrice,
+          oil.PartNumber)}
         handleOpen()}} >
                         <EditIcon fontSize="small"/>
 

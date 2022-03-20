@@ -7,6 +7,8 @@ export default function UpdateBrand() {
     let history = useHistory();
     const [BrandAr, setFirstName] = useState('');
     const [BrandEn, setLastName] = useState('');
+    const [BrandDiscr, setBrandDiscr] = useState('');
+
     const [ID, setID] = useState(null);
     const sendDataToAPI = () => {
         axios.put(`https://backendoil.vercel.app/api/oil/brand/${ID}`, {
@@ -21,6 +23,7 @@ export default function UpdateBrand() {
     useEffect(() => {
         setFirstName(localStorage.getItem('BrandAr'));
         setLastName(localStorage.getItem('BrandEn'));
+        setBrandDiscr(localStorage.getItem('BrandDiscr'));
         setID(localStorage.getItem('ID'))
     }, [])
 
@@ -43,6 +46,16 @@ export default function UpdateBrand() {
                         value={BrandEn}
                         placeholder=''
                         onChange={(e) => setLastName(e.target.value)}
+                    />
+                </Form.Field>
+                <Form.Field>
+                    <label>BrandDiscr</label>
+                    <input
+                    className='inputform'
+                    name="lname"
+                        value={BrandDiscr}
+                        placeholder=''
+                        onChange={(e) => setBrandDiscr(e.target.value)}
                     />
                 </Form.Field>
                 <Button type='submit' className='submitform' onClick={sendDataToAPI}>Update</Button>

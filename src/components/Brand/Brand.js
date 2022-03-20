@@ -64,13 +64,13 @@ export default function CreateBrand() {
 
 
 
-  const setID=(id,BrandAr,BrandEn)=>{
+  const setID=(id,BrandAr,BrandEn,BrandDiscr)=>{
     console.log(id)
     localStorage.setItem('ID', id)
     localStorage.setItem('BrandAr', BrandAr)
     localStorage.setItem('BrandEn', BrandEn)
-    localStorage.setItem('BrandImage', BrandEn)
-    localStorage.setItem('BrandDiscr', BrandEn)
+    localStorage.setItem('BrandImage', BrandImage)
+    localStorage.setItem('BrandDiscr', BrandDiscr)
 
   }
   
@@ -170,7 +170,7 @@ export default function CreateBrand() {
 
               <StyledTableCell align="center">
                 <Link to = './UpdateBrand'>
-                <IconButton aria-label='edit' onClick={()=>setID(brand._id,brand.BrandAr,brand.BrandEn)}>
+                <IconButton aria-label='edit' onClick={()=>setID(brand._id,brand.BrandAr,brand.BrandEn,brand.BrandDiscr)}>
 
                 <EditIcon fontSize="small"/>
                   </IconButton>

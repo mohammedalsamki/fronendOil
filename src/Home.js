@@ -62,26 +62,21 @@ export default function  Home() {
         <CreatOil /> 
         </Box>
       </StyledModal>
-      <Container maxWidth="lg">
+      
 
-         <Grow in>
-           <Container>
-             <Grid container  alignItems='strect' style={{ margin: "0px 20px 0px 0px"}}>
-                 <AppBar className={classes.appBar} position='static' color='inherit' style={{ margin: "30px 100px 0px 0px"}}>
+           <Container maxWidth="1200px">
+                 <AppBar className={classes.appBar} position='static' color='inherit'  style={{ margin: "30px 10px 0px 0px"}}>
                  <IconButton type="button" onClick={handleOpen}>
                  <AddIcon fontSize="larg"/>
                  Add
                  </IconButton>
-                     <ShowOil style={{color: "red", margin: "100px 25px 75px 100px"}}/> 
 
                  </AppBar>
-              </Grid>
+                 <ShowOil /> 
 
 
           
            </Container>
-         </Grow>
-        </Container>
 
     </div>
 

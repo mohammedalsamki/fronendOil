@@ -242,7 +242,7 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantiti,Unit)
             <StyledTableCell align="center">PartNumber</StyledTableCell>
             <StyledTableCell align="center">StockNumber</StyledTableCell>
 
-            <StyledTableCell align="center">StockQuantiti</StyledTableCell>
+            <StyledTableCell align="center">StockQuantity</StyledTableCell>
             <StyledTableCell align="center">UnitPrice</StyledTableCell>
             <StyledTableCell align="center">SaelsPrice</StyledTableCell>
             <StyledTableCell align="center">Update</StyledTableCell>
@@ -363,13 +363,13 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantiti,Unit)
                 </Form.Field>
                 <Form.Field align="center" style={lotteryStyle} class="grid-container">
                     <label>StockQuantiti</label>
-                    <input name="StockQuantiti"
+                    <input name="stockQuantity"
                     type="number"
                     class="item1"
                     className='inputform'
                     value={StockQuantiti}
                         onChange={(e) => setStockQuantiti(e.target.value)}
-                        placeholder='StockQuantiti' />
+                        placeholder='stockQuantity' />
 
                 </Form.Field>
 

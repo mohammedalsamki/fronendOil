@@ -4,7 +4,7 @@ import axios from 'axios'
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { Grid } from '@material-ui/core';
-import FileBase64 from 'react-file-base64';
+import "../style/select.css"
 
 
 const ulStyle = {  padding: "12px 10px",  width:'40%', listStyleType:'none'}
@@ -157,39 +157,37 @@ export default class Test extends Component {
     
     return (
       <div>
-            <p justifyContent="center">Brand</p>
-        <Select justifyContent="center" options={this.state.brandselectOptions} onChange={this.brandhandleChange.bind(this)} />
-          <p justifyContent="center">Usges</p>
-        <Select justifyContent="center" options={this.state.selectOptions} onChange={this.handleChange.bind(this)} />
-        
-        <p justifyContent="center">oil Specifications</p>
+        <Grid container    style={{  margin: "10px",justifyContent: "space-around"}}>
 
-        <Select justifyContent="center" options={this.state.oilGradeselectOptions} onChange={this.oilGradehandleChange.bind(this)} />
+        <Select justifyContent="center" placeholder="Brand" options={this.state.brandselectOptions} onChange={this.brandhandleChange.bind(this)} />
+        <Select justifyContent="center" placeholder="Usges" options={this.state.selectOptions} onChange={this.handleChange.bind(this)} />
+        </Grid>
+        <br></br>
+        <Grid container    style={{  margin: "10px",justifyContent: "space-around"}}>
         
-        <Grid container    style={{  margin: "10px",justifyContent: "space-around",
-    marginLeft: "0",
-    paddingLeft: "0"}}>
+
+        <Select justifyContent="center" placeholder="Specifications"  options={this.state.oilGradeselectOptions} onChange={this.oilGradehandleChange.bind(this)} />
+        </Grid>
+        <br></br>
+        
+        <Grid container    style={{  margin: "10px",justifyContent: "space-around"}}>
         
         
 
 
         <TextField
-        // justifyContent="center"
         id="outlined-number"
         label="Capacity"
         type="number"
-        style={ulStyle}
-
+        // style={ulStyle}
         onChange={(e)=>this.setState({Capasity:e.target.value})}
         InputLabelProps={{
         shrink: true,
         }}
         />
 
-
-
          
-         <Select   options={this.state.unitselectOptions} onChange={this.unithandleChange.bind(this)} placeholder="Unit"  style={selectStyle}  />
+         <Select maxWidth="100%"  options={this.state.unitselectOptions} onChange={this.unithandleChange.bind(this)} placeholder="Unit"  style={selectStyle}  />
          </Grid>
          
          <Grid container  justifyContent="center" style={{ margin: "0px 20px 0px 0px"}}>
@@ -252,7 +250,7 @@ export default class Test extends Component {
          style={ulStyle}
          
         id="outlined-number"
-          label="StockQuantiti"
+          label="stockQuantity"
           type="number"
           onChange={(e)=>this.setState({StockQuantiti:e.target.value})}
           InputLabelProps={{

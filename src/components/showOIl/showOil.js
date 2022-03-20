@@ -99,7 +99,22 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 export default function ShowOilsData() {
   let history = useHistory();
+  const [Brand, setBrand]= React.useState('');
+  const [_id,set_id]= React.useState('');
+  let [OilUsage,setOilUsage]= React.useState('');
+  let [UnitList,setUnitList]= React.useState('');
 
+  let [OilGrade,setOilGrade]= React.useState('');
+  let [Capasity,setCapasity]= React.useState('');
+  let [Unit,setUnit]= React.useState('');
+  let [StockQuantiti,setStockQuantiti]= React.useState('');
+  let [UnitPrice,setUnitPrice]= React.useState('');
+  let [SaelsPrice,setSaelsPrice]= React.useState('');
+
+  let [ItemImage,setItemImage]= React.useState('');
+  let [Note,setNote]= React.useState('');
+  let [StockNumber,setStockNumber]= React.useState('');
+  let [PartNumber,setPartNumber]= React.useState('');
   const [open, setOpen] = React.useState(false);
   const [unitList, setunitList] = React.useState(false);
   const getOptionsunit=async()=>{
@@ -153,25 +168,11 @@ export default function ShowOilsData() {
 
     })
   },[]);
-  const [Brand, setBrand]= React.useState('');
-  const [_id,set_id]= React.useState('');
-  let [OilUsage,setOilUsage]= React.useState('');
-  let [UnitList,setUnitList]= React.useState('');
 
-  let [OilGrade,setOilGrade]= React.useState('');
-  let [Capasity,setCapasity]= React.useState('');
-  let [Unit,setUnit]= React.useState('');
-  let [StockQuantiti,setStockQuantiti]= React.useState('');
-  let [UnitPrice,setUnitPrice]= React.useState('');
-  let [SaelsPrice,setSaelsPrice]= React.useState('');
-
-  let [ItemImage,setItemImage]= React.useState('');
-  let [Note,setNote]= React.useState('');
-  let [StockNumber,setStockNumber]= React.useState('');
-  let [PartNumber,setPartNumber]= React.useState('');
+  console.log(Brand,OilUsage,OilGrade,Capasity,Unit,StockNumber,ItemImage,Note,StockQuantiti,UnitPrice,SaelsPrice,PartNumber)
 
   const setID=(_id,Brand,OilUsage,OilGrade,Capasity,Unit,StockNumber,ItemImage,Note,StockQuantiti,UnitPrice,SaelsPrice,PartNumber)=>{
-    console.log(_id)
+    // console.log(_id,Brand,OilUsage,OilGrade,Capasity,Unit,StockNumber,ItemImage,Note,StockQuantiti,UnitPrice,SaelsPrice,PartNumber)
     localStorage.setItem('_id', _id)
     localStorage.setItem('Brand', Brand)
     localStorage.setItem('OilUsage', OilUsage)
@@ -217,6 +218,7 @@ export default function ShowOilsData() {
  
     }).then(() => {
 alert("Updated")
+history.push('/Oil_Fluid');
 
       window.location.reload(false);
 

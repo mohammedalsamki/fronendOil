@@ -170,9 +170,10 @@ export default function ShowFilterData() {
   let [Note,setNote]= React.useState('');
   let [StockNumber,setStockNumber]= React.useState('');
   let [PartNumber,setPartNumber]= React.useState('');
+  console.log(_id)
 
   const setID=(_id,Brand,FilterUsage,Unit,StockNumber,ItemImage,Note,StockQuantity,UnitPrice,SaelsPrice,PartNumber)=>{
-    console.log(_id)
+    // console.log(_id)
     localStorage.setItem('_id', _id)
     localStorage.setItem('Brand', Brand)
     localStorage.setItem('FilterUsage', FilterUsage)
@@ -203,20 +204,21 @@ export default function ShowFilterData() {
   const sendDataToAPI = () => {
     axios.put(`https://backendoil.vercel.app/api/filter/filter/${_id}`, {
  
-      StockQuantity,
-      UnitPrice,
-      SaelsPrice,
-      Note,
-      PartNumber,
-      StockNumber,
+      StockQuantity:StockQuantity,
+      UnitPrice:UnitPrice,
+      SaelsPrice:SaelsPrice,
+      Note:Note,
+      PartNumber:PartNumber,
+      StockNumber:StockNumber,
     
  
     }).then(() => {
 alert("Updated")
 
+    history.push('/Filter');
+        localStorage.clear();
       window.location.reload(false);
 
-        localStorage.clear();
     })
 }
 // const onChangeHandler = (change) => {

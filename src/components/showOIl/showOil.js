@@ -17,6 +17,9 @@ import { ClassNames } from '@emotion/react';
 import { useHistory } from 'react-router';
 import { Form, Button } from 'semantic-ui-react';
 import EditIcon from '@mui/icons-material/Edit';
+import { async } from 'q';
+import Select from 'react-select'
+
 
 
 const lotteryStyle={
@@ -98,6 +101,22 @@ export default function ShowOilsData() {
   let history = useHistory();
 
   const [open, setOpen] = React.useState(false);
+  const [unitList, setunitList] = React.useState(false);
+  const getOptionsunit=async()=>{
+
+    const res = await axios.get('https://backendoil.vercel.app/api/oil/unit')
+    const data = res.data
+    const options = data.map(d => ({
+      "value" : d._id,
+      "label" : d.UnitNameEn
+
+    }))
+
+    // this.setState({unitselectOptions: options})
+    setunitList(options)
+    console.log(unitList)
+  }
+
   const handleOpen = () =>{ 
     
     setOpen(true)};
@@ -114,6 +133,7 @@ export default function ShowOilsData() {
     } )
   }
   useEffect(()=>{
+    getOptionsunit();
     axios.get(`https://backendoil.vercel.app/api/oil/`).then( (allOils) =>{
       setOilList(allOils.data);
       localStorage.setItem('_id', _id)
@@ -136,6 +156,8 @@ export default function ShowOilsData() {
   const [Brand, setBrand]= React.useState('');
   const [_id,set_id]= React.useState('');
   let [OilUsage,setOilUsage]= React.useState('');
+  let [UnitList,setUnitList]= React.useState('');
+
   let [OilGrade,setOilGrade]= React.useState('');
   let [Capasity,setCapasity]= React.useState('');
   let [Unit,setUnit]= React.useState('');
@@ -196,8 +218,11 @@ alert("Updated")
         localStorage.clear();
     })
 }
+// const onChangeHandler = (change) => {
+//   setUnit({change});
+// };
 
-console.log(SaelsPrice,_id,UnitPrice,StockQuantiti)
+console.log(SaelsPrice,_id,UnitPrice,StockQuantiti,Unit)
 
   return (
     < >
@@ -283,11 +308,13 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantiti)
           <h3>Specifications: {OilGrade}</h3>
 
 
+
+
           </div>
         <Form>
 
         <Form.Field align="center" style={lotteryStyle} class="grid-container">
-                    <label>Capasity</label>
+                    <label>Capacity</label>
                     <input name="Capasity"
                     type="text"
                     class="item1"
@@ -297,17 +324,10 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantiti)
                         placeholder='Capasity' />
 
                 </Form.Field>
-                <Form.Field align="center" style={lotteryStyle} class="grid-container">
-                    <label>Unit</label>
-                    <input name="Unit"
-                    type="text"
-                    class="item1"
-                    className='inputform'
-                    value={Unit}
-                        onChange={(e) => setUnit(e.target.value)}
-                        placeholder='StockQuantiti' />
+        <h3>Unit</h3>
 
-                </Form.Field>
+                <Select justifyContent="center" options={unitList}   onChange={(e) => setUnit(e.label)} />
+
                 <Form.Field align="center" style={lotteryStyle} class="grid-container">
                     <label>Note</label>
                     <input name="Note"

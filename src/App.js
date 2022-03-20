@@ -1,5 +1,5 @@
-import React from 'react';
-import { BrowserRouter as Router,Route,Switch} from 'react-router-dom';
+import React, { useState } from "react";
+import { BrowserRouter as Router,Route,NavLink,Switch} from 'react-router-dom';
 import './App.css';
 import { Container,AppBar,Typography } from '@material-ui/core';
 import Brand from './components/Brand/Brand';
@@ -13,7 +13,10 @@ import UpdateBrand from './components/Brand/UpdateBrand';
 import './components/style/naz.css'
 import AddSpec from './components/OilUseg/OilUsageModal';
 
+
+
 function App() {
+  
   const classes= useStyles();
   return (
   
@@ -26,10 +29,10 @@ function App() {
          <br></br>
 
           <div class="topnav">
-            <a class="active" href="/">Home</a>
-            <a href="/Brand">Brand</a>
-            <a href="/OilUseg">Usges</a>
-            <a href="/Unit">Unit</a>
+          <NavLink exact={true} activeClassName='active' to='/'>Home</NavLink>
+          <NavLink activeClassName='active' to='/Brand'>Brand</NavLink>
+          <NavLink activeClassName='active' to='/OilUseg'>OilUseg</NavLink>
+          <NavLink activeClassName='active' to='/Unit'>Unit</NavLink>
 
           </div>
          <br></br>

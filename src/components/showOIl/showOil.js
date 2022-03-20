@@ -172,7 +172,7 @@ export default function ShowOilsData() {
     setCapasity(localStorage.getItem('Capasity'))
     setStockQuantiti(localStorage.getItem('StockQuantiti'))
     setUnitPrice(localStorage.getItem('UnitPrice'))
-    setSaelsPrice(localStorage.getItem('UnitPrice'))
+    setSaelsPrice(localStorage.getItem('SaelsPrice'))
 
     setItemImage(localStorage.getItem('ItemImage'))
     setNote(localStorage.getItem('Note'))

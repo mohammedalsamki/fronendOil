@@ -12,8 +12,8 @@ import UpdateUnit from './components/Unit/UpdateUnit';
 import UpdateBrand from './components/Brand/UpdateBrand';
 import './components/style/naz.css'
 import AddSpec from './components/OilUseg/OilUsageModal';
-
-
+import CreateFilterUsge from "./components/Filter/filterUse/filteruse";
+import ShowFilterData from "./components/Filter/filtershow/filtershow";
 
 function App() {
   
@@ -32,6 +32,8 @@ function App() {
           <NavLink exact={true} activeClassName='active' to='/'>Home</NavLink>
           <NavLink activeClassName='active' to='/Brand'>Brand</NavLink>
           <NavLink activeClassName='active' to='/Oil_Fluid'>Oil's & Fluid's</NavLink>
+          <NavLink activeClassName='active' to='/Filter'>Filter</NavLink>
+
 
           </div>
           
@@ -41,6 +43,9 @@ function App() {
            <Switch>
            <Route path="/Oil_Fluid" exact component={Home}></Route>
             <Route path="/OilUseg" component={OilUseg}></Route>
+            <Route path="/Filter/usage" component={CreateFilterUsge}></Route>
+            <Route path="/Filter" component={ShowFilterData}></Route>
+
             <Route path="/Brand" component={Brand}></Route>
             <Route path="/unit" component={Unit}></Route>
             <Route path="/update" component={AddEdit}></Route>

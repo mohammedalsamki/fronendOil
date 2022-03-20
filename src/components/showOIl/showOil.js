@@ -208,7 +208,12 @@ export default function ShowOilsData() {
  
       StockQuantiti,
       UnitPrice,
-      SaelsPrice
+      SaelsPrice,
+      Note,
+      Capasity,
+      Unit,
+      PartNumber,
+      StockNumber
  
     }).then(() => {
 alert("Updated")
@@ -356,7 +361,7 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantiti,Unit)
                     type="number"
                     class="item1"
                     className='inputform'
-                    value={PartNumber}
+                    value={StockNumber}
                         onChange={(e) => setStockNumber(e.target.value)}
                         placeholder='StockNumber' />
 

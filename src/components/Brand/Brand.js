@@ -136,7 +136,6 @@ export default function CreateBrand() {
     <br></br>
 
     </Box>
-    <h2>All Oil in Stock</h2>
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="customized table">
         <TableHead>

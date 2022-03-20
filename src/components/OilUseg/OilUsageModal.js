@@ -118,7 +118,7 @@ export default function AddSpec() {
         <div className='form'>
             <Form>
                 <Form.Field>
-                    <label>add Specifications for {OilUsageEn}</label>
+                    <h2>add Specifications for {OilUsageEn}</h2>
                     <input name="Specs"
                     className='inputform'
 

@@ -114,7 +114,6 @@ export default function CreateUnit() {
     <br></br>
 
     </Box>
-    <h2>All Unit's in Stock</h2>
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="customized table">
         <TableHead>

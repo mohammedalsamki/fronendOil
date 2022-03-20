@@ -22,13 +22,13 @@ function App() {
     <Container maxWidth="lg">
          <AppBar className={classes.appBar} position="static" color='inherit'>
           
-          <Typography className={classes.heading} variant='h2' align='center'> Oil & Fluid Add and Show </Typography>
+          <Typography className={classes.heading} variant='h2' align='center'> Oil & Fluid</Typography>
          <br></br>
 
           <div class="topnav">
             <a class="active" href="/">Home</a>
             <a href="/Brand">Brand</a>
-            <a href="/OilUseg">Oil & Fluid Usges</a>
+            <a href="/OilUseg">Usges</a>
             <a href="/Unit">Unit</a>
 
           </div>

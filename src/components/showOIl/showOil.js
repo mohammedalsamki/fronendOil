@@ -201,7 +201,7 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantiti)
 
   return (
     < >
-    <h2>All Oil & Fluid in Stock</h2>
+    <h2>Oil & Fluid in Stock</h2>
     <TableContainer component={Paper} >
       <Table  sx={{ minWidth: 800 }} aria-label="customized table">
         <TableHead>

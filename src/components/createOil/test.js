@@ -4,6 +4,7 @@ import axios from 'axios'
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { Grid } from '@material-ui/core';
+import FileBase64 from 'react-file-base64';
 
 
 const ulStyle = {  padding: "12px 10px",  width:'40%', listStyleType:'none'}
@@ -34,8 +35,13 @@ export default class Test extends Component {
       Note:'',
       PartNumber:'',
       StockNumber:'',
-      ItemImage:''
+      ItemImage:'',
+      files: []
+
     }
+  }
+  async getFiles(files){
+    await  this.setState({ files: files })
   }
   async getOptionsunit(){
 
@@ -187,7 +193,7 @@ export default class Test extends Component {
          </Grid>
          
          <Grid container  justifyContent="center" style={{ margin: "0px 20px 0px 0px"}}>
-
+          
            <TextField
          style={ulStyle}
         id="outlined-number"

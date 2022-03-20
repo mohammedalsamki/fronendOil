@@ -285,6 +285,62 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantiti)
 
           </div>
         <Form>
+
+        <Form.Field align="center" style={lotteryStyle} class="grid-container">
+                    <label>Capasity</label>
+                    <input name="Capasity"
+                    type="text"
+                    class="item1"
+                    className='inputform'
+                    value={Capasity}
+                        onChange={(e) => setCapasity(e.target.value)}
+                        placeholder='Capasity' />
+
+                </Form.Field>
+                <Form.Field align="center" style={lotteryStyle} class="grid-container">
+                    <label>Unit</label>
+                    <input name="Unit"
+                    type="text"
+                    class="item1"
+                    className='inputform'
+                    value={Unit}
+                        onChange={(e) => setUnit(e.target.value)}
+                        placeholder='StockQuantiti' />
+
+                </Form.Field>
+                <Form.Field align="center" style={lotteryStyle} class="grid-container">
+                    <label>Note</label>
+                    <input name="Note"
+                    type="text"
+                    class="item1"
+                    className='inputform'
+                    value={Note}
+                        onChange={(e) => setNote(e.target.value)}
+                        placeholder='Note' />
+
+                </Form.Field>
+                <Form.Field align="center" style={lotteryStyle} class="grid-container">
+                    <label>PartNumber</label>
+                    <input name="PartNumber"
+                    type="number"
+                    class="item1"
+                    className='inputform'
+                    value={PartNumber}
+                        onChange={(e) => setPartNumber(e.target.value)}
+                        placeholder='PartNumber' />
+
+                </Form.Field>
+                <Form.Field align="center" style={lotteryStyle} class="grid-container">
+                    <label>StockNumber</label>
+                    <input name="StockNumber"
+                    type="number"
+                    class="item1"
+                    className='inputform'
+                    value={PartNumber}
+                        onChange={(e) => setStockNumber(e.target.value)}
+                        placeholder='StockNumber' />
+
+                </Form.Field>
                 <Form.Field align="center" style={lotteryStyle} class="grid-container">
                     <label>StockQuantiti</label>
                     <input name="StockQuantiti"
@@ -294,9 +350,9 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantiti)
                     value={StockQuantiti}
                         onChange={(e) => setStockQuantiti(e.target.value)}
                         placeholder='StockQuantiti' />
-                <h3 style={lotteryStyle1} >Unit : {Unit} </h3>
 
                 </Form.Field>
+
 
                 <Form.Field align="center">
                     <label>UnitPrice</label>

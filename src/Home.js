@@ -1,5 +1,7 @@
 import React from 'react';
-import { Container,AppBar, Grow,Grid } from '@material-ui/core';
+import { Container,AppBar, } from '@material-ui/core';
+import { BrowserRouter as Router,Route,NavLink,Switch} from 'react-router-dom';
+
 import ShowOil from './components/showOIl/showOil.js';
 import CreatOil from './components/createOil/createOil.js';
 import useStyles from './styles';
@@ -66,10 +68,14 @@ export default function  Home() {
 
            <Container maxWidth="1200px">
                  <AppBar className={classes.appBar} position='static' color='inherit'  style={{ margin: "30px 10px 0px 0px"}}>
+                 <div class="topnav">
                  <IconButton type="button" onClick={handleOpen}>
                  <AddIcon fontSize="larg"/>
                  Add
                  </IconButton>
+                 <NavLink activeClassName='active' to='/OilUseg'>Useg</NavLink>
+          <NavLink activeClassName='active' to='/Unit'>Unit</NavLink>
+          </div>
 
                  </AppBar>
                  <ShowOil /> 

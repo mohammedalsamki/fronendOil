@@ -25,21 +25,21 @@ function App() {
     <Container maxWidth="100%">
          <AppBar className={classes.appBar} position="static" color='inherit'>
           
-          <Typography className={classes.heading} variant='h2' align='center'> Oil & Fluid</Typography>
+          <Typography className={classes.heading} variant='h2' align='center'> Ontario Storehouse</Typography>
          <br></br>
 
           <div class="topnav">
           <NavLink exact={true} activeClassName='active' to='/'>Home</NavLink>
           <NavLink activeClassName='active' to='/Brand'>Brand</NavLink>
-          <NavLink activeClassName='active' to='/OilUseg'>OilUseg</NavLink>
-          <NavLink activeClassName='active' to='/Unit'>Unit</NavLink>
+          <NavLink activeClassName='active' to='/Oil_Fluid'>Oil's & Fluid's</NavLink>
 
           </div>
+          
          <br></br>
          </AppBar>
           <div>
            <Switch>
-           <Route path="/" exact component={Home}></Route>
+           <Route path="/Oil_Fluid" exact component={Home}></Route>
             <Route path="/OilUseg" component={OilUseg}></Route>
             <Route path="/Brand" component={Brand}></Route>
             <Route path="/unit" component={Unit}></Route>
@@ -51,7 +51,7 @@ function App() {
             <Route path="/UpdateBrand" component={UpdateBrand}></Route>
             
 
-            <Home/>
+            {/* <Home/> */}
            </Switch>
 
           </div>

@@ -116,9 +116,10 @@ export default function AddSpec() {
       return (
       <>
         <div className='form'>
+        <h2>add Specifications for {OilUsageEn}</h2>
+
             <Form>
                 <Form.Field>
-                    <h2>add Specifications for {OilUsageEn}</h2>
                     <input name="Specs"
                     className='inputform'
 
@@ -126,8 +127,8 @@ export default function AddSpec() {
                         placeholder='Specs' />
                 </Form.Field>
 
-                <Button type='submit' className='submitform' onClick={sendDataToAPI}>Add</Button>
             </Form>
+            <Button type='submit' className='submitform' style={{ width:"100px" }} onClick={sendDataToAPI}>Add</Button>
 
 
         </div>

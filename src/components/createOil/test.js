@@ -7,7 +7,7 @@ import { Grid } from '@material-ui/core';
 import "../style/select.css"
 
 
-const ulStyle = {  padding: "12px 10px",  width:'40%', listStyleType:'none'}
+const ulStyle = {  padding: "12px 10px",  width:'40%', listStyleType:'none',zIndex: -1}
 const selectStyle = { padding: "12px 10px", width: "50%",marginTop: "20px" }
 
 
@@ -160,7 +160,7 @@ export default class Test extends Component {
         <Grid container    style={{  margin: "10px",justifyContent: "space-around"}}>
 
         <Select justifyContent="center" placeholder="Brand" options={this.state.brandselectOptions} onChange={this.brandhandleChange.bind(this)} />
-        <Select justifyContent="center" placeholder="Usges" options={this.state.selectOptions} onChange={this.handleChange.bind(this)} />
+        <Select justifyContent="center" placeholder="Usge" options={this.state.selectOptions} onChange={this.handleChange.bind(this)} />
         </Grid>
         <br></br>
         <Grid container    style={{  margin: "10px",justifyContent: "space-around"}}>
@@ -179,7 +179,7 @@ export default class Test extends Component {
         id="outlined-number"
         label="Capacity"
         type="number"
-        // style={ulStyle}
+        style={ulStyle}
         onChange={(e)=>this.setState({Capasity:e.target.value})}
         InputLabelProps={{
         shrink: true,

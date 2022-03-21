@@ -17,28 +17,18 @@ import { ClassNames } from '@emotion/react';
 import { useHistory } from 'react-router';
 import { Form, Button } from 'semantic-ui-react';
 import EditIcon from '@mui/icons-material/Edit';
-import { async } from 'q';
 import Select from 'react-select'
 
 
 
 const lotteryStyle={
-  // border: '2px solid grey',
-  // borderRadius: '10px',
+  border: '2px solid grey',
+  borderRadius: '10px',
   width:'40em',
   textAlign:'left',
 
 }
-const lotteryStyle1={
-  // border: '2px solid grey',
-  // borderRadius: '10px',
-  width:'40em',
-  textAlign:'left',
-  position: 'absolute',
-  top: '41%',
-  left: '81%',
 
-}
 
 const StyledModal = styled(ModalUnstyled)`
   position: fixed;
@@ -258,7 +248,7 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantiti,Unit)
           <StyledTableCell align="center">Brand</StyledTableCell>
           <StyledTableCell align="center">Item Image</StyledTableCell>
 
-            <StyledTableCell>Usges</StyledTableCell>
+            <StyledTableCell align="center">Usge</StyledTableCell>
             <StyledTableCell align="center">Specifications</StyledTableCell>
             <StyledTableCell align="center">Capacity</StyledTableCell>
             <StyledTableCell align="center">Unit</StyledTableCell>
@@ -328,7 +318,7 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantiti,Unit)
         <Box sx={style}>
           <div align="center">
           <h2>Brand: {Brand}</h2>
-          <h3>Usges:  {OilUsage}</h3>
+          <h3>Usge:  {OilUsage}</h3>
           <h3>Specifications: {OilGrade}</h3>
 
 

@@ -7,7 +7,7 @@ import { Grid } from '@material-ui/core';
 import "../../style/select.css"
 
 
-const ulStyle = {  padding: "12px 10px",  width:'40%', listStyleType:'none'}
+const ulStyle = {  padding: "12px 10px",  width:'40%', listStyleType:'none',zIndex: -1}
 const selectStyle = { padding: "12px 10px", width: "50%",marginTop: "20px" }
 
 
@@ -154,7 +154,7 @@ export default class Test extends Component {
 
 
          
-         <Select maxWidth="100%"  options={this.state.unitselectOptions} onChange={this.unithandleChange.bind(this)} placeholder="Unit"  style={selectStyle}  />
+         {/* <Select maxWidth="100%"  options={this.state.unitselectOptions} onChange={this.unithandleChange.bind(this)} placeholder="Unit"  style={selectStyle}  /> */}
          </Grid>
          
          <Grid container  justifyContent="center" style={{ margin: "0px 20px 0px 0px"}}>

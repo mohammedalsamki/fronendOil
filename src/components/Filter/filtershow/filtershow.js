@@ -251,7 +251,7 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantity)
                  <AddIcon fontSize="larg"/>
                  Add
                  </IconButton>
-                 <NavLink activeClassName='active' to='/Filter/usage'>Useg</NavLink>
+                 <NavLink activeClassName='active' to='/Filter/usage'>Usge</NavLink>
           </div>
 
                  </AppBar>
@@ -277,7 +277,7 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantity)
           <StyledTableCell align="center">Brand</StyledTableCell>
           <StyledTableCell align="center">Item Image</StyledTableCell>
 
-            <StyledTableCell>Usges</StyledTableCell>
+            <StyledTableCell align="center">Usge</StyledTableCell>
             <StyledTableCell align="center">Note</StyledTableCell>
             <StyledTableCell align="center">PartNumber</StyledTableCell>
             <StyledTableCell align="center">StockNumber</StyledTableCell>
@@ -299,7 +299,7 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantity)
               <StyledTableCell align="center">
                 <img src={oil.ItemImage} alt="not found" width="70" height="70"></img>
                 </StyledTableCell>
-              <StyledTableCell component="th" scope="row">
+              <StyledTableCell align="center" component="th" scope="row">
                 {oil.FilterUsage}
               </StyledTableCell>
 

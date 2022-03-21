@@ -424,6 +424,7 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantity)
                         onChange={(e) => setSaelsPrice(e.target.value)}
                     />
                 </Form.Field>
+                
                 <Button type='submit' className='submitform' align="center" onClick={sendDataToAPI}>Update</Button>
             </Form>
 

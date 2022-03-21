@@ -7,7 +7,7 @@ import { Grid } from '@material-ui/core';
 import "../../style/select.css"
 
 
-const ulStyle = {  padding: "12px 10px",  width:'40%', listStyleType:'none',zIndex: -1}
+const ulStyle = {  padding: "12px 10px",  width:'40%', listStyleType:'none'}
 const selectStyle = { padding: "12px 10px", width: "50%",marginTop: "20px" }
 
 

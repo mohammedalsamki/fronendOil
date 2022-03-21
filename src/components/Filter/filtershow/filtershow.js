@@ -355,7 +355,7 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantity)
                 <Form.Field align="center"  class="grid-container">
                     <label>Note</label>
                     <br></br>
-                    <input name="Note"
+                    <textarea name="Note"
                     type="text"
                     class="item1"
                     className='inputform'

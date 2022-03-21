@@ -73,7 +73,7 @@ export default function  Home() {
                  <AddIcon fontSize="larg"/>
                  Add
                  </IconButton>
-                 <NavLink activeClassName='active' to='/OilUseg'>Useg</NavLink>
+                 <NavLink activeClassName='active' to='/OilUseg'>Usge</NavLink>
           <NavLink activeClassName='active' to='/Unit'>Unit</NavLink>
           </div>
 

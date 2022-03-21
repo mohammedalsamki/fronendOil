@@ -177,7 +177,7 @@ export default class Test extends Component {
 
         <TextField
         id="outlined-number"
-        label="Capacity"
+        placeholder="Capacity"
         type="number"
         style={ulStyle}
         onChange={(e)=>this.setState({Capasity:e.target.value})}
@@ -195,7 +195,8 @@ export default class Test extends Component {
            <TextField
          style={ulStyle}
         id="outlined-number"
-          label="ItemImage"
+        placeholder="ItemImage"
+
           type="text"
           onChange={(e)=>this.setState({ItemImage:e.target.value})}
           InputLabelProps={{
@@ -208,7 +209,7 @@ export default class Test extends Component {
          
         id="outlined-number"
          style={ulStyle}
-         label="Note"
+        placeholder="Note"
           type="text"
           onChange={(e)=>this.setState({Note:e.target.value})}
           InputLabelProps={{
@@ -221,7 +222,7 @@ export default class Test extends Component {
          
         id="outlined-number"
          style={ulStyle}
-         label="StockNumber"
+        placeholder="StockNumber"
           type="number"
           onChange={(e)=>this.setState({StockNumber:e.target.value})}
           InputLabelProps={{
@@ -235,7 +236,7 @@ export default class Test extends Component {
          
         id="outlined-number"
          style={ulStyle}
-         label="PartNumber"
+        placeholder="PartNumber"
           type="number"
           onChange={(e)=>this.setState({PartNumber:e.target.value})}
           InputLabelProps={{
@@ -250,7 +251,7 @@ export default class Test extends Component {
          style={ulStyle}
          
         id="outlined-number"
-          label="stockQuantity"
+        placeholder="stockQuantity"
           type="number"
           onChange={(e)=>this.setState({StockQuantiti:e.target.value})}
           InputLabelProps={{
@@ -263,7 +264,7 @@ export default class Test extends Component {
          
 
           id="outlined-number"
-          label="UnitPrice"
+        placeholder="UnitPrice"
           type="number"
           onChange={(e)=>this.setState({UnitPrice:e.target.value})}
           InputLabelProps={{
@@ -276,8 +277,8 @@ export default class Test extends Component {
          style={ulStyle}
          
           id="outlined-number"
-          label="SaelsPrice"
-          type="number"
+        placeholder="SaelsPrice"
+        type="number"
           onChange={(e)=>this.setState({SaelsPrice:e.target.value})}
           InputLabelProps={{
             shrink: true,

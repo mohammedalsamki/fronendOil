@@ -18,16 +18,15 @@ import { useHistory } from 'react-router';
 import { Form, Button } from 'semantic-ui-react';
 import EditIcon from '@mui/icons-material/Edit';
 import Select from 'react-select'
+import { makeStyles } from '@material-ui/core/styles';
 
 
 
-const lotteryStyle={
-  // border: '2px solid grey',
-  // borderRadius: '10px',
-  width:'40em',
-  textAlign:'left',
 
-}
+const  tableCell= {
+    backgroundColor: ''
+  };
+
 
 
 const StyledModal = styled(ModalUnstyled)`
@@ -268,7 +267,7 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantiti,Unit)
         </TableHead>
         <TableBody>
           {oilList.map((oil,key) => (
-            <StyledTableRow key={key}>
+            <StyledTableRow  style={tableCell}  key={key}>
               <StyledTableCell align="center">{oil.Brand}</StyledTableCell>
               <StyledTableCell align="center">
                 <img src={oil.ItemImage} alt="not found" width="70" height="70"></img>

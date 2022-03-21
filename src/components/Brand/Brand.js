@@ -105,22 +105,22 @@ export default function CreateBrand() {
     >
                   <TextField
         id="outlined-name"
-        label="BrandEn"
+        label="Name En"
         onChange={(event)=>setBrandEn(event.target.value)}
       />
       <TextField
         id="outlined-name"
-        label="BrandAr"
+        label="Name Ar"
         onChange={(event)=>setBrandAr(event.target.value)}
       />
             <TextField
         id="outlined-name"
-        label="BrandImage"
+        label="Image"
         onChange={(event)=>setBrandImage(event.target.value)}
       />
             <TextField
         id="outlined-name"
-        label="BrandDiscr"
+        label="Description"
         onChange={(event)=>setBrandDiscr(event.target.value)}
       />
 
@@ -141,11 +141,11 @@ export default function CreateBrand() {
         <TableHead>
           <TableRow>
           <StyledTableCell align="center">ID</StyledTableCell>
-          <StyledTableCell align="center">BrandImage</StyledTableCell>
+          <StyledTableCell align="center">Image</StyledTableCell>
 
-            <StyledTableCell align="center">BrandEn</StyledTableCell>
-            <StyledTableCell align="center">BrandAr</StyledTableCell>
-            <StyledTableCell align="center">BrandDiscr</StyledTableCell>
+            <StyledTableCell align="center">Name En</StyledTableCell>
+            <StyledTableCell align="center">Name Ar</StyledTableCell>
+            <StyledTableCell align="center">Description</StyledTableCell>
 
             <StyledTableCell align="center">Edit</StyledTableCell>
 

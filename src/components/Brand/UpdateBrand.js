@@ -31,7 +31,7 @@ export default function UpdateBrand() {
         <div className='form'>
             <Form>
                 <Form.Field>
-                    <label>BrandAr</label>
+                    <label>Name Ar</label>
                     <input name="fname"
                     className='inputform'
                     value={BrandAr}
@@ -39,7 +39,7 @@ export default function UpdateBrand() {
                         placeholder='' />
                 </Form.Field>
                 <Form.Field>
-                    <label>BrandEn</label>
+                    <label>Name En</label>
                     <input
                     className='inputform'
                     name="lname"
@@ -49,7 +49,7 @@ export default function UpdateBrand() {
                     />
                 </Form.Field>
                 <Form.Field>
-                    <label>BrandDiscr</label>
+                    <label>Description</label>
                     <input
                     className='inputform'
                     name="lname"

@@ -28,7 +28,7 @@ export default function UpdateUnit() {
         <div className='form'>
             <Form>
                 <Form.Field>
-                    <label>UnitNameEn</label>
+                    <label>Name En</label>
                     <input name="fname"
                     className='inputform'
                     value={UnitNameEn}
@@ -36,7 +36,7 @@ export default function UpdateUnit() {
                         placeholder='UnitNameEn' />
                 </Form.Field>
                 <Form.Field>
-                    <label>UnitNameAr</label>
+                    <label>Name Ar</label>
                     <input
                         name="lname"
                     className='inputform'

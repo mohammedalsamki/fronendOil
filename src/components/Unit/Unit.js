@@ -77,7 +77,7 @@ export default function CreateUnit() {
   return (
     
     <>
-      <h2>Add Unit's to stock</h2>
+      <h2>Add Unit to stock</h2>
     <Box sx={{ minWidth: 120 }}>
 
 
@@ -94,12 +94,12 @@ export default function CreateUnit() {
     >
       <TextField
         id="outlined-name"
-        label="UnitNameEn"
+        label="Name En"
         onChange={(event)=>setUnitNameEn(event.target.value)}
       />
             <TextField
         id="outlined-name"
-        label="UnitNameAr"
+        label="Name Ar"
         onChange={(event)=>setUnitNameAr(event.target.value)}
       />
 
@@ -120,8 +120,8 @@ export default function CreateUnit() {
           <TableRow>
           <StyledTableCell align="center">ID</StyledTableCell>
 
-            <StyledTableCell align="center">UnitNameEn</StyledTableCell>
-            <StyledTableCell align="center">UnitNameAr</StyledTableCell>
+            <StyledTableCell align="center">Name En</StyledTableCell>
+            <StyledTableCell align="center">Name  Ar</StyledTableCell>
             <StyledTableCell align="cinter">Update</StyledTableCell>
             <StyledTableCell align="center">Action</StyledTableCell>
 

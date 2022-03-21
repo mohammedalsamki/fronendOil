@@ -83,7 +83,7 @@ const setID=(id,OilUsageAr,OilUsageEn,Specs)=>{
   return (
     
     <>   	
-      <h2>Add Oil & Fluid Usges</h2>
+      <h2>Add Usge</h2>
     <Box sx={{ minWidth: 120 }}>
     <br></br>
     <br></br>
@@ -98,12 +98,12 @@ const setID=(id,OilUsageAr,OilUsageEn,Specs)=>{
 
             <TextField
         id="outlined-name"
-        label="OilUsageEn"
+        label="Name En"
         onChange={(event)=>setOilUsageEn(event.target.value)}
       />
             <TextField
         id="outlined-name"
-        label="OilUsageAr"
+        label="Name Ar"
         onChange={(event)=>setOilUsageAr(event.target.value)}
       />
 
@@ -126,8 +126,8 @@ const setID=(id,OilUsageAr,OilUsageEn,Specs)=>{
         <TableRow>
 
             <StyledTableCell align="center">id</StyledTableCell>
-            <StyledTableCell align="center">Oil & Fluid Usges En</StyledTableCell>
-            <StyledTableCell align="center">Oil & Fluid Usges Ar</StyledTableCell>
+            <StyledTableCell align="center">Name En</StyledTableCell>
+            <StyledTableCell align="center">Name Ar</StyledTableCell>
             <StyledTableCell align="center">Update</StyledTableCell>
             <StyledTableCell align="center">Delete</StyledTableCell>
             <StyledTableCell align="center">add Spec</StyledTableCell>

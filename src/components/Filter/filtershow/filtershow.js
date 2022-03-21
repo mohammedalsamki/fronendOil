@@ -352,8 +352,9 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantity)
 
 
 
-                <Form.Field align="center" style={lotteryStyle} class="grid-container">
+                <Form.Field align="center"  class="grid-container">
                     <label>Note</label>
+                    <br></br>
                     <input name="Note"
                     type="text"
                     class="item1"
@@ -363,8 +364,9 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantity)
                         placeholder='Note' />
 
                 </Form.Field>
-                <Form.Field align="center" style={lotteryStyle} class="grid-container">
+                <Form.Field align="center"  class="grid-container">
                     <label>PartNumber</label>
+                    <br></br>
                     <input name="PartNumber"
                     type="text"
                     class="item1"
@@ -374,8 +376,9 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantity)
                         placeholder='PartNumber' />
 
                 </Form.Field>
-                <Form.Field align="center" style={lotteryStyle} class="grid-container">
+                <Form.Field align="center"  class="grid-container">
                     <label>StockNumber</label>
+                    <br></br>
                     <input name="StockNumber"
                     type="number"
                     class="item1"
@@ -385,8 +388,9 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantity)
                         placeholder='StockNumber' />
 
                 </Form.Field>
-                <Form.Field align="center" style={lotteryStyle} class="grid-container">
+                <Form.Field align="center"  class="grid-container">
                     <label>StockQuantity</label>
+                    <br></br>
                     <input name="StockQuantity"
                     type="number"
                     class="item1"
@@ -400,6 +404,7 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantity)
 
                 <Form.Field align="center">
                     <label>UnitPrice</label>
+                    <br></br>
                     <input name="UnitPrice"
                     type="number"
                     className='inputform'
@@ -409,6 +414,7 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantity)
                 </Form.Field>
                 <Form.Field align="center">
                     <label>SaelsPrice</label>
+                    <br></br>
                     <input
                         name="SaelsPrice"
                     className='inputform'
@@ -420,7 +426,11 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantity)
                 </Form.Field>
                 <Button type='submit' className='submitform' align="center" onClick={sendDataToAPI}>Update</Button>
             </Form>
+
+            
+
         </Box>
+        
       </StyledModal>
     </>
   );

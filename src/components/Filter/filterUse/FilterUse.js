@@ -83,7 +83,7 @@ const setID=(id,OilUsageAr,OilUsageEn,Specs)=>{
   return (
     
     <>   	
-      <h2>Add Oil & Fluid Usges</h2>
+      <h2>test Fluid Usges</h2>
     <Box sx={{ minWidth: 120 }}>
     <br></br>
     <br></br>
@@ -111,7 +111,7 @@ const setID=(id,OilUsageAr,OilUsageEn,Specs)=>{
 
     <br></br>
     <br></br>
-    <Button variant="contained" color="success" onClick={creatOilusgefun}>
+    <Button variant="contained" className='submitform' color="success" onClick={creatOilusgefun}>
         save
       </Button>
     <br></br>

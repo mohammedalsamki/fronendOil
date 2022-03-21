@@ -22,8 +22,8 @@ import Select from 'react-select'
 
 
 const lotteryStyle={
-  border: '2px solid grey',
-  borderRadius: '10px',
+  // border: '2px solid grey',
+  // borderRadius: '10px',
   width:'40em',
   textAlign:'left',
 
@@ -327,8 +327,9 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantiti,Unit)
           </div>
         <Form>
 
-        <Form.Field align="center" style={lotteryStyle} class="grid-container">
+        <Form.Field >
                     <label>Capacity</label>
+                    <br></br>
                     <input name="Capasity"
                     type="text"
                     class="item1"
@@ -338,12 +339,16 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantiti,Unit)
                         placeholder='Capasity' />
 
                 </Form.Field>
-        <h3>Unit</h3>
+                
+        <Form.Field  >
+        <br></br>
+        
+                <Select placeholder='Unit' options={unitList}   onChange={(e) => setUnit(e.label)} />
+                </Form.Field>
 
-                <Select justifyContent="center" options={unitList}   onChange={(e) => setUnit(e.label)} />
-
-                <Form.Field align="center" style={lotteryStyle} class="grid-container">
+                <Form.Field align="center"  class="grid-container">
                     <label>Note</label>
+                    <br></br>
                     <input name="Note"
                     type="text"
                     class="item1"
@@ -353,8 +358,9 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantiti,Unit)
                         placeholder='Note' />
 
                 </Form.Field>
-                <Form.Field align="center" style={lotteryStyle} class="grid-container">
+                <Form.Field align="center"  class="grid-container">
                     <label>PartNumber</label>
+                    <br></br>
                     <input name="PartNumber"
                     type="number"
                     class="item1"
@@ -364,8 +370,9 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantiti,Unit)
                         placeholder='PartNumber' />
 
                 </Form.Field>
-                <Form.Field align="center" style={lotteryStyle} class="grid-container">
+                <Form.Field align="center"  class="grid-container">
                     <label>StockNumber</label>
+                    <br></br>
                     <input name="StockNumber"
                     type="number"
                     class="item1"
@@ -375,8 +382,9 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantiti,Unit)
                         placeholder='StockNumber' />
 
                 </Form.Field>
-                <Form.Field align="center" style={lotteryStyle} class="grid-container">
+                <Form.Field align="center"  class="grid-container">
                     <label>StockQuantiti</label>
+                    <br></br>
                     <input name="stockQuantity"
                     type="number"
                     class="item1"
@@ -390,6 +398,7 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantiti,Unit)
 
                 <Form.Field align="center">
                     <label>UnitPrice</label>
+                    <br></br>
                     <input name="UnitPrice"
                     type="number"
                     className='inputform'
@@ -399,6 +408,7 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantiti,Unit)
                 </Form.Field>
                 <Form.Field align="center">
                     <label>SaelsPrice</label>
+                    <br></br>
                     <input
                         name="SaelsPrice"
                     className='inputform'
@@ -408,7 +418,8 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantiti,Unit)
                         onChange={(e) => setSaelsPrice(e.target.value)}
                     />
                 </Form.Field>
-                <Button type='submit' className='submitform' align="center" onClick={sendDataToAPI}>Update</Button>
+            <Button type='submit' className='submitform' align="center" onClick={sendDataToAPI}>Update</Button>
+                
             </Form>
         </Box>
       </StyledModal>

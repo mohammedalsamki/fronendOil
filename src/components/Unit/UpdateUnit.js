@@ -47,6 +47,7 @@ export default function UpdateUnit() {
                 </Form.Field>
                 <Button type='submit' className='submitform' onClick={sendDataToAPI}>Update</Button>
             </Form>
+            
         </div>
     )
 }

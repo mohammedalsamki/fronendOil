@@ -151,9 +151,18 @@ export default function ShowFilterData() {
 
     localStorage.setItem('ItemImage', ItemImage)
     localStorage.setItem('Note', Note)
-    localStorage.setItem('StockNumber', StockNumber)
-    localStorage.setItem('PartNumber', PartNumber)
-
+    if(StockNumber===null){
+      localStorage.setItem('StockNumber', 0)
+    
+    }else{
+      localStorage.setItem('StockNumber', StockNumber)
+    }  
+    if(!PartNumber){
+      localStorage.setItem('PartNumber', 0)
+    
+    }else{
+      localStorage.setItem('PartNumber', PartNumber)
+    } 
     })
   },[]);
   const [Brand, setBrand]= React.useState('');
@@ -197,9 +206,14 @@ export default function ShowFilterData() {
 
     setItemImage(localStorage.getItem('ItemImage'))
     setNote(localStorage.getItem('Note'))
-    setStockNumber(localStorage.getItem('StockNumber'))
-    setPartNumber(localStorage.getItem('PartNumber'))
-  
+    if(StockNumber===null){
+      setStockNumber(0)    }else{
+      setStockNumber(localStorage.getItem('StockNumber'))
+    }
+    if(PartNumber===undefined){
+      setPartNumber(0)    }else{
+        setPartNumber(localStorage.getItem('PartNumber'))
+    }
   }
   const sendDataToAPI = () => {
     axios.put(`https://backendoil.vercel.app/api/filter/filter/${_id}`, {

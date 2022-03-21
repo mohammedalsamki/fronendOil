@@ -113,8 +113,8 @@ export default function ShowOilsData() {
 
   let [ItemImage,setItemImage]= React.useState('');
   let [Note,setNote]= React.useState('');
-  let [StockNumber,setStockNumber]= React.useState('');
-  let [PartNumber,setPartNumber]= React.useState('');
+  let [StockNumber,setStockNumber]= React.useState(0);
+  let [PartNumber,setPartNumber]= React.useState(0);
   const [open, setOpen] = React.useState(false);
   const [unitList, setunitList] = React.useState(false);
   const getOptionsunit=async()=>{
@@ -163,8 +163,18 @@ export default function ShowOilsData() {
 
     localStorage.setItem('ItemImage', ItemImage)
     localStorage.setItem('Note', Note)
-    localStorage.setItem('StockNumber', StockNumber)
-    localStorage.setItem('PartNumber', PartNumber)
+    if(StockNumber===null){
+      localStorage.setItem('StockNumber', 0)
+    
+    }else{
+      localStorage.setItem('StockNumber', StockNumber)
+    }  
+    if(!PartNumber){
+      localStorage.setItem('PartNumber', 0)
+    
+    }else{
+      localStorage.setItem('PartNumber', PartNumber)
+    } 
 
     })
   },[]);
@@ -172,7 +182,6 @@ export default function ShowOilsData() {
   console.log(Brand,OilUsage,OilGrade,Capasity,Unit,StockNumber,ItemImage,Note,StockQuantiti,UnitPrice,SaelsPrice,PartNumber)
 
   const setID=(_id,Brand,OilUsage,OilGrade,Capasity,Unit,StockNumber,ItemImage,Note,StockQuantiti,UnitPrice,SaelsPrice,PartNumber)=>{
-    // console.log(_id,Brand,OilUsage,OilGrade,Capasity,Unit,StockNumber,ItemImage,Note,StockQuantiti,UnitPrice,SaelsPrice,PartNumber)
     localStorage.setItem('_id', _id)
     localStorage.setItem('Brand', Brand)
     localStorage.setItem('OilUsage', OilUsage)
@@ -200,8 +209,16 @@ export default function ShowOilsData() {
 
     setItemImage(localStorage.getItem('ItemImage'))
     setNote(localStorage.getItem('Note'))
-    setStockNumber(localStorage.getItem('StockNumber'))
-    setPartNumber(localStorage.getItem('PartNumber'))
+
+    if(StockNumber===null){
+      setStockNumber(0)    }else{
+      setStockNumber(localStorage.getItem('StockNumber'))
+    }
+    if(PartNumber===undefined){
+      setPartNumber(0)    }else{
+        setPartNumber(localStorage.getItem('PartNumber'))
+    }
+    // console.log(_id,Brand,OilUsage,OilGrade,Capasity,Unit,StockNumber,ItemImage,Note,StockQuantiti,UnitPrice,SaelsPrice,PartNumber)
   
   }
   const sendDataToAPI = () => {

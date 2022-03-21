@@ -104,6 +104,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 export default function ShowFilterData() {
   let history = useHistory();
   const classes= useStyles();
+  let [MinQty,setMinQty]= React.useState(0);
 
   const [open, setOpen] = React.useState(false);
   const [unitList, setunitList] = React.useState(false);
@@ -151,6 +152,8 @@ export default function ShowFilterData() {
 
     localStorage.setItem('ItemImage', ItemImage)
     localStorage.setItem('Note', Note)
+    localStorage.setItem('MinQty', MinQty)
+
     if(StockNumber===null){
       localStorage.setItem('StockNumber', 0)
     
@@ -181,7 +184,7 @@ export default function ShowFilterData() {
   let [PartNumber,setPartNumber]= React.useState('');
   console.log(_id)
 
-  const setID=(_id,Brand,FilterUsage,Unit,StockNumber,ItemImage,Note,StockQuantity,UnitPrice,SaelsPrice,PartNumber)=>{
+  const setID=(_id,Brand,FilterUsage,Unit,StockNumber,ItemImage,Note,StockQuantity,UnitPrice,SaelsPrice,PartNumber,MinQty)=>{
     // console.log(_id)
     localStorage.setItem('_id', _id)
     localStorage.setItem('Brand', Brand)
@@ -195,6 +198,8 @@ export default function ShowFilterData() {
     localStorage.setItem('Note', Note)
     localStorage.setItem('StockNumber', StockNumber)
     localStorage.setItem('PartNumber', PartNumber)
+    localStorage.setItem('MinQty', MinQty)
+
 
     setBrand(localStorage.getItem('Brand'));
     set_id(localStorage.getItem('_id'));
@@ -203,9 +208,13 @@ export default function ShowFilterData() {
     setUnitPrice(localStorage.getItem('UnitPrice'))
     setSaelsPrice(localStorage.getItem('SaelsPrice'))
     setUnit(localStorage.getItem('Unit'))
-
+    setMinQty(localStorage.getItem('MinQty'))
     setItemImage(localStorage.getItem('ItemImage'))
     setNote(localStorage.getItem('Note'))
+    if(MinQty===null){
+      setMinQty(0)    }else{
+      setMinQty(localStorage.getItem('MinQty'))
+    }
     if(StockNumber===null){
       setStockNumber(0)    }else{
       setStockNumber(localStorage.getItem('StockNumber'))
@@ -224,6 +233,7 @@ export default function ShowFilterData() {
       Note:Note,
       PartNumber:PartNumber,
       StockNumber:StockNumber,
+      MinQty:MinQty
     
  
     }).then(() => {
@@ -281,6 +291,7 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantity)
             <StyledTableCell align="center">Note</StyledTableCell>
             <StyledTableCell align="center">PartNumber</StyledTableCell>
             <StyledTableCell align="center">StockNumber</StyledTableCell>
+            <StyledTableCell align="center">MinQty</StyledTableCell>
             <StyledTableCell align="center">StockQuantity</StyledTableCell>
 
             <StyledTableCell align="center">UnitPrice</StyledTableCell>
@@ -293,8 +304,10 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantity)
           </TableRow>
         </TableHead>
         <TableBody>
-          {oilList.map((oil,key) => (
-            <StyledTableRow key={key}>
+          {oilList.map((oil,key) =>  {
+            if(oil.MinQty<oil.StockQuantity){
+            return(
+            <StyledTableRow style={{backgroundColor: ''}} key={key}>
               <StyledTableCell align="center">{oil.Brand}</StyledTableCell>
               <StyledTableCell align="center">
                 <img src={oil.ItemImage} alt="not found" width="70" height="70"></img>
@@ -306,13 +319,14 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantity)
               <StyledTableCell align="center">{oil.Note}</StyledTableCell>
               <StyledTableCell align="center">{oil.PartNumber}</StyledTableCell>
               <StyledTableCell align="center">{oil.StockNumber}</StyledTableCell>
+              <StyledTableCell align="center">{oil.MinQty}</StyledTableCell>
 
               <StyledTableCell align="center">{oil.StockQuantity}</StyledTableCell>
               <StyledTableCell align="center">{oil.UnitPrice}</StyledTableCell>
               <StyledTableCell align="center">{oil.SaelsPrice}</StyledTableCell>
               <StyledTableCell align="center">
       <IconButton type="button"  onClick={()=>{
-      setID(oil._id,oil.Brand,oil.FilterUsage,oil.Unit,oil.StockNumber,oil.ItemImage,oil.Note,oil.StockQuantity,oil.UnitPrice,oil.SaelsPrice,oil.PartNumber);
+      setID(oil._id,oil.Brand,oil.FilterUsage,oil.Unit,oil.StockNumber,oil.ItemImage,oil.Note,oil.StockQuantity,oil.UnitPrice,oil.SaelsPrice,oil.PartNumber,MinQty);
         handleOpen()}} >
                         <EditIcon fontSize="small"/>
 
@@ -327,7 +341,50 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantity)
                 </StyledTableCell>
 
             </StyledTableRow>
-          ))}
+          )
+        }else{
+          return(
+            <StyledTableRow style={{backgroundColor: 'red'}} key={key}>
+              <StyledTableCell align="center">{oil.Brand}</StyledTableCell>
+              <StyledTableCell align="center">
+                <img src={oil.ItemImage} alt="not found" width="70" height="70"></img>
+                </StyledTableCell>
+              <StyledTableCell align="center" component="th" scope="row">
+                {oil.FilterUsage}
+              </StyledTableCell>
+
+              <StyledTableCell align="center">{oil.Note}</StyledTableCell>
+              <StyledTableCell align="center">{oil.PartNumber}</StyledTableCell>
+              <StyledTableCell align="center">{oil.StockNumber}</StyledTableCell>
+              <StyledTableCell align="center">{oil.MinQty}</StyledTableCell>
+
+              <StyledTableCell align="center">{oil.StockQuantity}</StyledTableCell>
+              <StyledTableCell align="center">{oil.UnitPrice}</StyledTableCell>
+              <StyledTableCell align="center">{oil.SaelsPrice}</StyledTableCell>
+              <StyledTableCell align="center">
+      <IconButton type="button"  onClick={()=>{
+      setID(oil._id,oil.Brand,oil.FilterUsage,oil.Unit,oil.StockNumber,oil.ItemImage,oil.Note,oil.StockQuantity,oil.UnitPrice,oil.SaelsPrice,oil.PartNumber,MinQty);
+        handleOpen()}} >
+                        <EditIcon fontSize="small"/>
+
+      </IconButton>
+
+    </StyledTableCell>
+
+              <StyledTableCell align="center">
+                <IconButton aria-label='delete' className={ClassNames.margin} onClick={()=> deleteOil(oil._id)}>
+                  <DeleteIcon fontSize="small"/>
+                  </IconButton>
+                </StyledTableCell>
+
+            </StyledTableRow>
+
+          )
+        
+        
+        }
+          
+      })}
         </TableBody>
       </Table>
     </TableContainer>
@@ -401,7 +458,18 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantity)
                         placeholder='StockQuantity' />
 
                 </Form.Field>
+                <Form.Field align="center"  class="grid-container">
+                    <label>MinQty</label>
+                    <br></br>
+                    <input name="MinQty"
+                    type="number"
+                    class="item1"
+                    className='inputform'
+                    value={MinQty}
+                        onChange={(e) => setMinQty(e.target.value)}
+                        placeholder='MinQty' />
 
+                </Form.Field>
 
                 <Form.Field align="center">
                     <label>UnitPrice</label>

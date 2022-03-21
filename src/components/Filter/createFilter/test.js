@@ -33,6 +33,7 @@ export default class Test extends Component {
       PartNumber:'',
       StockNumber:'',
       ItemImage:'',
+      MinQty:0,
       files: []
 
     }
@@ -124,7 +125,9 @@ export default class Test extends Component {
       PartNumber:this.state.PartNumber,
       StockNumber:this.state.StockNumber,
       ItemImage:this.state.ItemImage,
-      Note:this.state.Note
+      Note:this.state.Note,
+      MinQty:this.state.MinQty
+
     }
     axios.post('https://backendoil.vercel.app/api/filter/filter',x).then( () => {
       window.location.reload(false);
@@ -227,7 +230,17 @@ export default class Test extends Component {
             shrink: true,
           }}
         />
-
+                   <TextField
+         style={ulStyle}
+         
+        id="outlined-number"
+        placeholder="MinQty"
+          type="number"
+          onChange={(e)=>this.setState({MinQty:e.target.value})}
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
         <TextField
          style={ulStyle}
          

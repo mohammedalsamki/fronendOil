@@ -8,7 +8,7 @@ import "../../style/select.css"
 
 
 const ulStyle = {  padding: "12px 10px",  width:'40%', listStyleType:'none'}
-const selectStyle = { padding: "12px 10px", width: "50%",marginTop: "20px" }
+const selectStyle = {padding: "12px 10px", listStyleType:'none',width:"300px",height :'100px'}
 
 
 export default class Test extends Component {
@@ -171,10 +171,11 @@ export default class Test extends Component {
         />
 
 
-           <TextField
+           <textarea
          
         id="outlined-number"
-         style={ulStyle}
+         style={selectStyle }
+
          placeholder="Note"
           type="text"
           onChange={(e)=>this.setState({Note:e.target.value})}

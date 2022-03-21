@@ -359,6 +359,7 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantity)
                     type="text"
                     class="item1"
                     className='inputform'
+                    style={{ width:"300px",height :'100px' }}
                     value={Note}
                         onChange={(e) => setNote(e.target.value)}
                         placeholder='Note' />

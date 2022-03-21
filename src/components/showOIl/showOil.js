@@ -18,14 +18,14 @@ import { useHistory } from 'react-router';
 import { Form, Button } from 'semantic-ui-react';
 import EditIcon from '@mui/icons-material/Edit';
 import Select from 'react-select'
-import { makeStyles } from '@material-ui/core/styles';
+// import SelectField from "material-ui/SelectField";
+// import MenuItem from "material-ui/MenuItem";
+import SearchBar from "material-ui-search-bar";
+import { async } from 'q';
 
 
 
 
-const  tableCell= {
-    backgroundColor: ''
-  };
 
 
 
@@ -88,11 +88,10 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 export default function ShowOilsData() {
   let history = useHistory();
+
   const [Brand, setBrand]= React.useState('');
   const [_id,set_id]= React.useState('');
   let [OilUsage,setOilUsage]= React.useState('');
-  let [UnitList,setUnitList]= React.useState('');
-
   let [OilGrade,setOilGrade]= React.useState('');
   let [Capasity,setCapasity]= React.useState('');
   let [Unit,setUnit]= React.useState('');
@@ -119,9 +118,23 @@ export default function ShowOilsData() {
 
     // this.setState({unitselectOptions: options})
     setunitList(options)
-    console.log(unitList)
   }
+  const [oilList, setOilList]= React.useState([]);
+  const [rows, setRows] = React.useState(oilList);
 
+  const [searched, setSearched] = React.useState(oilList);
+
+  const requestSearch = (searchedVal) => {
+    const filteredRows = oilList.filter((oilList) => {
+      return oilList.Brand.toLowerCase().includes(searchedVal.toLowerCase());
+    });
+
+    setRows(filteredRows);
+  };
+  const cancelSearch = () => {
+    setSearched("");
+    requestSearch(searched);
+  };
   const handleOpen = () =>{ 
     
     setOpen(true)};
@@ -129,7 +142,6 @@ export default function ShowOilsData() {
     localStorage.clear();
 
     setOpen(false)};
-  const [oilList, setOilList]= React.useState([]);
   
 
   const deleteOil=(id)=>{
@@ -137,10 +149,12 @@ export default function ShowOilsData() {
       window.location.reload(false);
     } )
   }
-  useEffect(()=>{
+   useEffect(()=>{
     getOptionsunit();
     axios.get(`https://backendoil.vercel.app/api/oil/`).then( (allOils) =>{
       setOilList(allOils.data);
+      setRows(allOils.data);
+
       localStorage.setItem('_id', _id)
     localStorage.setItem('Brand', Brand)
     localStorage.setItem('OilUsage', OilUsage)
@@ -170,7 +184,6 @@ export default function ShowOilsData() {
     })
   },[]);
 
-  console.log(Brand,OilUsage,OilGrade,Capasity,Unit,StockNumber,ItemImage,Note,StockQuantiti,UnitPrice,SaelsPrice,PartNumber)
 
   const setID=(_id,Brand,OilUsage,OilGrade,Capasity,Unit,StockNumber,ItemImage,Note,StockQuantiti,UnitPrice,SaelsPrice,PartNumber,MinQty)=>{
     localStorage.setItem('_id', _id)
@@ -215,7 +228,6 @@ export default function ShowOilsData() {
       setPartNumber(0)    }else{
         setPartNumber(localStorage.getItem('PartNumber'))
     }
-    // console.log(_id,Brand,OilUsage,OilGrade,Capasity,Unit,StockNumber,ItemImage,Note,StockQuantiti,UnitPrice,SaelsPrice,PartNumber)
   
   }
   const sendDataToAPI = () => {
@@ -240,15 +252,18 @@ history.push('/Oil_Fluid');
         localStorage.clear();
     })
 }
-// const onChangeHandler = (change) => {
-//   setUnit({change});
-// };
+
 
 console.log(SaelsPrice,_id,UnitPrice,StockQuantiti,Unit,MinQty)
 
   return (
     < >
     <h2>Oil's & Fluid's in Stock</h2>
+    <SearchBar
+          value={searched}
+          onChange={(searchVal) => requestSearch(searchVal)}
+          onCancelSearch={() => cancelSearch()}
+        />
     <TableContainer component={Paper} maxWidth="100%">
       <Table  sx={{ minWidth: 800 }} aria-label="customized table">
         <TableHead>
@@ -277,7 +292,7 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantiti,Unit,MinQty)
           </TableRow>
         </TableHead>
         <TableBody>
-          {oilList.map((oil,key) => {
+          {rows.map((oil,key) => {
             if(oil.MinQty<oil.StockQuantiti){
             return(
             

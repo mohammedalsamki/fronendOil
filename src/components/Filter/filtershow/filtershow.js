@@ -19,30 +19,14 @@ import { Form, Button } from 'semantic-ui-react';
 import EditIcon from '@mui/icons-material/Edit';
 import useStyles from '../../../styles';
 import AddIcon from '@mui/icons-material/Add';
-import { Container,AppBar, } from '@material-ui/core';
-import { BrowserRouter as Router,NavLink} from 'react-router-dom';
+import { AppBar } from '@material-ui/core';
+import { NavLink} from 'react-router-dom';
 import CreateFilter from '../createFilter/CreateFilter';
 
 
 
 
-const lotteryStyle={
-  // border: '2px solid grey',
-  // borderRadius: '10px',
-  width:'40em',
-  textAlign:'left',
 
-}
-const lotteryStyle1={
-  // border: '2px solid grey',
-  // borderRadius: '10px',
-  width:'40em',
-  textAlign:'left',
-  position: 'absolute',
-  top: '41%',
-  left: '81%',
-
-}
 
 const StyledModal = styled(ModalUnstyled)`
   position: fixed;
@@ -171,7 +155,6 @@ export default function ShowFilterData() {
   const [Brand, setBrand]= React.useState('');
   const [_id,set_id]= React.useState('');
   let [FilterUsage,setFilterUsage]= React.useState('');
-  let [UnitList,setUnitList]= React.useState('');
 
   let [Unit,setUnit]= React.useState('');
   let [StockQuantity,setStockQuantity]= React.useState('');

@@ -99,7 +99,7 @@ export default function ShowOilsData() {
   let [UnitPrice,setUnitPrice]= React.useState('');
   let [SaelsPrice,setSaelsPrice]= React.useState('');
 
-  let [ItemImage,setItemImage]= React.useState([]);
+  let [ItemImage,setItemImage]= React.useState();
   let [Note,setNote]= React.useState('');
   let [StockNumber,setStockNumber]= React.useState(0);
   let [PartNumber,setPartNumber]= React.useState(0);

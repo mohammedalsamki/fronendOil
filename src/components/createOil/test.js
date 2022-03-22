@@ -5,6 +5,9 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { Grid } from '@material-ui/core';
 import "../style/select.css"
+import { file } from '@babel/types';
+import Image from "material-ui-image";
+
 
 
 const ulStyle = {  padding: "12px 10px",  width:'40%', listStyleType:'none'}
@@ -35,11 +38,12 @@ export default class Test extends Component {
       Note:'',
       PartNumber:'',
       StockNumber:'',
-      ItemImage:'',
-      files: [],
+      ItemImage:null,
+      files:[],
       MinQty:0
 
     }
+    
   }
   async getFiles(files){
     await  this.setState({ files: files })
@@ -94,7 +98,7 @@ export default class Test extends Component {
 
     this.setState({oilGradeselectOptions: options})
 
-  }
+  };
 
   async handleChange(e){
    await this.setState({ID:e.value})
@@ -127,13 +131,29 @@ export default class Test extends Component {
       this.getOptionsoilGrade()
       this.getOptionsunit()
 
-
-
-
   }
+  async handleFile (e) {
+    console.log(e.target.files)
 
+    if (e.target.files && e.target.files[0]) {
+      let reader = new FileReader();
+      reader.onload = (e) => {
+        this.setState({files: e.target.result});
+    // console.log(this.state.files)
+
+      };
+      reader.readAsDataURL(e.target.files[0]);
+
+    
+
+    }
+
+  };
   creatOill (e){
-    this.setState({OilUsag:e.label})
+
+    this.setState({OilUsag:e.label});
+ 
+
 
     let x= {
       OilUsage:this.state.OilUsag,
@@ -146,19 +166,33 @@ export default class Test extends Component {
       SaelsPrice:this.state.SaelsPrice,
       PartNumber:this.state.PartNumber,
       StockNumber:this.state.StockNumber,
-      ItemImage:this.state.ItemImage,
+      ItemImage:this.state.files,
       Note:this.state.Note,
       MinQty:this.state.MinQty
     }
-    axios.post('https://backendoil.vercel.app/api/oil',x).then( () => {
+    // console.log(x)
+
+    axios
+    .post('https://backendoil.vercel.app/api/oil', x)
+    .then((response) => {
+      console.log(response);
       window.location.reload(false);
 
     })
+    .catch((error) => {
+      console.log(error);
+    });
+
   }
   render() {
     
     return (
       <div>
+        {/* <div>
+        <Image src={this.state.files}/>
+
+
+        </div> */}
         <Grid container    style={{  margin: "10px",justifyContent: "space-around"}}>
 
         <Select justifyContent="center" placeholder="Brand" options={this.state.brandselectOptions} onChange={this.brandhandleChange.bind(this)} />
@@ -182,7 +216,7 @@ export default class Test extends Component {
         placeholder="Capacity"
         type="number"
         style={ulStyle}
-        onChange={(e)=>this.setState({Capasity:e.target.value})}
+          onChange={(e)=>this.setState({Capacity:e.target.value})}
         InputLabelProps={{
         shrink: true,
         }}
@@ -199,8 +233,8 @@ export default class Test extends Component {
         id="outlined-number"
         placeholder="ItemImage"
 
-          type="text"
-          onChange={(e)=>this.setState({ItemImage:e.target.value})}
+          type="file"
+          onChange={(e)=>this.handleFile(e)}
           InputLabelProps={{
             shrink: true,
           }}

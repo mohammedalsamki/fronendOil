@@ -99,7 +99,7 @@ export default function ShowOilsData() {
   let [UnitPrice,setUnitPrice]= React.useState('');
   let [SaelsPrice,setSaelsPrice]= React.useState('');
 
-  let [ItemImage,setItemImage]= React.useState('');
+  let [ItemImage,setItemImage]= React.useState([]);
   let [Note,setNote]= React.useState('');
   let [StockNumber,setStockNumber]= React.useState(0);
   let [PartNumber,setPartNumber]= React.useState(0);
@@ -230,6 +230,26 @@ export default function ShowOilsData() {
     }
   
   }
+  const handleFile = (e) =>{
+    // console.log(e.target.files[0])
+    if (e.target.files && e.target.files[0]) {
+      let reader = new FileReader();
+      console.log(reader)
+      reader.onload = (e) => {
+        // console.log(e.target.result)
+        let image=e.target.result
+        setItemImage(image);
+       console.log(ItemImage)
+
+      };
+      reader.readAsDataURL(e.target.files[0]);
+      // console.log("test2",ItemImage)
+
+    
+
+    }
+
+  };
   const sendDataToAPI = () => {
     axios.put(`https://backendoil.vercel.app/api/oil/${_id}`, {
  
@@ -429,6 +449,18 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantiti,Unit,MinQty)
                     value={Note}
                         onChange={(e) => setNote(e.target.value)}
                         placeholder='Note' />
+
+                </Form.Field>
+                <Form.Field align="center"  class="grid-container">
+                    <label>image</label>
+                    <br></br>
+                    <input name="image"
+                    type="file"
+                    class="item1"
+                    className='inputform'
+                    // value={}
+                        onChange={(e) => handleFile(e)}
+                        placeholder='image' />
 
                 </Form.Field>
                 <Form.Field align="center"  class="grid-container">

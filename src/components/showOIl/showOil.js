@@ -22,6 +22,7 @@ import Select from 'react-select'
 // import MenuItem from "material-ui/MenuItem";
 import SearchBar from "material-ui-search-bar";
 import { async } from 'q';
+import { stringify } from 'json5';
 
 
 
@@ -99,7 +100,9 @@ export default function ShowOilsData() {
   let [UnitPrice,setUnitPrice]= React.useState('');
   let [SaelsPrice,setSaelsPrice]= React.useState('');
 
-  let [ItemImage,setItemImage]= React.useState();
+  let [ItemImage,setItemImage]= React.useState(String);
+  let [Imagenew,setImagenew]= React.useState(String);
+
   let [Note,setNote]= React.useState('');
   let [StockNumber,setStockNumber]= React.useState(0);
   let [PartNumber,setPartNumber]= React.useState(0);
@@ -236,18 +239,15 @@ export default function ShowOilsData() {
       let reader = new FileReader();
       console.log(reader)
       reader.onload = (e) => {
-        // console.log(e.target.result)
-        let image=e.target.result
-        setItemImage(image);
-       console.log(ItemImage)
+        setImagenew(reader.result);
+        alert("image uploaded");
+       console.log(Imagenew)
 
       };
       reader.readAsDataURL(e.target.files[0]);
-      // console.log("test2",ItemImage)
-
-    
 
     }
+
 
   };
   const sendDataToAPI = () => {
@@ -261,7 +261,8 @@ export default function ShowOilsData() {
       Unit,
       PartNumber,
       StockNumber,
-      MinQty
+      MinQty,
+      ItemImage:Imagenew
  
     }).then(() => {
 alert("Updated")
@@ -274,7 +275,7 @@ history.push('/Oil_Fluid');
 }
 
 
-console.log(SaelsPrice,_id,UnitPrice,StockQuantiti,Unit,MinQty)
+// console.log(SaelsPrice,_id,UnitPrice,StockQuantiti,Unit,MinQty)
 
   return (
     < >

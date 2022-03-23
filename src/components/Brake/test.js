@@ -149,11 +149,21 @@ export default class Test extends Component {
 
     }
  console.log(x)
-   await axios.post('https://backendoil.vercel.app/api/brake/brake',x).then( () => {
-      window.location.reload(false);
 
-    })
-    alert("item added")
+
+    await axios
+     .post('https://backendoil.vercel.app/api/brake/brake', x)
+     .then((response) => {
+       console.log(response);
+       window.location.reload(false);
+ 
+     })
+     .catch((error) => {
+       console.log(error);
+     });
+ 
+   alert("item added")
+
   }
   render() {
     

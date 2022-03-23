@@ -96,7 +96,7 @@ export default function ShowBrakeData() {
 
   const requestSearch = (searchedVal) => {
     const brakeedRows = brakeList.brake((brakeList) => {
-      return brakeList.PartNumber.toLowerCase().includes(searchedVal.toLowerCase());
+      return brakeList.OEMPartNumber.toLowerCase().includes(searchedVal.toLowerCase());
     });
 
     setRows(brakeedRows);
@@ -169,12 +169,8 @@ export default function ShowBrakeData() {
     }else{
       localStorage.setItem('StockNumber', StockNumber)
     }  
-    if(!PartNumber){
-      localStorage.setItem('PartNumber', 0)
-    
-    }else{
-      localStorage.setItem('PartNumber', PartNumber)
-    } 
+
+      localStorage.setItem('OEMPartNumber', OEMPartNumber)
     })
   },[]);
   const [Brand, setBrand]= React.useState('');
@@ -189,10 +185,11 @@ export default function ShowBrakeData() {
   let [ItemImage,setItemImage]= React.useState('');
   let [Note,setNote]= React.useState('');
   let [StockNumber,setStockNumber]= React.useState('');
-  let [PartNumber,setPartNumber]= React.useState('');
+  let [OEMPartNumber,setOEMPartNumber]= React.useState('');
+  let [BrandPartNumber,setBrandPartNumber]= React.useState('');
   console.log(_id)
 
-  const setID=(_id,Brand,brakeUsage,Unit,StockNumber,ItemImage,Note,StockQuantity,UnitPrice,SaelsPrice,PartNumber,MinQty)=>{
+  const setID=(_id,Brand,brakeUsage,Unit,StockNumber,ItemImage,Note,StockQuantity,UnitPrice,SaelsPrice,OEMPartNumber,MinQty,BrandPartNumber)=>{
     // console.log(_id)
     localStorage.setItem('_id', _id)
     localStorage.setItem('Brand', Brand)
@@ -205,7 +202,8 @@ export default function ShowBrakeData() {
     localStorage.setItem('ItemImage', ItemImage)
     localStorage.setItem('Note', Note)
     localStorage.setItem('StockNumber', StockNumber)
-    localStorage.setItem('PartNumber', PartNumber)
+    localStorage.setItem('OEMPartNumber', OEMPartNumber)
+    localStorage.setItem('BrandPartNumber', BrandPartNumber)
     localStorage.setItem('MinQty', MinQty)
 
 
@@ -223,14 +221,12 @@ export default function ShowBrakeData() {
       setMinQty(0)    }else{
       setMinQty(localStorage.getItem('MinQty'))
     }
-    if(StockNumber===null){
-      setStockNumber(0)    }else{
-      setStockNumber(localStorage.getItem('StockNumber'))
-    }
-    if(PartNumber===undefined){
-      setPartNumber(0)    }else{
-        setPartNumber(localStorage.getItem('PartNumber'))
-    }
+
+    setStockNumber(localStorage.getItem('StockNumber'))
+
+    setOEMPartNumber(localStorage.getItem('OEMPartNumber'))
+    setBrandPartNumber(localStorage.getItem('BrandPartNumber'))
+    
   }
   const handleFile = (e) =>{
     // console.log(e.target.files[0])
@@ -254,7 +250,8 @@ export default function ShowBrakeData() {
       UnitPrice:UnitPrice,
       SaelsPrice:SaelsPrice,
       Note:Note,
-      PartNumber:PartNumber,
+      OEMPartNumber:OEMPartNumber,
+      BrandPartNumber:BrandPartNumber,
       StockNumber:StockNumber,
       MinQty:MinQty,
       ItemImage:Imagenew
@@ -318,7 +315,8 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantity)
 
             <StyledTableCell align="center">Usge</StyledTableCell>
             <StyledTableCell align="center">Note</StyledTableCell>
-            <StyledTableCell align="center">PartNumber</StyledTableCell>
+            <StyledTableCell align="center">OEMPartNumber</StyledTableCell>
+            <StyledTableCell align="center">BrandPartNumber</StyledTableCell>
             <StyledTableCell align="center">StockNumber</StyledTableCell>
             <StyledTableCell align="center">MinQty</StyledTableCell>
             <StyledTableCell align="center">StockQuantity</StyledTableCell>
@@ -346,7 +344,9 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantity)
               </StyledTableCell>
 
               <StyledTableCell align="center">{brake.Note}</StyledTableCell>
-              <StyledTableCell align="center">{brake.PartNumber}</StyledTableCell>
+              <StyledTableCell align="center">{brake.OEMPartNumber}</StyledTableCell>
+              <StyledTableCell align="center">{brake.BrandPartNumber}</StyledTableCell>
+
               <StyledTableCell align="center">{brake.StockNumber}</StyledTableCell>
               <StyledTableCell align="center">{brake.MinQty}</StyledTableCell>
 
@@ -355,7 +355,7 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantity)
               <StyledTableCell align="center">{brake.SaelsPrice}</StyledTableCell>
               <StyledTableCell align="center">
       <IconButton type="button"  onClick={()=>{
-      setID(brake._id,brake.Brand,brake.brakeUsage,brake.Unit,brake.StockNumber,brake.ItemImage,brake.Note,brake.StockQuantity,brake.UnitPrice,brake.SaelsPrice,brake.PartNumber,MinQty);
+      setID(brake._id,brake.Brand,brake.brakeUsage,brake.Unit,brake.StockNumber,brake.ItemImage,brake.Note,brake.StockQuantity,brake.UnitPrice,brake.SaelsPrice,brake.OEMPartNumber,brake.MinQty,brake.BrandPartNumber);
         handleOpen()}} >
                         <EditIcon fontSize="small"/>
 
@@ -383,7 +383,8 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantity)
               </StyledTableCell>
 
               <StyledTableCell align="center">{brake.Note}</StyledTableCell>
-              <StyledTableCell align="center">{brake.PartNumber}</StyledTableCell>
+              <StyledTableCell align="center">{brake.OEMPartNumber}</StyledTableCell>
+              <StyledTableCell align="center">{brake.BrandPartNumber}</StyledTableCell>
               <StyledTableCell align="center">{brake.StockNumber}</StyledTableCell>
               <StyledTableCell align="center">{brake.MinQty}</StyledTableCell>
 
@@ -392,7 +393,7 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantity)
               <StyledTableCell align="center">{brake.SaelsPrice}</StyledTableCell>
               <StyledTableCell align="center">
       <IconButton type="button"  onClick={()=>{
-      setID(brake._id,brake.Brand,brake.brakeUsage,brake.Unit,brake.StockNumber,brake.ItemImage,brake.Note,brake.StockQuantity,brake.UnitPrice,brake.SaelsPrice,brake.PartNumber,MinQty);
+      setID(brake._id,brake.Brand,brake.brakeUsage,brake.Unit,brake.StockNumber,brake.ItemImage,brake.Note,brake.StockQuantity,brake.UnitPrice,brake.SaelsPrice,brake.OEMPartNumber,brake.MinQty,brake.BrandPartNumber);
         handleOpen()}} >
                         <EditIcon fontSize="small"/>
 
@@ -464,22 +465,34 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantity)
 
                 </Form.Field>
                 <Form.Field align="center"  class="grid-container">
-                    <label>PartNumber</label>
+                    <label>BrandPartNumber</label>
                     <br></br>
-                    <input name="PartNumber"
+                    <input name="BrandPartNumber"
                     type="text"
                     class="item1"
                     className='inputform'
-                    value={PartNumber}
-                        onChange={(e) => setPartNumber(e.target.value)}
-                        placeholder='PartNumber' />
+                    value={BrandPartNumber}
+                        onChange={(e) => setBrandPartNumber(e.target.value)}
+                        placeholder='BrandPartNumber' />
+
+                </Form.Field>
+                <Form.Field align="center"  class="grid-container">
+                    <label>OEMPartNumber</label>
+                    <br></br>
+                    <input name="OEMPartNumber"
+                    type="text"
+                    class="item1"
+                    className='inputform'
+                    value={OEMPartNumber}
+                        onChange={(e) => setOEMPartNumber(e.target.value)}
+                        placeholder='OEMPartNumber' />
 
                 </Form.Field>
                 <Form.Field align="center"  class="grid-container">
                     <label>StockNumber</label>
                     <br></br>
                     <input name="StockNumber"
-                    type="number"
+                    type="text"
                     class="item1"
                     className='inputform'
                     value={StockNumber}

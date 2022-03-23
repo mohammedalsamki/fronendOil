@@ -96,7 +96,7 @@ export default function ShowFilterData() {
 
   const requestSearch = (searchedVal) => {
     const filteredRows = oilList.filter((oilList) => {
-      return oilList.PartNumber.toLowerCase().includes(searchedVal.toLowerCase());
+      return oilList.OEMPartNumber.toLowerCase().includes(searchedVal.toLowerCase());
     });
 
     setRows(filteredRows);
@@ -169,13 +169,15 @@ export default function ShowFilterData() {
     }else{
       localStorage.setItem('StockNumber', StockNumber)
     }  
-    if(!PartNumber){
-      localStorage.setItem('PartNumber', 0)
+    if(!OEMPartNumber){
+      localStorage.setItem('OEMPartNumber', 0)
     
     }else{
-      localStorage.setItem('PartNumber', PartNumber)
+      localStorage.setItem('OEMPartNumber', OEMPartNumber)
     } 
     })
+    localStorage.setItem('BrandPartNumber', BrandPartNumber)
+
   },[]);
   const [Brand, setBrand]= React.useState('');
   const [_id,set_id]= React.useState('');
@@ -189,10 +191,11 @@ export default function ShowFilterData() {
   let [ItemImage,setItemImage]= React.useState('');
   let [Note,setNote]= React.useState('');
   let [StockNumber,setStockNumber]= React.useState('');
-  let [PartNumber,setPartNumber]= React.useState('');
+  let [OEMPartNumber,setOEMPartNumber]= React.useState('');
+  let [BrandPartNumber,setBrandPartNumber]= React.useState('');
   console.log(_id)
 
-  const setID=(_id,Brand,FilterUsage,Unit,StockNumber,ItemImage,Note,StockQuantity,UnitPrice,SaelsPrice,PartNumber,MinQty)=>{
+  const setID=(_id,Brand,FilterUsage,Unit,StockNumber,ItemImage,Note,StockQuantity,UnitPrice,SaelsPrice,OEMPartNumber,MinQty,BrandPartNumber)=>{
     // console.log(_id)
     localStorage.setItem('_id', _id)
     localStorage.setItem('Brand', Brand)
@@ -205,7 +208,8 @@ export default function ShowFilterData() {
     localStorage.setItem('ItemImage', ItemImage)
     localStorage.setItem('Note', Note)
     localStorage.setItem('StockNumber', StockNumber)
-    localStorage.setItem('PartNumber', PartNumber)
+    localStorage.setItem('OEMPartNumber', OEMPartNumber)
+    localStorage.setItem('BrandPartNumber', BrandPartNumber)
     localStorage.setItem('MinQty', MinQty)
 
 
@@ -227,10 +231,12 @@ export default function ShowFilterData() {
       setStockNumber(0)    }else{
       setStockNumber(localStorage.getItem('StockNumber'))
     }
-    if(PartNumber===undefined){
-      setPartNumber(0)    }else{
-        setPartNumber(localStorage.getItem('PartNumber'))
+    if(OEMPartNumber===undefined){
+      setOEMPartNumber(0)    }else{
+        setOEMPartNumber(localStorage.getItem('OEMPartNumber'))
     }
+    setBrandPartNumber(localStorage.getItem('BrandPartNumber'))
+
   }
   const handleFile = (e) =>{
     // console.log(e.target.files[0])
@@ -254,7 +260,8 @@ export default function ShowFilterData() {
       UnitPrice:UnitPrice,
       SaelsPrice:SaelsPrice,
       Note:Note,
-      PartNumber:PartNumber,
+      OEMPartNumber:OEMPartNumber,
+      BrandPartNumber:BrandPartNumber,
       StockNumber:StockNumber,
       MinQty:MinQty,
       ItemImage:Imagenew
@@ -318,7 +325,8 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantity)
 
             <StyledTableCell align="center">Usge</StyledTableCell>
             <StyledTableCell align="center">Note</StyledTableCell>
-            <StyledTableCell align="center">PartNumber</StyledTableCell>
+            <StyledTableCell align="center">OEMPartNumber</StyledTableCell>
+            <StyledTableCell align="center">BrandPartNumber</StyledTableCell>
             <StyledTableCell align="center">StockNumber</StyledTableCell>
             <StyledTableCell align="center">MinQty</StyledTableCell>
             <StyledTableCell align="center">StockQuantity</StyledTableCell>
@@ -346,7 +354,8 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantity)
               </StyledTableCell>
 
               <StyledTableCell align="center">{oil.Note}</StyledTableCell>
-              <StyledTableCell align="center">{oil.PartNumber}</StyledTableCell>
+              <StyledTableCell align="center">{oil.OEMPartNumber}</StyledTableCell>
+              <StyledTableCell align="center">{oil.BrandPartNumber}</StyledTableCell>
               <StyledTableCell align="center">{oil.StockNumber}</StyledTableCell>
               <StyledTableCell align="center">{oil.MinQty}</StyledTableCell>
 
@@ -355,7 +364,7 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantity)
               <StyledTableCell align="center">{oil.SaelsPrice}</StyledTableCell>
               <StyledTableCell align="center">
       <IconButton type="button"  onClick={()=>{
-      setID(oil._id,oil.Brand,oil.FilterUsage,oil.Unit,oil.StockNumber,oil.ItemImage,oil.Note,oil.StockQuantity,oil.UnitPrice,oil.SaelsPrice,oil.PartNumber,MinQty);
+      setID(oil._id,oil.Brand,oil.FilterUsage,oil.Unit,oil.StockNumber,oil.ItemImage,oil.Note,oil.StockQuantity,oil.UnitPrice,oil.SaelsPrice,oil.OEMPartNumber,oil.MinQty,oil.BrandPartNumber);
         handleOpen()}} >
                         <EditIcon fontSize="small"/>
 
@@ -383,7 +392,8 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantity)
               </StyledTableCell>
 
               <StyledTableCell align="center">{oil.Note}</StyledTableCell>
-              <StyledTableCell align="center">{oil.PartNumber}</StyledTableCell>
+              <StyledTableCell align="center">{oil.OEMPartNumber}</StyledTableCell>
+              <StyledTableCell align="center">{oil.BrandPartNumber}</StyledTableCell>
               <StyledTableCell align="center">{oil.StockNumber}</StyledTableCell>
               <StyledTableCell align="center">{oil.MinQty}</StyledTableCell>
 
@@ -392,7 +402,7 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantity)
               <StyledTableCell align="center">{oil.SaelsPrice}</StyledTableCell>
               <StyledTableCell align="center">
       <IconButton type="button"  onClick={()=>{
-      setID(oil._id,oil.Brand,oil.FilterUsage,oil.Unit,oil.StockNumber,oil.ItemImage,oil.Note,oil.StockQuantity,oil.UnitPrice,oil.SaelsPrice,oil.PartNumber,MinQty);
+      setID(oil._id,oil.Brand,oil.FilterUsage,oil.Unit,oil.StockNumber,oil.ItemImage,oil.Note,oil.StockQuantity,oil.UnitPrice,oil.SaelsPrice,oil.OEMPartNumber,oil.MinQty,oil.BrandPartNumber);
         handleOpen()}} >
                         <EditIcon fontSize="small"/>
 
@@ -464,22 +474,34 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantity)
 
                 </Form.Field>
                 <Form.Field align="center"  class="grid-container">
-                    <label>PartNumber</label>
+                    <label>OEMPartNumber</label>
                     <br></br>
-                    <input name="PartNumber"
+                    <input name="OEMPartNumber"
                     type="text"
                     class="item1"
                     className='inputform'
-                    value={PartNumber}
-                        onChange={(e) => setPartNumber(e.target.value)}
-                        placeholder='PartNumber' />
+                    value={OEMPartNumber}
+                        onChange={(e) => setOEMPartNumber(e.target.value)}
+                        placeholder='OEMPartNumber' />
+
+                </Form.Field>
+                <Form.Field align="center"  class="grid-container">
+                    <label>BrandPartNumber</label>
+                    <br></br>
+                    <input name="BrandPartNumber"
+                    type="text"
+                    class="item1"
+                    className='inputform'
+                    value={BrandPartNumber}
+                        onChange={(e) => setBrandPartNumber(e.target.value)}
+                        placeholder='OEMPartNumber' />
 
                 </Form.Field>
                 <Form.Field align="center"  class="grid-container">
                     <label>StockNumber</label>
                     <br></br>
                     <input name="StockNumber"
-                    type="number"
+                    type="text"
                     class="item1"
                     className='inputform'
                     value={StockNumber}

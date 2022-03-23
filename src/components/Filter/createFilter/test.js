@@ -31,7 +31,8 @@ export default class Test extends Component {
       name: '',
       ID:"",
       Note:'',
-      PartNumber:'',
+      BrandPartNumber:'',
+      OEMPartNumber:'',
       StockNumber:'',
       ItemImage:'',
       MinQty:0,
@@ -139,7 +140,8 @@ export default class Test extends Component {
       UnitPrice:this.state.UnitPrice,
       Unit:this.state.Unit,
       SaelsPrice:this.state.SaelsPrice,
-      PartNumber:this.state.PartNumber,
+      BrandPartNumber:this.state.BrandPartNumber,
+      OEMPartNumber:this.state.OEMPartNumber,
       StockNumber:this.state.StockNumber,
       ItemImage:this.state.files,
       Note:this.state.Note,
@@ -206,7 +208,7 @@ export default class Test extends Component {
         id="outlined-number"
          style={ulStyle}
          placeholder="StockNumber"
-          type="number"
+          type="text"
           onChange={(e)=>this.setState({StockNumber:e.target.value})}
           InputLabelProps={{
             shrink: true,
@@ -219,14 +221,26 @@ export default class Test extends Component {
          
         id="outlined-number"
          style={ulStyle}
-         placeholder="PartNumber"
+         placeholder="BrandPartNumber"
 
           type="text"
-          onChange={(e)=>this.setState({PartNumber:e.target.value})}
+          onChange={(e)=>this.setState({BrandPartNumber:e.target.value})}
           InputLabelProps={{
             shrink: true,
           }}
         />
+        <TextField
+         
+         id="outlined-number"
+          style={ulStyle}
+          placeholder="OEMPartNumber"
+ 
+           type="text"
+           onChange={(e)=>this.setState({OEMPartNumber:e.target.value})}
+           InputLabelProps={{
+             shrink: true,
+           }}
+         />
           </Grid>
 
          <Grid container  justifyContent="center" style={{ margin: "0px 20px 0px 0px"}}>

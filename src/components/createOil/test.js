@@ -36,7 +36,8 @@ export default class Test extends Component {
       name: '',
       ID:"",
       Note:'',
-      PartNumber:'',
+      OEMPartNumber:'',
+      BrandPartNumber:'',
       StockNumber:'',
       ItemImage:null,
       files:[],
@@ -164,7 +165,9 @@ export default class Test extends Component {
       UnitPrice:this.state.UnitPrice,
       Unit:this.state.Unit,
       SaelsPrice:this.state.SaelsPrice,
-      PartNumber:this.state.PartNumber,
+      OEMPartNumber:this.state.OEMPartNumber,
+      BrandPartNumber:this.state.BrandPartNumber,
+
       StockNumber:this.state.StockNumber,
       ItemImage:this.state.files,
       Note:this.state.Note,
@@ -260,22 +263,32 @@ export default class Test extends Component {
         id="outlined-number"
          style={ulStyle}
         placeholder="StockNumber"
-          type="number"
+          type="text"
           onChange={(e)=>this.setState({StockNumber:e.target.value})}
           InputLabelProps={{
             shrink: true,
           }}
         />
-
+           <TextField
+         
+         id="outlined-number"
+          style={ulStyle}
+         placeholder="BrandPartNumber"
+           type="text"
+           onChange={(e)=>this.setState({BrandPartNumber:e.target.value})}
+           InputLabelProps={{
+             shrink: true,
+           }}
+         />
 
 
            <TextField
          
         id="outlined-number"
          style={ulStyle}
-        placeholder="PartNumber"
-          type="number"
-          onChange={(e)=>this.setState({PartNumber:e.target.value})}
+        placeholder="OEMPartNumber"
+          type="text"
+          onChange={(e)=>this.setState({OEMPartNumber:e.target.value})}
           InputLabelProps={{
             shrink: true,
           }}

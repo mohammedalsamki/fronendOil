@@ -102,8 +102,9 @@ export default function ShowOilsData() {
   let [Imagenew,setImagenew]= React.useState(String);
 
   let [Note,setNote]= React.useState('');
-  let [StockNumber,setStockNumber]= React.useState(0);
-  let [PartNumber,setPartNumber]= React.useState(0);
+  let [StockNumber,setStockNumber]= React.useState('');
+  let [BrandPartNumber,setBrandPartNumber]= React.useState('');
+  let [OEMPartNumber,setOEMPartNumber]= React.useState('');
   let [MinQty,setMinQty]= React.useState(0);
   const [open, setOpen] = React.useState(false);
   const [unitList, setunitList] = React.useState(false);
@@ -175,24 +176,17 @@ export default function ShowOilsData() {
     
     localStorage.setItem('ItemImage', ItemImage)
     localStorage.setItem('Note', Note)
-    if(StockNumber===null){
-      localStorage.setItem('StockNumber', 0)
-    
-    }else{
+
       localStorage.setItem('StockNumber', StockNumber)
-    }  
-    if(!PartNumber){
-      localStorage.setItem('PartNumber', 0)
-    
-    }else{
-      localStorage.setItem('PartNumber', PartNumber)
-    } 
+
+      localStorage.setItem('OEMPartNumber', OEMPartNumber)
+      localStorage.setItem('BrandPartNumber', BrandPartNumber)
 
     })
   },[]);
 
 
-  const setID=(_id,Brand,OilUsage,OilGrade,Capasity,Unit,StockNumber,ItemImage,Note,StockQuantiti,UnitPrice,SaelsPrice,PartNumber,MinQty)=>{
+  const setID=(_id,Brand,OilUsage,OilGrade,Capasity,Unit,StockNumber,ItemImage,Note,StockQuantiti,UnitPrice,SaelsPrice,BrandPartNumber,MinQty,OEMPartNumber)=>{
     localStorage.setItem('_id', _id)
     localStorage.setItem('Brand', Brand)
     localStorage.setItem('OilUsage', OilUsage)
@@ -206,7 +200,8 @@ export default function ShowOilsData() {
     localStorage.setItem('ItemImage', ItemImage)
     localStorage.setItem('Note', Note)
     localStorage.setItem('StockNumber', StockNumber)
-    localStorage.setItem('PartNumber', PartNumber)
+    localStorage.setItem('BrandPartNumber', BrandPartNumber)
+    localStorage.setItem('OEMPartNumber', OEMPartNumber)
     localStorage.setItem('MinQty', MinQty)
 
 
@@ -227,14 +222,11 @@ export default function ShowOilsData() {
       setMinQty(0)    }else{
       setMinQty(localStorage.getItem('MinQty'))
     }
-    if(StockNumber===null){
-      setStockNumber(0)    }else{
+
       setStockNumber(localStorage.getItem('StockNumber'))
-    }
-    if(PartNumber===undefined){
-      setPartNumber(0)    }else{
-        setPartNumber(localStorage.getItem('PartNumber'))
-    }
+
+        setOEMPartNumber(localStorage.getItem('OEMPartNumber'))
+        setBrandPartNumber(localStorage.getItem('BrandPartNumber'))
   
   }
   const handleFile = (e) =>{
@@ -263,7 +255,8 @@ export default function ShowOilsData() {
       Note,
       Capasity,
       Unit,
-      PartNumber,
+      BrandPartNumber,
+      OEMPartNumber,
       StockNumber,
       MinQty,
       ItemImage:Imagenew
@@ -301,7 +294,8 @@ history.push('/Oil_Fluid');
             <StyledTableCell align="center">Capacity</StyledTableCell>
             <StyledTableCell align="center">Unit</StyledTableCell>
             <StyledTableCell align="center">Note</StyledTableCell>
-            <StyledTableCell align="center">PartNumber</StyledTableCell>
+            <StyledTableCell align="center">OEMPartNumber</StyledTableCell>
+            <StyledTableCell align="center">BrandPartNumber</StyledTableCell>
             <StyledTableCell align="center">StockNumber</StyledTableCell>
 
             <StyledTableCell align="center">MinQty</StyledTableCell>
@@ -334,7 +328,8 @@ history.push('/Oil_Fluid');
               <StyledTableCell align="center">{oil.Unit}</StyledTableCell>
 
               <StyledTableCell align="center">{oil.Note}</StyledTableCell>
-              <StyledTableCell align="center">{oil.PartNumber}</StyledTableCell>
+              <StyledTableCell align="center">{oil.OEMPartNumber}</StyledTableCell>
+              <StyledTableCell align="center">{oil.BrandPartNumber}</StyledTableCell>
               <StyledTableCell align="center">{oil.StockNumber}</StyledTableCell>
 
               <StyledTableCell align="center">{oil.MinQty}</StyledTableCell>
@@ -344,7 +339,7 @@ history.push('/Oil_Fluid');
 
               <StyledTableCell align="center">
       <IconButton type="button"  onClick={()=>{
-      setID(oil._id,oil.Brand,oil.OilUsage,oil.OilGrade,oil.Capasity,oil.Unit,oil.StockNumber,oil.ItemImage,oil.Note,oil.StockQuantiti,oil.UnitPrice,oil.SaelsPrice,oil.PartNumberoil,oil.MinQty);
+      setID(oil._id,oil.Brand,oil.OilUsage,oil.OilGrade,oil.Capasity,oil.Unit,oil.StockNumber,oil.ItemImage,oil.Note,oil.StockQuantiti,oil.UnitPrice,oil.SaelsPrice,oil.BrandPartNumberoil,oil.MinQty,oil.OEMPartNumber);
         handleOpen()}} >
                         <EditIcon fontSize="small"/>
 
@@ -376,7 +371,8 @@ history.push('/Oil_Fluid');
             <StyledTableCell align="center">{oil.Unit}</StyledTableCell>
 
             <StyledTableCell align="center">{oil.Note}</StyledTableCell>
-            <StyledTableCell align="center">{oil.PartNumber}</StyledTableCell>
+            <StyledTableCell align="center">{oil.OEMPartNumber}</StyledTableCell>
+            <StyledTableCell align="center">{oil.BrandPartNumber}</StyledTableCell>
             <StyledTableCell align="center">{oil.StockNumber}</StyledTableCell>
 
               <StyledTableCell align="center">{oil.MinQty}</StyledTableCell>
@@ -385,7 +381,7 @@ history.push('/Oil_Fluid');
             <StyledTableCell align="center">{oil.SaelsPrice}</StyledTableCell>
             <StyledTableCell align="center">
     <IconButton type="button"  onClick={()=>{
-    setID(oil._id,oil.Brand,oil.OilUsage,oil.OilGrade,oil.Capasity,oil.Unit,oil.StockNumber,oil.ItemImage,oil.Note,oil.StockQuantiti,oil.UnitPrice,oil.SaelsPrice,oil.PartNumberoil,oil.MinQty);
+    setID(oil._id,oil.Brand,oil.OilUsage,oil.OilGrade,oil.Capasity,oil.Unit,oil.StockNumber,oil.ItemImage,oil.Note,oil.StockQuantiti,oil.UnitPrice,oil.SaelsPrice,oil.BrandPartNumberoil,oil.MinQty,oil.OEMPartNumber);
       handleOpen()}} >
                       <EditIcon fontSize="small"/>
 
@@ -469,22 +465,34 @@ history.push('/Oil_Fluid');
 
                 </Form.Field>
                 <Form.Field align="center"  class="grid-container">
-                    <label>PartNumber</label>
+                    <label>BrandPartNumber</label>
                     <br></br>
-                    <input name="PartNumber"
-                    type="number"
+                    <input name="BrandPartNumber"
+                    type="text"
                     class="item1"
                     className='inputform'
-                    value={PartNumber}
-                        onChange={(e) => setPartNumber(e.target.value)}
-                        placeholder='PartNumber' />
+                    value={BrandPartNumber}
+                        onChange={(e) => setBrandPartNumber(e.target.value)}
+                        placeholder='BrandPartNumber' />
+
+                </Form.Field>
+                <Form.Field align="center"  class="grid-container">
+                    <label>OEMPartNumber</label>
+                    <br></br>
+                    <input name="OEMPartNumber"
+                    type="text"
+                    class="item1"
+                    className='inputform'
+                    value={OEMPartNumber}
+                        onChange={(e) => setOEMPartNumber(e.target.value)}
+                        placeholder='OEMPartNumber' />
 
                 </Form.Field>
                 <Form.Field align="center"  class="grid-container">
                     <label>StockNumber</label>
                     <br></br>
                     <input name="StockNumber"
-                    type="number"
+                    type="text"
                     class="item1"
                     className='inputform'
                     value={StockNumber}

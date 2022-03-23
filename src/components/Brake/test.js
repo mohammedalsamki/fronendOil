@@ -36,7 +36,7 @@ export default class Test extends Component {
       StockNumber:'',
       ItemImage:'',
       MinQty:0,
-      files: []
+      files: null
 
     }
   }
@@ -152,7 +152,7 @@ export default class Test extends Component {
 
 
     await axios
-     .post('https://backendoil.vercel.app/api/brake/brake', x)
+     .post('http://localhost:5002/api/brake/brake', x)
      .then((response) => {
        console.log(response);
        window.location.reload(false);

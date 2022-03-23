@@ -40,7 +40,7 @@ export default class Test extends Component {
       BrandPartNumber:'',
       StockNumber:'',
       ItemImage:null,
-      files:[],
+      files:null,
       MinQty:0
 
     }
@@ -174,18 +174,19 @@ export default class Test extends Component {
       MinQty:this.state.MinQty
     }
     // console.log(x)
-    alert("item added")
+    alert("added NEW ITEM ")
+    console.log(x)
 
-   await axios
-    .post('https://backendoil.vercel.app/api/oil', x)
-    .then((response) => {
-      console.log(response);
-      window.location.reload(false);
+  //  await axios
+  //   .post('https://backendoil.vercel.app/api/oil', x)
+  //   .then((response) => {
+  //     console.log(response);
+  //     window.location.reload(false);
 
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  //   })
+  //   .catch((error) => {
+  //     console.log(error);
+  //   });
 
   }
   render() {

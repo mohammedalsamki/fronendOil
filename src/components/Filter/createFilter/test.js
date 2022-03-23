@@ -36,7 +36,7 @@ export default class Test extends Component {
       StockNumber:'',
       ItemImage:'',
       MinQty:0,
-      files: []
+      files: null
 
     }
   }

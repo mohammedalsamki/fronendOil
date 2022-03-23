@@ -249,7 +249,7 @@ export default function ShowOilsData() {
   const sendDataToAPI = () => {
     axios.put(`https://backendoil.vercel.app/api/oil/${_id}`, {
  
-      StockQuantiti,
+      StockQuantiti:StockQuantiti,
       UnitPrice,
       SaelsPrice,
       Note,

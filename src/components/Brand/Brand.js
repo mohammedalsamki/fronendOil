@@ -14,6 +14,7 @@ import TableRow from '@mui/material/TableRow';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import EditIcon from '@mui/icons-material/Edit';
+import AddIcon from '@mui/icons-material/Add';
 import { Form, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
@@ -134,7 +135,6 @@ export default function CreateBrand() {
         onChange={(event)=>setBrandAr(event.target.value)}
       />
                            <Form.Field align="center"  class="grid-container">
-                    {/* <label>image</label> */}
                     <input name="image"
                     type="file"
                     class="item1"
@@ -153,11 +153,11 @@ export default function CreateBrand() {
 
     </Box>
 
-    <br></br>
-    <br></br>
-    <Button variant="contained" color="success" onClick={creatBrandfun}>
-        save
-      </Button>
+    <IconButton type="button" onClick={creatBrandfun}>
+                 <AddIcon fontSize="larg"/>
+                 Add
+                 </IconButton>
+
     <br></br>
     <br></br>
 

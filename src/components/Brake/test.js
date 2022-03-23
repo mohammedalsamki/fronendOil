@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import AddIcon from '@mui/icons-material/Add';
 import { Grid } from '@material-ui/core';
-import "../../style/select.css"
+import "../style/select.css"
 
 
 const ulStyle = {  padding: "12px 10px",  width:'40%', listStyleType:'none'}
@@ -18,7 +18,7 @@ export default class Test extends Component {
       
     super(props)
     this.state = {
-      FilterUsage:'',
+      brakeUsage:'',
       Brand:'',
       StockQuantity:0,
       UnitPrice:0,
@@ -56,12 +56,12 @@ export default class Test extends Component {
   }
  async getOptions(){
 
-    const res = await axios.get('https://backendoil.vercel.app/api/filter/filter/usage')
+    const res = await axios.get('https://backendoil.vercel.app/api/brake/brake/usage')
     const data = res.data
     
     const options = data.map(d => ({
       "value" : d._id,
-      "label" : d.FilterUsageEn
+      "label" : d.brakeUsageEn
 
     }))
     this.setState({selectOptions: options})
@@ -87,7 +87,7 @@ export default class Test extends Component {
     
    this.setState({ID:e.value})
    console.log(this.state.ID)
-   this.setState({FilterUsage:e.label})
+   this.setState({brakeUsage:e.label})
 
    this.setState({id:e.value, name:e.label})
 
@@ -130,10 +130,10 @@ export default class Test extends Component {
 
   };
   async creatOill (e){
-    // this.setState({FilterUsage:e.label})
+    // this.setState({brakeUsage:e.label})
 
     let x= {
-      FilterUsage:this.state.FilterUsage,
+      brakeUsage:this.state.brakeUsage,
       Brand:this.state.Brand,
       StockQuantity:this.state.StockQuantity,
       UnitPrice:this.state.UnitPrice,
@@ -147,7 +147,7 @@ export default class Test extends Component {
 
     }
     alert("item added")
-   await axios.post('https://backendoil.vercel.app/api/filter/filter',x).then( () => {
+   await axios.post('https://backendoil.vercel.app/api/brake/brake',x).then( () => {
       window.location.reload(false);
 
     })

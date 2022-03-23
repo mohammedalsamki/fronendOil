@@ -111,9 +111,11 @@ const setID=(id,OilUsageAr,OilUsageEn,Specs)=>{
 
     <br></br>
     <br></br>
-    <Button variant="contained" className='submitform' color="success" onClick={creatOilusgefun}>
-        save
-      </Button>
+    <IconButton type="button" onClick={creatOilusgefun}>
+                 <AddIcon fontSize="larg"/>
+                 Add
+                 </IconButton>
+
     <br></br>
     <br></br>
 

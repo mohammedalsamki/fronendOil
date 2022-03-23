@@ -14,6 +14,8 @@ import './components/style/naz.css'
 import AddSpec from './components/OilUseg/OilUsageModal';
 import CreateFilterUsge from "./components/Filter/filterUse/filteruse";
 import ShowFilterData from "./components/Filter/filtershow/filtershow";
+import ShowBrakeData from "./components/Brake/ShoeBrakeData";
+import CreatebrakeUsge from "./components/Brake/brakeUsage";
 
 function App() {
   
@@ -33,6 +35,8 @@ function App() {
           <NavLink activeClassName='active' to='/Brand'>Brand</NavLink>
           <NavLink activeClassName='active' to='/Oil_Fluid'>Oil's & Fluid's</NavLink>
           <NavLink activeClassName='active' to='/Filter'>Filter</NavLink>
+          <NavLink activeClassName='active' to='/Brake'>Brake</NavLink>
+
 
 
           </div>
@@ -44,7 +48,11 @@ function App() {
            <Route path="/Oil_Fluid" exact component={Home}></Route>
             <Route path="/OilUseg" component={OilUseg}></Route>
             <Route path="/Filter/usage" component={CreateFilterUsge}></Route>
+            <Route path="/Brake/usage" component={CreatebrakeUsge}></Route>
+
             <Route path="/Filter" component={ShowFilterData}></Route>
+            <Route path="/Brake" component={ShowBrakeData}></Route>
+
 
             <Route path="/Brand" component={Brand}></Route>
             <Route path="/unit" component={Unit}></Route>

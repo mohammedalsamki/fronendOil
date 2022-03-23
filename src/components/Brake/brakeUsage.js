@@ -94,9 +94,13 @@ export default function CreatebrakeUsge() {
     const [id,setid]= React.useState('');
 
   const deletebrakeUsge=(id)=>{
+    let isExecuted = window.confirm("Are you sure to execute this action?");
+    console.log(isExecuted);
+    if(isExecuted){
     axios.delete(`https://backendoil.vercel.app/api/brake/brake/usage/${id}`).then( () =>{
       window.location.reload(false);
     } )
+}
   }
 
   useEffect(()=>{

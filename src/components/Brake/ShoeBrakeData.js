@@ -95,8 +95,8 @@ export default function ShowBrakeData() {
   const [searched, setSearched] = React.useState(brakeList);
 
   const requestSearch = (searchedVal) => {
-    const brakeedRows = brakeList.brake((brakeList) => {
-      return brakeList.OEMPartNumber.toLowerCase().includes(searchedVal.toLowerCase());
+    const brakeedRows = brakeList.filter((brakeList) => {
+      return brakeList.BrandPartNumber.toLowerCase().includes(searchedVal.toLowerCase());
     });
 
     setRows(brakeedRows);

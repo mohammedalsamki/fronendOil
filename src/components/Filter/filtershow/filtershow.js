@@ -96,7 +96,7 @@ export default function ShowFilterData() {
 
   const requestSearch = (searchedVal) => {
     const filteredRows = oilList.filter((oilList) => {
-      return oilList.OEMPartNumber.toLowerCase().includes(searchedVal.toLowerCase());
+      return oilList.BrandPartNumber.toLowerCase().includes(searchedVal.toLowerCase());
     });
 
     setRows(filteredRows);

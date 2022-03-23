@@ -21,8 +21,6 @@ import Select from 'react-select'
 // import SelectField from "material-ui/SelectField";
 // import MenuItem from "material-ui/MenuItem";
 import SearchBar from "material-ui-search-bar";
-import { async } from 'q';
-import { stringify } from 'json5';
 
 
 
@@ -129,7 +127,7 @@ export default function ShowOilsData() {
 
   const requestSearch = (searchedVal) => {
     const filteredRows = oilList.filter((oilList) => {
-      return oilList.Brand.toLowerCase().includes(searchedVal.toLowerCase());
+      return oilList.OilGrade.toLowerCase().includes(searchedVal.toLowerCase());
     });
 
     setRows(filteredRows);
@@ -141,6 +139,7 @@ export default function ShowOilsData() {
   const handleOpen = () =>{ 
     
     setOpen(true)};
+
   const handleClose = () => {
     localStorage.clear();
 
@@ -148,9 +147,14 @@ export default function ShowOilsData() {
   
 
   const deleteOil=(id)=>{
+    let isExecuted = window.confirm("Are you sure to execute this action?");
+    console.log(isExecuted);
+    if(isExecuted){
     axios.delete(`https://backendoil.vercel.app/api/oil/${id}`).then( () =>{
+      alert('delete done')
       window.location.reload(false);
-    } )
+    } )}
+
   }
    useEffect(()=>{
     getOptionsunit();
@@ -267,7 +271,7 @@ export default function ShowOilsData() {
     }).then(() => {
 alert("Updated")
 history.push('/Oil_Fluid');
-
+      
       window.location.reload(false);
 
         localStorage.clear();

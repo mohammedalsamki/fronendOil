@@ -48,9 +48,12 @@ export default function CreateOilUsge() {
   
 
   const deleteOilUsge=(id)=>{
+    let isExecuted = window.confirm("Are you sure to execute this action?");
+    console.log(isExecuted);
+    if(isExecuted){
     axios.delete(`https://backendoil.vercel.app/api/oil/oilUseg/${id}`).then( () =>{
       window.location.reload(false);
-    } )
+    } )}
   }
 
   useEffect(()=>{

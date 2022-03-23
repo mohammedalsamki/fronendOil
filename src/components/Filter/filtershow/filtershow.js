@@ -21,6 +21,7 @@ import useStyles from '../../../styles';
 import AddIcon from '@mui/icons-material/Add';
 import { AppBar } from '@material-ui/core';
 import { NavLink} from 'react-router-dom';
+import SearchBar from "material-ui-search-bar";
 import CreateFilter from '../createFilter/CreateFilter';
 
 
@@ -87,8 +88,26 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 export default function ShowFilterData() {
   let history = useHistory();
+  const [oilList, setOilList]= React.useState([]);
   const classes= useStyles();
+  const [rows, setRows] = React.useState(oilList);
+
+  const [searched, setSearched] = React.useState(oilList);
+
+  const requestSearch = (searchedVal) => {
+    const filteredRows = oilList.filter((oilList) => {
+      return oilList.PartNumber.toLowerCase().includes(searchedVal.toLowerCase());
+    });
+
+    setRows(filteredRows);
+  };
+  const cancelSearch = () => {
+    setSearched("");
+    requestSearch(searched);
+  };
+
   let [MinQty,setMinQty]= React.useState(0);
+  let [Imagenew,setImagenew]= React.useState(String);
 
   const [open, setOpen] = React.useState(false);
   const [unitList, setunitList] = React.useState(false);
@@ -114,18 +133,24 @@ export default function ShowFilterData() {
     localStorage.clear();
 
     setOpen(false)};
-  const [oilList, setOilList]= React.useState([]);
   
 
   const deleteOil=(id)=>{
+    let isExecuted = window.confirm("Are you sure to execute this action?");
+    console.log(isExecuted);
+    if(isExecuted){
     axios.delete(`https://backendoil.vercel.app/api/filter/filter/${id}`).then( () =>{
-      window.location.reload(false);
-    } )
+      alert('delete done')
+      
+    window.location.reload(false);
+    } )}
   }
   useEffect(()=>{
     getOptionsunit();
     axios.get(`https://backendoil.vercel.app/api/filter/filter/`).then( (allOils) =>{
       setOilList(allOils.data);
+      setRows(allOils.data);
+
       localStorage.setItem('_id', _id)
     localStorage.setItem('Brand', Brand)
     localStorage.setItem('FilterUsage', FilterUsage)
@@ -207,6 +232,21 @@ export default function ShowFilterData() {
         setPartNumber(localStorage.getItem('PartNumber'))
     }
   }
+  const handleFile = (e) =>{
+    // console.log(e.target.files[0])
+    if (e.target.files && e.target.files[0]) {
+      let reader = new FileReader();
+      console.log(reader)
+      reader.onload = (e) => {
+        setImagenew(reader.result);
+        alert("image uploaded");
+       console.log(Imagenew)
+
+      };
+      reader.readAsDataURL(e.target.files[0]);
+
+    }
+  }
   const sendDataToAPI = () => {
     axios.put(`https://backendoil.vercel.app/api/filter/filter/${_id}`, {
  
@@ -216,7 +256,8 @@ export default function ShowFilterData() {
       Note:Note,
       PartNumber:PartNumber,
       StockNumber:StockNumber,
-      MinQty:MinQty
+      MinQty:MinQty,
+      ItemImage:Imagenew
     
  
     }).then(() => {
@@ -263,6 +304,11 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantity)
       </StyledModal>  	
       </div>
     <h2>Filters in Stock</h2>
+    <SearchBar
+          value={searched}
+          onChange={(searchVal) => requestSearch(searchVal)}
+          onCancelSearch={() => cancelSearch()}
+        />
     <TableContainer component={Paper} maxWidth="100%">
       <Table  sx={{ minWidth: 800 }} aria-label="customized table">
         <TableHead>
@@ -287,7 +333,7 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantity)
           </TableRow>
         </TableHead>
         <TableBody>
-          {oilList.map((oil,key) =>  {
+          {rows.map((oil,key) =>  {
             if(oil.MinQty<oil.StockQuantity){
             return(
             <StyledTableRow style={{backgroundColor: ''}} key={key}>
@@ -403,6 +449,18 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantity)
                     value={Note}
                         onChange={(e) => setNote(e.target.value)}
                         placeholder='Note' />
+
+                </Form.Field>
+                <Form.Field align="center"  class="grid-container">
+                    <label>image</label>
+                    <br></br>
+                    <input name="image"
+                    type="file"
+                    class="item1"
+                    className='inputform'
+                    // value={}
+                        onChange={(e) => handleFile(e)}
+                        placeholder='image' />
 
                 </Form.Field>
                 <Form.Field align="center"  class="grid-container">

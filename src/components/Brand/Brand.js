@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import axios from 'axios';
 import { useEffect } from 'react';
@@ -15,6 +14,7 @@ import TableRow from '@mui/material/TableRow';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import EditIcon from '@mui/icons-material/Edit';
+import { Form, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
 
@@ -46,11 +46,31 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 export default function CreateBrand() {
   const [BrandlList, setBrandlList]= React.useState([]);
   
+  let [Imagenew,setImagenew]= React.useState(String);
+  
+  const handleFile = (e) =>{
+    // console.log(e.target.files[0])
+    if (e.target.files && e.target.files[0]) {
+      let reader = new FileReader();
+      console.log(reader)
+      reader.onload = (e) => {
+        setImagenew(reader.result);
+        alert("image uploaded");
+       console.log(Imagenew)
 
+      };
+      reader.readAsDataURL(e.target.files[0]);
+
+    }
+  }
   const deleteBrand=(id)=>{
+    let isExecuted = window.confirm("Are you sure to execute this action?");
+    console.log(isExecuted);
+    if(isExecuted){
     axios.delete(`https://backendoil.vercel.app/api/oil/brand/${id}`).then( () =>{
       window.location.reload(false);
     } )
+  }
   }
   useEffect(()=>{
     axios.get(`https://backendoil.vercel.app/api/oil/brand`).then( (allOilsUseg) =>{
@@ -77,7 +97,7 @@ export default function CreateBrand() {
 
          
   const creatBrandfun = ()=>{
-    axios.post('https://backendoil.vercel.app/api/oil/brand',{BrandAr,BrandEn,BrandImage,BrandDiscr}).then( () => {
+    axios.post('https://backendoil.vercel.app/api/oil/brand',{BrandAr,BrandEn,BrandImage:Imagenew,BrandDiscr}).then( () => {
       window.location.reload(false);
     })
   }
@@ -113,11 +133,17 @@ export default function CreateBrand() {
         label="Name Ar"
         onChange={(event)=>setBrandAr(event.target.value)}
       />
-            <TextField
-        id="outlined-name"
-        label="Image"
-        onChange={(event)=>setBrandImage(event.target.value)}
-      />
+                           <Form.Field align="center"  class="grid-container">
+                    {/* <label>image</label> */}
+                    <input name="image"
+                    type="file"
+                    class="item1"
+                    className='inputform'
+                    // value={}
+                        onChange={(e) => handleFile(e)}
+                        placeholder='image' />
+
+                </Form.Field>
             <TextField
         id="outlined-name"
         label="Description"

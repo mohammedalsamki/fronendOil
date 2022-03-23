@@ -3,7 +3,6 @@ import { Form, Button } from 'semantic-ui-react';
 import axios from 'axios';
 import { useHistory } from 'react-router';
 import '../style/form.css'
-import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
@@ -15,20 +14,8 @@ import Paper from '@mui/material/Paper';
 import { ClassNames } from '@emotion/react';
 import { IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
 
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 800,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
+
 
 
 
@@ -85,6 +72,9 @@ export default function AddSpec() {
       });
     }
     const deleteSpec=(name)=>{
+      let isExecuted = window.confirm("Are you sure to execute this action?");
+    console.log(isExecuted);
+    if(isExecuted){
       axios.put(`https://backendoil.vercel.app/api/oil/specDelete/${IDSpec}`, {
         OilUsageEn,
         SpecsChiled:name
@@ -94,6 +84,7 @@ export default function AddSpec() {
       }).catch(error => {
         console.log(error.response)
     });
+  }
     }
 
     useEffect(() => {

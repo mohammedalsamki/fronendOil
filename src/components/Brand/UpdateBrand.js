@@ -3,7 +3,24 @@ import { Form, Button } from 'semantic-ui-react';
 import '../style/form.css'
 import axios from 'axios';
 import { useHistory } from 'react-router';
+
 export default function UpdateBrand() {
+  let [Imagenew,setImagenew]= React.useState(String);
+  const handleFile = (e) =>{
+    // console.log(e.target.files[0])
+    if (e.target.files && e.target.files[0]) {
+      let reader = new FileReader();
+      console.log(reader)
+      reader.onload = (e) => {
+        setImagenew(reader.result);
+        alert("image uploaded");
+       console.log(Imagenew)
+
+      };
+      reader.readAsDataURL(e.target.files[0]);
+
+    }
+  }
     let history = useHistory();
     const [BrandAr, setFirstName] = useState('');
     const [BrandEn, setLastName] = useState('');
@@ -13,7 +30,9 @@ export default function UpdateBrand() {
     const sendDataToAPI = () => {
         axios.put(`https://backendoil.vercel.app/api/oil/brand/${ID}`, {
             BrandAr,
-            BrandEn
+            BrandEn,
+            BrandDiscr,
+            BrandImage:Imagenew
         }).then(() => {
             history.push('/Brand');
             localStorage.clear();
@@ -57,6 +76,18 @@ export default function UpdateBrand() {
                         placeholder=''
                         onChange={(e) => setBrandDiscr(e.target.value)}
                     />
+                </Form.Field>
+                <Form.Field align="center"  class="grid-container">
+                    <label>image</label>
+                    <br></br>
+                    <input name="image"
+                    type="file"
+                    class="item1"
+                    className='inputform'
+                    // value={}
+                        onChange={(e) => handleFile(e)}
+                        placeholder='image' />
+
                 </Form.Field>
                 <Button type='submit' className='submitform' onClick={sendDataToAPI}>Update</Button>
             </Form>

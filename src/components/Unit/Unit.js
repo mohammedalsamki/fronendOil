@@ -49,9 +49,12 @@ export default function CreateUnit() {
   
 
   const deleteUnit=(id)=>{
+    let isExecuted = window.confirm("Are you sure to execute this action?");
+    console.log(isExecuted);
+    if(isExecuted){
     axios.delete(`https://backendoil.vercel.app/api/oil/unit/${id}`).then( () =>{
       window.location.reload(false);
-    } )
+    } )}
   }
   useEffect(()=>{
     axios.get(`https://backendoil.vercel.app/api/oil/unit`).then( (allOilsUnit) =>{

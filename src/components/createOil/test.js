@@ -149,7 +149,7 @@ export default class Test extends Component {
     }
 
   };
-  creatOill (e){
+ async creatOill (e){
 
     this.setState({OilUsag:e.label});
  
@@ -171,8 +171,9 @@ export default class Test extends Component {
       MinQty:this.state.MinQty
     }
     // console.log(x)
+    alert("item added")
 
-    axios
+   await axios
     .post('https://backendoil.vercel.app/api/oil', x)
     .then((response) => {
       console.log(response);

@@ -111,8 +111,24 @@ export default class Test extends Component {
 
 
   }
+  async handleFile (e) {
+    console.log(e.target.files)
 
-  creatOill (e){
+    if (e.target.files && e.target.files[0]) {
+      let reader = new FileReader();
+      reader.onload = (e) => {
+        this.setState({files: e.target.result});
+    // console.log(this.state.files)
+
+      };
+      reader.readAsDataURL(e.target.files[0]);
+
+    
+
+    }
+
+  };
+  async creatOill (e){
     // this.setState({FilterUsage:e.label})
 
     let x= {
@@ -124,12 +140,13 @@ export default class Test extends Component {
       SaelsPrice:this.state.SaelsPrice,
       PartNumber:this.state.PartNumber,
       StockNumber:this.state.StockNumber,
-      ItemImage:this.state.ItemImage,
+      ItemImage:this.state.files,
       Note:this.state.Note,
       MinQty:this.state.MinQty
 
     }
-    axios.post('https://backendoil.vercel.app/api/filter/filter',x).then( () => {
+    alert("item added")
+   await axios.post('https://backendoil.vercel.app/api/filter/filter',x).then( () => {
       window.location.reload(false);
 
     })
@@ -162,12 +179,13 @@ export default class Test extends Component {
          
          <Grid container  justifyContent="center" style={{ margin: "0px 20px 0px 0px"}}>
           
-           <TextField
+         <TextField
          style={ulStyle}
         id="outlined-number"
-          type="text"
-          placeholder="ItemImage"
-          onChange={(e)=>this.setState({ItemImage:e.target.value})}
+        placeholder="ItemImage"
+
+          type="file"
+          onChange={(e)=>this.handleFile(e)}
           InputLabelProps={{
             shrink: true,
           }}

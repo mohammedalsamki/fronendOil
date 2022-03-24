@@ -263,7 +263,14 @@ export default function ShowOilsData() {
  
     }).then(() => {
 alert("Updated")
-history.push('/Oil_Fluid');
+console.log(StockQuantiti,UnitPrice,      SaelsPrice,
+  Note,
+  Capasity,
+  Unit,
+  BrandPartNumber,
+  OEMPartNumber,
+  StockNumber,
+  MinQty,ItemImage)
       
       window.location.reload(false);
 

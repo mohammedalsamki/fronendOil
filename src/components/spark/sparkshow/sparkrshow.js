@@ -101,6 +101,13 @@ export default function ShowsparkData() {
 
     setRows(sparkedRows);
   };
+  const requestSearchCar = (searchedVal) => {
+    const brakeedRows = sparkList.filter((brakeList) => {
+      return brakeList.Note.toLowerCase().includes(searchedVal.toLowerCase());
+    });
+
+    setRows(brakeedRows);
+  };
   const cancelSearch = () => {
     setSearched("");
     requestSearch(searched);
@@ -311,11 +318,24 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantity)
       </StyledModal>  	
       </div>
     <h2>sparks in Stock</h2>
+    <div >
     <SearchBar
+          style={{ width:"400px",float:'left', marginLeft: '450px',border: '5px solid gray' }}
           value={searched}
+          placeholder='Search by BrandPartNumber	'
           onChange={(searchVal) => requestSearch(searchVal)}
           onCancelSearch={() => cancelSearch()}
         />
+            <SearchBar
+          style={{ width:"400px",float:'left', marginLeft: '150px',border: '5px solid gray' }}
+          value={searched}
+          placeholder='Search by Car Modale	'
+          onChange={(searchVal) => requestSearchCar(searchVal)}
+          onCancelSearch={() => cancelSearch()}
+        />
+
+
+        </div>
     <TableContainer component={Paper} maxWidth="100%">
       <Table  sx={{ minWidth: 800 }} aria-label="customized table">
         <TableHead>

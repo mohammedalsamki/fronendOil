@@ -285,6 +285,7 @@ console.log(StockQuantiti,UnitPrice,      SaelsPrice,
     < >
     <h2>Oil's & Fluid's in Stock</h2>
     <SearchBar
+     style={{ width:"99.5%",border: '5px solid gray' }}
           value={searched}
           onChange={(searchVal) => requestSearch(searchVal)}
           onCancelSearch={() => cancelSearch()}

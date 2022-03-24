@@ -16,6 +16,9 @@ import CreateFilterUsge from "./components/Filter/filterUse/filteruse";
 import ShowFilterData from "./components/Filter/filtershow/filtershow";
 import ShowBrakeData from "./components/Brake/ShoeBrakeData";
 import CreatebrakeUsge from "./components/Brake/brakeUsage";
+import ShowsparkData from "./components/spark/sparkshow/sparkrshow";
+import CreatesparkUsge from "./components/spark/sparkUse/SparkUse";
+
 
 function App() {
   
@@ -36,6 +39,7 @@ function App() {
           <NavLink activeClassName='active' to='/Oil_Fluid'>Oil's & Fluid's</NavLink>
           <NavLink activeClassName='active' to='/Filter'>Filter</NavLink>
           <NavLink activeClassName='active' to='/Brake'>Brake</NavLink>
+          <NavLink activeClassName='active' to='/Spark'>Spark</NavLink>
 
 
 
@@ -48,10 +52,12 @@ function App() {
            <Route path="/Oil_Fluid" exact component={Home}></Route>
             <Route path="/OilUseg" component={OilUseg}></Route>
             <Route path="/Filter/usage" component={CreateFilterUsge}></Route>
+            <Route path="/Spark/usage" component={CreatesparkUsge}></Route>
             <Route path="/Brake/usage" component={CreatebrakeUsge}></Route>
 
             <Route path="/Filter" component={ShowFilterData}></Route>
             <Route path="/Brake" component={ShowBrakeData}></Route>
+            <Route path="/Spark" component={ShowsparkData}></Route>
 
 
             <Route path="/Brand" component={Brand}></Route>

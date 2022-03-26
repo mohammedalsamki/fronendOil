@@ -478,17 +478,15 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantity)
           <h2>Brand: {Brand}</h2>
 
 
+          <h2>originated: {originated}</h2>
 
-          <Select placeholder='originateds' options={originList}   onChange={(e) => setoriginated(e.label)} />
+          <Select placeholder="{originated}" options={originList}   onChange={(e) => setoriginated(e.label)} />
 
           </div>
           <br></br>
         <Form>
 
-        {/* <Form.Field align="center"  class="grid-container">
 
-        <Select placeholder='originateds' options={originList}   onChange={(e) => setoriginated(e.label)} />
-        </Form.Field> */}
         
                 <Form.Field align="center"  class="grid-container">
                     <label>Note</label>

@@ -271,7 +271,8 @@ export default function ShowsparkData() {
       BrandPartNumber:BrandPartNumber,
       StockNumber:StockNumber,
       MinQty:MinQty,
-      ItemImage:Imagenew
+      ItemImage:Imagenew,
+      originated
     
  
     }).then(() => {
@@ -457,7 +458,6 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantity)
         <Box sx={style}>
           <div align="center">
           <h2>Brand: {Brand}</h2>
-          <h3>originateds:  {originated}</h3>
 
 
 
@@ -467,7 +467,19 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantity)
 
 
 
+        <Form.Field align="center"  class="grid-container">
+                    <label>originateds</label>
+                    <br></br>
+                    <textarea name="originateds"
+                    type="text"
+                    class="item1"
+                    className='inputform'
+                    style={{ width:"300px",height :'100px' }}
+                    value={originated}
+                        onChange={(e) => setoriginated(e.target.value)}
+                        placeholder='Note' />
 
+                </Form.Field>
                 <Form.Field align="center"  class="grid-container">
                     <label>Note</label>
                     <br></br>

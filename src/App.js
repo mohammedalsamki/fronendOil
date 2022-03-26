@@ -20,7 +20,8 @@ import ShowsparkData from "./components/spark/sparkshow/sparkrshow";
 import CreatesparkUsge from "./components/spark/sparkUse/SparkUse";
 import CreatebeltUsge from "./components/blet/beltkUse/beltUse";
 import ShowbeltData from "./components/blet/beltShow/bletShow";
-
+import ShowcarCareData from "./components/carCare/carCareshow/careCareShow";
+import CreatecarCareUsge from "./components/carCare/carCareUse/careCareUse";
 
 function App() {
   
@@ -43,6 +44,7 @@ function App() {
           <NavLink activeClassName='active' to='/Brake'>Brake</NavLink>
           <NavLink activeClassName='active' to='/Spark'>Spark</NavLink>
           <NavLink activeClassName='active' to='/Belt'>Belt</NavLink>
+          <NavLink activeClassName='active' to='/CareCare'>CareCare</NavLink>
 
 
 
@@ -58,8 +60,11 @@ function App() {
             <Route path="/Spark/usage" component={CreatesparkUsge}></Route>
             <Route path="/Belt/usage" component={CreatebeltUsge}></Route>
             <Route path="/Brake/usage" component={CreatebrakeUsge}></Route>
+            <Route path="/CareCare/usage" component={CreatecarCareUsge}></Route>
+
 
             <Route path="/Filter" component={ShowFilterData}></Route>
+            <Route path="/CareCare" component={ShowcarCareData}></Route>
             <Route path="/Brake" component={ShowBrakeData}></Route>
             <Route path="/Spark" component={ShowsparkData}></Route>
             <Route path="/Belt" component={ShowbeltData}></Route>

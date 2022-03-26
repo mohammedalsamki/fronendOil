@@ -22,6 +22,7 @@ import AddIcon from '@mui/icons-material/Add';
 import { AppBar } from '@material-ui/core';
 import { NavLink} from 'react-router-dom';
 import SearchBar from "material-ui-search-bar";
+import Select from 'react-select'
 import Createspark from '../createspark/CreateSpark';
 
 
@@ -112,6 +113,22 @@ export default function ShowsparkData() {
     setSearched("");
     requestSearch(searched);
   };
+  const [originList, setoriginList] = React.useState(false);
+
+  const getOptionsOrigin=async()=>{
+
+    const res = await axios.get('https://backendoil.vercel.app/api/spark/spark/usage')
+    const data = res.data
+    const options = data.map(d => ({
+      "value" : d._id,
+      "label" : d.originatedEn
+
+
+    }))
+
+    // this.setState({unitselectOptions: options})
+    setoriginList(options)
+  }
 
   let [MinQty,setMinQty]= React.useState(0);
   let [Imagenew,setImagenew]= React.useState(String);
@@ -154,6 +171,7 @@ export default function ShowsparkData() {
   }
   useEffect(()=>{
     getOptionsunit();
+    getOptionsOrigin();
     axios.get(`https://backendoil.vercel.app/api/spark/spark/`).then( (allsparks) =>{
       setsparkList(allsparks.data);
       setRows(allsparks.data);
@@ -461,25 +479,17 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantity)
 
 
 
+          <Select placeholder='originateds' options={originList}   onChange={(e) => setoriginated(e.label)} />
 
           </div>
+          <br></br>
         <Form>
 
+        {/* <Form.Field align="center"  class="grid-container">
 
-
-        <Form.Field align="center"  class="grid-container">
-                    <label>originateds</label>
-                    <br></br>
-                    <textarea name="originateds"
-                    type="text"
-                    class="item1"
-                    className='inputform'
-                    style={{ width:"300px",height :'100px' }}
-                    value={originated}
-                        onChange={(e) => setoriginated(e.target.value)}
-                        placeholder='Note' />
-
-                </Form.Field>
+        <Select placeholder='originateds' options={originList}   onChange={(e) => setoriginated(e.label)} />
+        </Form.Field> */}
+        
                 <Form.Field align="center"  class="grid-container">
                     <label>Note</label>
                     <br></br>

@@ -139,7 +139,7 @@ export default class Test extends Component {
       StockQuantiti:this.state.StockQuantiti,
       UnitPrice:this.state.UnitPrice,
       Unit:this.state.Unit,
-      Capacity:this.state.Capacity,
+      Capasity:this.state.Capacity,
       SaelsPrice:this.state.SaelsPrice,
       BrandPartNumber:this.state.BrandPartNumber,
       OEMPartNumber:this.state.OEMPartNumber,

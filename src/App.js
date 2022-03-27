@@ -22,6 +22,9 @@ import CreatebeltUsge from "./components/blet/beltkUse/beltUse";
 import ShowbeltData from "./components/blet/beltShow/bletShow";
 import ShowcarCareData from "./components/carCare/carCareshow/careCareShow";
 import CreatecarCareUsge from "./components/carCare/carCareUse/careCareUse";
+import ShowlampsData from "./components/lamps/lampsShow";
+import LampsUsgeNew from "./components/lamps/lampsUse";
+import LampsEStander from "./components/lamps/Estander";
 
 function App() {
   
@@ -45,6 +48,7 @@ function App() {
           <NavLink activeClassName='active' to='/Spark'>Spark</NavLink>
           <NavLink activeClassName='active' to='/Belt'>Belt</NavLink>
           <NavLink activeClassName='active' to='/CareCare'>CareCare</NavLink>
+          <NavLink activeClassName='active' to='/Lamps'>Lamps</NavLink>
 
 
 
@@ -56,11 +60,17 @@ function App() {
            <Switch>
            <Route path="/Oil_Fluid" exact component={Home}></Route>
             <Route path="/OilUseg" component={OilUseg}></Route>
+            <Route path="/Lamps" component={ShowlampsData}></Route>
             <Route path="/Filter/usage" component={CreateFilterUsge}></Route>
             <Route path="/Spark/usage" component={CreatesparkUsge}></Route>
             <Route path="/Belt/usage" component={CreatebeltUsge}></Route>
             <Route path="/Brake/usage" component={CreatebrakeUsge}></Route>
             <Route path="/CareCare/usage" component={CreatecarCareUsge}></Route>
+            <Route path="/lampusage" component={LampsUsgeNew}></Route>
+            <Route path="/EStander" component={LampsEStander}></Route>
+
+            
+
 
 
             <Route path="/Filter" component={ShowFilterData}></Route>

@@ -177,16 +177,16 @@ export default class Test extends Component {
     alert("added NEW ITEM ")
     console.log(x)
 
-  //  await axios
-  //   .post('https://backendoil.vercel.app/api/oil', x)
-  //   .then((response) => {
-  //     console.log(response);
-  //     window.location.reload(false);
+   await axios
+    .post('https://backendoil.vercel.app/api/oil', x)
+    .then((response) => {
+      console.log(response);
+      window.location.reload(false);
 
-  //   })
-  //   .catch((error) => {
-  //     console.log(error);
-  //   });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 
   }
   render() {

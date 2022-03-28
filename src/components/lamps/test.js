@@ -194,35 +194,31 @@ export default class Test extends Component {
         </Grid>
         <br></br>
 
-        <Grid container    style={{  margin: "10px",justifyContent: "space-around"}}>
-        <Select justifyContent="center" placeholder="ElectricStander" options={this.state.selectOptionsEs} onChange={this.handleChangeES.bind(this)} />
+        {/* <Grid container    style={{  margin: "10px",justifyContent: "space-around"}}>
         
 
-        </Grid>
-        <br></br>
+        </Grid> */}
         
-        <Grid container    style={{  margin: "10px",justifyContent: "space-around"}}>
-        
-      
-         </Grid>
+
          <Grid container    style={{  margin: "10px",justifyContent: "space-around"}}>
+         <br></br>
         
         
+         <Select style={ulStyle}  justifyContent="center" placeholder="ElectricStander" options={this.state.selectOptionsEs} onChange={this.handleChangeES.bind(this)} />
 
 
         <TextField
         id="outlined-number"
-        placeholder="Capacity"
-        type="number"
+        placeholder="Color"
+        type="text"
         style={ulStyle}
-          onChange={(e)=>this.setState({Capacity:e.target.value})}
+          onChange={(e)=>this.setState({Unit:e.target.value})}
         InputLabelProps={{
         shrink: true,
         }}
         />
-
          
-         <Select maxWidth="100%"  options={this.state.unitselectOptions} onChange={this.unithandleChange.bind(this)} placeholder="Unit"  style={selectStyle}  />
+         {/* <Select maxWidth="100%"  options={this.state.unitselectOptions} onChange={this.unithandleChange.bind(this)} placeholder="Unit"  style={selectStyle}  /> */}
          </Grid>
          
          <Grid container  justifyContent="center" style={{ margin: "0px 20px 0px 0px"}}>

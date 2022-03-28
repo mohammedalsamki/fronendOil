@@ -373,7 +373,7 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantiti)
             <StyledTableCell align="center">Usge</StyledTableCell>
             <StyledTableCell align="center">Note</StyledTableCell>
             <StyledTableCell align="center">Capacity</StyledTableCell>
-            <StyledTableCell align="center">Unit</StyledTableCell>
+            <StyledTableCell align="center">Color</StyledTableCell>
             <StyledTableCell align="center">OEMPartNumber</StyledTableCell>
             <StyledTableCell align="center">BrandPartNumber</StyledTableCell>
             <StyledTableCell align="center">StockNumber</StyledTableCell>
@@ -541,21 +541,17 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantiti)
                 <Form.Field >
                     <label>Capacity</label>
                     <br></br>
-                    <input name="Capasity"
+                    <input name="Color"
                     type="text"
                     class="item1"
                     className='inputform'
-                    value={Capasity}
-                        onChange={(e) => setCapasity(e.target.value)}
-                        placeholder='Capasity' />
+                    value={Unit}
+                        onChange={(e) => setUnit(e.target.value)}
+                        placeholder='Color' />
 
                 </Form.Field>
                 
-        <Form.Field  >
-        <br></br>
-        
-                <Select placeholder='Unit' options={unitList}   onChange={(e) => setUnit(e.label)} />
-                </Form.Field>
+
                 <Form.Field align="center"  class="grid-container">
                     <label>BrandPartNumber</label>
                     <br></br>

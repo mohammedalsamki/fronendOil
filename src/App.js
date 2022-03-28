@@ -25,6 +25,7 @@ import CreatecarCareUsge from "./components/carCare/carCareUse/careCareUse";
 import ShowlampsData from "./components/lamps/lampsShow";
 import LampsUsgeNew from "./components/lamps/lampsUse";
 import LampsEStander from "./components/lamps/Estander";
+import Parts from "./components/parts/parts";
 
 function App() {
   
@@ -49,6 +50,8 @@ function App() {
           <NavLink activeClassName='active' to='/Belt'>Belt</NavLink>
           <NavLink activeClassName='active' to='/CareCare'>CareCare</NavLink>
           <NavLink activeClassName='active' to='/Lamps'>Lamps</NavLink>
+          <NavLink activeClassName='active' to='/Parts'>Parts</NavLink>
+
 
 
 
@@ -60,6 +63,8 @@ function App() {
            <Switch>
            <Route path="/Oil_Fluid" exact component={Home}></Route>
             <Route path="/OilUseg" component={OilUseg}></Route>
+            <Route path="/Parts" component={Parts}></Route>
+
             <Route path="/Lamps" component={ShowlampsData}></Route>
             <Route path="/Filter/usage" component={CreateFilterUsge}></Route>
             <Route path="/Spark/usage" component={CreatesparkUsge}></Route>

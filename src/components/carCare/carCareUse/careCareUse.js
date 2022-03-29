@@ -13,7 +13,6 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
-import { Link } from 'react-router-dom';
 import EditIcon from '@mui/icons-material/Edit';
 import { ClassNames } from '@emotion/react';
 import AddIcon from '@mui/icons-material/Add';
@@ -104,22 +103,20 @@ export default function CreatecarCareUsge() {
   },[]);
   const [carCareUsageAr, setcarCareUsageAr]= React.useState('');
   const [carCareUsageEn,setcarCareUsageEn]= React.useState('');
-  let [Specs,setSpecs]= React.useState('');
 
 
-const setID=(id,carCareUsageAr,carCareUsageEn,Specs)=>{
+const setID=(id,carCareUsageAr,carCareUsageEn)=>{
   console.log(id)
   localStorage.setItem('ID', id)
   localStorage.setItem('carCareUsageAr', carCareUsageAr)
   localStorage.setItem('carCareUsageEn', carCareUsageEn)
-  localStorage.setItem('Specs', Specs)
 
  setcarCareUsageAr(localStorage.getItem('carCareUsageAr'))
 setcarCareUsageEn(localStorage.getItem('carCareUsageEn'))
 setid(localStorage.getItem('ID'))
 }    
   const creatcarCareusgefun = ()=>{
-    axios.post('https://backendoil.vercel.app/api/carCare/carCare/usage',{carCareUsageAr,carCareUsageEn,Specs}).then( () => {
+    axios.post('https://backendoil.vercel.app/api/carCare/carCare/usage',{carCareUsageAr,carCareUsageEn}).then( () => {
       window.location.reload(false);
     })
   }

@@ -136,18 +136,19 @@ export default () => {
     }, []);
 
   const [columns] = useState([
-    { name: "Brand", title: "Brand" },
-    { name: "name", title: "Name" },
-    { name: "_id", title: "ID" },
+    // { name: "Brand", title: "Brand" },
+    { name: "name", title: "Name EN" },
     { name: "ItemImage", title: "Item Image" },
-    { name: "Note", title: "Note" },
-    { name: "OEMPartNumber", title: "OEMPartNumber" },
-    { name: "BrandPartNumber", title: "BrandPartNumber" },
-    { name: "StockNumber", title: "StockNumber" },
-    { name: "MinQty", title: "MinQty" ,type: "number"},
-    { name: "StockQuantity", title: "StockQuantity" },
-    { name: "UnitPrice", title: "UnitPrice" },
-    { name: "SaelsPrice", title: "SaelsPrice" },
+    { name: "Note", title: "Name AR" },
+    { name: "_id", title: "ID" },
+
+    // { name: "OEMPartNumber", title: "OEMPartNumber" },
+    // { name: "BrandPartNumber", title: "BrandPartNumber" },
+    // { name: "StockNumber", title: "StockNumber" },
+    // { name: "MinQty", title: "MinQty" ,field: "birthYear",type: 'numericColumn'},
+    // { name: "StockQuantity", title: "StockQuantity" },
+    // { name: "UnitPrice", title: "UnitPrice" },
+    // { name: "SaelsPrice", title: "SaelsPrice" },
   
 
   ]);
@@ -165,18 +166,19 @@ export default () => {
   ]);
   const [searchValue, setSearchState] = useState("");
   const [columnWidths, setColumnWidths] = useState([
-    { columnName: "Brand", width: 100 },
+    // { columnName: "Brand", width: 250 },
     { columnName: "name", width: 250 },
     { columnName: "_id", width: 250 },
-    { columnName: "ItemImage", width: 120 },
-    { columnName: "Note", width: 80 },
-    { columnName: "OEMPartNumber", width: 150 },
-    { columnName: "BrandPartNumber", width: 150 },
-    { columnName: "StockNumber", width: 150 },
-    { columnName: "MinQty", width: 150 ,type: "number"},
-    { columnName: "StockQuantity", width: 100 },
-    { columnName: "UnitPrice", width: 100 },
-    { columnName: "SaelsPrice", width: 100 },
+    { columnName: "Note", width: 250 },
+    { columnName: "ItemImage", width: 250 },
+
+    // { columnName: "OEMPartNumber", width: 150 },
+    // { columnName: "BrandPartNumber", width: 150 },
+    // { columnName: "StockNumber", width: 150 },
+    // { columnName: "MinQty", width: 150 ,type: 'numericColumn',type:"numericColumn"},
+    // { columnName: "StockQuantity", width: 100 },
+    // { columnName: "UnitPrice", width: 100 },
+    // { columnName: "SaelsPrice", width: 100 },
 
   ]);
   const [expandedRowIds, setExpandedRowIds] = useState([0, 1]);
@@ -243,10 +245,10 @@ export default () => {
         let OEMPartNumber 
         let BrandPartNumber 
         let StockNumber 
-        let MinQty 
-        let StockQuantity 
-        let UnitPrice 
-        let SaelsPrice 
+        let MinQty =0
+        let StockQuantity =0
+        let UnitPrice =0
+        let SaelsPrice =0
 
         console.log("idc",changed)
         for (var i in changed){
@@ -276,16 +278,16 @@ export default () => {
                                     StockNumber=changed[i][key]
                                     }
                                     if(key=='MinQty'){
-                                        MinQty=Number(changed[i][key])
+                                        MinQty=0
                                     }
                                     if(key=='StockQuantity'){
-                                        StockQuantity=Number(changed[i][key])
+                                        StockQuantity=0
                                     }
                                     if(key=='SaelsPrice'){
-                                        SaelsPrice=Number(changed[i][key])
+                                        SaelsPrice=0
                                     }
                                     if(key=='UnitPrice'){
-                                        UnitPrice=Number(changed[i][key])
+                                        UnitPrice=0
                                     }
               console.log( 'name',name,Brand,ItemImage,Note,OEMPartNumber,BrandPartNumber,StockQuantity,MinQty,UnitPrice,SaelsPrice);
           }

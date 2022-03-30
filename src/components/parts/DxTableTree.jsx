@@ -136,10 +136,11 @@ export default () => {
     }, []);
 
   const [columns] = useState([
+
     // { name: "Brand", title: "Brand" },
     { name: "name", title: "Name EN" },
-    { name: "ItemImage", title: "Item Image" },
-    { name: "Note", title: "Name AR" },
+    { name: "ItemImage", title: "Item Image",id:'truid' },
+    { name: "nameEn", title: "Name AR" },
     { name: "_id", title: "ID" },
 
     // { name: "OEMPartNumber", title: "OEMPartNumber" },
@@ -167,9 +168,10 @@ export default () => {
   const [searchValue, setSearchState] = useState("");
   const [columnWidths, setColumnWidths] = useState([
     // { columnName: "Brand", width: 250 },
+
     { columnName: "name", width: 250 },
     { columnName: "_id", width: 250 },
-    { columnName: "Note", width: 250 },
+    { columnName: "nameEn", width: 250 },
     { columnName: "ItemImage", width: 250 },
 
     // { columnName: "OEMPartNumber", width: 150 },
@@ -200,7 +202,7 @@ export default () => {
 
         let Brand =added[0].Brand
         let ItemImage =added[0].ItemImage
-        let Note =added[0].Note
+        let nameEn =added[0].nameEn
         let OEMPartNumber =added[0].OEMPartNumber
         let BrandPartNumber =added[0].BrandPartNumber
         let StockNumber =added[0].StockNumber
@@ -212,16 +214,16 @@ export default () => {
         axios.post('https://backendoil.vercel.app/api/category',{
             parent:parent,
             name:name,
-            Brand: Brand, 
+            // Brand: Brand, 
             ItemImage: ItemImage, 
-            Note: Note, 
-            OEMPartNumber: OEMPartNumber, 
-            BrandPartNumber: BrandPartNumber, 
-            StockNumber: StockNumber, 
-            MinQty: MinQty, 
-            StockQuantity: StockQuantity, 
-            UnitPrice: UnitPrice, 
-            SaelsPrice: SaelsPrice, 
+            nameEn: nameEn, 
+            // OEMPartNumber: OEMPartNumber, 
+            // BrandPartNumber: BrandPartNumber, 
+            // StockNumber: StockNumber, 
+            // MinQty: MinQty, 
+            // StockQuantity: StockQuantity, 
+            // UnitPrice: UnitPrice, 
+            // SaelsPrice: SaelsPrice, 
         }).then( () => {
             window.location.reload(false);
           })
@@ -241,7 +243,7 @@ export default () => {
         let id
         let Brand 
         let ItemImage 
-        let Note 
+        let nameEn 
         let OEMPartNumber 
         let BrandPartNumber 
         let StockNumber 
@@ -265,8 +267,8 @@ export default () => {
                 if(key=='ItemImage'){
                     ItemImage=changed[i][key]
                     }
-                    if(key=='Note'){
-                        Note=changed[i][key]
+                    if(key=='nameEn'){
+                        nameEn=changed[i][key]
                         }
                         if(key=='OEMPartNumber'){
                             OEMPartNumber=changed[i][key]
@@ -289,22 +291,22 @@ export default () => {
                                     if(key=='UnitPrice'){
                                         UnitPrice=0
                                     }
-              console.log( 'name',name,Brand,ItemImage,Note,OEMPartNumber,BrandPartNumber,StockQuantity,MinQty,UnitPrice,SaelsPrice);
+              console.log( 'name',name,Brand,ItemImage,nameEn,OEMPartNumber,BrandPartNumber,StockQuantity,MinQty,UnitPrice,SaelsPrice);
           }
       }
         axios.put(`https://backendoil.vercel.app/api/category/update/${id}`, {
  
             category_name:name,
-            Brand: Brand, 
+            // Brand: Brand, 
             ItemImage: ItemImage, 
-            Note: Note, 
-            OEMPartNumber: OEMPartNumber, 
-            BrandPartNumber: BrandPartNumber, 
-            StockNumber: StockNumber, 
-            MinQty: MinQty, 
-            StockQuantity: StockQuantity, 
-            UnitPrice: UnitPrice, 
-            SaelsPrice: SaelsPrice,
+            nameEn: nameEn, 
+            // OEMPartNumber: OEMPartNumber, 
+            // BrandPartNumber: BrandPartNumber, 
+            // StockNumber: StockNumber, 
+            // MinQty: MinQty, 
+            // StockQuantity: StockQuantity, 
+            // UnitPrice: UnitPrice, 
+            // SaelsPrice: SaelsPrice,
     
  
         }).then(() => {

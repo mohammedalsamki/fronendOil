@@ -96,8 +96,8 @@ export default function ShowsparkData() {
   const [searched, setSearched] = React.useState(sparkList);
 
   const requestSearch = (searchedVal) => {
-    const sparkedRows = sparkList.spark((sparkList) => {
-      return sparkList.BrandPartNumber.toLowerCase().includes(searchedVal.toLowerCase());
+    const sparkedRows = sparkList.filter((sparkList) => {
+      return sparkList.OEMPartNumber.toLowerCase().includes(searchedVal.toLowerCase());
     });
 
     setRows(sparkedRows);

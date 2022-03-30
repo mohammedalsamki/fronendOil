@@ -24,6 +24,7 @@ import { NavLink} from 'react-router-dom';
 import SearchBar from "material-ui-search-bar";
 import Select from 'react-select'
 import Createspark from '../createspark/CreateSpark';
+import { async } from 'q';
 
 
 
@@ -169,10 +170,10 @@ export default function ShowsparkData() {
     window.location.reload(false);
     } )}
   }
-  useEffect(()=>{
+  useEffect(async()=>{
     getOptionsunit();
     getOptionsOrigin();
-    axios.get(`https://backendoil.vercel.app/api/spark/spark/`).then( (allsparks) =>{
+   await axios.get(`https://backendoil.vercel.app/api/spark/spark/`).then( (allsparks) =>{
       setsparkList(allsparks.data);
       setRows(allsparks.data);
 

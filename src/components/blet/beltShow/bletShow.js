@@ -24,6 +24,7 @@ import { NavLink} from 'react-router-dom';
 import SearchBar from "material-ui-search-bar";
 import Select from 'react-select'
 import Createbelt from '../createBelt/CreateBelt';
+import { async } from 'q';
 
 
 
@@ -169,10 +170,10 @@ export default function ShowbeltData() {
     window.location.reload(false);
     } )}
   }
-  useEffect(()=>{
+  useEffect(async()=>{
     getOptionsunit();
     getOptionsOrigin();
-    axios.get(`https://backendoil.vercel.app/api/belt/belt/`).then( (allbelts) =>{
+    await axios.get(`https://backendoil.vercel.app/api/belt/belt/`).then( (allbelts) =>{
       setbeltList(allbelts.data);
       setRows(allbelts.data);
 

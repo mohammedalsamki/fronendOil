@@ -23,6 +23,7 @@ import { AppBar } from '@material-ui/core';
 import { NavLink} from 'react-router-dom';
 import SearchBar from "material-ui-search-bar";
 import CreateBrake from './CreateBrake';
+import { async } from 'q';
 
 
 
@@ -152,9 +153,9 @@ export default function ShowBrakeData() {
     window.location.reload(false);
     } )}
   }
-  useEffect(()=>{
+  useEffect(async()=>{
     getOptionsunit();
-    axios.get(`https://backendoil.vercel.app/api/brake/brake/`).then( (allbrakes) =>{
+   await axios.get(`https://backendoil.vercel.app/api/brake/brake/`).then( (allbrakes) =>{
       setbrakeList(allbrakes.data);
       setRows(allbrakes.data);
 

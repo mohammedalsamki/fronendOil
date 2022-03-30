@@ -24,6 +24,7 @@ import { NavLink} from 'react-router-dom';
 import SearchBar from "material-ui-search-bar";
 import Createlamps from './lampsCreate';
 import Select from 'react-select'
+import { async } from 'q';
 
 
 
@@ -172,10 +173,10 @@ export default function ShowlampsData() {
     window.location.reload(false);
     } )}
   }
-  useEffect(()=>{
+  useEffect(async()=>{
     getOptionsunit();
     getOptionsES();
-    axios.get(`https://backendoil.vercel.app/api/lamps/lamps/`).then( (alllampss) =>{
+    await axios.get(`https://backendoil.vercel.app/api/lamps/lamps/`).then( (alllampss) =>{
       setlampsList(alllampss.data);
       setRows(alllampss.data);
 

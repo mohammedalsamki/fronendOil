@@ -23,6 +23,7 @@ import { AppBar } from '@material-ui/core';
 import { NavLink} from 'react-router-dom';
 import SearchBar from "material-ui-search-bar";
 import CreateFilter from '../createFilter/CreateFilter';
+import { async } from 'q';
 
 
 
@@ -152,9 +153,9 @@ export default function ShowFilterData() {
     window.location.reload(false);
     } )}
   }
-  useEffect(()=>{
+  useEffect(async()=>{
     getOptionsunit();
-    axios.get(`https://backendoil.vercel.app/api/filter/filter/`).then( (allOils) =>{
+   await axios.get(`https://backendoil.vercel.app/api/filter/filter/`).then( (allOils) =>{
       setOilList(allOils.data);
       setRows(allOils.data);
 

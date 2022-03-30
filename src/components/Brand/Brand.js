@@ -22,6 +22,7 @@ import { Link } from 'react-router-dom';
 
 
 import { ClassNames } from '@emotion/react';
+import { async } from 'q';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -73,8 +74,8 @@ export default function CreateBrand() {
     } )
   }
   }
-  useEffect(()=>{
-    axios.get(`https://backendoil.vercel.app/api/oil/brand`).then( (allOilsUseg) =>{
+  useEffect(async()=>{
+    await axios.get(`https://backendoil.vercel.app/api/oil/brand`).then( (allOilsUseg) =>{
       setBrandlList(allOilsUseg.data);
     })
   },[]);

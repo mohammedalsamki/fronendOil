@@ -24,6 +24,7 @@ import { NavLink} from 'react-router-dom';
 import SearchBar from "material-ui-search-bar";
 import CreatecarCare from '../createCareCare/carCareFilter';
 import Select from 'react-select'
+import { async } from 'q';
 
 
 
@@ -154,9 +155,9 @@ export default function ShowcarCareData() {
     window.location.reload(false);
     } )}
   }
-  useEffect(()=>{
+  useEffect(async()=>{
     getOptionsunit();
-    axios.get(`https://backendoil.vercel.app/api/carCare/carCare/`).then( (allcarCares) =>{
+   await axios.get(`https://backendoil.vercel.app/api/carCare/carCare/`).then( (allcarCares) =>{
       setcarCareList(allcarCares.data);
       setRows(allcarCares.data);
 

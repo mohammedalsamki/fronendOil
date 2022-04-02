@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { useEffect } from 'react';
-
+import ProdectTable from "./generator";
 import {
   EditingState,
   IntegratedSorting,
   SearchState,
   SortingState,
   IntegratedFiltering,
-  PagingState,
-  IntegratedPaging,
+
   TreeDataState,
   CustomTreeData
 } from "@devexpress/dx-react-grid";
@@ -21,12 +20,10 @@ import {
   TableHeaderRow,
   TableEditRow,
   TableEditColumn,
-  PagingPanel,
   TableColumnResizing,
-  TableTreeColumn
+  TableTreeColumn,
 } from "@devexpress/dx-react-grid-material-ui";
 
-import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
@@ -34,10 +31,22 @@ import SaveIcon from "@material-ui/icons/Save";
 import CancelIcon from "@material-ui/icons/Cancel";
 import { Paper } from "@material-ui/core";
 import axios from 'axios'
-import { async } from "q";
-import { alertClasses } from "@mui/material";
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
 
-
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: "90%",
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 
 const getRowId = row => row._id;
 const AddButton = ({ onExecute }) => (
@@ -117,9 +126,13 @@ const commandComponents = {
   delete: DeleteButton,
   commit: CommitButton,
   cancel: CancelButton,
+  
+
 
 };
 export default () => {
+  let [catName,setcatName]= React.useState(String);
+  
     const [PartslList, setPartslList]= useState([]);
     const [rows, setRows] = useState(PartslList);
 
@@ -133,24 +146,15 @@ export default () => {
             }
         }
         fetchData();
+    localStorage.setItem('catName', catName)
+
     }, []);
 
   const [columns] = useState([
-
-    // { name: "Brand", title: "Brand" },
     { name: "name", title: "Name EN" },
     { name: "ItemImage", title: "Item Image",id:'truid' },
     { name: "nameEn", title: "Name AR" },
     { name: "_id", title: "ID" },
-
-    // { name: "OEMPartNumber", title: "OEMPartNumber" },
-    // { name: "BrandPartNumber", title: "BrandPartNumber" },
-    // { name: "StockNumber", title: "StockNumber" },
-    // { name: "MinQty", title: "MinQty" ,field: "birthYear",type: 'numericColumn'},
-    // { name: "StockQuantity", title: "StockQuantity" },
-    // { name: "UnitPrice", title: "UnitPrice" },
-    // { name: "SaelsPrice", title: "SaelsPrice" },
-  
 
   ]);
 
@@ -167,20 +171,11 @@ export default () => {
   ]);
   const [searchValue, setSearchState] = useState("");
   const [columnWidths, setColumnWidths] = useState([
-    // { columnName: "Brand", width: 250 },
 
     { columnName: "name", width: 250 },
     { columnName: "_id", width: 250 },
     { columnName: "nameEn", width: 250 },
     { columnName: "ItemImage", width: 250 },
-
-    // { columnName: "OEMPartNumber", width: 150 },
-    // { columnName: "BrandPartNumber", width: 150 },
-    // { columnName: "StockNumber", width: 150 },
-    // { columnName: "MinQty", width: 150 ,type: 'numericColumn',type:"numericColumn"},
-    // { columnName: "StockQuantity", width: 100 },
-    // { columnName: "UnitPrice", width: 100 },
-    // { columnName: "SaelsPrice", width: 100 },
 
   ]);
   const [expandedRowIds, setExpandedRowIds] = useState([0, 1]);
@@ -199,31 +194,16 @@ export default () => {
         console.log('id',added[0]._id)
         let parent=added[0]._id || null
         let name =added[0].name
-
-        let Brand =added[0].Brand
         let ItemImage =added[0].ItemImage
         let nameEn =added[0].nameEn
-        let OEMPartNumber =added[0].OEMPartNumber
-        let BrandPartNumber =added[0].BrandPartNumber
-        let StockNumber =added[0].StockNumber
-        let MinQty =Number(added[0].MinQty)
-        let StockQuantity =Number(added[0].StockQuantity)
-        let UnitPrice =Number(added[0].UnitPrice)
-        let SaelsPrice =Number(added[0].SaelsPrice)
+
 
         axios.post('https://backendoil.vercel.app/api/category',{
             parent:parent,
             name:name,
-            // Brand: Brand, 
             ItemImage: ItemImage, 
             nameEn: nameEn, 
-            // OEMPartNumber: OEMPartNumber, 
-            // BrandPartNumber: BrandPartNumber, 
-            // StockNumber: StockNumber, 
-            // MinQty: MinQty, 
-            // StockQuantity: StockQuantity, 
-            // UnitPrice: UnitPrice, 
-            // SaelsPrice: SaelsPrice, 
+
         }).then( () => {
             window.location.reload(false);
           })
@@ -241,18 +221,9 @@ export default () => {
         alert("test")
         let name 
         let id
-        let Brand 
         let ItemImage 
         let nameEn 
-        let OEMPartNumber 
-        let BrandPartNumber 
-        let StockNumber 
-        let MinQty =0
-        let StockQuantity =0
-        let UnitPrice =0
-        let SaelsPrice =0
 
-        console.log("idc",changed)
         for (var i in changed){
             id=i
           console.log('id',id);
@@ -261,54 +232,21 @@ export default () => {
               if(key=='name'){
               name=changed[i][key]
               }
-              if(key=='Brand'){
-                Brand=changed[i][key]
-                }
+
                 if(key=='ItemImage'){
                     ItemImage=changed[i][key]
                     }
                     if(key=='nameEn'){
                         nameEn=changed[i][key]
                         }
-                        if(key=='OEMPartNumber'){
-                            OEMPartNumber=changed[i][key]
-                            }
-                            if(key=='BrandPartNumber'){
-                                BrandPartNumber=changed[i][key]
-                                }
-                                if(key=='StockNumber'){
-                                    StockNumber=changed[i][key]
-                                    }
-                                    if(key=='MinQty'){
-                                        MinQty=0
-                                    }
-                                    if(key=='StockQuantity'){
-                                        StockQuantity=0
-                                    }
-                                    if(key=='SaelsPrice'){
-                                        SaelsPrice=0
-                                    }
-                                    if(key=='UnitPrice'){
-                                        UnitPrice=0
-                                    }
-              console.log( 'name',name,Brand,ItemImage,nameEn,OEMPartNumber,BrandPartNumber,StockQuantity,MinQty,UnitPrice,SaelsPrice);
           }
       }
         axios.put(`https://backendoil.vercel.app/api/category/update/${id}`, {
  
             category_name:name,
-            // Brand: Brand, 
             ItemImage: ItemImage, 
             nameEn: nameEn, 
-            // OEMPartNumber: OEMPartNumber, 
-            // BrandPartNumber: BrandPartNumber, 
-            // StockNumber: StockNumber, 
-            // MinQty: MinQty, 
-            // StockQuantity: StockQuantity, 
-            // UnitPrice: UnitPrice, 
-            // SaelsPrice: SaelsPrice,
-    
- 
+
         }).then(() => {
         alert("Updated")
 
@@ -348,8 +286,40 @@ export default () => {
     ];
     return result;
   }, []);
+  
+  // const {  popupVisible, activeRow } = this.state;
+  const [popupVisible, setpopupVisible] = useState(false);
+  const [activeRow, setactiveRow] = useState([]);
 
+
+  // const showDetails =() => {
+  //   <ProdectTable/>
+
+  // };
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const showDetails = () => (
+    <ProdectTable />
+      
+  );
+  const CellComponent = ({ children, rows, ...restProps }) => (
+    localStorage.setItem('catName', restProps.row.name),
+
+    setcatName(localStorage.getItem('catName')),
+
+    <TableEditColumn.Cell rows={rows} {...restProps}>
+      {children}
+      <TableEditColumn.Command
+        id="custom"
+        text="Show Info"
+        onClick={() => {handleOpen()} }
+      />
+    </TableEditColumn.Cell>
+  );
   return (
+    <>
     <Paper>
       <Grid rows={rows} columns={columns} getRowId={getRowId}>
         <EditingState
@@ -385,11 +355,25 @@ export default () => {
           showEditCommand
           showDeleteCommand
           commandComponent={Command}
+          cellComponent={CellComponent}
         />
         <Getter name="tableColumns" computed={getTableColumnsComputed} />
         <Toolbar />
         <SearchPanel />
       </Grid>
     </Paper>
+    <Button onClick={handleOpen}>Open modal</Button>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+        <ProdectTable />
+
+        </Box>
+      </Modal>
+    </>
   );
 };

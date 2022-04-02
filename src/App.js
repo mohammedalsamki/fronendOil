@@ -50,7 +50,7 @@ function App() {
           <NavLink activeClassName='active' to='/Belt'>Belt</NavLink>
           <NavLink activeClassName='active' to='/CareCare'>CareCare</NavLink>
           <NavLink activeClassName='active' to='/Lamps'>Lamps</NavLink>
-          <NavLink activeClassName='active' to='/Parts'>Parts</NavLink>
+          <NavLink activeClassName='active' to='/Categories'>Categories</NavLink>
 
 
 
@@ -63,7 +63,7 @@ function App() {
            <Switch>
            <Route path="/Oil_Fluid" exact component={Home}></Route>
             <Route path="/OilUseg" component={OilUseg}></Route>
-            <Route path="/Parts" component={Parts}></Route>
+            <Route path="/Categories" component={Parts}></Route>
 
             <Route path="/Lamps" component={ShowlampsData}></Route>
             <Route path="/Filter/usage" component={CreateFilterUsge}></Route>

@@ -94,18 +94,18 @@ export default class Test extends Component {
    console.log(this.state.ID)
    this.setState({usedFor:e.label})
 
-   this.setState({id:e.value, name:e.label})
+  //  this.setState({id:e.value, name:e.label})
 
   }
 
    async BrandhandleChange(e){
      
     await this.setState({Brand:e.label})
-    this.setState({id:e.value, name:e.label})
+    // this.setState({id:e.value, name:e.label})
    }
    async  unithandleChange(e){
     await this.setState({Unit:e.label})
-    this.setState({id:e.value, name:e.label})
+    // this.setState({id:e.value, name:e.label})
    }
 
   componentDidMount(){
@@ -141,17 +141,14 @@ export default class Test extends Component {
       name:this.state.name,
       nameAr:this.state.nameAr,
       usedFor:this.state.usedFor,
-      // originated:this.state.originated,
       Brand:this.state.Brand,
       category: "624401b862d482a5f4781c63",      
       StockQuantity:this.state.StockQuantity,
       UnitPrice:this.state.UnitPrice,
-      // Unit:this.state.Unit,
       SaelsPrice:this.state.SaelsPrice,
       BrandPartNumber:this.state.BrandPartNumber,
       OEMPartNumber:this.state.OEMPartNumber,
       StockNumber:this.state.StockNumber,
-      // ItemImage:this.state.files,
       Note:this.state.Note,
       MinQty:this.state.MinQty
 

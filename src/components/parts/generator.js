@@ -13,6 +13,7 @@ import {
 import "./styles.css";
 
 function ModalBox(props) {
+
   const [open, setOpen] = useState(false);
   const [state, setState] = useState({
     dname: "",
@@ -27,6 +28,7 @@ function ModalBox(props) {
   };
 
   const handleClickOpen = () => {
+
     setOpen(true);
   };
 
@@ -91,6 +93,8 @@ function ModalBox(props) {
 }
 
 function ProdectTable() {
+  let [catName,setcatName]= React.useState(String);
+
   const columns = ["Id", "Name", "Provider"];
   const [data, setData] = useState([]);
 
@@ -101,6 +105,7 @@ function ProdectTable() {
   }
 
   useEffect(() => {
+    setcatName(localStorage.getItem('catName'));
     const data = [
       createData("Dummy1", "oracle"),
       createData("Dummy2", "mssql"),
@@ -122,6 +127,7 @@ function ProdectTable() {
   return (
     <div className="f-height fx-column-cont">
       <div>
+        <h1>{catName}</h1>
         <ModalBox
           addDataSource={(dname, dsource) => addDataSource(dname, dsource)}
         />

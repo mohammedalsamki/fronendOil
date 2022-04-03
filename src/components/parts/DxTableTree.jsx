@@ -107,7 +107,7 @@ function  currentloginid() {
       })
       .then(function(data) {
         var userid = JSON.parse(JSON.stringify(data));
-        console.log(userid);
+        // console.log(userid);
         return userid;
       })
   }
@@ -305,16 +305,17 @@ export default () => {
       
   );
   const CellComponent = ({ children, rows, ...restProps }) => (
-    localStorage.setItem('catName', restProps.row.name),
 
-    setcatName(localStorage.getItem('catName')),
-
-    <TableEditColumn.Cell rows={rows} {...restProps}>
+ <TableEditColumn.Cell rows={rows} {...restProps}>
       {children}
       <TableEditColumn.Command
         id="custom"
         text="Show Info"
-        onClick={() => {handleOpen()} }
+        onClick={() => {{ 
+          localStorage.setItem('catName', restProps.row.name);
+          setcatName(restProps.row.name);
+          console.log(catName);
+          handleOpen() }} }
       />
     </TableEditColumn.Cell>
   );
@@ -362,7 +363,7 @@ export default () => {
         <SearchPanel />
       </Grid>
     </Paper>
-    <Button onClick={handleOpen}>Open modal</Button>
+    {/* <Button onClick={handleOpen}>Open modal</Button> */}
       <Modal
         open={open}
         onClose={handleClose}

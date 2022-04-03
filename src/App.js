@@ -26,6 +26,10 @@ import ShowlampsData from "./components/lamps/lampsShow";
 import LampsUsgeNew from "./components/lamps/lampsUse";
 import LampsEStander from "./components/lamps/Estander";
 import Parts from "./components/parts/parts";
+import  mainHome from "./components/home/home"
+import Bumps from "./components/bumps/bumps"
+import CreatebumpsUsge from "./components/bumps/use";
+
 
 function App() {
   
@@ -43,13 +47,6 @@ function App() {
           <div class="topnav">
           <NavLink exact={true} activeClassName='active' to='/'>Home</NavLink>
           <NavLink activeClassName='active' to='/Brand'>Brand</NavLink>
-          <NavLink activeClassName='active' to='/Oil_Fluid'>Oil's & Fluid's</NavLink>
-          <NavLink activeClassName='active' to='/Filter'>Filter</NavLink>
-          <NavLink activeClassName='active' to='/Brake'>Brake</NavLink>
-          <NavLink activeClassName='active' to='/Spark'>Spark</NavLink>
-          <NavLink activeClassName='active' to='/Belt'>Belt</NavLink>
-          <NavLink activeClassName='active' to='/CareCare'>CareCare</NavLink>
-          <NavLink activeClassName='active' to='/Lamps'>Lamps</NavLink>
           <NavLink activeClassName='active' to='/Categories'>Categories</NavLink>
 
 
@@ -61,9 +58,15 @@ function App() {
          </AppBar>
           <div>
            <Switch>
+           <Route path="/" exact component={mainHome}></Route>
+           <Route path="/Bumps" exact component={Bumps}></Route>
+
+
            <Route path="/Oil_Fluid" exact component={Home}></Route>
             <Route path="/OilUseg" component={OilUseg}></Route>
             <Route path="/Categories" component={Parts}></Route>
+            <Route path="/Pumbs/use" component={CreatebumpsUsge}></Route>
+
 
             <Route path="/Lamps" component={ShowlampsData}></Route>
             <Route path="/Filter/usage" component={CreateFilterUsge}></Route>

@@ -45,7 +45,7 @@ export default class Test extends Component {
   }
   async getOptionsunit(){
 
-    const res = await axios.get('https://backendoil.vercel.app/api/oil/unit')
+    const res = await axios.get('https://backoil.herokuapp.com/api/oil/unit')
     const data = res.data
     const options = data.map(d => ({
       "value" : d._id,
@@ -57,7 +57,7 @@ export default class Test extends Component {
   }
  async getOptions(){
 
-    const res = await axios.get('https://backendoil.vercel.app/api/spark/spark/usage')
+    const res = await axios.get('https://backoil.herokuapp.com/api/spark/spark/usage')
     const data = res.data
     
     const options = data.map(d => ({
@@ -70,7 +70,7 @@ export default class Test extends Component {
   }
   async getOptionsBrand(){
 
-    const res = await axios.get('https://backendoil.vercel.app/api/oil/Brand')
+    const res = await axios.get('https://backoil.herokuapp.com/api/oil/Brand')
     const data = res.data
    this.setState({ID:data._id})
 
@@ -149,7 +149,7 @@ export default class Test extends Component {
 
     }
     console.log(x)
-   await axios.post('https://backendoil.vercel.app/api/spark/spark',x).then( () => {
+   await axios.post('https://backoil.herokuapp.com/api/spark/spark',x).then( () => {
     alert("item added")
 
       window.location.reload(false);

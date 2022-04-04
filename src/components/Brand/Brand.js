@@ -69,13 +69,13 @@ export default function CreateBrand() {
     let isExecuted = window.confirm("Are you sure to execute this action?");
     console.log(isExecuted);
     if(isExecuted){
-    axios.delete(`https://backendoil.vercel.app/api/oil/brand/${id}`).then( () =>{
+    axios.delete(`https://backoil.herokuapp.com/api/oil/brand/${id}`).then( () =>{
       window.location.reload(false);
     } )
   }
   }
   useEffect(async()=>{
-    await axios.get(`https://backendoil.vercel.app/api/oil/brand`).then( (allOilsUseg) =>{
+    await axios.get(`https://backoil.herokuapp.com/api/oil/brand`).then( (allOilsUseg) =>{
       setBrandlList(allOilsUseg.data);
     })
   },[]);
@@ -99,7 +99,7 @@ export default function CreateBrand() {
 
          
   const creatBrandfun = ()=>{
-    axios.post('https://backendoil.vercel.app/api/oil/brand',{BrandAr,BrandEn,BrandImage:Imagenew,BrandDiscr}).then( () => {
+    axios.post('https://backoil.herokuapp.com/api/oil/brand',{BrandAr,BrandEn,BrandImage:Imagenew,BrandDiscr}).then( () => {
       window.location.reload(false);
     })
   }

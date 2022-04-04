@@ -52,12 +52,12 @@ export default function CreateUnit() {
     let isExecuted = window.confirm("Are you sure to execute this action?");
     console.log(isExecuted);
     if(isExecuted){
-    axios.delete(`https://backendoil.vercel.app/api/oil/unit/${id}`).then( () =>{
+    axios.delete(`https://backoil.herokuapp.com/api/oil/unit/${id}`).then( () =>{
       window.location.reload(false);
     } )}
   }
   useEffect(()=>{
-    axios.get(`https://backendoil.vercel.app/api/oil/unit`).then( (allOilsUnit) =>{
+    axios.get(`https://backoil.herokuapp.com/api/oil/unit`).then( (allOilsUnit) =>{
         setUnitList(allOilsUnit.data);
     })
   },[]);
@@ -65,7 +65,7 @@ export default function CreateUnit() {
   const [UnitNameAr,setUnitNameAr]= React.useState('');
       
   const creatUnitFun = ()=>{
-    axios.post('https://backendoil.vercel.app/api/oil/unit',{UnitNameEn,UnitNameAr}).then( () => {
+    axios.post('https://backoil.herokuapp.com/api/oil/unit',{UnitNameEn,UnitNameAr}).then( () => {
       window.location.reload(false);
     })
   }

@@ -51,13 +51,13 @@ export default function CreateOilUsge() {
     let isExecuted = window.confirm("Are you sure to execute this action?");
     console.log(isExecuted);
     if(isExecuted){
-    axios.delete(`https://backendoil.vercel.app/api/oil/oilUseg/${id}`).then( () =>{
+    axios.delete(`https://backoil.herokuapp.com/api/oil/oilUseg/${id}`).then( () =>{
       window.location.reload(false);
     } )}
   }
 
   useEffect(()=>{
-    axios.get(`https://backendoil.vercel.app/api/oil/oilUseg`).then( (allOilsUseg) =>{
+    axios.get(`https://backoil.herokuapp.com/api/oil/oilUseg`).then( (allOilsUseg) =>{
       setOiUsgelList(allOilsUseg.data);
     })
   },[]);
@@ -76,7 +76,7 @@ const setID=(id,OilUsageAr,OilUsageEn,Specs)=>{
 }
        
   const creatOilusgefun = ()=>{
-    axios.post('https://backendoil.vercel.app/api/oil/oilUseg',{OilUsageAr,OilUsageEn,Specs}).then( () => {
+    axios.post('https://backoil.herokuapp.com/api/oil/oilUseg',{OilUsageAr,OilUsageEn,Specs}).then( () => {
       window.location.reload(false);
     })
   }

@@ -48,7 +48,6 @@ const style = {
   -webkit-tap-highlight-color: transparent;
 `;
 
-
 const StyledModal = styled(ModalUnstyled)`
   position: fixed;
   z-index: 1300;
@@ -73,7 +72,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(odd)': {
-    backgroundColor: theme.palette.action.hover,
+    backgroundColor:"white"
   },
   // hide last border
   '&:last-child td, &:last-child th': {
@@ -89,7 +88,7 @@ export default function CreateFilterUsge() {
   
 
   const deleteFilter=(id)=>{
-    axios.delete(`https://backendoil.vercel.app/api/filter/filter/usage/${id}`).then( () =>{
+    axios.delete(`https://backoil.herokuapp.com/api/filter/filter/usage/${id}`).then( () =>{
       window.location.reload(false);
     } )
   }
@@ -101,7 +100,7 @@ export default function CreateFilterUsge() {
 
     setOpen(false)};
   useEffect(()=>{
-    axios.get(`https://backendoil.vercel.app/api/filter/filter/usage`).then( (allOilsUseg) =>{
+    axios.get(`https://backoil.herokuapp.com/api/filter/filter/usage`).then( (allOilsUseg) =>{
       setFilterUsgelList(allOilsUseg.data);
     })
   },[]);
@@ -124,12 +123,12 @@ const setID=(id,FilterUsageAr,FilterUsageEn)=>{
 }
        
   const creatOilusgefun = ()=>{
-    axios.post('https://backendoil.vercel.app/api/filter/filter/usage',{FilterUsageAr,FilterUsageEn}).then( () => {
+    axios.post('https://backoil.herokuapp.com/api/filter/filter/usage',{FilterUsageAr,FilterUsageEn}).then( () => {
       window.location.reload(false);
     })
   }
   const sendDataToAPI = () => {
-    axios.put(`https://backendoil.vercel.app/api/filter/filter/usage/${_id}`, {
+    axios.put(`https://backoil.herokuapp.com/api/filter/filter/usage/${_id}`, {
  
         FilterUsageAr,
         FilterUsageEn

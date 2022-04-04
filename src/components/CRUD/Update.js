@@ -10,7 +10,7 @@ export default function AddEdit() {
     const [OilUsageEn, setLastName] = useState('');
     const [ID, setID] = useState(null);
     const sendDataToAPI = () => {
-        axios.put(`https://backendoil.vercel.app/api/oil/oilUseg/${ID}`, {
+        axios.put(`https://backoil.herokuapp.com/api/oil/oilUseg/${ID}`, {
             OilUsageAr,
             OilUsageEn
         }).then(() => {

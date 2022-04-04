@@ -9,7 +9,7 @@ export default function UpdateUnit() {
     const [UnitNameAr, setLastName] = useState('');
     const [ID, setID] = useState(null);
     const sendDataToAPI = () => {
-        axios.put(`https://backendoil.vercel.app/api/oil/unit/${ID}`, {
+        axios.put(`https://backoil.herokuapp.com/api/oil/unit/${ID}`, {
             UnitNameEn,
             UnitNameAr
         }).then(() => {

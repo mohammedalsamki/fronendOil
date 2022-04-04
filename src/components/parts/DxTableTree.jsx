@@ -99,7 +99,7 @@ const getChildRows = (row, rootRows) => {
 
 };
 function  currentloginid() {
-    return fetch('https://backendoil.vercel.app/api/category/get', {
+    return fetch('https://backoil.herokuapp.com/api/category/get', {
         method: 'GET',
       })
       .then(function(response) {
@@ -114,7 +114,7 @@ function  currentloginid() {
   
   console.log(currentloginid());
 const  getOptions= async()=>{
-    const res = await axios.get('https://backendoil.vercel.app/api/category/get')
+    const res = await axios.get('https://backoil.herokuapp.com/api/category/get')
     let data = res.data
     return data;
     }
@@ -139,7 +139,7 @@ export default () => {
     useEffect( () => { 
         async function fetchData() {
             try {
-                const res = await axios.get('https://backendoil.vercel.app/api/category/get'); 
+                const res = await axios.get('https://backoil.herokuapp.com/api/category/get'); 
                 setRows(res.data);
             } catch (err) {
                 console.log(err);
@@ -198,7 +198,7 @@ export default () => {
         let nameEn =added[0].nameEn
 
 
-        axios.post('https://backendoil.vercel.app/api/category',{
+        axios.post('https://backoil.herokuapp.com/api/category',{
             parent:parent,
             name:name,
             ItemImage: ItemImage, 
@@ -241,7 +241,7 @@ export default () => {
                         }
           }
       }
-        axios.put(`https://backendoil.vercel.app/api/category/update/${id}`, {
+        axios.put(`https://backoil.herokuapp.com/api/category/update/${id}`, {
  
             category_name:name,
             ItemImage: ItemImage, 
@@ -268,7 +268,7 @@ export default () => {
 
       const deletedSet = new Set(deleted);
       console.log(deletedSet);
-      axios.delete(`https://backendoil.vercel.app/api/category/delete/${deleted}`).then( () =>{
+      axios.delete(`https://backoil.herokuapp.com/api/category/delete/${deleted}`).then( () =>{
       window.location.reload(false);    } )
       changedRows = rows.filter(row => !deletedSet.has(row._id));
     }

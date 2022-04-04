@@ -22,9 +22,8 @@ import AddIcon from '@mui/icons-material/Add';
 import { AppBar } from '@material-ui/core';
 import { NavLink} from 'react-router-dom';
 import SearchBar from "material-ui-search-bar";
-import Createlamps from './lampsCreate';
 import Select from 'react-select'
-import { async } from 'q';
+import Createbearing from './create';
 
 
 
@@ -88,37 +87,48 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 
-export default function ShowlampsData() {
+export default function ShowbearingData() {
   let history = useHistory();
-  const [lampsList, setlampsList]= React.useState([]);
-  const [ES, setES]= React.useState([]);
-  const [EStander, setEStander]= React.useState([]);
-
-
+  const [bearingList, setbearingList]= React.useState([]);
   const classes= useStyles();
-  const [rows, setRows] = React.useState(lampsList);
-  let [Capasity,setCapasity]= React.useState('');
+  const [rows, setRows] = React.useState(bearingList);
 
-  const [searched, setSearched] = React.useState(lampsList);
+  const [searched, setSearched] = React.useState(bearingList);
 
   const requestSearch = (searchedVal) => {
-    const lampsedRows = lampsList.filter((lampsList) => {
-      return lampsList.BrandPartNumber.toLowerCase().includes(searchedVal.toLowerCase());
+    const bearingedRows = bearingList.filter((bearingList) => {
+      return bearingList.OEMPartNumber.toLowerCase().includes(searchedVal.toLowerCase());
     });
 
-    setRows(lampsedRows);
+    setRows(bearingedRows);
   };
   const requestSearchCar = (searchedVal) => {
-    const lampsedRows = lampsList.filter((lampsList) => {
-      return lampsList.Note.toLowerCase().includes(searchedVal.toLowerCase());
+    const brakeedRows = bearingList.filter((brakeList) => {
+      return brakeList.Note.toLowerCase().includes(searchedVal.toLowerCase());
     });
 
-    setRows(lampsedRows);
+    setRows(brakeedRows);
   };
   const cancelSearch = () => {
     setSearched("");
     requestSearch(searched);
   };
+  const [originList, setoriginList] = React.useState(false);
+
+  const getOptionsOrigin=async()=>{
+
+    const res = await axios.get('https://backoil.herokuapp.com/api/bearing/use/get')
+    const data = res.data
+    const options = data.map(d => ({
+      "value" : d._id,
+      "label" : d.BearingsUsageEn
+
+
+    }))
+
+    // this.setState({unitselectOptions: options})
+    setoriginList(options)
+  }
 
   let [MinQty,setMinQty]= React.useState(0);
   let [Imagenew,setImagenew]= React.useState(String);
@@ -127,31 +137,7 @@ export default function ShowlampsData() {
   const [unitList, setunitList] = React.useState(false);
   const getOptionsunit=async()=>{
 
-    const res = await axios.get('https://backoil.herokuapp.com/api/oil/unit')
-    const data = res.data
-    const options = data.map(d => ({
-      "value" : d._id,
-      "label" : d.UnitNameEn
-
-    }))
-
-    // this.setState({unitselectOptions: options})
-    setunitList(options)
-    console.log(unitList)
-  }
-  const getOptionsES=async()=>{
-
-    const res = await axios.get('https://backoil.herokuapp.com/api/lamps/lamps/EStander')
-    const data = res.data
-    const options = data.map(d => ({
-      "value" : d._id,
-      "label" : d.EStanderEn
-
-    }))
-
-    // this.setState({unitselectOptions: options})
-    setES(options)
-    console.log(unitList)
+    
   }
 
   const handleOpen = () =>{ 
@@ -163,11 +149,11 @@ export default function ShowlampsData() {
     setOpen(false)};
   
 
-  const deletelamps=(id)=>{
+  const deletebearing=(id)=>{
     let isExecuted = window.confirm("Are you sure to execute this action?");
     console.log(isExecuted);
     if(isExecuted){
-    axios.delete(`https://backoil.herokuapp.com/api/lamps/lamps/${id}`).then( () =>{
+    axios.delete(`https://backoil.herokuapp.com/api/bearing/${id}`).then( () =>{
       alert('delete done')
       
     window.location.reload(false);
@@ -175,21 +161,18 @@ export default function ShowlampsData() {
   }
   useEffect(async()=>{
     getOptionsunit();
-    getOptionsES();
-    await axios.get(`https://backoil.herokuapp.com/api/lamps/lamps/`).then( (alllampss) =>{
-      setlampsList(alllampss.data);
-      setRows(alllampss.data);
+    getOptionsOrigin();
+   await axios.get(`https://backoil.herokuapp.com/api/bearing/Bearings/get`).then( (allbearings) =>{
+      setbearingList(allbearings.data);
+      setRows(allbearings.data);
 
       localStorage.setItem('_id', _id)
     localStorage.setItem('Brand', Brand)
-    localStorage.setItem('EStander', EStander)
-    
-    localStorage.setItem('lampsUsage', lampsUsage)
+    localStorage.setItem('usedFor', usedFor)
     localStorage.setItem('Unit', Unit)
-    localStorage.setItem('StockQuantiti', StockQuantiti)
+    localStorage.setItem('StockQuantity', StockQuantity)
     localStorage.setItem('UnitPrice', UnitPrice)
     localStorage.setItem('SaelsPrice', SaelsPrice)
-    localStorage.setItem('Capasity', Capasity)
 
     localStorage.setItem('ItemImage', ItemImage)
     localStorage.setItem('Note', Note)
@@ -201,16 +184,22 @@ export default function ShowlampsData() {
     }else{
       localStorage.setItem('StockNumber', StockNumber)
     }  
-
+    if(!OEMPartNumber){
+      localStorage.setItem('OEMPartNumber', 0)
+    
+    }else{
       localStorage.setItem('OEMPartNumber', OEMPartNumber)
+    } 
     })
+    localStorage.setItem('BrandPartNumber', BrandPartNumber)
+
   },[]);
   const [Brand, setBrand]= React.useState('');
   const [_id,set_id]= React.useState('');
-  let [lampsUsage,setlampsUsage]= React.useState('');
+  let [usedFor,setusedFor]= React.useState('');
 
   let [Unit,setUnit]= React.useState('');
-  let [StockQuantiti,setStockQuantiti]= React.useState('');
+  let [StockQuantity,setStockQuantity]= React.useState('');
   let [UnitPrice,setUnitPrice]= React.useState('');
   let [SaelsPrice,setSaelsPrice]= React.useState('');
 
@@ -221,14 +210,13 @@ export default function ShowlampsData() {
   let [BrandPartNumber,setBrandPartNumber]= React.useState('');
   console.log(_id)
 
-  const setID=(_id,Capasity,Brand,lampsUsage,Unit,StockNumber,ItemImage,Note,StockQuantiti,UnitPrice,SaelsPrice,OEMPartNumber,MinQty,BrandPartNumber,EStander)=>{
+  const setID=(_id,Brand,usedFor,Unit,StockNumber,ItemImage,Note,StockQuantity,UnitPrice,SaelsPrice,OEMPartNumber,MinQty,BrandPartNumber)=>{
     // console.log(_id)
     localStorage.setItem('_id', _id)
     localStorage.setItem('Brand', Brand)
-    localStorage.setItem('EStander', EStander)
-    localStorage.setItem('lampsUsage', lampsUsage)
+    localStorage.setItem('usedFor', usedFor)
     localStorage.setItem('Unit', Unit)
-    localStorage.setItem('StockQuantiti', StockQuantiti)
+    localStorage.setItem('StockQuantity', StockQuantity)
     localStorage.setItem('UnitPrice', UnitPrice)
     localStorage.setItem('SaelsPrice', SaelsPrice)
 
@@ -238,17 +226,12 @@ export default function ShowlampsData() {
     localStorage.setItem('OEMPartNumber', OEMPartNumber)
     localStorage.setItem('BrandPartNumber', BrandPartNumber)
     localStorage.setItem('MinQty', MinQty)
-    localStorage.setItem('Capasity', Capasity)
-
-
-    setCapasity(localStorage.getItem('Capasity'))
-    setEStander(localStorage.getItem('EStander'))
 
 
     setBrand(localStorage.getItem('Brand'));
     set_id(localStorage.getItem('_id'));
-    setlampsUsage(localStorage.getItem('lampsUsage'))
-    setStockQuantiti(localStorage.getItem('StockQuantiti'))
+    setusedFor(localStorage.getItem('usedFor'))
+    setStockQuantity(localStorage.getItem('StockQuantity'))
     setUnitPrice(localStorage.getItem('UnitPrice'))
     setSaelsPrice(localStorage.getItem('SaelsPrice'))
     setUnit(localStorage.getItem('Unit'))
@@ -259,12 +242,16 @@ export default function ShowlampsData() {
       setMinQty(0)    }else{
       setMinQty(localStorage.getItem('MinQty'))
     }
-
-    setStockNumber(localStorage.getItem('StockNumber'))
-
-    setOEMPartNumber(localStorage.getItem('OEMPartNumber'))
+    if(StockNumber===null){
+      setStockNumber(0)    }else{
+      setStockNumber(localStorage.getItem('StockNumber'))
+    }
+    if(OEMPartNumber===undefined){
+      setOEMPartNumber(0)    }else{
+        setOEMPartNumber(localStorage.getItem('OEMPartNumber'))
+    }
     setBrandPartNumber(localStorage.getItem('BrandPartNumber'))
-    
+
   }
   const handleFile = (e) =>{
     // console.log(e.target.files[0])
@@ -282,26 +269,24 @@ export default function ShowlampsData() {
     }
   }
   const sendDataToAPI = () => {
-    axios.put(`https://backoil.herokuapp.com/api/lamps/lamps/${_id}`, {
+    axios.put(`https://backoil.herokuapp.com/api/bearing/${_id}`, {
  
-      StockQuantiti:StockQuantiti,
+      StockQuantity:StockQuantity,
       UnitPrice:UnitPrice,
       SaelsPrice:SaelsPrice,
       Note:Note,
-      EStander:EStander,
-      Unit:Unit,
-      Capasity:Capasity,
       OEMPartNumber:OEMPartNumber,
       BrandPartNumber:BrandPartNumber,
       StockNumber:StockNumber,
       MinQty:MinQty,
-      ItemImage:Imagenew
+      ItemImage:Imagenew,
+      usedFor
     
  
     }).then(() => {
 alert("Updated")
 
-    // history.push('/lamps');
+    // history.push('/bearing');
         localStorage.clear();
       window.location.reload(false);
 
@@ -313,7 +298,7 @@ alert("Updated")
 const [openadd, setOpenadd] = React.useState(false);
 const handleOpenAdd = () => setOpenadd(true);
 const handleCloseAdd = () => setOpenadd(false);
-console.log(SaelsPrice,_id,UnitPrice,StockQuantiti)
+console.log(SaelsPrice,_id,UnitPrice,StockQuantity)
 
   return (
     < >
@@ -323,9 +308,7 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantiti)
                  <AddIcon fontSize="larg"/>
                  Add
                  </IconButton>
-                 <NavLink activeClassName='active' to='/lampusage'>Usge</NavLink>
-                 <NavLink activeClassName='active' to='/EStander'>EStander</NavLink>
-
+                 <NavLink activeClassName='active' to='/bearing/usage'>usedFor</NavLink>
           </div>
 
                  </AppBar>
@@ -339,11 +322,11 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantiti)
         BackdropComponent={Backdrop}
       >
         <Box sx={style}>
-        <Createlamps /> 
+        <Createbearing /> 
         </Box>
       </StyledModal>  	
       </div>
-    <h2>lampss in Stock</h2>
+    <h2>bearings in Stock</h2>
     <div >
     <SearchBar
           style={{ width:"400px",float:'left', marginLeft: '450px',border: '5px solid gray' }}
@@ -362,7 +345,6 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantiti)
 
 
         </div>
-
     <TableContainer component={Paper} maxWidth="100%">
       <Table  sx={{ minWidth: 800 }} aria-label="customized table">
         <TableHead>
@@ -370,11 +352,8 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantiti)
           <StyledTableCell align="center">Brand</StyledTableCell>
           <StyledTableCell align="center">Item Image</StyledTableCell>
 
-            <StyledTableCell align="center">EStander</StyledTableCell>
-            <StyledTableCell align="center">Usge</StyledTableCell>
+            <StyledTableCell align="center">usedFor</StyledTableCell>
             <StyledTableCell align="center">Note</StyledTableCell>
-            <StyledTableCell align="center">Capacity</StyledTableCell>
-            <StyledTableCell align="center">Color</StyledTableCell>
             <StyledTableCell align="center">OEMPartNumber</StyledTableCell>
             <StyledTableCell align="center">BrandPartNumber</StyledTableCell>
             <StyledTableCell align="center">StockNumber</StyledTableCell>
@@ -391,36 +370,30 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantiti)
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((lamps,key) =>  {
-            if(lamps.MinQty<lamps.StockQuantiti){
+          {rows.map((bearing,key) =>  {
+            if(bearing.MinQty<bearing.StockQuantity){
             return(
             <StyledTableRow style={{backgroundColor: ''}} key={key}>
-              <StyledTableCell align="center">{lamps.Brand}</StyledTableCell>
+              <StyledTableCell align="center">{bearing.Brand}</StyledTableCell>
               <StyledTableCell align="center">
-                <img src={lamps.ItemImage} alt="not found" width="70" height="70"></img>
+                <img src={bearing.ItemImage} alt="not found" width="70" height="70"></img>
                 </StyledTableCell>
               <StyledTableCell align="center" component="th" scope="row">
-                {lamps.EStander}
-              </StyledTableCell>
-              <StyledTableCell align="center" component="th" scope="row">
-                {lamps.lampsUsage}
+                {bearing.usedFor}
               </StyledTableCell>
 
-              <StyledTableCell align="center">{lamps.Note}</StyledTableCell>
-              <StyledTableCell align="center">{lamps.Capasity}</StyledTableCell>
-            <StyledTableCell align="center">{lamps.Unit}</StyledTableCell>
-              <StyledTableCell align="center">{lamps.OEMPartNumber}</StyledTableCell>
-              <StyledTableCell align="center">{lamps.BrandPartNumber}</StyledTableCell>
+              <StyledTableCell align="center">{bearing.Note}</StyledTableCell>
+              <StyledTableCell align="center">{bearing.OEMPartNumber}</StyledTableCell>
+              <StyledTableCell align="center">{bearing.BrandPartNumber}</StyledTableCell>
+              <StyledTableCell align="center">{bearing.StockNumber}</StyledTableCell>
+              <StyledTableCell align="center">{bearing.MinQty}</StyledTableCell>
 
-              <StyledTableCell align="center">{lamps.StockNumber}</StyledTableCell>
-              <StyledTableCell align="center">{lamps.MinQty}</StyledTableCell>
-
-              <StyledTableCell align="center">{lamps.StockQuantiti}</StyledTableCell>
-              <StyledTableCell align="center">{lamps.UnitPrice}</StyledTableCell>
-              <StyledTableCell align="center">{lamps.SaelsPrice}</StyledTableCell>
+              <StyledTableCell align="center">{bearing.StockQuantity}</StyledTableCell>
+              <StyledTableCell align="center">{bearing.UnitPrice}</StyledTableCell>
+              <StyledTableCell align="center">{bearing.SaelsPrice}</StyledTableCell>
               <StyledTableCell align="center">
       <IconButton type="button"  onClick={()=>{
-      setID(lamps._id,lamps.Capasity,lamps.Brand,lamps.lampsUsage,lamps.Unit,lamps.StockNumber,lamps.ItemImage,lamps.Note,lamps.StockQuantiti,lamps.UnitPrice,lamps.SaelsPrice,lamps.OEMPartNumber,lamps.MinQty,lamps.BrandPartNumber,lamps.EStander);
+      setID(bearing._id,bearing.Brand,bearing.usedFor,bearing.Unit,bearing.StockNumber,bearing.ItemImage,bearing.Note,bearing.StockQuantity,bearing.UnitPrice,bearing.SaelsPrice,bearing.OEMPartNumber,bearing.MinQty,bearing.BrandPartNumber);
         handleOpen()}} >
                         <EditIcon fontSize="small"/>
 
@@ -429,7 +402,7 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantiti)
     </StyledTableCell>
 
               <StyledTableCell align="center">
-                <IconButton aria-label='delete' className={ClassNames.margin} onClick={()=> deletelamps(lamps._id)}>
+                <IconButton aria-label='delete' className={ClassNames.margin} onClick={()=> deletebearing(bearing._id)}>
                   <DeleteIcon fontSize="small"/>
                   </IconButton>
                 </StyledTableCell>
@@ -439,31 +412,26 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantiti)
         }else{
           return(
             <StyledTableRow style={{backgroundColor: 'red'}} key={key}>
-              <StyledTableCell align="center">{lamps.Brand}</StyledTableCell>
+              <StyledTableCell align="center">{bearing.Brand}</StyledTableCell>
               <StyledTableCell align="center">
-                <img src={lamps.ItemImage} alt="not found" width="70" height="70"></img>
+                <img src={bearing.ItemImage} alt="not found" width="70" height="70"></img>
                 </StyledTableCell>
-                <StyledTableCell align="center" component="th" scope="row">
-                {lamps.EStander}
-              </StyledTableCell>
               <StyledTableCell align="center" component="th" scope="row">
-                {lamps.lampsUsage}
+                {bearing.usedFor}
               </StyledTableCell>
 
-              <StyledTableCell align="center">{lamps.Note}</StyledTableCell>
-              <StyledTableCell align="center">{lamps.Capasity}</StyledTableCell>
-            <StyledTableCell align="center">{lamps.Unit}</StyledTableCell>
-              <StyledTableCell align="center">{lamps.OEMPartNumber}</StyledTableCell>
-              <StyledTableCell align="center">{lamps.BrandPartNumber}</StyledTableCell>
-              <StyledTableCell align="center">{lamps.StockNumber}</StyledTableCell>
-              <StyledTableCell align="center">{lamps.MinQty}</StyledTableCell>
+              <StyledTableCell align="center">{bearing.Note}</StyledTableCell>
+              <StyledTableCell align="center">{bearing.OEMPartNumber}</StyledTableCell>
+              <StyledTableCell align="center">{bearing.BrandPartNumber}</StyledTableCell>
+              <StyledTableCell align="center">{bearing.StockNumber}</StyledTableCell>
+              <StyledTableCell align="center">{bearing.MinQty}</StyledTableCell>
 
-              <StyledTableCell align="center">{lamps.StockQuantiti}</StyledTableCell>
-              <StyledTableCell align="center">{lamps.UnitPrice}</StyledTableCell>
-              <StyledTableCell align="center">{lamps.SaelsPrice}</StyledTableCell>
+              <StyledTableCell align="center">{bearing.StockQuantity}</StyledTableCell>
+              <StyledTableCell align="center">{bearing.UnitPrice}</StyledTableCell>
+              <StyledTableCell align="center">{bearing.SaelsPrice}</StyledTableCell>
               <StyledTableCell align="center">
       <IconButton type="button"  onClick={()=>{
-      setID(lamps._id,lamps.Capasity,lamps.Brand,lamps.lampsUsage,lamps.Unit,lamps.StockNumber,lamps.ItemImage,lamps.Note,lamps.StockQuantiti,lamps.UnitPrice,lamps.SaelsPrice,lamps.OEMPartNumber,lamps.MinQty,lamps.BrandPartNumber,lamps.EStander);
+      setID(bearing._id,bearing.Brand,bearing.usedFor,bearing.Unit,bearing.StockNumber,bearing.ItemImage,bearing.Note,bearing.StockQuantity,bearing.UnitPrice,bearing.SaelsPrice,bearing.OEMPartNumber,bearing.MinQty,bearing.BrandPartNumber);
         handleOpen()}} >
                         <EditIcon fontSize="small"/>
 
@@ -472,7 +440,7 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantiti)
     </StyledTableCell>
 
               <StyledTableCell align="center">
-                <IconButton aria-label='delete' className={ClassNames.margin} onClick={()=> deletelamps(lamps._id)}>
+                <IconButton aria-label='delete' className={ClassNames.margin} onClick={()=> deletebearing(bearing._id)}>
                   <DeleteIcon fontSize="small"/>
                   </IconButton>
                 </StyledTableCell>
@@ -498,22 +466,18 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantiti)
         <Box sx={style}>
           <div align="center">
           <h2>Brand: {Brand}</h2>
-          <h3>Usges:  {lampsUsage}</h3>
 
 
+          <h2>usedFor: {usedFor}</h2>
 
+          <Select placeholder="{usedFor}" options={originList}   onChange={(e) => setusedFor(e.label)} />
 
           </div>
+          <br></br>
         <Form>
 
-        <Form.Field align="center"  class="grid-container">
 
-        <br></br>
-        <br></br>
-
-        <Select placeholder='EStander' options={ES}   onChange={(e) => setEStander(e.label)} />
-        </Form.Field>
-
+        
                 <Form.Field align="center"  class="grid-container">
                     <label>Note</label>
                     <br></br>
@@ -539,32 +503,6 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantiti)
                         placeholder='image' />
 
                 </Form.Field>
-                <Form.Field >
-                    <label>Capacity</label>
-                    <br></br>
-                    <input name="Color"
-                    type="text"
-                    class="item1"
-                    className='inputform'
-                    value={Unit}
-                        onChange={(e) => setUnit(e.target.value)}
-                        placeholder='Color' />
-
-                </Form.Field>
-                
-
-                <Form.Field align="center"  class="grid-container">
-                    <label>BrandPartNumber</label>
-                    <br></br>
-                    <input name="BrandPartNumber"
-                    type="text"
-                    class="item1"
-                    className='inputform'
-                    value={BrandPartNumber}
-                        onChange={(e) => setBrandPartNumber(e.target.value)}
-                        placeholder='BrandPartNumber' />
-
-                </Form.Field>
                 <Form.Field align="center"  class="grid-container">
                     <label>OEMPartNumber</label>
                     <br></br>
@@ -574,6 +512,18 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantiti)
                     className='inputform'
                     value={OEMPartNumber}
                         onChange={(e) => setOEMPartNumber(e.target.value)}
+                        placeholder='OEMPartNumber' />
+
+                </Form.Field>
+                <Form.Field align="center"  class="grid-container">
+                    <label>BrandPartNumber</label>
+                    <br></br>
+                    <input name="BrandPartNumber"
+                    type="text"
+                    class="item1"
+                    className='inputform'
+                    value={BrandPartNumber}
+                        onChange={(e) => setBrandPartNumber(e.target.value)}
                         placeholder='OEMPartNumber' />
 
                 </Form.Field>
@@ -590,15 +540,15 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantiti)
 
                 </Form.Field>
                 <Form.Field align="center"  class="grid-container">
-                    <label>StockQuantiti</label>
+                    <label>StockQuantity</label>
                     <br></br>
-                    <input name="StockQuantiti"
+                    <input name="StockQuantity"
                     type="number"
                     class="item1"
                     className='inputform'
-                    value={StockQuantiti}
-                        onChange={(e) => setStockQuantiti(e.target.value)}
-                        placeholder='StockQuantiti' />
+                    value={StockQuantity}
+                        onChange={(e) => setStockQuantity(e.target.value)}
+                        placeholder='StockQuantity' />
 
                 </Form.Field>
                 <Form.Field align="center"  class="grid-container">

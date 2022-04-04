@@ -121,17 +121,6 @@ export default function ShowFilterData() {
   const [unitList, setunitList] = React.useState(false);
   const getOptionsunit=async()=>{
 
-    const res = await axios.get('https://backendoil.vercel.app/api/filter/filter/unit')
-    const data = res.data
-    const options = data.map(d => ({
-      "value" : d._id,
-      "label" : d.UnitNameEn
-
-    }))
-
-    // this.setState({unitselectOptions: options})
-    setunitList(options)
-    console.log(unitList)
   }
 
   const handleOpen = () =>{ 
@@ -147,7 +136,7 @@ export default function ShowFilterData() {
     let isExecuted = window.confirm("Are you sure to execute this action?");
     console.log(isExecuted);
     if(isExecuted){
-    axios.delete(`https://backendoil.vercel.app/api/filter/filter/${id}`).then( () =>{
+    axios.delete(`https://backoil.herokuapp.com/api/filter/filter/${id}`).then( () =>{
       alert('delete done')
       
     window.location.reload(false);
@@ -155,7 +144,7 @@ export default function ShowFilterData() {
   }
   useEffect(async()=>{
     getOptionsunit();
-   await axios.get(`https://backendoil.vercel.app/api/filter/filter/`).then( (allOils) =>{
+   await axios.get(`https://backoil.herokuapp.com/api/filter/filter/`).then( (allOils) =>{
       setOilList(allOils.data);
       setRows(allOils.data);
 
@@ -262,7 +251,7 @@ export default function ShowFilterData() {
     }
   }
   const sendDataToAPI = () => {
-    axios.put(`https://backendoil.vercel.app/api/filter/filter/${_id}`, {
+    axios.put(`https://backoil.herokuapp.com/api/filter/filter/${_id}`, {
  
       StockQuantity:StockQuantity,
       UnitPrice:UnitPrice,

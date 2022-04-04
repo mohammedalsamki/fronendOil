@@ -29,6 +29,8 @@ import Parts from "./components/parts/parts";
 import  mainHome from "./components/home/home"
 import Bumps from "./components/bumps/bumps"
 import CreatebumpsUsge from "./components/bumps/use";
+import ShowbearingData from "./components/bearings/show";
+import CreateBearingsUsge from "./components/bearings/use";
 
 
 function App() {
@@ -60,6 +62,10 @@ function App() {
            <Switch>
            <Route path="/" exact component={mainHome}></Route>
            <Route path="/Bumps" exact component={Bumps}></Route>
+           <Route path="/bearing" exact component={ShowbearingData}></Route>
+           <Route path="/bearing/usage" exact component={CreateBearingsUsge}></Route>
+
+
 
 
            <Route path="/Oil_Fluid" exact component={Home}></Route>

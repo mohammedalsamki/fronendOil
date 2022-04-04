@@ -147,7 +147,7 @@ export default function ShowBrakeData() {
     let isExecuted = window.confirm("Are you sure to execute this action?");
     console.log(isExecuted);
     if(isExecuted){
-    axios.delete(`https://backendoil.vercel.app/api/brake/brake/${id}`).then( () =>{
+    axios.delete(`https://backoil.herokuapp.com/api/brake/brake/${id}`).then( () =>{
       alert('delete done')
       
     window.location.reload(false);
@@ -155,7 +155,7 @@ export default function ShowBrakeData() {
   }
   useEffect(async()=>{
     getOptionsunit();
-   await axios.get(`https://backendoil.vercel.app/api/brake/brake/`).then( (allbrakes) =>{
+   await axios.get(`https://backoil.herokuapp.com/api/brake/brake/`).then( (allbrakes) =>{
       setbrakeList(allbrakes.data);
       setRows(allbrakes.data);
 
@@ -252,7 +252,7 @@ export default function ShowBrakeData() {
     }
   }
   const sendDataToAPI = () => {
-    axios.put(`https://backendoil.vercel.app/api/brake/brake/${_id}`, {
+    axios.put(`https://backoil.herokuapp.com/api/brake/brake/${_id}`, {
  
       StockQuantity:StockQuantity,
       UnitPrice:UnitPrice,

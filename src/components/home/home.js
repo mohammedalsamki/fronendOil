@@ -78,6 +78,14 @@ export default function mainHome() {
         </ListItemAvatar>
         <ListItemText primary="Pumps" secondary="test" />
       </ListItem>
+      <ListItem>
+        <ListItemAvatar>
+          <Avatar>
+          <NavLink activeClassName='active' to='/bearing'><ImageIcon  /></NavLink>
+          </Avatar>
+        </ListItemAvatar>
+        <ListItemText primary="Bearing" secondary="test" />
+      </ListItem>
     </List>
   );
 }

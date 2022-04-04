@@ -178,7 +178,7 @@ function Bumps() {
   }
 
   useEffect(async() => {
-    await axios.get(`https://backendoil.vercel.app/api/bumps/bumps/get`).then( (alllampssUseg) =>{
+    await axios.get(`https://backoil.herokuapp.com/api/bumps/bumps/get`).then( (alllampssUseg) =>{
         setbumpslList(alllampssUseg.data);
       })
       console.log(bumpslList)
@@ -192,7 +192,7 @@ function Bumps() {
     console.log(data)
   }, []);
   const deletelampsUsge=(id)=>{
-    axios.delete(`https://backendoil.vercel.app/api/bumps/${id}`).then( () =>{
+    axios.delete(`https://backoil.herokuapp.com/api/bumps/${id}`).then( () =>{
       window.location.reload(false);
     } )
   }

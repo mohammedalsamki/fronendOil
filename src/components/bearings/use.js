@@ -13,7 +13,6 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
-import { Link } from 'react-router-dom';
 import EditIcon from '@mui/icons-material/Edit';
 import { ClassNames } from '@emotion/react';
 import AddIcon from '@mui/icons-material/Add';
@@ -53,7 +52,9 @@ const style = {
     boxShadow: 24,
     p: 4
   };
-  
+
+
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -76,9 +77,11 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
  
 
-export default function LampsEStander() {
-  const [lampslList, setlampslList]= React.useState([]);
+export default function     () {
+  const [OiUsgelList, setOiUsgelList]= React.useState([]);
   const [open, setOpen] = React.useState(false);
+  const [id, setid]= React.useState('');
+
   const handleOpen = () =>{ 
     
     setOpen(true)};
@@ -87,47 +90,42 @@ export default function LampsEStander() {
 
     setOpen(false)};
 
-  const deletelampsUsge=(id)=>{
-    axios.delete(`https://backoil.herokuapp.com/api/lamps/lamps/EStander/${id}`).then( () =>{
+  const deleteBearingsUsge=(id)=>{
+    axios.delete(`https://backoil.herokuapp.com/api/bearing/use/${id}`).then( () =>{
       window.location.reload(false);
     } )
   }
 
   useEffect(()=>{
-    axios.get(`https://backoil.herokuapp.com/api/lamps/lamps/EStander`).then( (alllampssUseg) =>{
-      setlampslList(alllampssUseg.data);
+    axios.get(`https://backoil.herokuapp.com/api/bearing/use/get/`).then( (allBearingssUseg) =>{
+      setOiUsgelList(allBearingssUseg.data);
     })
   },[]);
-  const [id, setid]= React.useState('');
-
-  const [EStanderAr, setEStanderAr]= React.useState('');
-  const [EStanderEn,setEStanderEn]= React.useState('');
+  const [BearingsUsageAr, setBearingsUsageAr]= React.useState('');
+  const [BearingsUsageEn,setBearingsUsageEn]= React.useState('');
 
 
-const setID=(id,EStanderAr,EStanderEn)=>{
+const setID=(id,BearingsUsageAr,BearingsUsageEn)=>{
   console.log(id)
   localStorage.setItem('ID', id)
-  localStorage.setItem('EStanderAr', EStanderAr)
-  localStorage.setItem('EStanderEn', EStanderEn)
+  localStorage.setItem('BearingsUsageAr', BearingsUsageAr)
+  localStorage.setItem('BearingsUsageEn', BearingsUsageEn)
 
-  setEStanderAr(localStorage.getItem('EStanderAr'))
-  setEStanderEn(localStorage.getItem('EStanderEn'))
-  setid(localStorage.getItem('ID'))
-
-
-}
-       
-  const creatlampsusgefun = ()=>{
-    axios.post('https://backoil.herokuapp.com/api/lamps/lamps/EStander',{EStanderAr,EStanderEn}).then( () => {
+ setBearingsUsageAr(localStorage.getItem('BearingsUsageAr'))
+setBearingsUsageEn(localStorage.getItem('BearingsUsageEn'))
+setid(localStorage.getItem('ID'))
+}    
+  const creatBearingsusgefun = ()=>{
+    axios.post('https://backoil.herokuapp.com/api/bearing/use/',{BearingsUsageAr,BearingsUsageEn}).then( () => {
       window.location.reload(false);
     })
   }
 
   const sendDataToAPI = () => {
-    axios.put(`https://backoil.herokuapp.com/api/lamps/lamps/EStander/${id}`, {
+    axios.put(`https://backoil.herokuapp.com/api/bearing/use/${id}`, {
  
-        EStanderAr:EStanderAr,
-        EStanderEn:EStanderEn
+      BearingsUsageAr:BearingsUsageAr,
+      BearingsUsageEn:BearingsUsageEn
     
  
     }).then(() => {
@@ -142,7 +140,7 @@ alert("Updated")
   return (
     
     <>   	
-      <h2>EStander</h2>
+      <h2>test Fluid Usges</h2>
     <Box sx={{ minWidth: 120 }}>
     <br></br>
     <br></br>
@@ -157,20 +155,20 @@ alert("Updated")
 
             <TextField
         id="outlined-name"
-        label="EStanderEn"
-        onChange={(event)=>setEStanderEn(event.target.value)}
+        label="BearingsUsageEn"
+        onChange={(event)=>setBearingsUsageEn(event.target.value)}
       />
             <TextField
         id="outlined-name"
-        label="EStanderAr"
-        onChange={(event)=>setEStanderAr(event.target.value)}
+        label="BearingsUsageAr"
+        onChange={(event)=>setBearingsUsageAr(event.target.value)}
       />
 
     </Box>
 
     <br></br>
     <br></br>
-    <IconButton type="button" onClick={creatlampsusgefun}>
+    <IconButton type="button" onClick={creatBearingsusgefun}>
                  <AddIcon fontSize="larg"/>
                  Add
                  </IconButton>
@@ -187,8 +185,8 @@ alert("Updated")
         <TableRow>
 
             <StyledTableCell align="center">id</StyledTableCell>
-            <StyledTableCell align="center">Name En</StyledTableCell>
-            <StyledTableCell align="center">Name Ar</StyledTableCell>
+            <StyledTableCell align="center">name En</StyledTableCell>
+            <StyledTableCell align="center">name Ar</StyledTableCell>
             <StyledTableCell align="center">Update</StyledTableCell>
             <StyledTableCell align="center">Delete</StyledTableCell>
 
@@ -196,20 +194,20 @@ alert("Updated")
           </TableRow>
         </TableHead>
         <TableBody>
-          {lampslList.map((lamps,key) => (
+          {OiUsgelList.map((Bearings,key) => (
             
             <StyledTableRow key={key}>
-              <StyledTableCell align="center">{lamps._id}</StyledTableCell>
-              <StyledTableCell align="center">{lamps.EStanderEn}</StyledTableCell>
-              <StyledTableCell align="center">{lamps.EStanderAr}</StyledTableCell>
+              <StyledTableCell align="center">{Bearings._id}</StyledTableCell>
+              <StyledTableCell align="center">{Bearings.BearingsUsageEn}</StyledTableCell>
+              <StyledTableCell align="center">{Bearings.BearingsUsageAr}</StyledTableCell>
               <StyledTableCell align="center">
-                <IconButton aria-label='edit' onClick={()=>{setID(lamps._id,lamps.EStanderAr,lamps.EStanderEn); handleOpen()}}>
+                <IconButton aria-label='edit' onClick={()=>{setID(Bearings._id,Bearings.BearingsUsageAr,Bearings.BearingsUsageEn); handleOpen()}}>
                 <EditIcon fontSize="small"/>
                   </IconButton>
               </StyledTableCell>
 
               <StyledTableCell align="center">
-                <IconButton aria-label='delete' className={ClassNames.margin} onClick={()=> deletelampsUsge(lamps._id,lamps.EStanderAr)}>
+                <IconButton aria-label='delete' className={ClassNames.margin} onClick={()=> deleteBearingsUsge(Bearings._id,Bearings.BearingsUsageAr)}>
                   <DeleteIcon fontSize="small"/>
                   </IconButton>
                 </StyledTableCell>
@@ -239,29 +237,29 @@ alert("Updated")
 
 
                 <Form.Field align="center"  class="grid-container">
-                    <label>EStanderAr</label>
+                    <label>BearingsUsageAr</label>
                     <br></br>
-                    <textarea name="EStanderAr"
+                    <textarea name="BearingsUsageAr"
                     type="text"
                     class="item1"
                     className='inputform'
                     style={{ width:"300px",height :'100px' }}
-                    value={EStanderAr}
-                        onChange={(e) => setEStanderAr(e.target.value)}
-                        placeholder='EStanderAr' />
+                    value={BearingsUsageAr}
+                        onChange={(e) => setBearingsUsageAr(e.target.value)}
+                        placeholder='BearingsUsageAr' />
 
                 </Form.Field>
                 <Form.Field align="center"  class="grid-container">
-                    <label>EStanderEn</label>
+                    <label>BearingsUsageEn</label>
                     <br></br>
-                    <textarea name="EStanderEn"
+                    <textarea name="BearingsUsageEn"
                     type="text"
                     class="item1"
                     className='inputform'
                     style={{ width:"300px",height :'100px' }}
-                    value={EStanderEn}
-                        onChange={(e) => setEStanderEn(e.target.value)}
-                        placeholder='EStanderEn' />
+                    value={BearingsUsageEn}
+                        onChange={(e) => setBearingsUsageEn(e.target.value)}
+                        placeholder='BearingsUsageEn' />
 
                 </Form.Field>
                 <Button type='submit' className='submitform' align="center" onClick={sendDataToAPI}>Update</Button>

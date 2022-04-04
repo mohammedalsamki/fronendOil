@@ -5,22 +5,22 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import AddIcon from '@mui/icons-material/Add';
 import { Grid } from '@material-ui/core';
-import "../../style/select.css"
+import "../style/select.css"
 
 
 const ulStyle = {  padding: "12px 10px",  width:'40%', listStyleType:'none'}
 const selectStyle = {padding: "12px 10px", listStyleType:'none',width:"300px",height :'100px'}
 
 
-export default class Test extends Component {
+export default class Createbearing extends Component {
 
   constructor(props){
       
     super(props)
     this.state = {
-      carCareUsage:'',
+      usedFor:'',
       Brand:'',
-      StockQuantiti:0,
+      StockQuantity:0,
       UnitPrice:0,
       SaelsPrice:0,
       Unit:'',
@@ -43,26 +43,15 @@ export default class Test extends Component {
   async getFiles(files){
     await  this.setState({ files: files })
   }
-  async getOptionsunit(){
-
-    const res = await axios.get('https://backoil.herokuapp.com/api/oil/unit')
-    const data = res.data
-    const options = data.map(d => ({
-      "value" : d._id,
-      "label" : d.UnitNameEn
-
-    }))
-
-    this.setState({unitselectOptions: options})
-  }
+ 
  async getOptions(){
 
-    const res = await axios.get('https://backoil.herokuapp.com/api/carCare/carCare/usage')
+    const res = await axios.get('https://backoil.herokuapp.com/api/bearing/use/get')
     const data = res.data
     
     const options = data.map(d => ({
       "value" : d._id,
-      "label" : d.carCareUsageEn
+      "label" : d.usedForEn
 
     }))
     this.setState({selectOptions: options})
@@ -88,7 +77,7 @@ export default class Test extends Component {
     
    this.setState({ID:e.value})
    console.log(this.state.ID)
-   this.setState({carCareUsage:e.label})
+   this.setState({usedFor:e.label})
 
    this.setState({id:e.value, name:e.label})
 
@@ -107,10 +96,6 @@ export default class Test extends Component {
   componentDidMount(){
       this.getOptions()
       this.getOptionsBrand()
-      this.getOptionsunit()
-
-
-
 
   }
   async handleFile (e) {
@@ -131,15 +116,14 @@ export default class Test extends Component {
 
   };
   async creatOill (e){
-    // this.setState({carCareUsage:e.label})
+    // this.setState({usedFor:e.label})
 
-     let  x=await {
-      carCareUsage:this.state.carCareUsage,
+    let x= {
+      usedFor:this.state.usedFor,
       Brand:this.state.Brand,
-      StockQuantiti:this.state.StockQuantiti,
+      StockQuantity:this.state.StockQuantity,
       UnitPrice:this.state.UnitPrice,
       Unit:this.state.Unit,
-      Capasity:this.state.Capacity,
       SaelsPrice:this.state.SaelsPrice,
       BrandPartNumber:this.state.BrandPartNumber,
       OEMPartNumber:this.state.OEMPartNumber,
@@ -149,10 +133,12 @@ export default class Test extends Component {
       MinQty:this.state.MinQty
 
     }
-    console.log(this.state.StockQuantiti,x)
-   await axios.post('https://backoil.herokuapp.com/api/carCare/carCare',x).then( () => {
-      window.location.reload(false);
+    console.log(x)
+   await axios.post('https://backoil.herokuapp.com/api/bearing/Bearings/create',x).then( () => {
     alert("item added")
+
+      window.location.reload(false);
+
     })
   }
   render() {
@@ -162,7 +148,7 @@ export default class Test extends Component {
         <Grid container    style={{  margin: "10px",justifyContent: "space-around"}}>
 
         <Select justifyContent="center" placeholder="Brand" options={this.state.BrandselectOptions} onChange={this.BrandhandleChange.bind(this)} />
-        <Select justifyContent="center" placeholder="Usges" options={this.state.selectOptions} onChange={this.handleChange.bind(this)} />
+        <Select justifyContent="center" placeholder="usedFor" options={this.state.selectOptions} onChange={this.handleChange.bind(this)} />
         </Grid>
         <Grid container    style={{  margin: "10px",justifyContent: "space-around"}}>
         
@@ -173,25 +159,6 @@ export default class Test extends Component {
         <Grid container    style={{  margin: "10px",justifyContent: "space-around"}}>
         
       
-         </Grid>
-         <Grid container    style={{  margin: "10px",justifyContent: "space-around"}}>
-        
-        
-
-
-        <TextField
-        id="outlined-number"
-        placeholder="Capacity"
-        type="number"
-        style={ulStyle}
-          onChange={(e)=>this.setState({Capacity:e.target.value})}
-        InputLabelProps={{
-        shrink: true,
-        }}
-        />
-
-         
-         <Select maxWidth="100%"  options={this.state.unitselectOptions} onChange={this.unithandleChange.bind(this)} placeholder="Unit"  style={selectStyle}  />
          </Grid>
          
          <Grid container  justifyContent="center" style={{ margin: "0px 20px 0px 0px"}}>
@@ -269,10 +236,10 @@ export default class Test extends Component {
          style={ulStyle}
          
         id="outlined-number"
-         placeholder="StockQuantiti"
+         placeholder="StockQuantity"
 
           type="number"
-          onChange={(e)=>this.setState({StockQuantiti:e.target.value})}
+          onChange={(e)=>this.setState({StockQuantity:e.target.value})}
           InputLabelProps={{
             shrink: true,
           }}

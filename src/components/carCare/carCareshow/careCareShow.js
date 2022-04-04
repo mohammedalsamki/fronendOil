@@ -123,7 +123,7 @@ export default function ShowcarCareData() {
   const [unitList, setunitList] = React.useState(false);
   const getOptionsunit=async()=>{
 
-    const res = await axios.get('https://backendoil.vercel.app/api/oil/unit')
+    const res = await axios.get('https://backoil.herokuapp.com/api/oil/unit')
     const data = res.data
     const options = data.map(d => ({
       "value" : d._id,
@@ -149,7 +149,7 @@ export default function ShowcarCareData() {
     let isExecuted = window.confirm("Are you sure to execute this action?");
     console.log(isExecuted);
     if(isExecuted){
-    axios.delete(`https://backendoil.vercel.app/api/carCare/carCare/${id}`).then( () =>{
+    axios.delete(`https://backoil.herokuapp.com/api/carCare/carCare/${id}`).then( () =>{
       alert('delete done')
       
     window.location.reload(false);
@@ -157,7 +157,7 @@ export default function ShowcarCareData() {
   }
   useEffect(async()=>{
     getOptionsunit();
-   await axios.get(`https://backendoil.vercel.app/api/carCare/carCare/`).then( (allcarCares) =>{
+   await axios.get(`https://backoil.herokuapp.com/api/carCare/carCare/`).then( (allcarCares) =>{
       setcarCareList(allcarCares.data);
       setRows(allcarCares.data);
 
@@ -258,7 +258,7 @@ export default function ShowcarCareData() {
     }
   }
   const sendDataToAPI = () => {
-    axios.put(`https://backendoil.vercel.app/api/carCare/carCare/${_id}`, {
+    axios.put(`https://backoil.herokuapp.com/api/carCare/carCare/${_id}`, {
  
       StockQuantiti:StockQuantiti,
       UnitPrice:UnitPrice,

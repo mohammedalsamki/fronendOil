@@ -97,14 +97,14 @@ export default function CreatebrakeUsge() {
     let isExecuted = window.confirm("Are you sure to execute this action?");
     console.log(isExecuted);
     if(isExecuted){
-    axios.delete(`https://backendoil.vercel.app/api/brake/brake/usage/${id}`).then( () =>{
+    axios.delete(`https://backoil.herokuapp.com/api/brake/brake/usage/${id}`).then( () =>{
       window.location.reload(false);
     } )
 }
   }
 
   useEffect(()=>{
-    axios.get(`https://backendoil.vercel.app/api/brake/brake/usage`).then( (allbrakesUseg) =>{
+    axios.get(`https://backoil.herokuapp.com/api/brake/brake/usage`).then( (allbrakesUseg) =>{
       setbrakeUsgelList(allbrakesUseg.data);
     })
   },[]);
@@ -126,7 +126,7 @@ const setID=(id,brakeUsageAr,brakeUsageEn)=>{
 
 }
 const sendDataToAPI = () => {
-    axios.put(`https://backendoil.vercel.app/api/brake/brake/usage/${id}`, {
+    axios.put(`https://backoil.herokuapp.com/api/brake/brake/usage/${id}`, {
  
         brakeUsageAr,
         brakeUsageEn,
@@ -142,7 +142,7 @@ alert("Updated")
     })
 }
   const creatbrakeusgefun = ()=>{
-    axios.post('https://backendoil.vercel.app/api/brake/brake/usage',{brakeUsageAr,brakeUsageEn}).then( () => {
+    axios.post('https://backoil.herokuapp.com/api/brake/brake/usage',{brakeUsageAr,brakeUsageEn}).then( () => {
       window.location.reload(false);
     })
   }

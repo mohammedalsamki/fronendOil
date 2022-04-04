@@ -223,8 +223,6 @@ function Bumps() {
         <TableRow>
             <StyledTableCell align="center">id</StyledTableCell>
             <StyledTableCell align="center">Brand</StyledTableCell>
-            <StyledTableCell align="center">Name EN</StyledTableCell>
-            <StyledTableCell align="center">Name Ar</StyledTableCell>
             <StyledTableCell align="center">Use</StyledTableCell>
             <StyledTableCell align="center">Note</StyledTableCell>
             <StyledTableCell align="center">BrandPartNumber</StyledTableCell>
@@ -244,8 +242,6 @@ function Bumps() {
             <StyledTableRow key={key}>
               <StyledTableCell align="center">{lamps._id}</StyledTableCell>
               <StyledTableCell align="center">{lamps.Brand}</StyledTableCell>
-              <StyledTableCell align="center">{lamps.name}</StyledTableCell>
-              <StyledTableCell align="center">{lamps.nameAr}</StyledTableCell>
               <StyledTableCell align="center">{lamps.usedFor}</StyledTableCell>
               <StyledTableCell align="center">{lamps.Note}</StyledTableCell>
               <StyledTableCell align="center">{lamps.BrandPartNumber}</StyledTableCell>

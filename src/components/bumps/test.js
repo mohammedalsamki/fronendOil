@@ -138,8 +138,8 @@ export default class Test extends Component {
     // this.setState({originated:e.label})
 
     let x= {
-      name:this.state.name,
-      nameAr:this.state.nameAr,
+      // name:this.state.name,
+      // nameAr:this.state.nameAr,
       usedFor:this.state.usedFor,
       Brand:this.state.Brand,
       category: "624401b862d482a5f4781c63",      
@@ -167,27 +167,7 @@ export default class Test extends Component {
       <div>
         <Grid container    style={{  margin: "10px",justifyContent: "space-around"}}>
 
-        <TextField
-         
-         id="outlined-number"
-          style={ulStyle}
-          placeholder="Name En"
-           type="text"
-           onChange={(e)=>this.setState({name:e.target.value})}
-           InputLabelProps={{
-             shrink: true,
-           }}
-         />           <TextField
-         
-         id="outlined-number"
-          style={ulStyle}
-          placeholder="Name Ar"
-           type="text"
-           onChange={(e)=>this.setState({nameAr:e.target.value})}
-           InputLabelProps={{
-             shrink: true,
-           }}
-         />
+
         <Select justifyContent="center" placeholder="Brand" options={this.state.BrandselectOptions} onChange={this.BrandhandleChange.bind(this)} />
         <Select justifyContent="center" placeholder="Use" options={this.state.selectOptions} onChange={this.handleChange.bind(this)} />
         </Grid>

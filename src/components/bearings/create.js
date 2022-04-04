@@ -51,7 +51,7 @@ export default class Createbearing extends Component {
     
     const options = data.map(d => ({
       "value" : d._id,
-      "label" : d.usedForEn
+      "label" : d.BearingsUsageEn
 
     }))
     this.setState({selectOptions: options})

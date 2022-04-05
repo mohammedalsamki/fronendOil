@@ -31,6 +31,8 @@ import Bumps from "./components/bumps/bumps"
 import CreatebumpsUsge from "./components/bumps/use";
 import ShowbearingData from "./components/bearings/show";
 import CreateBearingsUsge from "./components/bearings/use";
+import CreateSuspentionUse from "./components/Suspention/use";
+import ShowSuspentionData from "./components/Suspention/show";
 
 
 function App() {
@@ -63,7 +65,11 @@ function App() {
            <Route path="/" exact component={mainHome}></Route>
            <Route path="/Bumps" exact component={Bumps}></Route>
            <Route path="/bearing" exact component={ShowbearingData}></Route>
+           <Route path="/Suspention" exact component={ShowSuspentionData}></Route>
+
            <Route path="/bearing/usage" exact component={CreateBearingsUsge}></Route>
+           <Route path="/Suspention/usage" exact component={CreateSuspentionUse}></Route>
+
 
 
 

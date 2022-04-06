@@ -41,7 +41,8 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: "90%",
+  width: "80%",
+  height:"80%",
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
@@ -132,6 +133,8 @@ const commandComponents = {
 };
 export default () => {
   let [catName,setcatName]= React.useState(String);
+  let [catID,setcatID]= React.useState(String);
+
   
     const [PartslList, setPartslList]= useState([]);
     const [rows, setRows] = useState(PartslList);
@@ -147,6 +150,9 @@ export default () => {
         }
         fetchData();
     localStorage.setItem('catName', catName)
+    localStorage.setItem('catID', catID)
+
+    
 
     }, []);
 
@@ -313,8 +319,14 @@ export default () => {
         text="Show Info"
         onClick={() => {{ 
           localStorage.setItem('catName', restProps.row.name);
+          localStorage.setItem('catID', restProps.row._id);
+
           setcatName(restProps.row.name);
+          setcatID(restProps.row._id);
+
           console.log(catName);
+          console.log(catID);
+
           handleOpen() }} }
       />
     </TableEditColumn.Cell>
@@ -371,8 +383,9 @@ export default () => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-        <ProdectTable />
-
+          <div>
+        <ProdectTable  />
+        </div>
         </Box>
       </Modal>
     </>

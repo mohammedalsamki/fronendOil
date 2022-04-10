@@ -14,7 +14,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import {  Box } from '@mui/system';
 import ModalUnstyled from '@mui/base/ModalUnstyled';
 import { ClassNames } from '@emotion/react';
-import { useHistory } from 'react-router';
 import { Form, Button } from 'semantic-ui-react';
 import EditIcon from '@mui/icons-material/Edit';
 import Select from 'react-select'
@@ -86,7 +85,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 
 export default function ShowOilsData() {
-  let history = useHistory();
 
   const [Brand, setBrand]= React.useState('');
   const [_id,set_id]= React.useState('');

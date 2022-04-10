@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
@@ -14,21 +15,15 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import {  Box } from '@mui/system';
 import ModalUnstyled from '@mui/base/ModalUnstyled';
 import { ClassNames } from '@emotion/react';
-import { useHistory } from 'react-router';
 import { Form, Button } from 'semantic-ui-react';
 import EditIcon from '@mui/icons-material/Edit';
-import useStyles from '../../../styles';
+import useStyles from '../../styles';
 import AddIcon from '@mui/icons-material/Add';
 import { AppBar } from '@material-ui/core';
 import { NavLink} from 'react-router-dom';
 import SearchBar from "material-ui-search-bar";
 import Select from 'react-select'
-import Createbelt from '../createBelt/CreateBelt';
-
-
-
-
-
+import CreateWiper from './create';
 
 const StyledModal = styled(ModalUnstyled)`
   position: fixed;
@@ -87,23 +82,20 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 
-export default function ShowbeltData() {
-  let history = useHistory();
-  const [beltList, setbeltList]= React.useState([]);
+export default function ShowWiperData() {
+  const [WiperList, setWiperList]= React.useState([]);
   const classes= useStyles();
-  const [rows, setRows] = React.useState(beltList);
-
-  const [searched, setSearched] = React.useState(beltList);
-
+  const [rows, setRows] = React.useState(WiperList);
+  const [searched, setSearched] = React.useState(WiperList);
   const requestSearch = (searchedVal) => {
-    const beltedRows = beltList.belt((beltList) => {
-      return beltList.BrandPartNumber.toLowerCase().includes(searchedVal.toLowerCase());
+    const WiperedRows = WiperList.filter((WiperList) => {
+      return WiperList.OEMPartNumber.toLowerCase().includes(searchedVal.toLowerCase());
     });
 
-    setRows(beltedRows);
+    setRows(WiperedRows);
   };
   const requestSearchCar = (searchedVal) => {
-    const brakeedRows = beltList.filter((brakeList) => {
+    const brakeedRows = WiperList.filter((brakeList) => {
       return brakeList.Note.toLowerCase().includes(searchedVal.toLowerCase());
     });
 
@@ -115,28 +107,11 @@ export default function ShowbeltData() {
   };
   const [originList, setoriginList] = React.useState(false);
 
-  const getOptionsOrigin=async()=>{
-
-    const res = await axios.get('https://backoil.herokuapp.com/api/belt/belt/usage')
-    const data = res.data
-    const options = data.map(d => ({
-      "value" : d._id,
-      "label" : d.originatedEn
-
-
-    }))
-
-    // this.setState({unitselectOptions: options})
-    setoriginList(options)
-  }
-
   let [MinQty,setMinQty]= React.useState(0);
   let [Imagenew,setImagenew]= React.useState(String);
 
   const [open, setOpen] = React.useState(false);
   const getOptionsunit=async()=>{
-
-    
   }
 
   const handleOpen = () =>{ 
@@ -148,11 +123,11 @@ export default function ShowbeltData() {
     setOpen(false)};
   
 
-  const deletebelt=(id)=>{
+  const deleteWiper=(id)=>{
     let isExecuted = window.confirm("Are you sure to execute this action?");
     console.log(isExecuted);
     if(isExecuted){
-    axios.delete(`https://backoil.herokuapp.com/api/belt/belt/${id}`).then( () =>{
+    axios.delete(`https://backoil.herokuapp.com/api/Wiper/Wiper/${id}`).then( () =>{
       alert('delete done')
       
     window.location.reload(false);
@@ -160,16 +135,15 @@ export default function ShowbeltData() {
   }
   useEffect(async()=>{
     getOptionsunit();
-    getOptionsOrigin();
-    await axios.get(`https://backoil.herokuapp.com/api/belt/belt/`).then( (allbelts) =>{
-      setbeltList(allbelts.data);
-      setRows(allbelts.data);
+   await axios.get(`https://backoil.herokuapp.com/api/Wiper/Wiper`).then( (allWipers) =>{
+      setWiperList(allWipers.data);
+      setRows(allWipers.data);
 
       localStorage.setItem('_id', _id)
     localStorage.setItem('Brand', Brand)
-    localStorage.setItem('originated', originated)
+    localStorage.setItem('WiperUsage', WiperUsage)
     localStorage.setItem('Unit', Unit)
-    localStorage.setItem('StockQuantity', StockQuantity)
+    localStorage.setItem('StockQuantiti', StockQuantiti)
     localStorage.setItem('UnitPrice', UnitPrice)
     localStorage.setItem('SaelsPrice', SaelsPrice)
 
@@ -195,10 +169,10 @@ export default function ShowbeltData() {
   },[]);
   const [Brand, setBrand]= React.useState('');
   const [_id,set_id]= React.useState('');
-  let [originated,setoriginated]= React.useState('');
+  let [WiperUsage,setWiperUsage]= React.useState('');
 
   let [Unit,setUnit]= React.useState('');
-  let [StockQuantity,setStockQuantity]= React.useState('');
+  let [StockQuantiti,setStockQuantiti]= React.useState('');
   let [UnitPrice,setUnitPrice]= React.useState('');
   let [SaelsPrice,setSaelsPrice]= React.useState('');
 
@@ -209,13 +183,13 @@ export default function ShowbeltData() {
   let [BrandPartNumber,setBrandPartNumber]= React.useState('');
   console.log(_id)
 
-  const setID=(_id,Brand,originated,Unit,StockNumber,ItemImage,Note,StockQuantity,UnitPrice,SaelsPrice,OEMPartNumber,MinQty,BrandPartNumber)=>{
+  const setID=(_id,Brand,WiperUsage,Unit,StockNumber,ItemImage,Note,StockQuantiti,UnitPrice,SaelsPrice,OEMPartNumber,MinQty,BrandPartNumber)=>{
     // console.log(_id)
     localStorage.setItem('_id', _id)
     localStorage.setItem('Brand', Brand)
-    localStorage.setItem('originated', originated)
+    localStorage.setItem('WiperUsage', WiperUsage)
     localStorage.setItem('Unit', Unit)
-    localStorage.setItem('StockQuantity', StockQuantity)
+    localStorage.setItem('StockQuantiti', StockQuantiti)
     localStorage.setItem('UnitPrice', UnitPrice)
     localStorage.setItem('SaelsPrice', SaelsPrice)
 
@@ -229,8 +203,8 @@ export default function ShowbeltData() {
 
     setBrand(localStorage.getItem('Brand'));
     set_id(localStorage.getItem('_id'));
-    setoriginated(localStorage.getItem('originated'))
-    setStockQuantity(localStorage.getItem('StockQuantity'))
+    setWiperUsage(localStorage.getItem('WiperUsage'))
+    setStockQuantiti(localStorage.getItem('StockQuantiti'))
     setUnitPrice(localStorage.getItem('UnitPrice'))
     setSaelsPrice(localStorage.getItem('SaelsPrice'))
     setUnit(localStorage.getItem('Unit'))
@@ -268,9 +242,9 @@ export default function ShowbeltData() {
     }
   }
   const sendDataToAPI = () => {
-    axios.put(`https://backoil.herokuapp.com/api/belt/belt/${_id}`, {
+    axios.put(`https://backoil.herokuapp.com/api/Wiper/Wiper/${_id}`, {
  
-      StockQuantity:StockQuantity,
+      StockQuantiti:StockQuantiti,
       UnitPrice:UnitPrice,
       SaelsPrice:SaelsPrice,
       Note:Note,
@@ -279,13 +253,13 @@ export default function ShowbeltData() {
       StockNumber:StockNumber,
       MinQty:MinQty,
       ItemImage:Imagenew,
-      originated
+      WiperUsage
     
  
     }).then(() => {
 alert("Updated")
 
-    history.push('/belt');
+    // history.push('/Wiper');
         localStorage.clear();
       window.location.reload(false);
 
@@ -297,7 +271,7 @@ alert("Updated")
 const [openadd, setOpenadd] = React.useState(false);
 const handleOpenAdd = () => setOpenadd(true);
 const handleCloseAdd = () => setOpenadd(false);
-console.log(SaelsPrice,_id,UnitPrice,StockQuantity)
+console.log(SaelsPrice,_id,UnitPrice,StockQuantiti)
 
   return (
     < >
@@ -307,7 +281,6 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantity)
                  <AddIcon fontSize="larg"/>
                  Add
                  </IconButton>
-                 <NavLink activeClassName='active' to='/Belt/usage'>originated</NavLink>
           </div>
 
                  </AppBar>
@@ -321,11 +294,11 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantity)
         BackdropComponent={Backdrop}
       >
         <Box sx={style}>
-        <Createbelt /> 
+        <CreateWiper /> 
         </Box>
       </StyledModal>  	
       </div>
-    <h2>belts in Stock</h2>
+    <h2>Wipers in Stock</h2>
     <div >
     <SearchBar
           style={{ width:"400px",float:'left', marginLeft: '450px',border: '5px solid gray' }}
@@ -351,13 +324,13 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantity)
           <StyledTableCell align="center">Brand</StyledTableCell>
           <StyledTableCell align="center">Item Image</StyledTableCell>
 
-            <StyledTableCell align="center">originated</StyledTableCell>
+            <StyledTableCell align="center">Dimensions</StyledTableCell>
             <StyledTableCell align="center">Note</StyledTableCell>
             <StyledTableCell align="center">OEMPartNumber</StyledTableCell>
             <StyledTableCell align="center">BrandPartNumber</StyledTableCell>
             <StyledTableCell align="center">StockNumber</StyledTableCell>
             <StyledTableCell align="center">MinQty</StyledTableCell>
-            <StyledTableCell align="center">StockQuantity</StyledTableCell>
+            <StyledTableCell align="center">StockQuantiti</StyledTableCell>
 
             <StyledTableCell align="center">UnitPrice</StyledTableCell>
             <StyledTableCell align="center">SaelsPrice</StyledTableCell>
@@ -369,30 +342,30 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantity)
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((belt,key) =>  {
-            if(belt.MinQty<belt.StockQuantity){
+          {rows.map((Wiper,key) =>  {
+            if(Wiper.MinQty<Wiper.StockQuantiti){
             return(
             <StyledTableRow style={{backgroundColor: ''}} key={key}>
-              <StyledTableCell align="center">{belt.Brand}</StyledTableCell>
+              <StyledTableCell align="center">{Wiper.Brand}</StyledTableCell>
               <StyledTableCell align="center">
-                <img src={belt.ItemImage} alt="not found" width="70" height="70"></img>
+                <img src={Wiper.ItemImage} alt="not found" width="70" height="70"></img>
                 </StyledTableCell>
               <StyledTableCell align="center" component="th" scope="row">
-                {belt.originated}
+                {Wiper.WiperUsage}
               </StyledTableCell>
 
-              <StyledTableCell align="center">{belt.Note}</StyledTableCell>
-              <StyledTableCell align="center">{belt.OEMPartNumber}</StyledTableCell>
-              <StyledTableCell align="center">{belt.BrandPartNumber}</StyledTableCell>
-              <StyledTableCell align="center">{belt.StockNumber}</StyledTableCell>
-              <StyledTableCell align="center">{belt.MinQty}</StyledTableCell>
+              <StyledTableCell align="center">{Wiper.Note}</StyledTableCell>
+              <StyledTableCell align="center">{Wiper.OEMPartNumber}</StyledTableCell>
+              <StyledTableCell align="center">{Wiper.BrandPartNumber}</StyledTableCell>
+              <StyledTableCell align="center">{Wiper.StockNumber}</StyledTableCell>
+              <StyledTableCell align="center">{Wiper.MinQty}</StyledTableCell>
 
-              <StyledTableCell align="center">{belt.StockQuantity}</StyledTableCell>
-              <StyledTableCell align="center">{belt.UnitPrice}</StyledTableCell>
-              <StyledTableCell align="center">{belt.SaelsPrice}</StyledTableCell>
+              <StyledTableCell align="center">{Wiper.StockQuantiti}</StyledTableCell>
+              <StyledTableCell align="center">{Wiper.UnitPrice}</StyledTableCell>
+              <StyledTableCell align="center">{Wiper.SaelsPrice}</StyledTableCell>
               <StyledTableCell align="center">
       <IconButton type="button"  onClick={()=>{
-      setID(belt._id,belt.Brand,belt.originated,belt.Unit,belt.StockNumber,belt.ItemImage,belt.Note,belt.StockQuantity,belt.UnitPrice,belt.SaelsPrice,belt.OEMPartNumber,belt.MinQty,belt.BrandPartNumber);
+      setID(Wiper._id,Wiper.Brand,Wiper.WiperUsage,Wiper.Unit,Wiper.StockNumber,Wiper.ItemImage,Wiper.Note,Wiper.StockQuantiti,Wiper.UnitPrice,Wiper.SaelsPrice,Wiper.OEMPartNumber,Wiper.MinQty,Wiper.BrandPartNumber);
         handleOpen()}} >
                         <EditIcon fontSize="small"/>
 
@@ -401,7 +374,7 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantity)
     </StyledTableCell>
 
               <StyledTableCell align="center">
-                <IconButton aria-label='delete' className={ClassNames.margin} onClick={()=> deletebelt(belt._id)}>
+                <IconButton aria-label='delete' className={ClassNames.margin} onClick={()=> deleteWiper(Wiper._id)}>
                   <DeleteIcon fontSize="small"/>
                   </IconButton>
                 </StyledTableCell>
@@ -411,26 +384,26 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantity)
         }else{
           return(
             <StyledTableRow style={{backgroundColor: 'red'}} key={key}>
-              <StyledTableCell align="center">{belt.Brand}</StyledTableCell>
+              <StyledTableCell align="center">{Wiper.Brand}</StyledTableCell>
               <StyledTableCell align="center">
-                <img src={belt.ItemImage} alt="not found" width="70" height="70"></img>
+                <img src={Wiper.ItemImage} alt="not found" width="70" height="70"></img>
                 </StyledTableCell>
               <StyledTableCell align="center" component="th" scope="row">
-                {belt.originated}
+                {Wiper.WiperUsage}
               </StyledTableCell>
 
-              <StyledTableCell align="center">{belt.Note}</StyledTableCell>
-              <StyledTableCell align="center">{belt.OEMPartNumber}</StyledTableCell>
-              <StyledTableCell align="center">{belt.BrandPartNumber}</StyledTableCell>
-              <StyledTableCell align="center">{belt.StockNumber}</StyledTableCell>
-              <StyledTableCell align="center">{belt.MinQty}</StyledTableCell>
+              <StyledTableCell align="center">{Wiper.Note}</StyledTableCell>
+              <StyledTableCell align="center">{Wiper.OEMPartNumber}</StyledTableCell>
+              <StyledTableCell align="center">{Wiper.BrandPartNumber}</StyledTableCell>
+              <StyledTableCell align="center">{Wiper.StockNumber}</StyledTableCell>
+              <StyledTableCell align="center">{Wiper.MinQty}</StyledTableCell>
 
-              <StyledTableCell align="center">{belt.StockQuantity}</StyledTableCell>
-              <StyledTableCell align="center">{belt.UnitPrice}</StyledTableCell>
-              <StyledTableCell align="center">{belt.SaelsPrice}</StyledTableCell>
+              <StyledTableCell align="center">{Wiper.StockQuantiti}</StyledTableCell>
+              <StyledTableCell align="center">{Wiper.UnitPrice}</StyledTableCell>
+              <StyledTableCell align="center">{Wiper.SaelsPrice}</StyledTableCell>
               <StyledTableCell align="center">
       <IconButton type="button"  onClick={()=>{
-      setID(belt._id,belt.Brand,belt.originated,belt.Unit,belt.StockNumber,belt.ItemImage,belt.Note,belt.StockQuantity,belt.UnitPrice,belt.SaelsPrice,belt.OEMPartNumber,belt.MinQty,belt.BrandPartNumber);
+      setID(Wiper._id,Wiper.Brand,Wiper.WiperUsage,Wiper.Unit,Wiper.StockNumber,Wiper.ItemImage,Wiper.Note,Wiper.StockQuantiti,Wiper.UnitPrice,Wiper.SaelsPrice,Wiper.OEMPartNumber,Wiper.MinQty,Wiper.BrandPartNumber);
         handleOpen()}} >
                         <EditIcon fontSize="small"/>
 
@@ -439,7 +412,7 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantity)
     </StyledTableCell>
 
               <StyledTableCell align="center">
-                <IconButton aria-label='delete' className={ClassNames.margin} onClick={()=> deletebelt(belt._id)}>
+                <IconButton aria-label='delete' className={ClassNames.margin} onClick={()=> deleteWiper(Wiper._id)}>
                   <DeleteIcon fontSize="small"/>
                   </IconButton>
                 </StyledTableCell>
@@ -467,15 +440,26 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantity)
           <h2>Brand: {Brand}</h2>
 
 
-          <h2>originated: {originated}</h2>
+          <h2>Dimensions: {WiperUsage}</h2>
 
-          <Select placeholder="{originated}" options={originList}   onChange={(e) => setoriginated(e.label)} />
 
           </div>
           <br></br>
         <Form>
 
+        <Form.Field align="center"  class="grid-container">
+                    <label>Dimensions</label>
+                    <br></br>
+                    <textarea name="Dimensions"
+                    type="text"
+                    class="item1"
+                    className='inputform'
+                    style={{ width:"300px",height :'100px' }}
+                    value={WiperUsage}
+                        onChange={(e) => setWiperUsage(e.target.value)}
+                        placeholder='Note' />
 
+                </Form.Field>
         
                 <Form.Field align="center"  class="grid-container">
                     <label>Note</label>
@@ -541,13 +525,13 @@ console.log(SaelsPrice,_id,UnitPrice,StockQuantity)
                 <Form.Field align="center"  class="grid-container">
                     <label>StockQuantity</label>
                     <br></br>
-                    <input name="StockQuantity"
+                    <input name="StockQuantiti"
                     type="number"
                     class="item1"
                     className='inputform'
-                    value={StockQuantity}
-                        onChange={(e) => setStockQuantity(e.target.value)}
-                        placeholder='StockQuantity' />
+                    value={StockQuantiti}
+                        onChange={(e) => setStockQuantiti(e.target.value)}
+                        placeholder='StockQuantiti' />
 
                 </Form.Field>
                 <Form.Field align="center"  class="grid-container">

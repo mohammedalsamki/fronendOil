@@ -23,7 +23,6 @@ import { AppBar } from '@material-ui/core';
 import { NavLink} from 'react-router-dom';
 import SearchBar from "material-ui-search-bar";
 import CreateFilter from '../createFilter/CreateFilter';
-import { async } from 'q';
 
 
 
@@ -118,7 +117,6 @@ export default function ShowFilterData() {
   let [Imagenew,setImagenew]= React.useState(String);
 
   const [open, setOpen] = React.useState(false);
-  const [unitList, setunitList] = React.useState(false);
   const getOptionsunit=async()=>{
 
   }

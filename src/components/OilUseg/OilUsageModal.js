@@ -40,13 +40,13 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export default function AddSpec() {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => {
-    setIDSpec(localStorage.getItem('ID'))
+  // const [open, setOpen] = React.useState(false);
+  // const handleOpen = () => {
+  //   setIDSpec(localStorage.getItem('ID'))
 
-    setOpen(true);
-  };
-  const handleClose = () => setOpen(false);
+  //   setOpen(true);
+  // };
+  // const handleClose = () => setOpen(false);
 
     let history = useHistory();
     const [Specs, setOilSpec] = useState('');
@@ -65,8 +65,7 @@ export default function AddSpec() {
         }).then(() => {
           window.location.reload(false);
             history.push('/OilUseg');
-            // localStorage.clear();
-            // console.log(Specs)
+
         }).catch(error => {
           console.log(error.response)
       });

@@ -64,6 +64,7 @@ export default function CreateOilUsge() {
   const [OilUsageAr, setOilUsageAr]= React.useState('');
   const [OilUsageEn,setOilUsageEn]= React.useState('');
   let [Specs,setSpecs]= React.useState('');
+  setSpecs('');
 
 
 const setID=(id,OilUsageAr,OilUsageEn,Specs)=>{

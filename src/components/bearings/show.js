@@ -14,7 +14,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import {  Box } from '@mui/system';
 import ModalUnstyled from '@mui/base/ModalUnstyled';
 import { ClassNames } from '@emotion/react';
-import { useHistory } from 'react-router';
 import { Form, Button } from 'semantic-ui-react';
 import EditIcon from '@mui/icons-material/Edit';
 import useStyles from '../../styles';
@@ -88,7 +87,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 
 export default function ShowbearingData() {
-  let history = useHistory();
   const [bearingList, setbearingList]= React.useState([]);
   const classes= useStyles();
   const [rows, setRows] = React.useState(bearingList);
@@ -134,7 +132,6 @@ export default function ShowbearingData() {
   let [Imagenew,setImagenew]= React.useState(String);
 
   const [open, setOpen] = React.useState(false);
-  const [unitList, setunitList] = React.useState(false);
   const getOptionsunit=async()=>{
 
     

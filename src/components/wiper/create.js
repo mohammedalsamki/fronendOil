@@ -11,15 +11,15 @@ const ulStyle = {  padding: "12px 10px",  width:'40%', listStyleType:'none'}
 const selectStyle = {padding: "12px 10px", listStyleType:'none',width:"300px",height :'100px'}
 
 
-export default class CreateSuspention extends Component {
+export default class CreateWiper extends Component {
 
   constructor(props){
       
     super(props)
     this.state = {
-      usedFor:'',
+      WiperUsage:'',
       Brand:'',
-      StockQuantity:0,
+      StockQuantiti:0,
       UnitPrice:0,
       SaelsPrice:0,
       Unit:'',
@@ -43,19 +43,7 @@ export default class CreateSuspention extends Component {
     await  this.setState({ files: files })
   }
  
- async getOptions(){
 
-    const res = await axios.get('https://backoil.herokuapp.com/api/Suspention/use/get')
-    const data = res.data
-    
-    const options = data.map(d => ({
-      "value" : d._id,
-      "label" : d.SuspentionsUsageEn
-
-    }))
-    this.setState({selectOptions: options})
-
-  }
   async getOptionsBrand(){
 
     const res = await axios.get('https://backoil.herokuapp.com/api/oil/Brand')
@@ -71,16 +59,7 @@ export default class CreateSuspention extends Component {
   }
   
 
-  async handleChange(e){
-   await this.setState({ID:e.value})
-    
-   this.setState({ID:e.value})
-   console.log(this.state.ID)
-   this.setState({usedFor:e.label})
-
-   this.setState({id:e.value, name:e.label})
-
-  }
+ 
 
    async BrandhandleChange(e){
      
@@ -93,7 +72,6 @@ export default class CreateSuspention extends Component {
    }
 
   componentDidMount(){
-      this.getOptions()
       this.getOptionsBrand()
 
   }
@@ -115,12 +93,12 @@ export default class CreateSuspention extends Component {
 
   };
   async creatOill (e){
-    // this.setState({usedFor:e.label})
+    // this.setState({WiperUsage:e.label})
 
     let x= {
-      usedFor:this.state.usedFor,
+      WiperUsage:this.state.WiperUsage,
       Brand:this.state.Brand,
-      StockQuantity:this.state.StockQuantity,
+      StockQuantiti:this.state.StockQuantiti,
       UnitPrice:this.state.UnitPrice,
       Unit:this.state.Unit,
       SaelsPrice:this.state.SaelsPrice,
@@ -133,7 +111,7 @@ export default class CreateSuspention extends Component {
 
     }
     console.log(x)
-   await axios.post('https://backoil.herokuapp.com/api/Suspention/Suspentions/create',x).then( () => {
+   await axios.post('https://backoil.herokuapp.com/api/Wiper/Wiper',x).then( () => {
     alert("item added")
 
       window.location.reload(false);
@@ -147,7 +125,19 @@ export default class CreateSuspention extends Component {
         <Grid container    style={{  margin: "10px",justifyContent: "space-around"}}>
 
         <Select justifyContent="center" placeholder="Brand" options={this.state.BrandselectOptions} onChange={this.BrandhandleChange.bind(this)} />
-        <Select justifyContent="center" placeholder="usedFor" options={this.state.selectOptions} onChange={this.handleChange.bind(this)} />
+        <TextField
+         
+         id="outlined-number"
+          style={ulStyle}
+          placeholder="Dimensions"
+           type="text"
+           onChange={(e)=>this.setState({WiperUsage:e.target.value})}
+           InputLabelProps={{
+             shrink: true,
+           }}
+         />
+        {/* <Select justifyContent="center" placeholder="WiperUsage" options={this.state.selectOptions} onChange={this.handleChange.bind(this)} /> */}
+        
         </Grid>
         <Grid container    style={{  margin: "10px",justifyContent: "space-around"}}>
         
@@ -238,7 +228,7 @@ export default class CreateSuspention extends Component {
          placeholder="StockQuantity"
 
           type="number"
-          onChange={(e)=>this.setState({StockQuantity:e.target.value})}
+          onChange={(e)=>this.setState({StockQuantiti:e.target.value})}
           InputLabelProps={{
             shrink: true,
           }}

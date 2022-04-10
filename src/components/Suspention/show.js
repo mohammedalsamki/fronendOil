@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
@@ -14,7 +15,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import {  Box } from '@mui/system';
 import ModalUnstyled from '@mui/base/ModalUnstyled';
 import { ClassNames } from '@emotion/react';
-import { useHistory } from 'react-router';
 import { Form, Button } from 'semantic-ui-react';
 import EditIcon from '@mui/icons-material/Edit';
 import useStyles from '../../styles';
@@ -24,11 +24,6 @@ import { NavLink} from 'react-router-dom';
 import SearchBar from "material-ui-search-bar";
 import Select from 'react-select'
 import CreateSuspention from './create';
-
-
-
-
-
 
 const StyledModal = styled(ModalUnstyled)`
   position: fixed;
@@ -88,13 +83,10 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 
 export default function ShowSuspentionData() {
-  let history = useHistory();
   const [SuspentionList, setSuspentionList]= React.useState([]);
   const classes= useStyles();
   const [rows, setRows] = React.useState(SuspentionList);
-
   const [searched, setSearched] = React.useState(SuspentionList);
-
   const requestSearch = (searchedVal) => {
     const SuspentionedRows = SuspentionList.filter((SuspentionList) => {
       return SuspentionList.OEMPartNumber.toLowerCase().includes(searchedVal.toLowerCase());
@@ -125,8 +117,6 @@ export default function ShowSuspentionData() {
 
 
     }))
-
-    // this.setState({unitselectOptions: options})
     setoriginList(options)
   }
 
@@ -134,10 +124,7 @@ export default function ShowSuspentionData() {
   let [Imagenew,setImagenew]= React.useState(String);
 
   const [open, setOpen] = React.useState(false);
-  const [unitList, setunitList] = React.useState(false);
   const getOptionsunit=async()=>{
-
-    
   }
 
   const handleOpen = () =>{ 

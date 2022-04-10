@@ -5,8 +5,6 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { Grid } from '@material-ui/core';
 import "../style/select.css"
-import { file } from '@babel/types';
-import Image from "material-ui-image";
 
 
 

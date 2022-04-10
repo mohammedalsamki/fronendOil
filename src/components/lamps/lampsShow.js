@@ -14,6 +14,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import {  Box } from '@mui/system';
 import ModalUnstyled from '@mui/base/ModalUnstyled';
 import { ClassNames } from '@emotion/react';
+import { useHistory } from 'react-router';
 import { Form, Button } from 'semantic-ui-react';
 import EditIcon from '@mui/icons-material/Edit';
 import useStyles from '../../styles';
@@ -23,6 +24,7 @@ import { NavLink} from 'react-router-dom';
 import SearchBar from "material-ui-search-bar";
 import Createlamps from './lampsCreate';
 import Select from 'react-select'
+import { async } from 'q';
 
 
 
@@ -87,6 +89,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 
 export default function ShowlampsData() {
+  let history = useHistory();
   const [lampsList, setlampsList]= React.useState([]);
   const [ES, setES]= React.useState([]);
   const [EStander, setEStander]= React.useState([]);

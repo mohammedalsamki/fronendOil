@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import MUIDataTable from "mui-datatables";
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
@@ -6,6 +7,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { IconButton } from '@mui/material';
 import Table from '@mui/material/Table';
+import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import { ClassNames } from '@emotion/react';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -16,13 +18,17 @@ import { NavLink} from 'react-router-dom';
 
 import {
     Button,
+  Select,
   Dialog,
   DialogTitle,
   DialogContent,
+  DialogContentText,
+  TextField,
   DialogActions
 } from "@material-ui/core";
 import "./styles.css";
 import axios from 'axios';
+import { async } from "q";
 import { styled } from '@mui/material/styles';
 import ModalUnstyled from '@mui/base/ModalUnstyled';
 import { Form } from 'semantic-ui-react';
@@ -84,17 +90,13 @@ function ModalBox(props) {
     name: "",
     nameAR: ""
   });
-  setState({
-    name: "",
-    nameAR: ""
-  });
 
-  // const handleChange = name => e => {
-  //   setState({
-  //     ...state,
-  //     [name]: e.target.value
-  //   });
-  // };
+  const handleChange = name => e => {
+    setState({
+      ...state,
+      [name]: e.target.value
+    });
+  };
 
   const handleClickOpen = () => {
 
@@ -164,8 +166,10 @@ function Bumps() {
   let [nameAR,setnameAR]= React.useState(String);
   let [name,setname]= React.useState(String);
 
+  const columns = ["Id", "Name", "Name Ar"];
   const [data, setData] = useState([]);
 
+  let id = 0;
   function createData(id,name, provider) {
     // {bumpslList.map((lamps,key) =>createData(lamps.name,lamps.nameAr) )}
     alert('ia mahere')
@@ -193,7 +197,10 @@ function Bumps() {
     } )
   }
 
-
+  const options = {
+    filterType: "checkbox"
+  };
+  console.log(bumpslList)
 
   const addDataSource = (name, nameAR) => {
     const updated = [...data];
@@ -276,7 +283,7 @@ function Bumps() {
           </div>
         <Form>
                 <Form.Field align="center"  class="grid-container">
-                    <label>namesAR</label>
+                    <label>nameAR</label>
                     <br></br>
                     <textarea name="nameAR"
                     type="text"

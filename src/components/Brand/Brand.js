@@ -15,13 +15,14 @@ import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import EditIcon from '@mui/icons-material/Edit';
 import AddIcon from '@mui/icons-material/Add';
-import { Form } from 'semantic-ui-react';
+import { Form, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
 
 
 
 import { ClassNames } from '@emotion/react';
+import { async } from 'q';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -81,7 +82,6 @@ export default function CreateBrand() {
   const [BrandAr, setBrandAr]= React.useState('');
   const [BrandEn,setBrandEn]= React.useState('');
   const [BrandImage,setBrandImage]= React.useState('');
-  setBrandImage('');
   const [BrandDiscr,setBrandDiscr]= React.useState('');
 
 

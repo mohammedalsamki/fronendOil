@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import MUIDataTable from "mui-datatables";
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -13,18 +14,27 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import {  Box } from '@mui/system';
 import ModalUnstyled from '@mui/base/ModalUnstyled';
 import { ClassNames } from '@emotion/react';
+import { useHistory } from 'react-router';
 import { Form} from 'semantic-ui-react';
 import EditIcon from '@mui/icons-material/Edit';
 import useStyles from '../../styles';
 import AddIcon from '@mui/icons-material/Add';
 import { AppBar } from '@material-ui/core';
 import { NavLink} from 'react-router-dom';
+import SearchBar from "material-ui-search-bar";
 import CreateSuspention from './create';
 import {
   Button,
   Select,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  TextField,
+  DialogActions
 } from "@material-ui/core";
 import "./styles.css";
+import { async } from "q";
 
 const StyledModal = styled(ModalUnstyled)`
   position: absolute;
@@ -88,6 +98,7 @@ function ProdectTable() {
   let [catName,setcatName]= React.useState('');
   let [catID,setcatID]=React.useState(localStorage.getItem('catID'));
 
+  let history = useHistory();
   const [SuspentionList, setSuspentionList]= React.useState([]);
   const classes= useStyles();
   const [rows, setRows] = React.useState(SuspentionList);
@@ -133,6 +144,7 @@ function ProdectTable() {
   let [Imagenew,setImagenew]= React.useState(String);
 
   const [open, setOpen] = React.useState(false);
+  const [unitList, setunitList] = React.useState(false);
   const getOptionsunit=async()=>{
 
     

@@ -99,7 +99,7 @@ export default function mainHome() {
           </Avatar>
         </ListItemAvatar>
         <ListItemText primary="Wiper" secondary="test" />
-      </ListItem>
+      </ListItem> 
     </List>
   );
 }

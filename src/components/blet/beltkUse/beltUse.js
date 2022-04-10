@@ -13,6 +13,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
+import { Link } from 'react-router-dom';
 import EditIcon from '@mui/icons-material/Edit';
 import { ClassNames } from '@emotion/react';
 import AddIcon from '@mui/icons-material/Add';

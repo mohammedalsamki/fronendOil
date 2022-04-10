@@ -3,6 +3,7 @@ import Select from 'react-select'
 import axios from 'axios'
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import AddIcon from '@mui/icons-material/Add';
 import { Grid } from '@material-ui/core';
 import "../style/select.css"
 
@@ -30,6 +31,7 @@ export default class Test extends Component {
       BrandselectOptions : [],
       selectOptions : [],
       id: "",
+      name: '',
       ID:"",
       Note:'',
       BrandPartNumber:'',

@@ -33,6 +33,7 @@ import { Paper } from "@material-ui/core";
 import axios from 'axios'
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 
 const style = {
@@ -136,7 +137,6 @@ export default () => {
 
   
     const [PartslList, setPartslList]= useState([]);
-    setPartslList([]);
     const [rows, setRows] = useState(PartslList);
 
     useEffect( () => { 
@@ -235,14 +235,14 @@ export default () => {
           console.log('id',id);
           console.log('changed',changed);
           for (var key in changed[i]){
-              if(key==='name'){
+              if(key=='name'){
               name=changed[i][key]
               }
 
-                if(key==='ItemImage'){
+                if(key=='ItemImage'){
                     ItemImage=changed[i][key]
                     }
-                    if(key==='nameEn'){
+                    if(key=='nameEn'){
                         nameEn=changed[i][key]
                         }
           }
@@ -293,11 +293,23 @@ export default () => {
     return result;
   }, []);
   
+  // const {  popupVisible, activeRow } = this.state;
+  const [popupVisible, setpopupVisible] = useState(false);
+  const [activeRow, setactiveRow] = useState([]);
 
+
+  // const showDetails =() => {
+  //   <ProdectTable/>
+
+  // };
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const showDetails = () => (
+    <ProdectTable />
+      
+  );
   const CellComponent = ({ children, rows, ...restProps }) => (
 
  <TableEditColumn.Cell rows={rows} {...restProps}>

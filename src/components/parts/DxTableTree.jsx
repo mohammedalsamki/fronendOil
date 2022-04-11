@@ -2,12 +2,15 @@ import React, { useState } from "react";
 import { useEffect } from 'react';
 import ProdectTable from "./generator";
 import {
+  AppBar,
+  TextField,
+} from "@material-ui/core";
+import {
   EditingState,
   IntegratedSorting,
   SearchState,
   SortingState,
   IntegratedFiltering,
-
   TreeDataState,
   CustomTreeData
 } from "@devexpress/dx-react-grid";
@@ -23,7 +26,6 @@ import {
   TableColumnResizing,
   TableTreeColumn,
 } from "@devexpress/dx-react-grid-material-ui";
-
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
@@ -35,14 +37,15 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import FileSystemNavigator from "./partName";
 
 const style = {
   position: 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: "80%",
-  height:"80%",
+  width: "50%",
+  height:"50%",
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
@@ -63,7 +66,25 @@ const EditButton = ({ onExecute }) => (
     <EditIcon />
   </IconButton>
 );
-
+const partName= {
+    id: "string",
+    partnameen: "string",
+    image: "string",
+    partnamear: "string",
+    brands: {
+        id: "string",
+        nameen: "string",
+        logo: "string",
+        brandParts: {
+            id: "string",
+            nameen: "string",
+            image: "string",
+            brandid: "string",
+            manufacturerpartno: "string",
+            vehicles: [],
+        },
+    },
+}
 const DeleteButton = ({ onExecute }) => (
   <IconButton
     onClick={() => {
@@ -134,7 +155,33 @@ const commandComponents = {
 export default () => {
   let [catName,setcatName]= React.useState(String);
   let [catID,setcatID]= React.useState(String);
+  let [name0,setName]= React.useState(String);
+  let [nameEN,setnameEN]= React.useState(String);
+  let [parent0,setparent]= React.useState(String);
+  let [ItemImage,setItemImage]= React.useState(String);
 
+
+  const sendDataToAPI = () => {
+    setparent(localStorage.getItem('catID'));
+
+    let parent=parent0
+    let name =name0
+    let ItemImage =ItemImage
+    let nameEn =nameEN
+
+console.log(name,parent,nameEN)
+    axios.post('https://backoil.herokuapp.com/api/category',{
+        parent:parent,
+        name:name,
+        ItemImage: ItemImage, 
+        nameEn: nameEn, 
+
+    }).then( () => {
+        window.location.reload(false);
+      }).catch((error) => {
+        console.log(error.message);
+    })
+  }
   
     const [PartslList, setPartslList]= useState([]);
     const [rows, setRows] = useState(PartslList);
@@ -158,10 +205,6 @@ export default () => {
 
   const [columns] = useState([
     { name: "name", title: "Name EN" },
-    { name: "ItemImage", title: "Item Image",id:'truid' },
-    { name: "nameEn", title: "Name AR" },
-    { name: "_id", title: "ID" },
-
   ]);
 
 
@@ -179,16 +222,13 @@ export default () => {
   const [columnWidths, setColumnWidths] = useState([
 
     { columnName: "name", width: 250 },
-    { columnName: "_id", width: 250 },
-    { columnName: "nameEn", width: 250 },
-    { columnName: "ItemImage", width: 250 },
 
   ]);
   const [expandedRowIds, setExpandedRowIds] = useState([0, 1]);
 
   const changeAddedRows = value => {
     const initialized = value.map(row =>
-      Object.keys(row).length ? row : { name: "Tokio" }
+      Object.keys(row).length ? row : { name: "" }
     );
     setAddedRows(initialized);
   };
@@ -293,33 +333,25 @@ export default () => {
     return result;
   }, []);
   
-  // const {  popupVisible, activeRow } = this.state;
-  const [popupVisible, setpopupVisible] = useState(false);
-  const [activeRow, setactiveRow] = useState([]);
 
-
-  // const showDetails =() => {
-  //   <ProdectTable/>
-
-  // };
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  let [partData,setpartData]= React.useState(String);
 
-  const showDetails = () => (
-    <ProdectTable />
-      
-  );
   const CellComponent = ({ children, rows, ...restProps }) => (
 
  <TableEditColumn.Cell rows={rows} {...restProps}>
       {children}
-      <TableEditColumn.Command
+     
+       <TableEditColumn.Command
         id="custom"
-        text="Show Info"
+        text="+"
         onClick={() => {{ 
           localStorage.setItem('catName', restProps.row.name);
           localStorage.setItem('catID', restProps.row._id);
+    setparent(localStorage.getItem('catID'));
+
 
           setcatName(restProps.row.name);
           setcatID(restProps.row._id);
@@ -329,11 +361,48 @@ export default () => {
 
           handleOpen() }} }
       />
+
+<TableEditColumn.Command
+        id="custom"
+        text="Show Items"
+        onClick={() => {{ 
+          localStorage.setItem('catName', restProps.row.name);
+          localStorage.setItem('catID', restProps.row._id);
+    setparent(localStorage.getItem('catID'));
+
+
+          setcatName(restProps.row.name);
+          setcatID(restProps.row._id);
+
+          console.log(catName);
+          console.log(catID);
+          getOptionsPro(parent0);
+
+           }} }
+      />
     </TableEditColumn.Cell>
+    
   );
+  const getOptionsPro=async(parent0)=>{
+    setparent(localStorage.getItem('catID'));
+    async function fetchData() {
+        try {
+            const res = await axios.post('http://localhost:5002/api/partName/PartName/cat/',{category:parent0}); 
+            setpartData(res.data);
+            console.log(partData)
+        } catch (err) {
+            console.log(err);
+        }
+    }
+    fetchData();
+
+     }
   return (
     <>
-    <Paper>
+    <div class="flex-container">
+    <div class="flex-child magenta">
+
+    <Paper style={{ width:"600px" }}>
       <Grid rows={rows} columns={columns} getRowId={getRowId}>
         <EditingState
           editingRowIds={editingRowIds}
@@ -364,17 +433,29 @@ export default () => {
         <TableEditRow />
         <TableEditColumn
           width={150}
+          cellComponent={CellComponent}
           showAddCommand={!addedRows.length}
           showEditCommand
           showDeleteCommand
           commandComponent={Command}
-          cellComponent={CellComponent}
         />
         <Getter name="tableColumns" computed={getTableColumnsComputed} />
         <Toolbar />
         <SearchPanel />
       </Grid>
     </Paper>
+    </div>
+    <div class="flex-child green">
+
+    <Paper style={{ width:"600px" }}>
+      <h1>test</h1>
+      <FileSystemNavigator
+            partData={partData}
+          />    </Paper>
+    </div>
+    <div class="flex-child green"></div>
+
+    </div>
     {/* <Button onClick={handleOpen}>Open modal</Button> */}
       <Modal
         open={open}
@@ -383,9 +464,55 @@ export default () => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <div>
-        <ProdectTable  />
-        </div>
+        <div className="App">
+      <AppBar>
+        <toolbar>
+          <h1>Category: {catName} </h1>
+          <h2>Add Chailed</h2>
+        </toolbar>
+      </AppBar>
+<br></br>
+      <Typography variant="h5">BASIC WITH MATERIAL UI</Typography>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+
+      <form>
+        <TextField
+          style={{ width: "300px", margin: "5px" }}
+          type="text"
+          label="Name En"
+          variant="outlined"
+          onChange={(e) => setName(e.target.value)}
+        />
+        <br />
+        <TextField
+          style={{ width: "300px", margin: "5px" }}
+          type="text"
+          label="Name Ar"
+          variant="outlined"
+          onChange={(e) => setnameEN(e.target.value)}
+
+        />
+        <br />
+          {/* <TextField
+            style={{ width: "300px", margin: "5px" }}
+            type="file"
+            label="image"
+            variant="outlined"
+            onChange={(e) => setItemImage(e.target.value)}
+
+          /> */}
+        <br />
+
+        <br />
+        <Button variant="contained" color="primary" onClick={sendDataToAPI}>
+        Add Chailed for {catName} 
+        </Button>
+      </form>
+    </div>
         </Box>
       </Modal>
     </>

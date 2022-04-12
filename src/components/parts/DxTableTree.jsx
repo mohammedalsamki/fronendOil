@@ -338,7 +338,8 @@ console.log(name,parent,nameEN)
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   let [partData,setpartData]= React.useState(String);
-
+  console.log(partData)
+  let idNew
   const CellComponent = ({ children, rows, ...restProps }) => (
 
  <TableEditColumn.Cell rows={rows} {...restProps}>
@@ -369,31 +370,40 @@ console.log(name,parent,nameEN)
           localStorage.setItem('catName', restProps.row.name);
           localStorage.setItem('catID', restProps.row._id);
     setparent(localStorage.getItem('catID'));
-
+      idNew = restProps.row._id
 
           setcatName(restProps.row.name);
           setcatID(restProps.row._id);
 
           console.log(catName);
           console.log(catID);
-          getOptionsPro(parent0);
+          getOptionsPro(idNew);
 
            }} }
       />
     </TableEditColumn.Cell>
     
   );
-  const getOptionsPro=async(parent0)=>{
+  
+  const getOptionsPro=async(idNew)=>{
+    
     setparent(localStorage.getItem('catID'));
     async function fetchData() {
+      if(parent0.length===24){
         try {
-            const res = await axios.post('http://localhost:5002/api/partName/PartName/cat/',{category:parent0}); 
-            setpartData(res.data);
-            console.log(partData)
-        } catch (err) {
-            console.log(err);
-        }
-    }
+          const res = await axios.post('http://localhost:5002/api/partName/product/cat/',{category:idNew}); 
+          setpartData(res.data);
+          // console.log(partData)
+          setpartData(res.data)
+          console.log(partData)
+
+
+      } catch (err) {
+          console.log(err);
+      }
+  }else{alert("re CLick")}
+      }
+
     fetchData();
 
      }
@@ -429,7 +439,7 @@ console.log(name,parent,nameEN)
           onColumnWidthsChange={setColumnWidths}
         />
         <TableHeaderRow showSortingControls />
-        <TableTreeColumn for="name" />
+        <TableTreeColumn  for="name" />
         <TableEditRow />
         <TableEditColumn
           width={150}
@@ -448,15 +458,15 @@ console.log(name,parent,nameEN)
     <div class="flex-child green">
 
     <Paper style={{ width:"600px" }}>
-      <h1>test</h1>
+      <h1>{catName}</h1>
       <FileSystemNavigator
+            catID={catID}
             partData={partData}
           />    </Paper>
     </div>
     <div class="flex-child green"></div>
 
     </div>
-    {/* <Button onClick={handleOpen}>Open modal</Button> */}
       <Modal
         open={open}
         onClose={handleClose}

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import axios from "axios"
 import { useEffect } from 'react';
+import Image from "material-ui-image";
 
 import TreeView from '@mui/lab/TreeView';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -14,6 +15,7 @@ import {
     AppBar,
     TextField,
   } from "@material-ui/core";
+import { name } from 'lodash.assignwith';
   const style = {
     position: 'absolute',
     top: '50%',
@@ -30,50 +32,56 @@ import {
 
 
 
-export default function FileSystemNavigator(catID) {
+export default function FileSystemNavigator(props) {
     const [open, setOpen] = React.useState(false);
+    const [openEdit, setopenEdit] = React.useState(false);
+    const [idEdit, setidEdit] = React.useState(false);
 
-    const handleOpen = () => setOpen(true);
+    let test = [{}]
+  // --------------edit module------------------
+    const handleOpenEdit = (id) => {
+      setidEdit(id)
+      console.log("its me",id)
+
+      test=props.partData
+      console.log("test",test)
+      setparent(localStorage.getItem('catID'));
+      setcatName(localStorage.getItem('catName'));
+      setopenEdit(true)};
+    const handleCloseEdit = () => setopenEdit(false);
+
+  // --------------Add module------------------
+
+    const handleOpen = () => {
+      console.log("its me",props.partData)
+      test=props.partData
+      console.log("test",test)
+      setparent(localStorage.getItem('catID'));
+      setcatName(localStorage.getItem('catName'));
+      setOpen(true)};
     const handleClose = () => setOpen(false);
     let [name0,setName]= React.useState(String);
     let [nameEN0,setnameEN]= React.useState(String);
     let [catName,setcatName]= React.useState(localStorage.getItem('catName'));
 
-    let [parent0,setparent]= React.useState(localStorage.getItem('catID'));
+    let [parent0,setparent]= React.useState(props.catID);
     let [ItemImage,setItemImage]= React.useState(String);
-    let [partData,setpartData]= React.useState(String);
-
-    const getOptionsPro=async(catID)=>{
-        async function fetchData() {
-            try {
-                const res = await axios.post('http://localhost:5002/api/partName/product/cat/',{category:catID}); 
-                setpartData(res.data);
-                console.log(partData)
-            } catch (err) {
-                console.log(err);
-            }
-        }
-        fetchData();
-
-         }
-    useEffect(async () => { 
-        setcatName(localStorage.getItem('catName'));
-        await setparent(localStorage.getItem('catID'));
-
-        // getOptionsPro(catID);
-        // console.log(partData)
-
-        setparent(localStorage.getItem('catID'));
-        setcatName(localStorage.getItem('catName'));
-
+    let [part,setpart]= React.useState([]);
+    let [partData,setpartData]= React.useState(part);
 
     
+    useEffect(async () => { 
+        setcatName(localStorage.getItem('catName'));
+        console.log(props.dataPart)
+        setparent(localStorage.getItem('catID'));
+        setcatName(localStorage.getItem('catName'));
 
     }, []);
   
     const sendDataToAPI = () => {
       setparent(localStorage.getItem('catID'));
       setcatName(localStorage.getItem('catName'));
+      console.log(props.dataPart)
 
   
       let parent=parent0
@@ -87,31 +95,143 @@ export default function FileSystemNavigator(catID) {
             ItemImage: ItemImage, 
             nameAr: nameAr, 
     
-        }).then( () => {
+        }).then( (response) => {
+          console.log(response)
+          console.log(parent)
+
             window.location.reload(false);
           }).catch((error) => {
             console.log(error.message);
         })
+    };
+    const EditDataToAPI = () => {
+      axios.put(`http://localhost:5002/api/partName/PartName/${idEdit}`, {
+   
+        nameEN:name0,
+        nameAr:nameEN0,
+       
+   
+      }).then(() => {
+  alert("Updated")
+  console.log(props.catID,name0,nameEN0)
+        
+        window.location.reload(false);
+  
+          localStorage.clear();
+      })
+  }
+    const DeleteItem=(id)=>{
+      let isExecuted = window.confirm("Are you sure to execute this action?");
+      console.log(isExecuted);
+      if(isExecuted){
+      axios.delete(`https://backoil.herokuapp.com/api/partName/PartName/${id}`).then( () =>{
+        alert('delete done')
+        window.location.reload(false);
+      } )}
+  
     }
   return (
-      <>
-      <button onClick={handleOpen}>+</button>
-    <TreeView
-      aria-label="file system navigator"
-      defaultCollapseIcon={<ExpandMoreIcon />}
-      defaultExpandIcon={<ChevronRightIcon />}
-      sx={{ height: 240, flexGrow: 1, maxWidth: 400, overflowY: 'auto' }}
-    >
-      <TreeItem nodeId="1" label="Applications">
-        <TreeItem nodeId="2" label="Calendar" />
-      </TreeItem>
-      <TreeItem nodeId="5" label="Documents">
-        <TreeItem nodeId="10" label="OSS" />
-        <TreeItem nodeId="6" label="MUI">
-          <TreeItem nodeId="8" label="index.js" />
-        </TreeItem>
-      </TreeItem>
-    </TreeView>
+
+     <>
+      <button onClick={handleOpen}> Add Part Name+</button>
+      <br></br>
+
+      {(() => {
+              if (!props.partData){
+                  return (
+                      <h1>loading</h1>
+                  )
+              }else{
+                return (
+                  <>                      <TreeView
+                  aria-label="file system navigator"
+                  defaultCollapseIcon={<ExpandMoreIcon />}
+                  defaultExpandIcon={<ChevronRightIcon />}
+                  sx={{ height: 600, flexGrow: 1, maxWidth: "100%", overflowY: 'auto' }}
+                >
+                  {props.partData.map((item, i) => (
+              <>
+         <TreeItem nodeId={item._id}  label={<>
+        <h3>
+          {/* <Image rounded  style={{ width: 40, height: 40 }} /> */}
+          {item.nameEN}
+        </h3>
+        <button>+</button>
+      {/* <br/> */}
+
+        <button onClick={()=> DeleteItem(item._id)} >X</button>
+        <button onClick={()=> handleOpenEdit(item._id)}>Edit/</button>
+      </>}> 
+                          <TreeItem nodeId="2" label="loading" />
+                        </TreeItem>
+                        {/* <TreeItem nodeId="5" label="Documents">
+                          <TreeItem nodeId="10" label="OSS" />
+                          <TreeItem nodeId="6" label="MUI">
+                            <TreeItem nodeId="8" label="index.js" />
+                          </TreeItem>
+                        </TreeItem> */}
+                   </>
+                    ))}
+                      </TreeView>
+                    </>
+              )
+              }
+              return null;
+            })()}
+                <Modal
+        open={openEdit}
+        onClose={handleCloseEdit}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+        <div className="App">
+      <AppBar>
+        <toolbar>
+          <h1>Category:{catName } </h1>
+          <h2>Edit Part Name</h2>
+        </toolbar>
+      </AppBar>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+
+      <form>
+        <TextField
+          style={{ width: "300px", margin: "5px" }}
+          type="text"
+          label="Name En"
+          variant="outlined"
+          onChange={(e) => setName(e.target.value)}
+        />
+        <br />
+        <TextField
+          style={{ width: "300px", margin: "5px" }}
+          type="text"
+          label="Name Ar"
+          variant="outlined"
+          onChange={(e) => setnameEN(e.target.value)}
+
+        />
+        <br />
+
+        <br />
+
+        <br />
+        <Button variant="contained" color="primary" onClick={()=>{{
+                setparent(localStorage.getItem('catID'));
+                setcatName(localStorage.getItem('catName'));
+          EditDataToAPI()}}}>
+        Add Part Name for {parent0}  
+        </Button>
+      </form>
+    </div>
+        </Box>
+      </Modal>
+   
 
     <Modal
         open={open}
@@ -153,11 +273,12 @@ export default function FileSystemNavigator(catID) {
 
         />
         <br />
-
         <br />
-
         <br />
-        <Button variant="contained" color="primary" onClick={sendDataToAPI}>
+        <Button variant="contained" color="primary" onClick={()=>{{
+                setparent(localStorage.getItem('catID'));
+                setcatName(localStorage.getItem('catName'));
+          sendDataToAPI()}}}>
         Add Part Name for {parent0}  
         </Button>
       </form>

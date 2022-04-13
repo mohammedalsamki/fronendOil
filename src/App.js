@@ -34,6 +34,7 @@ import CreateBearingsUsge from "./components/bearings/use";
 import CreateSuspentionUse from "./components/Suspention/use";
 import ShowSuspentionData from "./components/Suspention/show";
 import ShowWiperData from "./components/wiper/show";
+import vehicles from "./components/vehicles/vehicles";
 
 function App() {
   
@@ -51,7 +52,9 @@ function App() {
           <div class="topnav">
           <NavLink exact={true} activeClassName='active' to='/'>Home</NavLink>
           <NavLink activeClassName='active' to='/Brand'>Brand</NavLink>
-          <NavLink activeClassName='active' to='/Categories'>Categories</NavLink>
+          <NavLink activeClassName='active' to='/Categories'>Parts Categories</NavLink>
+          <NavLink activeClassName='active' to='/vehicles'>vehicles</NavLink>
+
 
 
 
@@ -64,6 +67,7 @@ function App() {
            <Switch>
            <Route path="/" exact component={mainHome}></Route>
            <Route path="/Bumps" exact component={Bumps}></Route>
+           <Route path="/vehicles" exact component={vehicles}></Route>
            <Route path="/bearing" exact component={ShowbearingData}></Route>
            <Route path="/Suspention" exact component={ShowSuspentionData}></Route>
 

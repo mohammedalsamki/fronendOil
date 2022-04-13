@@ -39,9 +39,9 @@
 
 .flex-child {
   flex: 1;
-  border: 2px solid rgb(0, 102, 255);
+  /* border: 2px solid rgb(0, 102, 255); */
 }  
 
 .flex-child:first-child {
-  margin-right: 20px;
+  /* margin-right: 20px; */
 } 

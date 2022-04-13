@@ -34,9 +34,10 @@ import { Grid } from '@material-ui/core';
 
 
 
-export default function FileSystemNavigator(props) {
+export default function vehicles(props) {
     const [open, setOpen] = React.useState(false);
     const [openEdit, setopenEdit] = React.useState(false);
+    const [propsdata, setpropsdata] = React.useState(false);
     const [openItem, setopenItem] = React.useState(false);
     const [openItemBrand, setopenItemBrand] = React.useState(false);
 
@@ -50,7 +51,7 @@ export default function FileSystemNavigator(props) {
     // const [idEdit, setidEdit] = React.useState(false);
     let test = [{}]
     
-    // --------------edit part name module------------------
+    // --------------edit part name module--------------------------------------------------
     const handleOpenEditBrand = (id,cat) => {
       setidEdit(id)
       setCat(cat)
@@ -62,7 +63,7 @@ export default function FileSystemNavigator(props) {
       setcatName(localStorage.getItem('catName'));
       setopenItemBrand(true)};
     const handleCloseEditBrand = () => setopenItemBrand(false);
-  // --------------edit part name module------------------
+  // --------------edit part name module------------------------------------------------
     const handleOpenEdit = (id) => {
       setidEdit(id)
       console.log("its me",id)
@@ -74,7 +75,7 @@ export default function FileSystemNavigator(props) {
       setopenEdit(true)};
     const handleCloseEdit = () => setopenEdit(false);
 
-  // --------------Add part name module------------------
+  // --------------Add part name module--------------------------------------------------------
 
     const handleOpen = () => {
       console.log("its me",props.partData)
@@ -84,10 +85,9 @@ export default function FileSystemNavigator(props) {
       setcatName(localStorage.getItem('catName'));
       setOpen(true)};
     const handleClose = () => setOpen(false);
-  // --------------Add item info module------------------
+  // --------------Add item info module--------------------------------------------------------------
   const handleOpenItem = (partNamedrom,partID) => {
-    console.log("its me",props.partData)
-    test=props.partData
+    console.log("its me",propsdata)
     console.log("test",test)
     setpartId(partID)
     setopartName(partNamedrom)
@@ -95,12 +95,10 @@ export default function FileSystemNavigator(props) {
     setcatName(localStorage.getItem('catName'));
     setopenItem(true)};
   const handleCloseItem = () => setopenItem(false);
-  // --------------Add item info module------------------
-
+  // --------------Add item info module----------------------------------------------------------
     let [name0,setName]= React.useState(String);
     let [nameEN0,setnameEN]= React.useState(String);
     let [catName,setcatName]= React.useState(localStorage.getItem('catName'));
-
     let [parent0,setparent]= React.useState(props.catID);
     let [ItemImage,setItemImage]= React.useState(String);
     let [part,setpart]= React.useState([]);
@@ -109,8 +107,6 @@ export default function FileSystemNavigator(props) {
     let [BrandselectOptions,setBrandselectOptions]= React.useState(part);
     let [BrandID,setBrandID]= React.useState(part);
     let [BrandName,setBrandName]= React.useState(part);
-
-
     // ----------------------------Get Brand-----------------
     const getOptionsBrand=async()=>{
 
@@ -131,6 +127,17 @@ export default function FileSystemNavigator(props) {
 
 
     useEffect(async () => { 
+
+        async function fetchData() {
+            try {
+                const res = await axios.get('https://backoil.herokuapp.com/api/vehicles/Manufacturer/get/'); 
+                setpropsdata(res.data);
+                console.log(propsdata)
+            } catch (err) {
+                console.log(err);
+            }
+        }
+        fetchData();
         setcatName(localStorage.getItem('catName'));
         console.log(props.dataPart)
         setparent(localStorage.getItem('catID'));
@@ -146,10 +153,8 @@ export default function FileSystemNavigator(props) {
       let nameEN =name0
       let ItemImage =ItemImage
       let nameAr =nameEN0
-        axios.post('https://backoil.herokuapp.com/api/partName/PartName',{
-            category:parent,
-            nameEN:nameEN,
-            ItemImage: ItemImage, 
+        axios.post('https://backoil.herokuapp.com/api/vehicles/Manufacturer/create',{
+            nameEn:nameEN,
             nameAr: nameAr, 
         }).then( (response) => {
           console.log(response)
@@ -185,7 +190,7 @@ export default function FileSystemNavigator(props) {
     const ItemDataToAPI = () => {
       setparent(localStorage.getItem('catID'));
       setcatName(localStorage.getItem('catName'));
-        axios.post('https://backoil.herokuapp.com/api/products/product/create',{
+        axios.post('https://backoil.herokuapp.com/api/vehicles/Manufacturer/create',{
           BrandID:BrandID,
           BrandName:BrandName,
           // vehicles:vehicles,
@@ -205,8 +210,8 @@ export default function FileSystemNavigator(props) {
 
     // ------------------------Edit Part Name api----------------
     const EditDataToAPI = () => {
-      axios.put(`https://backoil.herokuapp.com/api/partName/PartName/${idEdit}`, {
-        nameEN:name0,
+      axios.put(`https://backoil.herokuapp.com/api/vehicles/Manufacturer/${idEdit}`, {
+        nameEn:name0,
         nameAr:nameEN0,
       }).then(() => {
   alert("Updated")
@@ -230,7 +235,7 @@ export default function FileSystemNavigator(props) {
       let isExecuted = window.confirm("Are you sure to execute this action?");
       console.log(isExecuted);
       if(isExecuted){
-      axios.delete(`https://backoil.herokuapp.com/api/partName/PartName/${id}`).then( () =>{
+      axios.delete(`https://backoil.herokuapp.com/api/vehicles/Manufacturer/${id}`).then( () =>{
         alert('delete done')
         window.location.reload(false);
       } )}
@@ -238,19 +243,19 @@ export default function FileSystemNavigator(props) {
     // -------------get items info --------------------
     const getOptionsPro=async(idNew)=>{
       setparent(localStorage.getItem('catID'));
-      async function fetchData() {
-        if(parent0.length===24){
-          try {
-            const res = await axios.post('https://backoil.herokuapp.com/api/products/product/cat',{category:idNew}); 
-            setitemData(res.data);
-            console.log("from local",itemData)
-            console.log("from api",res.data)
-        } catch (err) {
-            console.log(err);
-        }
-    }else{alert("re CLick")}
-        }
-      fetchData();
+    //   async function fetchData() {
+    //     if(parent0.length===24){
+    //       try {
+    //         const res = await axios.post('https://backoil.herokuapp.com/api/products/product/cat',{category:idNew}); 
+    //         setitemData(res.data);
+    //         console.log("from local",itemData)
+    //         console.log("from api",res.data)
+    //     } catch (err) {
+    //         console.log(err);
+    //     }
+    // }else{alert("re CLick")}
+    //     }
+    //   fetchData();
        }
       //  *----------------------get brand item info -------------------
       const getBrandItem=async(idNew,cat)=>{
@@ -274,7 +279,7 @@ export default function FileSystemNavigator(props) {
       <button onClick={handleOpen}> Add Part Name+</button>
       <br></br>
       {(() => {
-              if (!props.partData){
+              if (!propsdata){
                   return (
                       <h1>loading</h1>
                   )
@@ -286,12 +291,12 @@ export default function FileSystemNavigator(props) {
                   defaultExpandIcon={<ChevronRightIcon />}
                   sx={{ height: 600, flexGrow: 1, maxWidth: "100%", overflowY: 'auto' }}
                 >
-                  {props.partData.map((item, i) => (
+                  {propsdata.map((item, i) => (
               <>
          <TreeItem nodeId={item._id }   onClick={() => getOptionsPro(item._id)}  label={<>
         <h3>
           {/* <Image rounded  style={{ width: 40, height: 40 }} /> */}
-          {item.nameEN}
+          {item.nameEn}
         </h3>
         <button  onClick={()=> handleOpenItem(item.nameEN,item._id)}>+</button>
         <button onClick={()=> DeleteItem(item._id)} >X</button>

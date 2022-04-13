@@ -202,15 +202,18 @@ console.log(name,parent,nameEN)
     
 
     }, []);
-
+const test=()=>{
+  console.log("test")
+  alert("iam working")
+}
   const [columns] = useState([
-    { name: "name", title: "Name EN" },
+    { name: "name", title: "Name EN" ,onclick:{test}},
   ]);
 
 
 
   const [tableColumnExtensions] = useState([
-    { columnName: "name", width: 300 }
+    { columnName: "name", width: 300, onclick:{test}}
   ]);
   const [editingRowIds, setEditingRowIds] = useState([]);
   const [addedRows, setAddedRows] = useState([]);
@@ -221,7 +224,7 @@ console.log(name,parent,nameEN)
   const [searchValue, setSearchState] = useState("");
   const [columnWidths, setColumnWidths] = useState([
 
-    { columnName: "name", width: 250 },
+    { columnName: "name", width: 250,onclick:{test} },
 
   ]);
   const [expandedRowIds, setExpandedRowIds] = useState([0, 1]);
@@ -391,7 +394,7 @@ console.log(name,parent,nameEN)
     async function fetchData() {
       if(parent0.length===24){
         try {
-          const res = await axios.post('http://localhost:5002/api/partName/product/cat/',{category:idNew}); 
+          const res = await axios.post('https://backoil.herokuapp.com/api/partName/product/cat/',{category:idNew}); 
           setpartData(res.data);
           // console.log(partData)
           setpartData(res.data)
@@ -428,19 +431,21 @@ console.log(name,parent,nameEN)
         <IntegratedSorting />
         <IntegratedFiltering />
         <TreeDataState
-          expandedRowIds={expandedRowIds}
+        onClick={test}
+           expandedRowIds={expandedRowIds}
           onExpandedRowIdsChange={setExpandedRowIds}
         />
-        <CustomTreeData getChildRows={getChildRows} />
+        <CustomTreeData onClick={test} getChildRows={getChildRows} />
 
-        <Table height="auto" columnExtensions={tableColumnExtensions} />
+        <Table height="auto" onClick={test} columnExtensions={tableColumnExtensions} />
         <TableColumnResizing
+        onClick={test}
           columnWidths={columnWidths}
           onColumnWidthsChange={setColumnWidths}
         />
-        <TableHeaderRow showSortingControls />
-        <TableTreeColumn  for="name" />
-        <TableEditRow />
+        <TableHeaderRow onClick={test} showSortingControls />
+        <TableTreeColumn onClick={test} for="name" />
+        <TableEditRow  />
         <TableEditColumn
           width={150}
           cellComponent={CellComponent}

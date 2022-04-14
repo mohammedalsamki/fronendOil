@@ -439,16 +439,18 @@ export default function vehicles(props) {
         <button onClick={()=> handleOpenEdit(item._id,item.nameEn)}>Edit/</button>
       </>}> 
       {itemData.map((item, i) => (
-                          <TreeItem style={ { textAlign: "left" }} nodeId={item._id} onClick={() => getVehiclesItem(item.ModelEn,item._id)}  label={<><h3>{item.ModelEn}</h3>         <button  onClick={()=> handleOpenVehicles(item.ModelEn,item._id)}>+</button>
+                          <TreeItem style={ { textAlign: "left" }} nodeId={item._id} onClick={() => getVehiclesItem(item.ModelEn,item._id)}  
+                          label={<><h3>{item.ModelEn}</h3>         <button  onClick={()=> handleOpenVehicles(item.ModelEn,item._id)}>+</button>
                           <button onClick={()=> DeleteItemBrand(item._id)} >X</button>
                           <button onClick={()=> handleOpenEditBrand(item._id,item.ModelEn)}>Edit/</button></>} >
-      {branditemData.map((item, i) => (
-
-                             <TreeItem style={ { textAlign: "left" }} nodeId={Math.floor(Math.random() * 10)} label={<><h3> ({item.ModelYear}) ({item.Fueltype}) BodyNo#:({item.BodyNo})  EngVol#:({item.EngVol}) EngNo#:({item.EngNo}) </h3> 
+      {branditemData.map((item0, i) => {
+                             if(item._id===item0.category){return( <TreeItem style={ { textAlign: "left" }} nodeId={Math.floor(Math.random() * 10)} 
+                             label={<><h3> ({item0.ModelYear}) ({item0.Fueltype}) BodyNo#:({item0.BodyNo})  EngVol#:({item0.EngVol}) EngNo#:({item0.EngNo}) </h3> 
                                       <button onClick={()=> DeleteVehicles(item._id)} >X</button>
-                          <button onClick={()=> handleEditVehicles(item.ModelYear,item._id)}>Edit/</button></>}  >
-                             </TreeItem>
-                    ))}
+                          <button onClick={()=> handleEditVehicles(item0.ModelYear,item0._id)}>Edit/</button></>}  >
+                             </TreeItem>)}
+                            
+                    })}
                         </TreeItem>
                     ))}
                         </TreeItem>
@@ -460,7 +462,7 @@ export default function vehicles(props) {
               }
               return null;
             })()}
-      {/* -+------------------------ Add Vehicles Module------------------------------------------ */}
+      {/* ------------------------------------------- Add Vehicles Module----------------------------------------------------------- */}
       
       <Modal
         open={openVehicles}
@@ -472,18 +474,16 @@ export default function vehicles(props) {
         <div className="App">
       <AppBar>
         <toolbar>
-          <h1>Modal Name 0: {partName} </h1>
+          <h1>Modal Name : {partName} </h1>
         </toolbar>
       </AppBar>
 <br></br><br></br><br></br><br></br><br></br><br></br>
 <Grid container    style={{  margin: "10px",justifyContent: "space-around"}}>
-
 <Select 
           placeholder="Year"
         onChange={handleOnchange}
         options={options}
       />
-
 <Select 
           placeholder="Fule Type"
         onChange={handleOnchangeFule}

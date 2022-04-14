@@ -45,45 +45,29 @@ function App() {
     <div className="App">
     <Container maxWidth="100%">
          <AppBar className={classes.appBar} position="static" color='inherit'>
-          
-          <Typography className={classes.heading} variant='h2' align='center'> Ontario Storehouse</Typography>
-         <br></br>
-
-          <div class="topnav">
-          <NavLink exact={true} activeClassName='active' to='/'>Home</NavLink>
-          <NavLink activeClassName='active' to='/Brand'>Brand</NavLink>
-          <NavLink activeClassName='active' to='/Categories'>Parts Categories</NavLink>
-          <NavLink activeClassName='active' to='/vehicles'>vehicles</NavLink>
-
-
-
-
-
-          </div>
-          
+            <Typography className={classes.heading} variant='h2' align='center'> Ontario Storehouse</Typography>
+          <br></br>
+            <div class="topnav">
+            <NavLink exact={true} activeClassName='active' to='/'>Home</NavLink>
+            <NavLink activeClassName='active' to='/Brand'>Brand</NavLink>
+            <NavLink activeClassName='active' to='/Categories'>Parts Categories</NavLink>
+            <NavLink activeClassName='active' to='/vehicles'>vehicles</NavLink>
+          </div>        
          <br></br>
          </AppBar>
           <div>
-           <Switch>
+          <Switch>
            <Route path="/" exact component={mainHome}></Route>
            <Route path="/Bumps" exact component={Bumps}></Route>
            <Route path="/vehicles" exact component={vehicles}></Route>
            <Route path="/bearing" exact component={ShowbearingData}></Route>
            <Route path="/Suspention" exact component={ShowSuspentionData}></Route>
-
            <Route path="/bearing/usage" exact component={CreateBearingsUsge}></Route>
            <Route path="/Suspention/usage" exact component={CreateSuspentionUse}></Route>
-
-
-
-
-
            <Route path="/Oil_Fluid" exact component={Home}></Route>
             <Route path="/OilUseg" component={OilUseg}></Route>
             <Route path="/Categories" component={Parts}></Route>
             <Route path="/Pumbs/use" component={CreatebumpsUsge}></Route>
-
-
             <Route path="/Lamps" component={ShowlampsData}></Route>
             <Route path="/Filter/usage" component={CreateFilterUsge}></Route>
             <Route path="/Spark/usage" component={CreatesparkUsge}></Route>
@@ -92,19 +76,11 @@ function App() {
             <Route path="/CareCare/usage" component={CreatecarCareUsge}></Route>
             <Route path="/lampusage" component={LampsUsgeNew}></Route>
             <Route path="/EStander" component={LampsEStander}></Route>
-
-            
-
-
-
             <Route path="/Filter" component={ShowFilterData}></Route>
             <Route path="/CareCare" component={ShowcarCareData}></Route>
             <Route path="/Brake" component={ShowBrakeData}></Route>
             <Route path="/Spark" component={ShowsparkData}></Route>
             <Route path="/Belt" component={ShowbeltData}></Route>
-
-
-
             <Route path="/Brand" component={Brand}></Route>
             <Route path="/unit" component={Unit}></Route>
             <Route path="/update" component={AddEdit}></Route>
@@ -113,11 +89,7 @@ function App() {
             <Route path="/delete" component={Unit}></Route>
             <Route path="/UpdateUnit" component={UpdateUnit}></Route>
             <Route path="/UpdateBrand" component={UpdateBrand}></Route>
-            
-
-            {/* <Home/> */}
-           </Switch>
-
+          </Switch>
           </div>
 
           </Container>

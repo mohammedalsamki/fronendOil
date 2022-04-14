@@ -286,28 +286,30 @@ export default function FileSystemNavigator(props) {
                   defaultExpandIcon={<ChevronRightIcon />}
                   sx={{ height: 600, flexGrow: 1, maxWidth: "100%", overflowY: 'auto' }}
                 >
-                  {props.partData.map((item, i) => (
+                  {props.partData.map((item1, i) => (
               <>
-         <TreeItem nodeId={item._id }   onClick={() => getOptionsPro(item._id)}  label={<>
+         <TreeItem nodeId={item1._id }   onClick={() => getOptionsPro(item1._id)}  label={<>
         <h3>
           {/* <Image rounded  style={{ width: 40, height: 40 }} /> */}
-          {item.nameEN}
+          {item1.nameEN}
         </h3>
-        <button  onClick={()=> handleOpenItem(item.nameEN,item._id)}>+</button>
-        <button onClick={()=> DeleteItem(item._id)} >X</button>
-        <button onClick={()=> handleOpenEdit(item._id)}>Edit/</button>
+        <button  onClick={()=> handleOpenItem(item1.nameEN,item1._id)}>+</button>
+        <button onClick={()=> DeleteItem(item1._id)} >X</button>
+        <button onClick={()=> handleOpenEdit(item1._id)}>Edit/</button>
       </>}> 
-      {itemData.map((item, i) => (
-                          <TreeItem nodeId={item._id} onClick={() => getBrandItem(item.BrandName,item.category)} label={<><h3>{item.BrandName}</h3> </>} >
-      {branditemData.map((item, i) => (
+      {itemData.map((item, i) => {
+if(item1._id===item.category){return(
 
-                             <TreeItem nodeId={Math.floor(Math.random() * 10)} label={<><h3> OEM#:({item.OEMPartNumber}) BRAND#:({item.BrandPartNumber}) </h3> 
-                                      <button onClick={()=> DeleteItemBrand(item._id)} >X</button>
-                          <button onClick={()=> handleOpenEditBrand(item._id,item.category)}>Edit/</button></>}  >
-                             </TreeItem>
-                    ))}
+                          <TreeItem nodeId={item._id} onClick={() => getBrandItem(item.BrandName,item.category)} label={<><h3>{item.BrandName}</h3> </>} >
+      {branditemData.map((item0, i) => {
+if(item._id===item0.category){return(
+                             <TreeItem nodeId={Math.floor(Math.random() * 10)} label={<><h3> OEM#:({item0.OEMPartNumber}) BRAND#:({item0.BrandPartNumber}) </h3> 
+                                      <button onClick={()=> DeleteItemBrand(item0._id)} >X</button>
+                          <button onClick={()=> handleOpenEditBrand(item0._id,item0.category)}>Edit/</button></>}  >
+                             </TreeItem>)}
+              })}
                         </TreeItem>
-                    ))}
+      )}})}
                         </TreeItem>
                    </>
                     ))}

@@ -305,7 +305,7 @@ export default function vehicles(props) {
         }).then( (response) => {
           console.log(response)
           console.log(parent0)
-            window.location.reload(false);
+            // window.location.reload(false);
             alert("added new Item")
           }).catch((error) => {
             console.log(error.message);
@@ -429,7 +429,7 @@ export default function vehicles(props) {
                 >
                   {propsdata.map((item, i) => (
               <>
-         <TreeItem nodeId={item._id }   onClick={() => getBrandItem(item.ModelEn,item._id)}  label={<>
+         <TreeItem style={ { textAlign: "left" }} nodeId={item._id }   onClick={() => getBrandItem(item.ModelEn,item._id)}  label={<>
         <h3>
           {/* <Image rounded  style={{ width: 40, height: 40 }} /> */}
           {item.nameEn}
@@ -439,12 +439,12 @@ export default function vehicles(props) {
         <button onClick={()=> handleOpenEdit(item._id,item.nameEn)}>Edit/</button>
       </>}> 
       {itemData.map((item, i) => (
-                          <TreeItem nodeId={item._id} onClick={() => getVehiclesItem(item.ModelEn,item._id)}  label={<><h3>{item.ModelEn}</h3>         <button  onClick={()=> handleOpenVehicles(item.ModelEn,item._id)}>+</button>
+                          <TreeItem style={ { textAlign: "left" }} nodeId={item._id} onClick={() => getVehiclesItem(item.ModelEn,item._id)}  label={<><h3>{item.ModelEn}</h3>         <button  onClick={()=> handleOpenVehicles(item.ModelEn,item._id)}>+</button>
                           <button onClick={()=> DeleteItemBrand(item._id)} >X</button>
                           <button onClick={()=> handleOpenEditBrand(item._id,item.ModelEn)}>Edit/</button></>} >
       {branditemData.map((item, i) => (
 
-                             <TreeItem nodeId={Math.floor(Math.random() * 10)} label={<><h3> ModelYear#:({item.ModelYear}) Fueltype#:({item.Fueltype}) BodyNo#:({item.BodyNo})  EngVol#:({item.EngVol}) EngNo#:({item.EngNo}) </h3> 
+                             <TreeItem style={ { textAlign: "left" }} nodeId={Math.floor(Math.random() * 10)} label={<><h3> ({item.ModelYear}) ({item.Fueltype}) BodyNo#:({item.BodyNo})  EngVol#:({item.EngVol}) EngNo#:({item.EngNo}) </h3> 
                                       <button onClick={()=> DeleteVehicles(item._id)} >X</button>
                           <button onClick={()=> handleEditVehicles(item.ModelYear,item._id)}>Edit/</button></>}  >
                              </TreeItem>

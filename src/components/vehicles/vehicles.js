@@ -1,6 +1,6 @@
 import * as React from 'react';
 import axios from "axios"
-import { useEffect } from 'react';
+import { useEffect,useState } from 'react';
 import Image from "material-ui-image";
 import Select from 'react-select'
 import TreeView from '@mui/lab/TreeView';
@@ -11,6 +11,9 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import MultiSelect from  'react-multiple-select-dropdown-lite'
+import  'react-multiple-select-dropdown-lite/dist/index.css'
+
 import {
     AppBar,
     TextField,
@@ -28,6 +31,7 @@ import { Grid } from '@material-ui/core';
     boxShadow: 24,
     p: 4,
   };
+
   
   const ulStyle = {  padding: "12px 10px",  width:'40%', listStyleType:'none'}
   const selectStyle = {padding: "12px 10px", listStyleType:'none',width:"300px",height :'100px'}
@@ -35,26 +39,113 @@ import { Grid } from '@material-ui/core';
 
 
 export default function vehicles(props) {
+  // ------------------------------start select year --------------------
+  const [value, setvalue] = useState([])
+  const [valueFule, setvalueFule] = useState([])
+
+  let arr= []
+  const  handleOnchangeFule  =  val  => {
+    setvalueFule(val)
+
+  }
+  const  handleOnchange  =  val  => {
+    setvalue(val)
+
+  }
+  const sortedValue=()=>{
+    arr= value
+    // arr.sort();
+    console.log(arr)
+
+  }
+
+  const  optionsFule  = [
+    { label:  'Hybrid', value:  "Hybrid"  },
+    { label:  'Electric', value:  "Electric"  },
+    { label:  'Gasoline', value:  "Gasoline"  },
+    { label:  'Gasoline', value:  "Gasoline"  },
+
+
+
+  ]
+  const  options  = [
+    { label:  '2000', value:  2000  },
+    { label:  '2001', value:  2001  },
+    { label:  '2002', value:  2002  },
+    { label:  '2003', value:  2003  },
+    { label:  '2004', value:  2004  },
+    { label:  '2005', value:  2005  },
+    { label:  '2006', value:  2006  },
+    { label:  '2007', value:  2007  },
+    { label:  '2008', value:  2008  },
+    { label:  '2009', value:  2009  },
+    { label:  '2010', value:  2010  },
+    { label:  '2011', value:  2011  },
+    { label:  '2012', value:  2012  },
+    { label:  '2013', value:  2013  },
+    { label:  '2014', value:  2014  },
+    { label:  '2015', value:  2015  },
+    { label:  '2016', value:  2016  },
+    { label:  '2017', value:  2017  },
+    { label:  '2018', value:  2018  },
+    { label:  '2019', value:  2019  },
+    { label:  '2020', value:  2020  },
+    { label:  '2021', value:  2021  },
+    { label:  '2022', value:  2022  },
+
+  ]
+  // ------------------------------end select year --------------------
+
     const [open, setOpen] = React.useState(false);
     const [openEdit, setopenEdit] = React.useState(false);
     const [propsdata, setpropsdata] = React.useState(false);
     const [openItem, setopenItem] = React.useState(false);
     const [openItemBrand, setopenItemBrand] = React.useState(false);
+    const [openVehicles, setopenVehicles] = React.useState(false);
+    const [openEditVehicles, setopenEditVehicles] = React.useState(false);
+
 
     const [partName, setopartName] = React.useState(false);
     const [partId, setpartId] = React.useState(false);
     const [idEdit, setidEdit] = React.useState(false);
     const [Cat, setCat] = React.useState(false);
     const [Note, setNote] = React.useState(false);
-    const [OEMNUMB, setOEMNUMB] = React.useState(false);
-    const [BrandNum, setBrandNum] = React.useState(false);
+    const [NameEn, setNameEn] = React.useState(false);
+    const [NameAr, setNameAr] = React.useState(false);
     // const [idEdit, setidEdit] = React.useState(false);
     let test = [{}]
     
-    // --------------edit part name module--------------------------------------------------
-    const handleOpenEditBrand = (id,cat) => {
+    const handleOpenVehicles = (partNamedrom,id) => {
       setidEdit(id)
-      setCat(cat)
+    setopartName(partNamedrom)
+
+      console.log("its me",id)
+
+      test=props.partData
+      console.log("test",test)
+      setparent(localStorage.getItem('catID'));
+      setcatName(localStorage.getItem('catName'));
+      setopenVehicles(true)};
+    const handleCloseVehicles = () => setopenVehicles(false);
+    // --------------edit Vehicles module--------------------------------------------------
+
+    const handleEditVehicles = (partNamedrom,id) => {
+      setidEdit(id)
+    setopartName(partNamedrom)
+
+      console.log("its me",id)
+
+      test=props.partData
+      console.log("test",test)
+      setparent(localStorage.getItem('catID'));
+      setcatName(localStorage.getItem('catName'));
+      setopenEditVehicles(true)};
+    const handleCloseEditVehicles = () => setopenEditVehicles(false);
+    // --------------edit part name module--------------------------------------------------
+    const handleOpenEditBrand = (id,partNamedrom) => {
+      setidEdit(id)
+    setopartName(partNamedrom)
+
       console.log("its me",id)
 
       test=props.partData
@@ -64,8 +155,10 @@ export default function vehicles(props) {
       setopenItemBrand(true)};
     const handleCloseEditBrand = () => setopenItemBrand(false);
   // --------------edit part name module------------------------------------------------
-    const handleOpenEdit = (id) => {
+    const handleOpenEdit = (id,partNamedrom) => {
       setidEdit(id)
+    setopartName(partNamedrom)
+
       console.log("its me",id)
 
       test=props.partData
@@ -98,6 +191,12 @@ export default function vehicles(props) {
   // --------------Add item info module----------------------------------------------------------
     let [name0,setName]= React.useState(String);
     let [nameEN0,setnameEN]= React.useState(String);
+    let [BodyNo,setBodyNo]= React.useState(String);
+    let [EngNo,setEngNo]= React.useState(String);
+    let [Notes,setNotes]= React.useState(String);
+    let [EngVol,setEngVol]= React.useState(String);
+
+
     let [catName,setcatName]= React.useState(localStorage.getItem('catName'));
     let [parent0,setparent]= React.useState(props.catID);
     let [ItemImage,setItemImage]= React.useState(String);
@@ -108,23 +207,6 @@ export default function vehicles(props) {
     let [BrandID,setBrandID]= React.useState(part);
     let [BrandName,setBrandName]= React.useState(part);
     // ----------------------------Get Brand-----------------
-    const getOptionsBrand=async()=>{
-
-      const res = await axios.get('https://backoil.herokuapp.com/api/oil/Brand')
-      const data = res.data
-      const options = data.map(d => ({
-        "value" : d._id,
-        "label" : d.BrandEn
-      }))
-      setBrandselectOptions( options)
-    }
-     const BrandhandleChange=async(e)=>{
-     
-      await setBrandName(e.label)
-            setBrandID(e.value)
-            console.log(BrandName,BrandID)
-    }
-
 
     useEffect(async () => { 
 
@@ -142,7 +224,6 @@ export default function vehicles(props) {
         console.log(props.dataPart)
         setparent(localStorage.getItem('catID'));
         setcatName(localStorage.getItem('catName'));
-        getOptionsBrand();
     }, []);
     // ---------------------------post part name api ---------------
     const sendDataToAPI = () => {
@@ -169,40 +250,83 @@ export default function vehicles(props) {
      const ItemDataToAPIUpdate = () => {
       setparent(localStorage.getItem('catID'));
       setcatName(localStorage.getItem('catName'));
-        axios.put(`https://backoil.herokuapp.com/api/products/${idEdit}`,{
-          BrandID:BrandID,
-          BrandName:BrandName,
-          // vehicles:vehicles,
-          category:Cat,
-          Note:Note,
-          BrandPartNumber:BrandNum,
-          OEMPartNumber:OEMNUMB,
-          ItemImage:ItemImage,
+        axios.put(`https://backoil.herokuapp.com/api/vehicles/Modale/${idEdit}`,{
+          ModelAr:NameAr,
+          ModelEn:NameEn,
+         
         }).then( (response) => {
           console.log(response)
           console.log(parent0)
-            // window.location.reload(false);
+            window.location.reload(false);
           }).catch((error) => {
             console.log(error.message);
         })
     };
-    // -------------------------------------post Item api-------------
-    const ItemDataToAPI = () => {
+     // -------------------------------------Put Vehicles api-------------
+     const VehiclesEditDataToAPI = () => {
+      // sortedValue();
       setparent(localStorage.getItem('catID'));
+      console.log(arr.value,value.value,valueFule.value,BodyNo,idEdit)
       setcatName(localStorage.getItem('catName'));
-        axios.post('https://backoil.herokuapp.com/api/vehicles/Manufacturer/create',{
-          BrandID:BrandID,
-          BrandName:BrandName,
-          // vehicles:vehicles,
-          category:partId,
-          Note:Note,
-          BrandPartNumber:BrandNum,
-          OEMPartNumber:OEMNUMB,
-          ItemImage:ItemImage,
+        axios.put(`https://backoil.herokuapp.com/api/vehicles/Vehicles/${idEdit}`,{
+          ModelYear:value.value,
+          Fueltype:valueFule.value,
+          BodyNo:BodyNo,
+          EngNo:EngNo,
+          EngVol:EngVol,
+          Notes:Notes,
+         
         }).then( (response) => {
           console.log(response)
           console.log(parent0)
             // window.location.reload(false);
+            alert("Edit  vehicles info")
+
+          }).catch((error) => {
+            console.log(error.message);
+        })
+    };
+
+    // -------------------------------------post Item api-------------
+    const VehiclesDataToAPI = () => {
+      sortedValue();
+      setparent(localStorage.getItem('catID'));
+      console.log(arr.value,value.value,valueFule.value,BodyNo,idEdit)
+      setcatName(localStorage.getItem('catName'));
+        axios.post('https://backoil.herokuapp.com/api/vehicles/Vehicles/create',{
+          ModelYear:value.value,
+          Fueltype:valueFule.value,
+          BodyNo:BodyNo,
+          EngNo:EngNo,
+          EngVol:EngVol,
+          Notes:Notes,
+          category:idEdit,
+         
+        }).then( (response) => {
+          console.log(response)
+          console.log(parent0)
+            window.location.reload(false);
+            alert("added new Item")
+          }).catch((error) => {
+            console.log(error.message);
+        })
+    };
+
+    // -------------------------------------post Item api-------------
+    const ItemDataToAPI = () => {
+      setparent(localStorage.getItem('catID'));
+      setcatName(localStorage.getItem('catName'));
+        axios.post('https://backoil.herokuapp.com/api/vehicles/Modale/create',{
+          ModelEn:NameEn,
+          ModelAr:NameAr,
+          category:partId,
+         
+        }).then( (response) => {
+          console.log(response)
+          console.log(parent0)
+            // window.location.reload(false);
+            alert("added new Vehicles")
+
           }).catch((error) => {
             console.log(error.message);
         })
@@ -220,12 +344,23 @@ export default function vehicles(props) {
           localStorage.clear();
       })
   }
+
+  // ----------------------Delete Vehicles--------------------
+  const DeleteVehicles=(id)=>{
+    let isExecuted = window.confirm("Are you sure to execute this action?");
+    console.log(isExecuted);
+    if(isExecuted){
+    axios.delete(`https://backoil.herokuapp.com/api/vehicles/Vehicles/${id}`).then( () =>{
+      alert('delete done')
+      window.location.reload(false);
+    } )}
+  }
     // ----------------------Delete Part Brand--------------------
     const DeleteItemBrand=(id)=>{
       let isExecuted = window.confirm("Are you sure to execute this action?");
       console.log(isExecuted);
       if(isExecuted){
-      axios.delete(`https://backoil.herokuapp.com/api/products/${id}`).then( () =>{
+      axios.delete(`https://backoil.herokuapp.com/api/vehicles/Modale/${id}`).then( () =>{
         alert('delete done')
         window.location.reload(false);
       } )}
@@ -241,42 +376,43 @@ export default function vehicles(props) {
       } )}
     }
     // -------------get items info --------------------
-    const getOptionsPro=async(idNew)=>{
-      setparent(localStorage.getItem('catID'));
-    //   async function fetchData() {
-    //     if(parent0.length===24){
-    //       try {
-    //         const res = await axios.post('https://backoil.herokuapp.com/api/products/product/cat',{category:idNew}); 
-    //         setitemData(res.data);
-    //         console.log("from local",itemData)
-    //         console.log("from api",res.data)
-    //     } catch (err) {
-    //         console.log(err);
-    //     }
-    // }else{alert("re CLick")}
-    //     }
-    //   fetchData();
-       }
+    
       //  *----------------------get brand item info -------------------
       const getBrandItem=async(idNew,cat)=>{
         // setparent(localStorage.getItem('catID'));
+        console.log(cat)
         async function fetchData() {
-          if(parent0.length===24){
             try {
-              const res = await axios.post('https://backoil.herokuapp.com/api/products/product/brand',{BrandName:idNew,category:cat}); 
-              setbranditemData(res.data);
-              console.log("from local",branditemData)
+              const res = await axios.post('https://backoil.herokuapp.com/api/vehicles/Modale/get/',{category:cat}); 
+              setitemData(res.data);
+              console.log("from local",itemData)
               console.log("from api",res.data)
           } catch (err) {
               console.log(err);
           }
-      }else{alert("re CLick")}
-          }
+        }
         fetchData();
          }
+      //  *----------------------get brand item info -------------------
+
+         const getVehiclesItem=async(idNew,cat)=>{
+          // setparent(localStorage.getItem('catID'));
+          console.log(cat)
+          async function fetchData() {
+              try {
+                const res = await axios.post('https://backoil.herokuapp.com/api/vehicles/Vehicles/get/',{category:cat}); 
+                setbranditemData(res.data);
+                console.log("from local",branditemData)
+                console.log("from api",res.data)
+            } catch (err) {
+                console.log(err);
+            }
+          }
+          fetchData();
+           }
   return (
      <>
-      <button onClick={handleOpen}> Add Part Name+</button>
+      <button onClick={handleOpen}> Add Manufacturer Name</button>
       <br></br>
       {(() => {
               if (!propsdata){
@@ -293,22 +429,24 @@ export default function vehicles(props) {
                 >
                   {propsdata.map((item, i) => (
               <>
-         <TreeItem nodeId={item._id }   onClick={() => getOptionsPro(item._id)}  label={<>
+         <TreeItem nodeId={item._id }   onClick={() => getBrandItem(item.ModelEn,item._id)}  label={<>
         <h3>
           {/* <Image rounded  style={{ width: 40, height: 40 }} /> */}
           {item.nameEn}
         </h3>
-        <button  onClick={()=> handleOpenItem(item.nameEN,item._id)}>+</button>
+        <button  onClick={()=> handleOpenItem(item.nameEn,item._id)}>+</button>
         <button onClick={()=> DeleteItem(item._id)} >X</button>
-        <button onClick={()=> handleOpenEdit(item._id)}>Edit/</button>
+        <button onClick={()=> handleOpenEdit(item._id,item.nameEn)}>Edit/</button>
       </>}> 
       {itemData.map((item, i) => (
-                          <TreeItem nodeId={item._id} onClick={() => getBrandItem(item.BrandName,item.category)} label={<><h3>{item.BrandName}</h3> </>} >
+                          <TreeItem nodeId={item._id} onClick={() => getVehiclesItem(item.ModelEn,item._id)}  label={<><h3>{item.ModelEn}</h3>         <button  onClick={()=> handleOpenVehicles(item.ModelEn,item._id)}>+</button>
+                          <button onClick={()=> DeleteItemBrand(item._id)} >X</button>
+                          <button onClick={()=> handleOpenEditBrand(item._id,item.ModelEn)}>Edit/</button></>} >
       {branditemData.map((item, i) => (
 
-                             <TreeItem nodeId={Math.floor(Math.random() * 10)} label={<><h3> OEM#:({item.OEMPartNumber}) BRAND#:({item.BrandPartNumber}) </h3> 
-                                      <button onClick={()=> DeleteItemBrand(item._id)} >X</button>
-                          <button onClick={()=> handleOpenEditBrand(item._id,item.category)}>Edit/</button></>}  >
+                             <TreeItem nodeId={Math.floor(Math.random() * 10)} label={<><h3> ModelYear#:({item.ModelYear}) Fueltype#:({item.Fueltype}) BodyNo#:({item.BodyNo})  EngVol#:({item.EngVol}) EngNo#:({item.EngNo}) </h3> 
+                                      <button onClick={()=> DeleteVehicles(item._id)} >X</button>
+                          <button onClick={()=> handleEditVehicles(item.ModelYear,item._id)}>Edit/</button></>}  >
                              </TreeItem>
                     ))}
                         </TreeItem>
@@ -322,7 +460,207 @@ export default function vehicles(props) {
               }
               return null;
             })()}
-      {/* -+------------------------ Add Item info Module------------------------------------------ */}
+      {/* -+------------------------ Add Vehicles Module------------------------------------------ */}
+      
+      <Modal
+        open={openVehicles}
+        onClose={handleCloseVehicles}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+        <div className="App">
+      <AppBar>
+        <toolbar>
+          <h1>Modal Name 0: {partName} </h1>
+        </toolbar>
+      </AppBar>
+<br></br><br></br><br></br><br></br><br></br><br></br>
+<Grid container    style={{  margin: "10px",justifyContent: "space-around"}}>
+
+<Select 
+          placeholder="Year"
+        onChange={handleOnchange}
+        options={options}
+      />
+
+<Select 
+          placeholder="Fule Type"
+        onChange={handleOnchangeFule}
+        options={optionsFule}
+      />
+        <br /><br /><br />
+
+          <TextField
+         id="outlined-number"
+          style={ulStyle}
+          placeholder="BodyNo"
+ 
+           type="text"
+           onChange={(e)=>setBodyNo(e.target.value)}
+           InputLabelProps={{
+             shrink: true,
+           }}
+         />
+                   <TextField
+         id="outlined-number"
+          style={ulStyle}
+          placeholder="EngNo"
+ 
+           type="text"
+           onChange={(e)=>setEngNo(e.target.value)}
+           InputLabelProps={{
+             shrink: true,
+           }}
+         />
+          <TextField
+         id="outlined-number"
+          style={ulStyle}
+          placeholder="EngVol"
+ 
+           type="text"
+           onChange={(e)=>setEngVol(e.target.value)}
+           InputLabelProps={{
+             shrink: true,
+           }}
+         />
+                   <TextField
+         id="outlined-number"
+          style={ulStyle}
+          placeholder="Notes"
+ 
+           type="text"
+           onChange={(e)=>setNotes(e.target.value)}
+           InputLabelProps={{
+             shrink: true,
+           }}
+         />
+         <TextField
+         
+         id="outlined-number"
+          style={ulStyle}
+          placeholder="image"
+ 
+           type="file"
+          //  onChange={(e)=>setNameAr(e.target.value)}
+           InputLabelProps={{
+             shrink: true,
+           }}
+         />
+        
+        <br /><br /><br />
+
+      </Grid>
+      <Button variant="contained" color="primary" onClick={()=>{{
+                setparent(localStorage.getItem('catID'));
+                setcatName(localStorage.getItem('catName'));
+                VehiclesDataToAPI()}}}>
+        Add Model Info   
+        </Button>
+    </div>
+        </Box>
+      </Modal>
+      {/* -+------------------------ Edit Vehicles Module------------------------------------------ */}
+      <Modal
+        open={openEditVehicles}
+        onClose={handleCloseEditVehicles}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+        <div className="App">
+      <AppBar>
+        <toolbar>
+          <h1>Edit ModelYear : {partName} </h1>
+        </toolbar>
+      </AppBar>
+<br></br><br></br><br></br><br></br><br></br><br></br>
+<Grid container    style={{  margin: "10px",justifyContent: "space-around"}}>
+
+<Select 
+          placeholder="Year"
+        onChange={handleOnchange}
+        options={options}
+      />
+
+<Select 
+          placeholder="Fule Type"
+        onChange={handleOnchangeFule}
+        options={optionsFule}
+      />
+        <br /><br /><br />
+
+          <TextField
+         id="outlined-number"
+          style={ulStyle}
+          placeholder="BodyNo"
+ 
+           type="text"
+           onChange={(e)=>setBodyNo(e.target.value)}
+           InputLabelProps={{
+             shrink: true,
+           }}
+         />
+                            <TextField
+         id="outlined-number"
+          style={ulStyle}
+          placeholder="EngNo"
+ 
+           type="text"
+           onChange={(e)=>setEngNo(e.target.value)}
+           InputLabelProps={{
+             shrink: true,
+           }}
+         />
+          <TextField
+         id="outlined-number"
+          style={ulStyle}
+          placeholder="EngVol"
+ 
+           type="text"
+           onChange={(e)=>setEngVol(e.target.value)}
+           InputLabelProps={{
+             shrink: true,
+           }}
+         />
+                   <TextField
+         id="outlined-number"
+          style={ulStyle}
+          placeholder="Notes"
+ 
+           type="text"
+           onChange={(e)=>setNotes(e.target.value)}
+           InputLabelProps={{
+             shrink: true,
+           }}
+         />
+         <TextField
+         
+         id="outlined-number"
+          style={ulStyle}
+          placeholder="image"
+ 
+           type="file"
+          //  onChange={(e)=>setNameAr(e.target.value)}
+           InputLabelProps={{
+             shrink: true,
+           }}
+         />
+        
+        <br /><br /><br />
+
+      </Grid>
+      <Button variant="contained" color="primary" onClick={()=>{{
+                setparent(localStorage.getItem('catID'));
+                setcatName(localStorage.getItem('catName'));
+                VehiclesEditDataToAPI()}}}>
+        Add Model Info   
+        </Button>
+    </div>
+        </Box>
+      </Modal>
+
+      {/* -+------------------------ Add Manufacturer info Module------------------------------------------ */}
 
                 <Modal
         open={openItem}
@@ -334,43 +672,19 @@ export default function vehicles(props) {
         <div className="App">
       <AppBar>
         <toolbar>
-          <h1>Part Name:{partName } </h1>
-          <h2>Add Item Info</h2>
+          <h1>Manufacturer Name : {partName} </h1>
         </toolbar>
       </AppBar>
 <br></br><br></br><br></br><br></br><br></br><br></br>
 <Grid container    style={{  margin: "10px",justifyContent: "space-around"}}>
-      <Select styles={{ width:"200px" }} justifyContent="center" placeholder="Brand" options={BrandselectOptions} onChange={BrandhandleChange} />
-      <TextField
-         style={ulStyle}
-        id="outlined-number"
-        placeholder="ItemImage"
 
-          type="file"
-          onChange={(e)=>setItemImage(e.target.value)}
-          InputLabelProps={{
-            shrink: true,
-          }}
-        />
-        <textarea
-         
-         id="outlined-number"
-          style={selectStyle }
- 
-          placeholder="Note"
-           type="text"
-           onChange={(e)=>setNote(e.target.value)}
-           InputLabelProps={{
-             shrink: true,
-           }}
-         />
           <TextField
          id="outlined-number"
           style={ulStyle}
-          placeholder="OEMPartNumber"
+          placeholder="Name En"
  
            type="text"
-           onChange={(e)=>setOEMNUMB(e.target.value)}
+           onChange={(e)=>setNameEn(e.target.value)}
            InputLabelProps={{
              shrink: true,
            }}
@@ -379,27 +693,28 @@ export default function vehicles(props) {
          
          id="outlined-number"
           style={ulStyle}
-          placeholder="BrandPartNumber"
+          placeholder="Name Ar"
  
            type="text"
-           onChange={(e)=>setBrandNum(e.target.value)}
+           onChange={(e)=>setNameAr(e.target.value)}
            InputLabelProps={{
              shrink: true,
            }}
          />
         
         <br /><br /><br />
-        <Button variant="contained" color="primary" onClick={()=>{{
+
+      </Grid>
+      <Button variant="contained" color="primary" onClick={()=>{{
                 setparent(localStorage.getItem('catID'));
                 setcatName(localStorage.getItem('catName'));
           ItemDataToAPI()}}}>
-        Add Item Info   
+        Add Model Info   
         </Button>
-      </Grid>
     </div>
         </Box>
       </Modal>
-      {/* -+------------------------ Edit Item info Module------------------------------------------ */}
+      {/* -+------------------------ Edit Manufacturer info Module------------------------------------------ */}
       <Modal
         open={openItemBrand}
         onClose={handleCloseEditBrand}
@@ -410,44 +725,19 @@ export default function vehicles(props) {
         <div className="App">
       <AppBar>
         <toolbar>
-          <h1>Part Name:{partName } </h1>
-          <h2>Edit Item Info</h2>
+          <h1>Manufacturer Name : {partName } </h1>
         </toolbar>
       </AppBar>
 <br></br><br></br><br></br><br></br><br></br><br></br>
 <Grid container    style={{  margin: "10px",justifyContent: "space-around"}}>
-      <Select styles={{ width:"200px" }} justifyContent="center" placeholder="Brand" options={BrandselectOptions} onChange={BrandhandleChange} />
-      <TextField
-         style={ulStyle}
-        id="outlined-number"
-        placeholder="ItemImage"
-
-          type="file"
-          onChange={(e)=>setItemImage(e.target.value)}
-          InputLabelProps={{
-            shrink: true,
-          }}
-        />
-        <textarea
-         
-         id="outlined-number"
-          style={selectStyle }
- 
-          placeholder="Note"
-           type="text"
-           value={Note}
-           onChange={(e)=>setNote(e.target.value)}
-           InputLabelProps={{
-             shrink: true,
-           }}
-         />
+     
           <TextField
          id="outlined-number"
           style={ulStyle}
-           value={OEMNUMB}
+           value={NameEn}
            placeholder="OEMPartNumber"
            type="text"
-           onChange={(e)=>setOEMNUMB(e.target.value)}
+           onChange={(e)=>setNameEn(e.target.value)}
            InputLabelProps={{
              shrink: true,
            }}
@@ -457,26 +747,27 @@ export default function vehicles(props) {
          id="outlined-number"
           style={ulStyle}
           placeholder="BrandPartNumber"
-          value={BrandNum}
+          value={NameAr}
            type="text"
-           onChange={(e)=>setBrandNum(e.target.value)}
+           onChange={(e)=>setNameAr(e.target.value)}
            InputLabelProps={{
              shrink: true,
            }}
          />
         
         <br /><br /><br />
-        <Button variant="contained" color="primary" onClick={()=>{{
+
+      </Grid>
+      <Button variant="contained" color="primary" onClick={()=>{{
                 setparent(localStorage.getItem('catID'));
                 setcatName(localStorage.getItem('catName'));
           ItemDataToAPIUpdate()}}}>
-        Edit Item Info   
+        Edit Modal Info   
         </Button>
-      </Grid>
     </div>
         </Box>
       </Modal>
-      {/* -+------------------------ Edit Part Name Module------------------------------------------ */}
+      {/* -+------------------------ Edit Manufacturer Name Module------------------------------------------ */}
 
     <Modal
         open={openEdit}
@@ -488,8 +779,7 @@ export default function vehicles(props) {
         <div className="App">
       <AppBar>
         <toolbar>
-          <h1>Category:{catName } </h1>
-          <h2>Edit Part Name</h2>
+          <h1>Manufacturer : {partName } </h1>
         </toolbar>
       </AppBar>
       <br></br><br></br><br></br><br></br><br></br><br></br>
@@ -515,7 +805,7 @@ export default function vehicles(props) {
                 setparent(localStorage.getItem('catID'));
                 setcatName(localStorage.getItem('catName'));
           EditDataToAPI()}}}>
-        Add Part Name for {parent0}  
+        Add 
         </Button>
       </form>
     </div>
@@ -534,12 +824,10 @@ export default function vehicles(props) {
         <div className="App">
       <AppBar>
         <toolbar>
-          <h1>Category:{catName } </h1>
-          <h2>Add Part Name</h2>
+          <h2>Add Manufacturer Name</h2>
         </toolbar>
       </AppBar>
 <br></br>
-      <Typography variant="h5">BASIC WITH MATERIAL UI</Typography>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <form>
         <TextField
@@ -563,7 +851,7 @@ export default function vehicles(props) {
                 setparent(localStorage.getItem('catID'));
                 setcatName(localStorage.getItem('catName'));
           sendDataToAPI()}}}>
-        Add Part Name for {parent0}  
+        Add 
         </Button>
       </form>
     </div>

@@ -236,14 +236,31 @@ export default function FileSystemNavigator(props) {
       } )}
     }
     // -------------get items info --------------------
+    function removeDuplicates(itemData, prop) {
+      var newArray = [];
+      var lookupObject  = {};
+ 
+      for(var i in itemData) {
+         lookupObject[itemData[i][prop]] = itemData[i];
+      }
+ 
+      for(i in lookupObject) {
+          newArray.push(lookupObject[i]);
+      }
+      console.log(newArray)
+       return newArray;
+  }
     const getOptionsPro=async(idNew)=>{
       setparent(localStorage.getItem('catID'));
       async function fetchData() {
         if(parent0.length===24){
           try {
             const res = await axios.post('https://backoil.herokuapp.com/api/products/product/cat',{category:idNew}); 
-            setitemData(res.data);
+            // setitemData(res.data);
+            setitemData(removeDuplicates(res.data,"BrandName"))
             console.log("from local",itemData)
+            console.log("fun", removeDuplicates(itemData,"BrandName"))
+
             console.log("from api",res.data)
         } catch (err) {
             console.log(err);
@@ -260,6 +277,8 @@ export default function FileSystemNavigator(props) {
             try {
               const res = await axios.post('https://backoil.herokuapp.com/api/products/product/brand',{BrandName:idNew,category:cat}); 
               setbranditemData(res.data);
+
+           
               console.log("from local",branditemData)
               console.log("from api",res.data)
           } catch (err) {
@@ -301,13 +320,14 @@ export default function FileSystemNavigator(props) {
 // if(item1._id===item.category){return(
 
                           <TreeItem nodeId={item._id} onClick={() => getBrandItem(item.BrandName,item.category)} label={<><h3>{item.BrandName}</h3> </>} >
-      {branditemData.map((item0, i) => {
-if(item._id===item0.category){return(
+      {branditemData.map((item0, i) => (
+// if(item._id===item0.category){return(
                              <TreeItem nodeId={Math.floor(Math.random() * 10)} label={<><h3> OEM#:({item0.OEMPartNumber}) BRAND#:({item0.BrandPartNumber}) </h3> 
                                       <button onClick={()=> DeleteItemBrand(item0._id)} >X</button>
                           <button onClick={()=> handleOpenEditBrand(item0._id,item0.category)}>Edit/</button></>}  >
-                             </TreeItem>)}
-              })}
+                             </TreeItem>
+                            //  )}
+      ))}
                         </TreeItem>
       // )}
       

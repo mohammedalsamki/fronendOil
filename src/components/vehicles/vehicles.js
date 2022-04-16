@@ -13,7 +13,10 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import MultiSelect from  'react-multiple-select-dropdown-lite'
 import  'react-multiple-select-dropdown-lite/dist/index.css'
-
+import RestoreFromTrashIcon from '@mui/icons-material/RestoreFromTrash';
+import EditIcon from '@mui/icons-material/Edit';
+import "./styles.css";
+import AddIcon from '@mui/icons-material/Add';
 import {
     AppBar,
     TextField,
@@ -412,8 +415,11 @@ export default function vehicles(props) {
            }
   return (
      <>
-      <button onClick={handleOpen}> Add Manufacturer Name</button>
+      <button class="mainButt" onClick={handleOpen}> Add Manufacturer Name</button>
       <br></br>
+      <br></br>
+      <br></br>
+
       {(() => {
               if (!propsdata){
                   return (
@@ -421,43 +427,48 @@ export default function vehicles(props) {
                   )
               }else{
                 return (
-                  <> <TreeView
+                  // <> <div id="theTree" class="custom-tree">
+                  <TreeView
                   aria-label="file system navigator"
                   defaultCollapseIcon={<ExpandMoreIcon />}
                   defaultExpandIcon={<ChevronRightIcon />}
-                  sx={{ height: 600, flexGrow: 1, maxWidth: "100%", overflowY: 'auto' }}
+                  sx={{ height: "100%", flexGrow: 1, maxWidth: "100%", overflowY: 'auto' ,borderStyle: "outset" ,borderRadius: "25px"}}
                 >
-                  {propsdata.map((item, i) => (
+                  {propsdata.map((item1, i) => (
               <>
-         <TreeItem style={ { textAlign: "left" }} nodeId={item._id }   onClick={() => getBrandItem(item.ModelEn,item._id)}  label={<>
-        <h3>
+         <TreeItem style={ { textAlign: "left",borderStyle: "outset" }} nodeId={item1._id }   onClick={() => getBrandItem(item1.ModelEn,item1._id)}  label={<>
+        <h3 style={{  display:"inline-block" }}>
           {/* <Image rounded  style={{ width: 40, height: 40 }} /> */}
-          {item.nameEn}
+          {item1.nameEn}
         </h3>
-        <button  onClick={()=> handleOpenItem(item.nameEn,item._id)}>+</button>
-        <button onClick={()=> DeleteItem(item._id)} >X</button>
-        <button onClick={()=> handleOpenEdit(item._id,item.nameEn)}>Edit/</button>
+        <button style={{  display:"inline-block" }} class="add"  onClick={()=> handleOpenItem(item1.nameEn,item1._id)}><AddIcon/></button>
+        <button style={{  display:"inline-block" }} className="remove" onClick={()=> DeleteItem(item1._id)} ><RestoreFromTrashIcon/></button>
+        <button style={{  display:"inline-block" }} className="edit" onClick={()=> handleOpenEdit(item1._id,item1.nameEn)}><EditIcon/></button>
       </>}> 
-      {itemData.map((item, i) => (
-                          <TreeItem style={ { textAlign: "left" }} nodeId={item._id} onClick={() => getVehiclesItem(item.ModelEn,item._id)}  
-                          label={<><h3>{item.ModelEn}</h3>         <button  onClick={()=> handleOpenVehicles(item.ModelEn,item._id)}>+</button>
-                          <button onClick={()=> DeleteItemBrand(item._id)} >X</button>
-                          <button onClick={()=> handleOpenEditBrand(item._id,item.ModelEn)}>Edit/</button></>} >
+      {itemData.map((item, i) => {
+        if(item1._id===item.category){return( 
+                          <TreeItem style={ { textAlign: "left",borderStyle: "outset",borderRadius: "25px" }} nodeId={item._id} onClick={() => getVehiclesItem(item.ModelEn,item._id)}  
+                          label={<><h4 style={{  display:"inline-block" }}>{item.ModelEn}</h4>   <br/><button style={{  display:"inline-block" }} class="add" onClick={()=> handleOpenVehicles(item.ModelEn,item._id)}><AddIcon/></button>
+                          <button style={{  display:"inline-block" }} className="remove" onClick={()=> DeleteItemBrand(item._id)} ><RestoreFromTrashIcon/></button>
+                          <button style={{  display:"inline-block" }} className="edit" onClick={()=> handleOpenEditBrand(item._id,item.ModelEn)}><EditIcon/></button></>} >
       {branditemData.map((item0, i) => {
-                             if(item._id===item0.category){return( <TreeItem style={ { textAlign: "left" }} nodeId={Math.floor(Math.random() * 10)} 
-                             label={<><h3> ({item0.ModelYear}) ({item0.Fueltype}) BodyNo#:({item0.BodyNo})  EngVol#:({item0.EngVol}) EngNo#:({item0.EngNo}) </h3> 
-                                      <button onClick={()=> DeleteVehicles(item._id)} >X</button>
-                          <button onClick={()=> handleEditVehicles(item0.ModelYear,item0._id)}>Edit/</button></>}  >
-                             </TreeItem>)}
+                             if(item._id===item0.category){return( <TreeItem style={ { textAlign: "left",borderStyle: "outset",borderRadius: "25px" }} nodeId={Math.floor(Math.random() * 10)} 
+                             label={<div style={{  display:"inline-block" }}><h5 style={{  display:"inline-block" }}> ({item0.ModelYear}) ({item0.Fueltype}) BodyNo#:({item0.BodyNo})  EngVol#:({item0.EngVol}) EngNo#:({item0.EngNo}) </h5> 
+                                      <button style={{  display:"inline-block" }} className="remove" onClick={()=> DeleteVehicles(item._id)} ><RestoreFromTrashIcon/></button>
+                          <button style={{  display:"inline-block" }} className="edit" onClick={()=> handleEditVehicles(item0.ModelYear,item0._id)}><EditIcon/></button></div>}  >
+                             </TreeItem>
+                             )}
                             
                     })}
                         </TreeItem>
-                    ))}
+                             )}
+
+              })}
                         </TreeItem>
                    </>
                     ))}
                       </TreeView>
-                    </>
+                      // </div> </>
               )
               }
               return null;

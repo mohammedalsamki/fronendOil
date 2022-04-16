@@ -290,12 +290,13 @@ export default function FileSystemNavigator(props) {
          }
   return (
      <>
-      <button onClick={handleOpen}> Add Part Name+</button>
+      <button onClick={handleOpen}> Add Part Name</button>
+      <br></br>
       <br></br>
       {(() => {
               if (!props.partData){
                   return (
-                      <h1>loading</h1>
+                      <h3>Click in category </h3>
                   )
               }else{
                 return (

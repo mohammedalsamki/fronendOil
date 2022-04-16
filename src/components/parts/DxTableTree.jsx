@@ -38,7 +38,23 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import FileSystemNavigator from "./partName";
-
+const styles = {
+  banking: {
+    backgroundColor: '#f5f5f5',
+  },
+  health: {
+    backgroundColor: '#a2e2a4',
+  },
+  telecom: {
+    backgroundColor: '#b3e5fc',
+  },
+  energy: {
+    backgroundColor: '#ffcdd2',
+  },
+  insurance: {
+    backgroundColor: '#f0f4c3',
+  },
+};
 const style = {
   position: 'absolute',
   top: '50%',
@@ -66,25 +82,7 @@ const EditButton = ({ onExecute }) => (
     <EditIcon />
   </IconButton>
 );
-const partName= {
-    id: "string",
-    partnameen: "string",
-    image: "string",
-    partnamear: "string",
-    brands: {
-        id: "string",
-        nameen: "string",
-        logo: "string",
-        brandParts: {
-            id: "string",
-            nameen: "string",
-            image: "string",
-            brandid: "string",
-            manufacturerpartno: "string",
-            vehicles: [],
-        },
-    },
-}
+
 const DeleteButton = ({ onExecute }) => (
   <IconButton
     onClick={() => {
@@ -213,7 +211,7 @@ const test=()=>{
 
 
   const [tableColumnExtensions] = useState([
-    { columnName: "name", width: 300, onclick:{test}}
+    { columnName: "name", width: 350, onclick:{test}}
   ]);
   const [editingRowIds, setEditingRowIds] = useState([]);
   const [addedRows, setAddedRows] = useState([]);
@@ -224,7 +222,7 @@ const test=()=>{
   const [searchValue, setSearchState] = useState("");
   const [columnWidths, setColumnWidths] = useState([
 
-    { columnName: "name", width: 250,onclick:{test} },
+    // { columnName: "name", width: 250,onclick:{test} },
 
   ]);
   const [expandedRowIds, setExpandedRowIds] = useState([0, 1]);
@@ -365,31 +363,12 @@ const test=()=>{
 
           handleOpen() }} }
       />
-
-<TableEditColumn.Command
-        id="custom"
-        text="Show Items"
-        onClick={() => {{ 
-          localStorage.setItem('catName', restProps.row.name);
-          localStorage.setItem('catID', restProps.row._id);
-    setparent(localStorage.getItem('catID'));
-      idNew = restProps.row._id
-
-          setcatName(restProps.row.name);
-          setcatID(restProps.row._id);
-
-          console.log(catName);
-          console.log(catID);
-          getOptionsPro(idNew);
-
-           }} }
-      />
     </TableEditColumn.Cell>
     
   );
   
   const getOptionsPro=async(idNew)=>{
-    
+    // alert("test")
     setparent(localStorage.getItem('catID'));
     async function fetchData() {
       if(parent0.length===24){
@@ -410,13 +389,50 @@ const test=()=>{
     fetchData();
 
      }
+
+    const  onCellPrepared = (e) => {
+      if(e.rowType === "data" && e.column.dataField === "name") {
+          e.cellElement.style.color = e.data.Amount >= 10000 ? "green" : "red";
+          // Tracks the `Amount` data field
+          e.watch(function() {
+              return e.data.Amount;
+          }, function() {
+              e.cellElement.style.color = e.data.Amount >= 10000 ? "green" : "red";
+          })
+      }
+  }
+  const TableRow = ({ row, ...restProps }) => (
+    <Table.Row
+      {...restProps}
+      // eslint-disable-next-line no-alert
+      onClick={() => {{ 
+        localStorage.setItem('catName', row.name);
+        localStorage.setItem('catID', row._id);
+  setparent(localStorage.getItem('catID'));
+    idNew = row._id
+
+        setcatName(row.name);
+        setcatID(row._id);
+
+        console.log(catName);
+        console.log(catID);
+        getOptionsPro(idNew);
+
+         }} }
+      // onClick={() => alert(JSON.stringify(row))}
+      style={{
+        cursor: 'pointer',
+        ...styles[row.name.toLowerCase()],
+      }}
+    />
+  );
   return (
     <>
     <div class="flex-container">
     <div class="flex-child magenta">
 
     <Paper style={{ width:"600px" }}>
-      <Grid rows={rows} columns={columns} getRowId={getRowId}>
+      <Grid onClick={onCellPrepared} rows={rows} columns={columns} getRowId={getRowId}>
         <EditingState
           editingRowIds={editingRowIds}
           onEditingRowIdsChange={setEditingRowIds}
@@ -437,14 +453,13 @@ const test=()=>{
         />
         <CustomTreeData onClick={test} getChildRows={getChildRows} />
 
-        <Table height="auto" onClick={test} columnExtensions={tableColumnExtensions} />
+        <Table height="auto" rowComponent={TableRow} columnExtensions={tableColumnExtensions} />
         <TableColumnResizing
-        onClick={test}
           columnWidths={columnWidths}
           onColumnWidthsChange={setColumnWidths}
         />
-        <TableHeaderRow onClick={test} showSortingControls />
-        <TableTreeColumn onClick={test} for="name" />
+        <TableHeaderRow  showSortingControls />
+        <TableTreeColumn   for="name"   onCellPrepared={onCellPrepared}/>
         <TableEditRow  />
         <TableEditColumn
           width={150}

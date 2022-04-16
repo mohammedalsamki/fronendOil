@@ -432,7 +432,7 @@ export default function vehicles(props) {
                   aria-label="file system navigator"
                   defaultCollapseIcon={<ExpandMoreIcon />}
                   defaultExpandIcon={<ChevronRightIcon />}
-                  sx={{ height: "100%", flexGrow: 1, maxWidth: "100%", overflowY: 'auto' ,borderStyle: "outset" ,borderRadius: "25px"}}
+                  sx={{ height: "100%", flexGrow: 1, maxWidth: "100%", overflowY: 'auto'  ,borderRadius: "10px"}}
                 >
                   {propsdata.map((item1, i) => (
               <>
@@ -447,13 +447,17 @@ export default function vehicles(props) {
       </>}> 
       {itemData.map((item, i) => {
         if(item1._id===item.category){return( 
-                          <TreeItem style={ { textAlign: "left",borderStyle: "outset",borderRadius: "25px" }} nodeId={item._id} onClick={() => getVehiclesItem(item.ModelEn,item._id)}  
+                          <TreeItem style={ { textAlign: "left",borderRadius: "25px" }} nodeId={item._id} onClick={() => getVehiclesItem(item.ModelEn,item._id)}  
                           label={<><h4 style={{  display:"inline-block" }}>{item.ModelEn}</h4>   <br/><button style={{  display:"inline-block" }} class="add" onClick={()=> handleOpenVehicles(item.ModelEn,item._id)}><AddIcon/></button>
                           <button style={{  display:"inline-block" }} className="remove" onClick={()=> DeleteItemBrand(item._id)} ><RestoreFromTrashIcon/></button>
                           <button style={{  display:"inline-block" }} className="edit" onClick={()=> handleOpenEditBrand(item._id,item.ModelEn)}><EditIcon/></button></>} >
       {branditemData.map((item0, i) => {
-                             if(item._id===item0.category){return( <TreeItem style={ { textAlign: "left",borderStyle: "outset",borderRadius: "25px" }} nodeId={Math.floor(Math.random() * 10)} 
-                             label={<div style={{  display:"inline-block" }}><h5 style={{  display:"inline-block" }}> ({item0.ModelYear}) ({item0.Fueltype}) BodyNo#:({item0.BodyNo})  EngVol#:({item0.EngVol}) EngNo#:({item0.EngNo}) </h5> 
+                             if(item._id===item0.category){return( <TreeItem style={ { textAlign: "left",borderRadius: "25px" }} nodeId={Math.floor(Math.random() * 10)} 
+                             label={<div style={{  display:"inline-block" }}><h5 style={{  display:"inline-block",border: "5px solid gray" }}> ( . {item0.ModelYear} . )      </h5> 
+                                                                             <h5 style={{  display:"inline-block",border: "5px solid gray" }}>.  {item0.Fueltype}  .</h5>
+                                                                             <h5 style={{  display:"inline-block",border: "5px solid gray" }}>.  BodyNo# : {item0.BodyNo}  .</h5>
+                                                                             <h5 style={{  display:"inline-block",border: "5px solid gray" }}>.  EngVol# : {item0.EngVol}  .</h5>
+                                                                             <h5 style={{  display:"inline-block",border: "5px solid gray" }}>.  EngNo# : {item0.EngNo} .</h5>
                                       <button style={{  display:"inline-block" }} className="remove" onClick={()=> DeleteVehicles(item._id)} ><RestoreFromTrashIcon/></button>
                           <button style={{  display:"inline-block" }} className="edit" onClick={()=> handleEditVehicles(item0.ModelYear,item0._id)}><EditIcon/></button></div>}  >
                              </TreeItem>

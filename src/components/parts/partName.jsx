@@ -317,8 +317,8 @@ export default function FileSystemNavigator(props) {
         <button onClick={()=> DeleteItem(item1._id)} >X</button>
         <button onClick={()=> handleOpenEdit(item1._id)}>Edit/</button>
       </>}> 
-      {itemData.map((item, i) => (
-// if(item1._id===item.category){return(
+      {itemData.map((item, i) => {
+if(item1._id===item.category){return(
 
                           <TreeItem nodeId={item._id} onClick={() => getBrandItem(item.BrandName,item.category)} label={<><h3>{item.BrandName}</h3> </>} >
       {branditemData.map((item0, i) => (
@@ -330,9 +330,9 @@ export default function FileSystemNavigator(props) {
                             //  )}
       ))}
                         </TreeItem>
-      // )}
+      )}
       
-      ))}
+              })}
                         </TreeItem>
                    </>
                     ))}

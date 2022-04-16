@@ -222,7 +222,6 @@ const test=()=>{
   const [searchValue, setSearchState] = useState("");
   const [columnWidths, setColumnWidths] = useState([
 
-    // { columnName: "name", width: 250,onclick:{test} },
 
   ]);
   const [expandedRowIds, setExpandedRowIds] = useState([0, 1]);
@@ -368,18 +367,14 @@ const test=()=>{
   );
   
   const getOptionsPro=async(idNew)=>{
-    // alert("test")
     setparent(localStorage.getItem('catID'));
     async function fetchData() {
       if(parent0.length===24){
         try {
           const res = await axios.post('https://backoil.herokuapp.com/api/partName/product/cat/',{category:idNew}); 
           setpartData(res.data);
-          // console.log(partData)
           setpartData(res.data)
           console.log(partData)
-
-
       } catch (err) {
           console.log(err);
       }
@@ -419,7 +414,6 @@ const test=()=>{
         getOptionsPro(idNew);
 
          }} }
-      // onClick={() => alert(JSON.stringify(row))}
       style={{
         cursor: 'pointer',
         ...styles[row.name.toLowerCase()],
@@ -527,14 +521,7 @@ const test=()=>{
 
         />
         <br />
-          {/* <TextField
-            style={{ width: "300px", margin: "5px" }}
-            type="file"
-            label="image"
-            variant="outlined"
-            onChange={(e) => setItemImage(e.target.value)}
-
-          /> */}
+         
         <br />
 
         <br />

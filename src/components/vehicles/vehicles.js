@@ -432,7 +432,7 @@ export default function vehicles(props) {
                   aria-label="file system navigator"
                   defaultCollapseIcon={<ExpandMoreIcon />}
                   defaultExpandIcon={<ChevronRightIcon />}
-                  sx={{ height: "100%", flexGrow: 1, maxWidth: "100%", overflowY: 'auto'  ,borderRadius: "10px"}}
+                  sx={{ height: "100%", flexGrow: 1, maxWidth: "50%", overflowY: 'auto'  ,borderRadius: "10px"}}
                 >
                   {propsdata.map((item1, i) => (
               <>

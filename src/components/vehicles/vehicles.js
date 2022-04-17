@@ -22,6 +22,7 @@ import {
     TextField,
   } from "@material-ui/core";
 import { Grid } from '@material-ui/core';
+import { set } from 'lodash';
   const style = {
     position: 'absolute',
     top: '50%',
@@ -101,6 +102,8 @@ export default function vehicles(props) {
 
     const [open, setOpen] = React.useState(false);
     const [openEdit, setopenEdit] = React.useState(false);
+    const [Fueltype, setFueltype] = React.useState(false);
+
     const [propsdata, setpropsdata] = React.useState(false);
     const [openItem, setopenItem] = React.useState(false);
     const [openItemBrand, setopenItemBrand] = React.useState(false);
@@ -132,8 +135,14 @@ export default function vehicles(props) {
     const handleCloseVehicles = () => setopenVehicles(false);
     // --------------edit Vehicles module--------------------------------------------------
 
-    const handleEditVehicles = (partNamedrom,id) => {
+    const handleEditVehicles = (partNamedrom,id,Note,logo,BodyNo,EngVol,EngNo,Fueltype) => {
       setidEdit(id)
+      setNote(Note)
+      setBodyNo(BodyNo)
+      setEngVol(EngVol)
+      setEngNo(EngNo)
+      setFueltype(Fueltype)
+      setItemImage(logo)
     setopartName(partNamedrom)
 
       console.log("its me",id)
@@ -212,7 +221,6 @@ export default function vehicles(props) {
     // ----------------------------Get Brand-----------------
 
     useEffect(async () => { 
-
         async function fetchData() {
             try {
                 const res = await axios.get('https://backoil.herokuapp.com/api/vehicles/Manufacturer/get/'); 
@@ -240,6 +248,8 @@ export default function vehicles(props) {
         axios.post('https://backoil.herokuapp.com/api/vehicles/Manufacturer/create',{
             nameEn:nameEN,
             nameAr: nameAr, 
+            logo:ItemImage
+
         }).then( (response) => {
           console.log(response)
           console.log(parent)
@@ -256,6 +266,8 @@ export default function vehicles(props) {
         axios.put(`https://backoil.herokuapp.com/api/vehicles/Modale/${idEdit}`,{
           ModelAr:NameAr,
           ModelEn:NameEn,
+          ModelLogo:ItemImage
+
          
         }).then( (response) => {
           console.log(response)
@@ -269,7 +281,7 @@ export default function vehicles(props) {
      const VehiclesEditDataToAPI = () => {
       // sortedValue();
       setparent(localStorage.getItem('catID'));
-      console.log(arr.value,value.value,valueFule.value,BodyNo,idEdit)
+      console.log(ItemImage)
       setcatName(localStorage.getItem('catName'));
         axios.put(`https://backoil.herokuapp.com/api/vehicles/Vehicles/${idEdit}`,{
           ModelYear:value.value,
@@ -277,7 +289,9 @@ export default function vehicles(props) {
           BodyNo:BodyNo,
           EngNo:EngNo,
           EngVol:EngVol,
-          Notes:Notes,
+          Notes:Note,
+          ModelImage:ItemImage
+
          
         }).then( (response) => {
           console.log(response)
@@ -302,8 +316,10 @@ export default function vehicles(props) {
           BodyNo:BodyNo,
           EngNo:EngNo,
           EngVol:EngVol,
-          Notes:Notes,
+          Notes:Note,
           category:idEdit,
+          logo:ItemImage
+
          
         }).then( (response) => {
           console.log(response)
@@ -323,6 +339,9 @@ export default function vehicles(props) {
           ModelEn:NameEn,
           ModelAr:NameAr,
           category:partId,
+          ModelLogo:ItemImage
+
+
          
         }).then( (response) => {
           console.log(response)
@@ -340,6 +359,7 @@ export default function vehicles(props) {
       axios.put(`https://backoil.herokuapp.com/api/vehicles/Manufacturer/${idEdit}`, {
         nameEn:name0,
         nameAr:nameEN0,
+        logo:ItemImage
       }).then(() => {
   alert("Updated")
   console.log(props.catID,name0,nameEN0)
@@ -437,6 +457,7 @@ export default function vehicles(props) {
                   {propsdata.map((item1, i) => (
               <>
          <TreeItem style={ { textAlign: "left",borderStyle: "outset" }} nodeId={item1._id }   onClick={() => getBrandItem(item1.ModelEn,item1._id)}  label={<>
+          <img style={{ width:"55px" }} src={item1.logo} alt="Logo" />
         <h3 style={{  display:"inline-block" }}>
           {/* <Image rounded  style={{ width: 40, height: 40 }} /> */}
           {item1.nameEn}
@@ -448,18 +469,22 @@ export default function vehicles(props) {
       {itemData.map((item, i) => {
         if(item1._id===item.category){return( 
                           <TreeItem style={ { textAlign: "left",borderRadius: "25px" }} nodeId={item._id} onClick={() => getVehiclesItem(item.ModelEn,item._id)}  
-                          label={<><h4 style={{  display:"inline-block" }}>{item.ModelEn}</h4>   <br/><button style={{  display:"inline-block" }} class="add" onClick={()=> handleOpenVehicles(item.ModelEn,item._id)}><AddIcon/></button>
+                          label={<>
+                          <img style={{ width:"55px" }} src={item1.logo} alt="Logo" />
+                          <h4 style={{  display:"inline-block" }}>{item.ModelEn}</h4>   <br/><button style={{  display:"inline-block" }} class="add" onClick={()=> handleOpenVehicles(item.ModelEn,item._id)}><AddIcon/></button>
                           <button style={{  display:"inline-block" }} className="remove" onClick={()=> DeleteItemBrand(item._id)} ><RestoreFromTrashIcon/></button>
                           <button style={{  display:"inline-block" }} className="edit" onClick={()=> handleOpenEditBrand(item._id,item.ModelEn)}><EditIcon/></button></>} >
       {branditemData.map((item0, i) => {
                              if(item._id===item0.category){return( <TreeItem style={ { textAlign: "left",borderRadius: "25px" }} nodeId={Math.floor(Math.random() * 10)} 
-                             label={<div style={{  display:"inline-block" }}><h5 style={{  display:"inline-block",border: "5px solid gray" }}> ( . {item0.ModelYear} . )      </h5> 
+                             label={<div style={{  display:"inline-block" }}>
+          <img style={{ width:"55px" }} src={item0.ModelImage} alt="Logo" />
+                               <h5 style={{  display:"inline-block",border: "5px solid gray" }}> ( . {item0.ModelYear} . )      </h5> 
                                                                              <h5 style={{  display:"inline-block",border: "5px solid gray" }}>.  {item0.Fueltype}  .</h5>
                                                                              <h5 style={{  display:"inline-block",border: "5px solid gray" }}>.  BodyNo# : {item0.BodyNo}  .</h5>
                                                                              <h5 style={{  display:"inline-block",border: "5px solid gray" }}>.  EngVol# : {item0.EngVol}  .</h5>
                                                                              <h5 style={{  display:"inline-block",border: "5px solid gray" }}>.  EngNo# : {item0.EngNo} .</h5>
                                       <button style={{  display:"inline-block" }} className="remove" onClick={()=> DeleteVehicles(item._id)} ><RestoreFromTrashIcon/></button>
-                          <button style={{  display:"inline-block" }} className="edit" onClick={()=> handleEditVehicles(item0.ModelYear,item0._id)}><EditIcon/></button></div>}  >
+                          <button style={{  display:"inline-block" }} className="edit" onClick={()=> handleEditVehicles(item0.ModelYear,item0._id,item0.Notes,item0.ModelImage,item0.BodyNo,item0.EngVol,item0.EngNo,item0.Fueltype)}><EditIcon/></button></div>}  >
                              </TreeItem>
                              )}
                             
@@ -545,23 +570,22 @@ export default function vehicles(props) {
           placeholder="Notes"
  
            type="text"
-           onChange={(e)=>setNotes(e.target.value)}
+           onChange={(e)=>setNote(e.target.value)}
            InputLabelProps={{
              shrink: true,
            }}
          />
          <TextField
-         
-         id="outlined-number"
-          style={ulStyle}
-          placeholder="image"
- 
-           type="file"
-          //  onChange={(e)=>setNameAr(e.target.value)}
-           InputLabelProps={{
-             shrink: true,
-           }}
-         />
+         style={ulStyle}
+        id="outlined-number"
+        placeholder="ItemImage"
+           value={ItemImage}
+           type="text"
+          onChange={(e)=>setItemImage(e.target.value)}
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
         
         <br /><br /><br />
 
@@ -596,12 +620,16 @@ export default function vehicles(props) {
           placeholder="Year"
         onChange={handleOnchange}
         options={options}
+        value={partName}
+
       />
 
 <Select 
           placeholder="Fule Type"
         onChange={handleOnchangeFule}
         options={optionsFule}
+        value={Fueltype}
+
       />
         <br /><br /><br />
 
@@ -609,7 +637,7 @@ export default function vehicles(props) {
          id="outlined-number"
           style={ulStyle}
           placeholder="BodyNo"
- 
+          value={BodyNo}
            type="text"
            onChange={(e)=>setBodyNo(e.target.value)}
            InputLabelProps={{
@@ -620,7 +648,7 @@ export default function vehicles(props) {
          id="outlined-number"
           style={ulStyle}
           placeholder="EngNo"
- 
+          value={EngNo}
            type="text"
            onChange={(e)=>setEngNo(e.target.value)}
            InputLabelProps={{
@@ -631,7 +659,7 @@ export default function vehicles(props) {
          id="outlined-number"
           style={ulStyle}
           placeholder="EngVol"
- 
+          value={EngVol}
            type="text"
            onChange={(e)=>setEngVol(e.target.value)}
            InputLabelProps={{
@@ -641,26 +669,25 @@ export default function vehicles(props) {
                    <TextField
          id="outlined-number"
           style={ulStyle}
-          placeholder="Notes"
- 
+          placeholder="Note"
+          value={Note}
            type="text"
-           onChange={(e)=>setNotes(e.target.value)}
+           onChange={(e)=>setNote(e.target.value)}
            InputLabelProps={{
              shrink: true,
            }}
          />
-         <TextField
-         
-         id="outlined-number"
-          style={ulStyle}
-          placeholder="image"
- 
-           type="file"
-          //  onChange={(e)=>setNameAr(e.target.value)}
-           InputLabelProps={{
-             shrink: true,
-           }}
-         />
+          <TextField
+         style={ulStyle}
+        id="outlined-number"
+        placeholder="ItemImage"
+           value={ItemImage}
+           type="text"
+          onChange={(e)=>setItemImage(e.target.value)}
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
         
         <br /><br /><br />
 

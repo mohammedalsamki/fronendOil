@@ -11,6 +11,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import "./styles.css"
 import {
     AppBar,
     TextField,
@@ -51,9 +52,16 @@ export default function FileSystemNavigator(props) {
     let test = [{}]
     
     // --------------edit part name module------------------
-    const handleOpenEditBrand = (id,cat) => {
+    const handleOpenEditBrand = (id,cat,BrandPartNumber,OEMPartNumber,ItemImage,Note,BrandName,BrandID) => {
       setidEdit(id)
+      setBrandID(BrandID)
+      setBrandName(BrandName)
+      setBrandNum(BrandPartNumber)
+      setOEMNUMB(OEMPartNumber)
+      setItemImage(ItemImage)
+      setNote(Note)
       setCat(cat)
+      setopartName(BrandName)
       console.log("its me",id)
 
       test=props.partData
@@ -63,7 +71,10 @@ export default function FileSystemNavigator(props) {
       setopenItemBrand(true)};
     const handleCloseEditBrand = () => setopenItemBrand(false);
   // --------------edit part name module------------------
-    const handleOpenEdit = (id) => {
+    const handleOpenEdit = (id,en,ar,img) => {
+      setnameEN(en)
+      setName(ar)
+      setItemImage(img)
       setidEdit(id)
       console.log("its me",id)
 
@@ -166,7 +177,7 @@ export default function FileSystemNavigator(props) {
       setcatName(localStorage.getItem('catName'));
         axios.put(`https://backoil.herokuapp.com/api/products/${idEdit}`,{
           BrandID:BrandID,
-          BrandName:BrandName,
+          // BrandName:BrandName,
           // vehicles:vehicles,
           category:Cat,
           Note:Note,
@@ -176,6 +187,8 @@ export default function FileSystemNavigator(props) {
         }).then( (response) => {
           console.log(response)
           console.log(parent0)
+          alert("Updated")
+          handleCloseEditBrand()
             // window.location.reload(false);
           }).catch((error) => {
             console.log(error.message);
@@ -197,6 +210,7 @@ export default function FileSystemNavigator(props) {
         }).then( (response) => {
           console.log(response)
           console.log(parent0)
+          alert("Added ")
             // window.location.reload(false);
           }).catch((error) => {
             console.log(error.message);
@@ -206,12 +220,14 @@ export default function FileSystemNavigator(props) {
     // ------------------------Edit Part Name api----------------
     const EditDataToAPI = () => {
       axios.put(`https://backoil.herokuapp.com/api/partName/PartName/${idEdit}`, {
-        nameEN:name0,
-        nameAr:nameEN0,
+        nameEN:nameEN0,
+        nameAr:name0,
+        ItemImage:ItemImage
       }).then(() => {
   alert("Updated")
   console.log(props.catID,name0,nameEN0)
-        window.location.reload(false);
+  handleCloseItem()
+        // window.location.reload(false);
           localStorage.clear();
       })
   }
@@ -253,7 +269,7 @@ export default function FileSystemNavigator(props) {
     const getOptionsPro=async(idNew)=>{
       setparent(localStorage.getItem('catID'));
       async function fetchData() {
-        if(parent0.length===24){
+        // if(parent0.length===24){
           try {
             const res = await axios.post('https://backoil.herokuapp.com/api/products/product/cat',{category:idNew}); 
             // setitemData(res.data);
@@ -265,7 +281,7 @@ export default function FileSystemNavigator(props) {
         } catch (err) {
             console.log(err);
         }
-    }else{alert("re CLick")}
+    // }else{alert("re CLick")}
         }
       fetchData();
        }
@@ -308,14 +324,15 @@ export default function FileSystemNavigator(props) {
                 >
                   {props.partData.map((item1, i) => (
               <>
-         <TreeItem nodeId={item1._id }   onClick={() => getOptionsPro(item1._id)}  label={<>
-        <h3>
+         <TreeItem style={ { textAlign: "left",borderStyle: "outset" }} nodeId={item1._id }   onClick={() => getOptionsPro(item1._id)}  label={<>
+          <img style={{ width:"55px" }} src={item1.ItemImage} alt="Logo" />
+        <h3 style={{  display:"inline-block" }}>
           {/* <Image rounded  style={{ width: 40, height: 40 }} /> */}
           {item1.nameEN}
         </h3>
-        <button  onClick={()=> handleOpenItem(item1.nameEN,item1._id)}>+</button>
-        <button onClick={()=> DeleteItem(item1._id)} >X</button>
-        <button onClick={()=> handleOpenEdit(item1._id)}>Edit/</button>
+        <button style={{  display:"inline-block" }} class="add" onClick={()=> handleOpenItem(item1.nameEN,item1._id)}>+</button>
+        <button style={{  display:"inline-block" }} className="remove" onClick={()=> DeleteItem(item1._id)} >X</button>
+        <button style={{  display:"inline-block" }} className="edit" onClick={()=> handleOpenEdit(item1._id,item1.nameEN,item1.nameAr,item1.ItemImage)}>Edit/</button>
       </>}> 
       {itemData.map((item, i) => {
 if(item1._id===item.category){return(
@@ -323,9 +340,10 @@ if(item1._id===item.category){return(
                           <TreeItem nodeId={item._id} onClick={() => getBrandItem(item.BrandName,item.category)} label={<><h3>{item.BrandName}</h3> </>} >
       {branditemData.map((item0, i) => (
 // if(item._id===item0.category){return(
-                             <TreeItem nodeId={Math.floor(Math.random() * 10)} label={<><h3> OEM#:({item0.OEMPartNumber}) BRAND#:({item0.BrandPartNumber}) </h3> 
-                                      <button onClick={()=> DeleteItemBrand(item0._id)} >X</button>
-                          <button onClick={()=> handleOpenEditBrand(item0._id,item0.category)}>Edit/</button></>}  >
+                             <TreeItem style={ { textAlign: "left",borderRadius: "25px" }} nodeId={Math.floor(Math.random() * 10)} label={<> <img style={{ width:"55px" }} src={item0.ItemImage} alt="Logo" />  <h3 style={{  display:"inline-block" }}> OEM#:({item0.OEMPartNumber}) BRAND#:({item0.BrandPartNumber}) </h3> 
+                                      <button  style={{  display:"inline-block" }} className="remove" onClick={()=> DeleteItemBrand(item0._id)} >X</button>
+                          <button style={{  display:"inline-block" }} className="edit" onClick={()=> handleOpenEditBrand(
+                            item0._id,item0.category,item0.BrandPartNumber,item0.OEMPartNumber,item0.ItemImage,item0.Note,item0.BrandName,item0.BrandID)}>Edit/</button></>}  >
                              </TreeItem>
                             //  )}
       ))}
@@ -366,7 +384,7 @@ if(item1._id===item.category){return(
         id="outlined-number"
         placeholder="ItemImage"
 
-          type="file"
+          type="text"
           onChange={(e)=>setItemImage(e.target.value)}
           InputLabelProps={{
             shrink: true,
@@ -441,8 +459,8 @@ if(item1._id===item.category){return(
          style={ulStyle}
         id="outlined-number"
         placeholder="ItemImage"
-
-          type="file"
+           value={ItemImage}
+           type="text"
           onChange={(e)=>setItemImage(e.target.value)}
           InputLabelProps={{
             shrink: true,
@@ -519,23 +537,34 @@ if(item1._id===item.category){return(
           type="text"
           label="Name En"
           variant="outlined"
-          onChange={(e) => setName(e.target.value)}
+          value={nameEN0}
+          onChange={(e) => setnameEN(e.target.value)}
         />
-        <br />
+        {/* <br /> */}
         <TextField
           style={{ width: "300px", margin: "5px" }}
           type="text"
           label="Name Ar"
           variant="outlined"
-          onChange={(e) => setnameEN(e.target.value)}
+          value={name0}
+          onChange={(e) => setName(e.target.value)}
 
         />
-        <br /><br /><br />
+        <TextField
+          style={{ width: "300px", margin: "5px" }}
+          type="text"
+          label="Image"
+          variant="outlined"
+          value={ItemImage}
+          onChange={(e) => setItemImage(e.target.value)}
+
+        />
+        {/* <br /><br /><br /> */}
         <Button variant="contained" color="primary" onClick={()=>{{
                 setparent(localStorage.getItem('catID'));
                 setcatName(localStorage.getItem('catName'));
           EditDataToAPI()}}}>
-        Add Part Name for {parent0}  
+        Edit Part Name for {catName }  
         </Button>
       </form>
     </div>
@@ -569,7 +598,7 @@ if(item1._id===item.category){return(
           variant="outlined"
           onChange={(e) => setName(e.target.value)}
         />
-        <br />
+        {/* <br /> */}
         <TextField
           style={{ width: "300px", margin: "5px" }}
           type="text"
@@ -578,12 +607,20 @@ if(item1._id===item.category){return(
           onChange={(e) => setnameEN(e.target.value)}
 
         />
-        <br /><br /><br />
+        <TextField
+          style={{ width: "300px", margin: "5px" }}
+          type="text"
+          label="Image"
+          variant="outlined"
+          onChange={(e) => setItemImage(e.target.value)}
+
+        />
+        {/* <br /><br /><br /> */}
         <Button variant="contained" color="primary" onClick={()=>{{
                 setparent(localStorage.getItem('catID'));
                 setcatName(localStorage.getItem('catName'));
           sendDataToAPI()}}}>
-        Add Part Name for {parent0}  
+        Add Part Name for {catName}  
         </Button>
       </form>
     </div>

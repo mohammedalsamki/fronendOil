@@ -39,6 +39,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import FileSystemNavigator from "./partName";
 const styles = {
+  backgroundColor:"gray",
   banking: {
     backgroundColor: '#f5f5f5',
   },
@@ -396,7 +397,9 @@ const test=()=>{
           })
       }
   }
+  let color ={backgroundColor:"gray"}
   const TableRow = ({ row, ...restProps }) => (
+    
     <Table.Row
       {...restProps}
       // eslint-disable-next-line no-alert
@@ -405,7 +408,7 @@ const test=()=>{
         localStorage.setItem('catID', row._id);
   setparent(localStorage.getItem('catID'));
     idNew = row._id
-
+        color ={backgroundColor:"gray"}
         setcatName(row.name);
         setcatID(row._id);
 
@@ -416,10 +419,57 @@ const test=()=>{
          }} }
       style={{
         cursor: 'pointer',
-        ...styles[row.name.toLowerCase()],
+        ...styles["banking"],
+        color
       }}
     />
   );
+  const Row = ({ tableRow, selected, onToggle,row, ...restProps }) => {
+    // workaround for using the click & doubleClick events at the same time
+    // from https://stackoverflow.com/questions/25777826/onclick-works-but-ondoubleclick-is-ignored-on-react-component
+    let timer = 0;
+    let delay = 200;
+    let prevent = false;
+    const handleClick = () => {
+      timer = setTimeout(() => {
+        // if (!prevent) {
+        //   onToggle();
+        // }
+        prevent = false;
+      }, delay);
+    };
+    const handleDoubleClick = () => {
+      clearTimeout(timer);
+      prevent = true;
+      alert(JSON.stringify(tableRow.row));
+    }
+    return (
+      <Table.Row
+        {...restProps}
+        className={selected ? 'active' : ''}
+        style={{ color: 'green' , cursor: 'pointer',
+        ...styles["banking"],
+      }}
+        // onClick={{handleClick}}
+        onClick={() => {{ 
+          localStorage.setItem('catName', row.name);
+          localStorage.setItem('catID', row._id);
+    setparent(localStorage.getItem('catID'));
+      idNew = row._id
+          color ={backgroundColor:"gray"}
+          setcatName(row.name);
+          setcatID(row._id);
+          handleClick()
+          console.log(catName);
+          console.log(catID);
+          getOptionsPro(idNew);
+  
+           }} }
+        onDoubleClick={handleDoubleClick}
+      />
+    );
+  };
+ 
   return (
     <>
     <div class="flex-container">
@@ -447,7 +497,10 @@ const test=()=>{
         />
         <CustomTreeData onClick={test} getChildRows={getChildRows} />
 
-        <Table height="auto" rowComponent={TableRow} columnExtensions={tableColumnExtensions} />
+        <Table height="auto" rowComponent={Row}  style={{
+        cursor: 'pointer',
+        backgroundColor: color
+      }} columnExtensions={tableColumnExtensions} />
         <TableColumnResizing
           columnWidths={columnWidths}
           onColumnWidthsChange={setColumnWidths}

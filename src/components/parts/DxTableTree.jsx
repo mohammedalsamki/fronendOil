@@ -38,6 +38,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import FileSystemNavigator from "./partName";
+import Vehicles from "./vehicles";
 const styles = {
   backgroundColor:"gray",
   banking: {
@@ -473,7 +474,7 @@ const test=()=>{
   return (
     <>
     <div class="flex-container">
-    <div class="flex-child magenta">
+    {/* <div class="flex-child magenta"> */}
 
     <Paper style={{ width:"600px" }}>
       <Grid onClick={onCellPrepared} rows={rows} columns={columns} getRowId={getRowId}>
@@ -521,18 +522,20 @@ const test=()=>{
         <SearchPanel />
       </Grid>
     </Paper>
-    </div>
+    {/* </div> */}
     <div class="flex-child green">
 
-    <Paper style={{ width:"600px" }}>
+    <Paper >
       <h1>{catName}</h1>
       <FileSystemNavigator
             catID={catID}
             partData={partData}
           />    </Paper>
     </div>
-    <div class="flex-child green"></div>
-
+    {/* <div class="flex-child green"></div> */}
+    {/* <Paper style={{ width:"600px" }}>
+    <Vehicles/>
+    </Paper> */}
     </div>
       <Modal
         open={open}
@@ -579,7 +582,7 @@ const test=()=>{
 
         <br />
         <Button variant="contained" color="primary" onClick={sendDataToAPI}>
-        Add Chailed for {catName} 
+        Add Sup Category for {catName} 
         </Button>
       </form>
     </div>

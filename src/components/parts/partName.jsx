@@ -11,6 +11,8 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import Vehicles from "./vehicles";
+import { Paper } from "@material-ui/core";
 import "./styles.css"
 import {
     AppBar,
@@ -40,7 +42,7 @@ export default function FileSystemNavigator(props) {
     const [openEdit, setopenEdit] = React.useState(false);
     const [openItem, setopenItem] = React.useState(false);
     const [openItemBrand, setopenItemBrand] = React.useState(false);
-
+    const [vehclesItem, setvehclesItem] = React.useState(false);
     const [partName, setopartName] = React.useState(false);
     const [partId, setpartId] = React.useState(false);
     const [idEdit, setidEdit] = React.useState(false);
@@ -293,10 +295,13 @@ export default function FileSystemNavigator(props) {
             try {
               const res = await axios.post('https://backoil.herokuapp.com/api/products/product/brand',{BrandName:idNew,category:cat}); 
               setbranditemData(res.data);
-
-           
-              console.log("from local",branditemData)
-              console.log("from api",res.data)
+              // console.log(res.data[0].vehicles[0])
+              const resn = await axios.get(`https://backoil.herokuapp.com/api/vehicles/Vehicles/get/${res.data[0].vehicles[0]}`); 
+            console.log(resn.data)
+            const resnM = await axios.get(`https://backoil.herokuapp.com/api/vehicles/Modale/get/${resn.data.category}`); 
+            console.log(resnM.data)
+              // console.log("from local",branditemData)
+              // console.log("from api",res.data)
           } catch (err) {
               console.log(err);
           }
@@ -306,6 +311,9 @@ export default function FileSystemNavigator(props) {
          }
   return (
      <>
+    <div class="flex-container">
+    <div class="flex-child magenta">
+
       <button onClick={handleOpen}> Add Part Name</button>
       <br></br>
       <br></br>
@@ -340,7 +348,7 @@ if(item1._id===item.category){return(
                           <TreeItem nodeId={item._id} onClick={() => getBrandItem(item.BrandName,item.category)} label={<><h3>{item.BrandName}</h3> </>} >
       {branditemData.map((item0, i) => (
 // if(item._id===item0.category){return(
-                             <TreeItem style={ { textAlign: "left",borderRadius: "25px" }} nodeId={Math.floor(Math.random() * 10)} label={<> <img style={{ width:"55px" }} src={item0.ItemImage} alt="Logo" />  <h3 style={{  display:"inline-block" }}> OEM#:({item0.OEMPartNumber}) BRAND#:({item0.BrandPartNumber}) </h3> 
+                             <TreeItem onClick={()=> setvehclesItem(item0.vehicles)} style={ { textAlign: "left",borderRadius: "25px" }} nodeId={Math.floor(Math.random() * 10)} label={<> <img style={{ width:"55px" }} src={item0.ItemImage} alt="Logo" />  <h3 style={{  display:"inline-block" }}> OEM#:({item0.OEMPartNumber}) BRAND#:({item0.BrandPartNumber}) </h3> 
                                       <button  style={{  display:"inline-block" }} className="remove" onClick={()=> DeleteItemBrand(item0._id)} >X</button>
                           <button style={{  display:"inline-block" }} className="edit" onClick={()=> handleOpenEditBrand(
                             item0._id,item0.category,item0.BrandPartNumber,item0.OEMPartNumber,item0.ItemImage,item0.Note,item0.BrandName,item0.BrandID)}>Edit/</button></>}  >
@@ -624,8 +632,19 @@ if(item1._id===item.category){return(
         </Button>
       </form>
     </div>
+    
         </Box>
       </Modal>
+    </div>
+
+      <div class="flex-child green">
+      <Paper >
+    <Vehicles vehclesItem={vehclesItem}/>
+    </Paper>
+      </div>
+    </div>
+
     </>
+    
   );
 }

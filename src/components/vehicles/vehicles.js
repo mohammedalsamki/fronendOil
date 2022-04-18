@@ -167,9 +167,12 @@ export default function vehicles(props) {
       setopenItemBrand(true)};
     const handleCloseEditBrand = () => setopenItemBrand(false);
   // --------------edit part name module------------------------------------------------
-    const handleOpenEdit = (id,partNamedrom) => {
+    const handleOpenEdit = (id,partNamedrom,nameAr,logo) => {
       setidEdit(id)
     setopartName(partNamedrom)
+    setNameEn(nameAr)
+    setName(partNamedrom)
+    setItemImage(logo)
 
       console.log("its me",id)
 
@@ -464,7 +467,7 @@ export default function vehicles(props) {
         </h3>
         <button style={{  display:"inline-block" }} class="add"  onClick={()=> handleOpenItem(item1.nameEn,item1._id)}><AddIcon/></button>
         <button style={{  display:"inline-block" }} className="remove" onClick={()=> DeleteItem(item1._id)} ><RestoreFromTrashIcon/></button>
-        <button style={{  display:"inline-block" }} className="edit" onClick={()=> handleOpenEdit(item1._id,item1.nameEn)}><EditIcon/></button>
+        <button style={{  display:"inline-block" }} className="edit" onClick={()=> handleOpenEdit(item1._id,item1.nameEn,item1.nameAr,item1.logo)}><EditIcon/></button>
       </>}> 
       {itemData.map((item, i) => {
         if(item1._id===item.category){return( 
@@ -475,7 +478,7 @@ export default function vehicles(props) {
                           <button style={{  display:"inline-block" }} className="remove" onClick={()=> DeleteItemBrand(item._id)} ><RestoreFromTrashIcon/></button>
                           <button style={{  display:"inline-block" }} className="edit" onClick={()=> handleOpenEditBrand(item._id,item.ModelEn)}><EditIcon/></button></>} >
       {branditemData.map((item0, i) => {
-                             if(item._id===item0.category){return( <TreeItem style={ { textAlign: "left",borderRadius: "25px" }} nodeId={Math.floor(Math.random() * 10)} 
+                             if(item._id===item0.category){return( <TreeItem  style={ { textAlign: "left",borderRadius: "25px" }} nodeId={Math.floor(Math.random() * 10)} 
                              label={<div style={{  display:"inline-block" }}>
           <img style={{ width:"55px" }} src={item0.ModelImage} alt="Logo" />
                                <h5 style={{  display:"inline-block",border: "5px solid gray" }}> ( . {item0.ModelYear} . )      </h5> 
@@ -831,18 +834,28 @@ export default function vehicles(props) {
           type="text"
           label="Name En"
           variant="outlined"
+          value={name0}
           onChange={(e) => setName(e.target.value)}
         />
-        <br />
+        {/* <br /> */}
         <TextField
           style={{ width: "300px", margin: "5px" }}
           type="text"
           label="Name Ar"
           variant="outlined"
+          value={NameEn}
           onChange={(e) => setnameEN(e.target.value)}
 
         />
-        <br /><br /><br />
+                <TextField
+          style={{ width: "300px", margin: "5px" }}
+          type="text"
+          label="ItemImage"
+          variant="outlined"
+          value={ItemImage}
+          onChange={(e) => setItemImage(e.target.value)}
+
+        />
         <Button variant="contained" color="primary" onClick={()=>{{
                 setparent(localStorage.getItem('catID'));
                 setcatName(localStorage.getItem('catName'));
@@ -879,7 +892,7 @@ export default function vehicles(props) {
           variant="outlined"
           onChange={(e) => setName(e.target.value)}
         />
-        <br />
+        {/* <br /> */}
         <TextField
           style={{ width: "300px", margin: "5px" }}
           type="text"
@@ -888,7 +901,15 @@ export default function vehicles(props) {
           onChange={(e) => setnameEN(e.target.value)}
 
         />
-        <br /><br /><br />
+                <TextField
+          style={{ width: "300px", margin: "5px" }}
+          type="text"
+          label="ItemImage"
+          variant="outlined"
+          onChange={(e) => setItemImage(e.target.value)}
+
+        />
+        {/* <br /><br /><br /> */}
         <Button variant="contained" color="primary" onClick={()=>{{
                 setparent(localStorage.getItem('catID'));
                 setcatName(localStorage.getItem('catName'));

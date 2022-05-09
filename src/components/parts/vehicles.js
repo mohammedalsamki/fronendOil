@@ -34,13 +34,23 @@ export default function Vehicles(props) {
   let [modale,setmodale]= React.useState(String);
   let [Manufacturer,setManufacturer]= React.useState(String);
   let [ManufacturerValue,setManufacturerValue]= React.useState(String);
+  let [ManufacturerID,setManufacturerID]= React.useState(String);
+  let [ModaleValue,setModaleValue]= React.useState(String);
+  let [Modale,setModale]= React.useState(String);
+  let [ModaleID,setModaleID]= React.useState(String);
+  let [VehcleValue,setVehcleValue]= React.useState(String);
+  let [Vehcle,setVehcle]= React.useState(String);
+  let [VehcleID,setVehcleID]= React.useState(String);
+  let [VehcleIDend,setVehcleIDend]= React.useState(String);
+  let [VehcleValueend,setVehcleValueend]= React.useState(String);
+  let [arrVhcles,setarrVhcles]= React.useState([]);
 
 
-  const [age, setAge] = React.useState('');
 
-  const handleChange = (event: SelectChangeEvent) => {
-    setAge(event.target.value );
-  };
+
+
+
+  
 
   const getOptionsBrand=async()=>{
 
@@ -55,35 +65,76 @@ export default function Vehicles(props) {
 
     }))
     setManufacturer(options)
+    // getOptionsModale(ManufacturerID);
+    localStorage.setItem('ManufacturerID', ManufacturerID)
+
   }
+  const getOptionsModale=async()=>{
+    console.log(ManufacturerID)
+   
+  //  this.setState({ID:data._id})
+  async function fetchData() {
+    try {
+      const res = await axios.post('https://backoil.herokuapp.com/api/vehicles/Modale/get/',{category:ManufacturerID}); 
+    const data = res.data
+    const options = data.map(d => ({
+      "value" : d._id,
+      "label" : d.ModelEn
+
+    }))
+    setModale(options)
+    console.log(Modale)
+
+  } catch (err) {
+      console.log(err);
+  }
+}
+fetchData();
+
+   
+  }
+  const getVehiclesItem=async(idNew,cat)=>{
+    // setparent(localStorage.getItem('catID'));
+    console.log(ModaleID)
+    async function fetchData() {
+        try {
+          const res = await axios.post('https://backoil.herokuapp.com/api/vehicles/Vehicles/get/',{category:ModaleID}); 
+          const data = res.data
+          const options = data.map(d => ({
+            "value" : d._id,
+            "label" : d.ModelYear
+      
+          }))
+          setVehcle(options)
+          console.log(Vehcle)
+        } catch (err) {
+          console.log(err);
+      }
+    }
+    fetchData();
+     }
   useEffect(async()=>{
     getOptionsBrand();
-    
-  },[]);
+   await getOptionsModale();
+   getVehiclesItem();
+  },[ManufacturerID,ModaleID]);
   
-const getVehiclesItem=async()=>{
-  console.log(props)
-  try {
+const allVehcles=()=>{
+  for(let i = 0; i < Vehcle.length; i++){
+  // console.log(Vehcle[i].value)
+  if (Vehcle[i].label>=VehcleValue && Vehcle[i].label<=VehcleValueend) {
+  arrVhcles.push(Vehcle[i].value)
+    
+  }
+  
 
-    // console.log(res.data[0].vehicles[0])
-    const resn = await axios.get(`https://backoil.herokuapp.com/api/vehicles/Vehicles/get/${props.vehclesItem[1]}`); 
-  console.log(resn.data.ModelYear)
-  setyear(resn.data.ModelYear)
-  console.log(resn.data.category)
-  const resnM = await axios.get(`https://backoil.herokuapp.com/api/vehicles/Modale/get/${resn.data.category}`); 
-  console.log(resnM.data)
-  setmodale(resnM.data.ModelEn)
-    // console.log("from local",branditemData)
-    // console.log("from api",res.data)
-} catch (err) {
-    console.log(err);
-}
+  }
+  console.log(arrVhcles)
+
 }
 return (
   <div>
     <p>Vehicles </p>
-    <button onClick={getOptionsBrand}>--</button>
-    <p>{modale} {year}</p>
 
     <Button onClick={handleOpen}>+</Button>    <div>
       
@@ -94,7 +145,21 @@ return (
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-        <Select placeholder='Manufacturer' options={Manufacturer}   onChange={(e) => setManufacturerValue(e.label)} />
+        <Select placeholder='Manufacturer' options={Manufacturer}   onChange={(e) => {setManufacturerValue(e.label); setManufacturerID(e.value);getOptionsModale(ManufacturerID)}} />
+        <br></br>
+        <br></br>
+        <Select placeholder='Modale' options={Modale}   onChange={(e) => {setModaleValue(e.label);setModaleID(e.value) }} />
+        <br></br>
+        <br></br>
+        <Select placeholder='start year' options={Vehcle}   onChange={(e) => {setVehcleValue(e.label);setVehcleID(e.value) }} />
+        <br></br>
+        <br></br>
+        <Select placeholder='End year' options={Vehcle}   onChange={(e) => {setVehcleValueend(e.label);setVehcleIDend(e.value) }} />
+        <br></br>
+        <br></br>
+        <Button onClick={allVehcles}>Add</Button>
+
+
 
         
         </Box>

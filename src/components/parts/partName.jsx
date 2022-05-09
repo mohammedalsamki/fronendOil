@@ -294,6 +294,7 @@ export default function FileSystemNavigator(props) {
           if(parent0.length===24){
             try {
               const res = await axios.post('https://backoil.herokuapp.com/api/products/product/brand',{BrandName:idNew,category:cat}); 
+              console.log(idNew,cat)
               setbranditemData(res.data);
               // console.log(res.data[0].vehicles[0])
               const resn = await axios.get(`https://backoil.herokuapp.com/api/vehicles/Vehicles/get/${res.data[0].vehicles[0]}`); 

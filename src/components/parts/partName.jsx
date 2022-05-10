@@ -41,6 +41,12 @@ export default function FileSystemNavigator(props) {
     const [open, setOpen] = React.useState(false);
     const [openEdit, setopenEdit] = React.useState(false);
     const [openItem, setopenItem] = React.useState(false);
+    const [partID, setpartID] = React.useState(false);
+    const [vehclesID, setvehclesID] = React.useState(false);
+    const [allVehcles, setallVehcles] = React.useState([]);
+    console.log(allVehcles)
+
+    
     const [openItemBrand, setopenItemBrand] = React.useState(false);
     const [vehclesItem, setvehclesItem] = React.useState(false);
     const [partName, setopartName] = React.useState(false);
@@ -127,7 +133,7 @@ export default function FileSystemNavigator(props) {
     // ----------------------------Get Brand-----------------
     const getOptionsBrand=async()=>{
 
-      const res = await axios.get('https://backoil.herokuapp.com/api/oil/Brand')
+      const res = await axios.get('https://backendapioill.herokuapp.com/api/oil/Brand')
       const data = res.data
       const options = data.map(d => ({
         "value" : d._id,
@@ -149,7 +155,7 @@ export default function FileSystemNavigator(props) {
         setparent(localStorage.getItem('catID'));
         setcatName(localStorage.getItem('catName'));
         getOptionsBrand();
-    }, []);
+    }, [partID,allVehcles ]);
     // ---------------------------post part name api ---------------
     const sendDataToAPI = () => {
       setparent(localStorage.getItem('catID'));
@@ -159,7 +165,7 @@ export default function FileSystemNavigator(props) {
       let nameEN =name0
       let ItemImage =ItemImage
       let nameAr =nameEN0
-        axios.post('https://backoil.herokuapp.com/api/partName/PartName',{
+        axios.post('https://backendapioill.herokuapp.com/api/partName/PartName',{
             category:parent,
             nameEN:nameEN,
             ItemImage: ItemImage, 
@@ -177,7 +183,7 @@ export default function FileSystemNavigator(props) {
      const ItemDataToAPIUpdate = () => {
       setparent(localStorage.getItem('catID'));
       setcatName(localStorage.getItem('catName'));
-        axios.put(`https://backoil.herokuapp.com/api/products/${idEdit}`,{
+        axios.put(`https://backendapioill.herokuapp.com/api/products/${idEdit}`,{
           BrandID:BrandID,
           // BrandName:BrandName,
           // vehicles:vehicles,
@@ -200,7 +206,7 @@ export default function FileSystemNavigator(props) {
     const ItemDataToAPI = () => {
       setparent(localStorage.getItem('catID'));
       setcatName(localStorage.getItem('catName'));
-        axios.post('https://backoil.herokuapp.com/api/products/product/create',{
+        axios.post('https://backendapioill.herokuapp.com/api/products/product/create',{
           BrandID:BrandID,
           BrandName:BrandName,
           // vehicles:vehicles,
@@ -221,7 +227,7 @@ export default function FileSystemNavigator(props) {
 
     // ------------------------Edit Part Name api----------------
     const EditDataToAPI = () => {
-      axios.put(`https://backoil.herokuapp.com/api/partName/PartName/${idEdit}`, {
+      axios.put(`https://backendapioill.herokuapp.com/api/partName/PartName/${idEdit}`, {
         nameEN:nameEN0,
         nameAr:name0,
         ItemImage:ItemImage
@@ -238,7 +244,7 @@ export default function FileSystemNavigator(props) {
       let isExecuted = window.confirm("Are you sure to execute this action?");
       console.log(isExecuted);
       if(isExecuted){
-      axios.delete(`https://backoil.herokuapp.com/api/products/${id}`).then( () =>{
+      axios.delete(`https://backendapioill.herokuapp.com/api/products/${id}`).then( () =>{
         alert('delete done')
         window.location.reload(false);
       } )}
@@ -248,7 +254,7 @@ export default function FileSystemNavigator(props) {
       let isExecuted = window.confirm("Are you sure to execute this action?");
       console.log(isExecuted);
       if(isExecuted){
-      axios.delete(`https://backoil.herokuapp.com/api/partName/PartName/${id}`).then( () =>{
+      axios.delete(`https://backendapioill.herokuapp.com/api/partName/PartName/${id}`).then( () =>{
         alert('delete done')
         window.location.reload(false);
       } )}
@@ -273,7 +279,7 @@ export default function FileSystemNavigator(props) {
       async function fetchData() {
         // if(parent0.length===24){
           try {
-            const res = await axios.post('https://backoil.herokuapp.com/api/products/product/cat',{category:idNew}); 
+            const res = await axios.post('https://backendapioill.herokuapp.com/api/products/product/cat',{category:idNew}); 
             // setitemData(res.data);
             setitemData(removeDuplicates(res.data,"BrandName"))
             console.log("from local",itemData)
@@ -293,14 +299,14 @@ export default function FileSystemNavigator(props) {
         async function fetchData() {
           if(parent0.length===24){
             try {
-              const res = await axios.post('https://backoil.herokuapp.com/api/products/product/brand',{BrandName:idNew,category:cat}); 
-              console.log(idNew,cat)
+              const res = await axios.post('https://backendapioill.herokuapp.com/api/products/product/brand',{BrandName:idNew,category:cat}); 
+              
               setbranditemData(res.data);
               // console.log(res.data[0].vehicles[0])
-              const resn = await axios.get(`https://backoil.herokuapp.com/api/vehicles/Vehicles/get/${res.data[0].vehicles[0]}`); 
-            console.log(resn.data)
-            const resnM = await axios.get(`https://backoil.herokuapp.com/api/vehicles/Modale/get/${resn.data.category}`); 
-            console.log(resnM.data)
+            //   const resn = await axios.get(`https://backendapioill.herokuapp.com/api/vehicles/Vehicles/get/${res.data[0].vehicles[0]}`); 
+            // console.log(resn.data)
+            // const resnM = await axios.get(`https://backendapioill.herokuapp.com/api/vehicles/Modale/get/${resn.data.category}`); 
+            // console.log(resnM.data)
               // console.log("from local",branditemData)
               // console.log("from api",res.data)
           } catch (err) {
@@ -310,6 +316,38 @@ export default function FileSystemNavigator(props) {
           }
         fetchData();
          }
+
+         const getvehclesID=async()=>{
+          // setparent(localStorage.getItem('catID'));
+          let arr = []
+          let obj={}
+          async function fetchData() {
+            if(parent0.length===24){
+              try {
+                // const res = await axios.post('https://backendapioill.herokuapp.com/api/products/product/brand',{BrandName:idNew,category:cat}); 
+                
+                // setbranditemData(res.data);
+                // console.log(res.data[0].vehicles[0])
+                for (let index = 0; index < vehclesID.length; index++) {
+                  const resn = await axios.get(`https://backendapioill.herokuapp.com/api/vehicles/Vehicles/get/${vehclesID[index]}`); 
+                  console.log(resn.data)
+                  console.log("modale",resn.data.category)
+                  const resnM = await axios.get(`https://backendapioill.herokuapp.com/api/vehicles/Modale/get/${resn.data.category}`);; 
+                  console.log(resnM.data)  
+                  obj = {Modale: resnM.data.ModelEn,year:resn.data.ModelYear[0]};     
+                  arr.push(obj);           
+                }
+                setallVehcles(arr)
+console.log("arr",allVehcles)
+console.log("arr",arr)
+
+            } catch (err) {
+                console.log(err);
+            }
+        }else{alert("re CLick")}
+            }
+          fetchData();
+           }
   return (
      <>
     <div class="flex-container">
@@ -344,20 +382,36 @@ export default function FileSystemNavigator(props) {
         <button style={{  display:"inline-block" }} className="edit" onClick={()=> handleOpenEdit(item1._id,item1.nameEN,item1.nameAr,item1.ItemImage)}>Edit/</button>
       </>}> 
       {itemData.map((item, i) => {
-if(item1._id===item.category){return(
+if(item1._id===item.category){return(<>
 
                           <TreeItem nodeId={item._id} onClick={() => getBrandItem(item.BrandName,item.category)} label={<><h3>{item.BrandName}</h3> </>} >
-      {branditemData.map((item0, i) => (
-// if(item._id===item0.category){return(
-                             <TreeItem onClick={()=> setvehclesItem(item0.vehicles)} style={ { textAlign: "left",borderRadius: "25px" }} nodeId={Math.floor(Math.random() * 10)} label={<> <img style={{ width:"55px" }} src={item0.ItemImage} alt="Logo" />  <h3 style={{  display:"inline-block" }}> OEM#:({item0.OEMPartNumber}) BRAND#:({item0.BrandPartNumber}) </h3> 
+      {branditemData.map((item0, i) => {
+if(item1._id===item0.category && item.BrandName===item0.BrandName){return(
+  
+                           <> 
+                            <TreeItem onClick={()=> {getvehclesID();setpartID(item0._id);setvehclesItem(item0.vehicles);setvehclesID(item0.vehicles);console.log(vehclesID)}} style={ { textAlign: "left",borderRadius: "25px" }} nodeId={Math.floor(Math.random() * 10)} label={<> <img style={{ width:"55px" }} src={item0.ItemImage} alt="Logo" />  <h3 style={{  display:"inline-block" }}> OEM#:({item0.OEMPartNumber}) BRAND#:({item0.BrandPartNumber}) </h3> 
+                                      <br></br>
+                
+      {allVehcles.map((item, i) => (
+
+                                      <div class='parent'>
+                                      <h3 class='child'>{item.Modale}</h3>
+                                      <h3 class='child'>{item.year}</h3>
+
+                                      </div>
+))}
+
+
                                       <button  style={{  display:"inline-block" }} className="remove" onClick={()=> DeleteItemBrand(item0._id)} >X</button>
                           <button style={{  display:"inline-block" }} className="edit" onClick={()=> handleOpenEditBrand(
                             item0._id,item0.category,item0.BrandPartNumber,item0.OEMPartNumber,item0.ItemImage,item0.Note,item0.BrandName,item0.BrandID)}>Edit/</button></>}  >
                              </TreeItem>
-                            //  )}
-      ))}
-                        </TreeItem>
+                             </>
+                             )}
+                          }
       )}
+                        </TreeItem>
+                        </> )}
       
               })}
                         </TreeItem>
@@ -640,7 +694,7 @@ if(item1._id===item.category){return(
 
       <div class="flex-child green">
       <Paper >
-    <Vehicles vehclesItem={vehclesItem}/>
+    <Vehicles vehclesItem={vehclesItem} partID={partID}/>
     </Paper>
       </div>
     </div>

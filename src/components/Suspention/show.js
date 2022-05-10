@@ -117,7 +117,7 @@ export default function ShowSuspentionData() {
 
   const getOptionsOrigin=async()=>{
 
-    const res = await axios.get('https://backoil.herokuapp.com/api/Suspention/use/get')
+    const res = await axios.get('https://backendapioill.herokuapp.com/api/Suspention/use/get')
     const data = res.data
     const options = data.map(d => ({
       "value" : d._id,
@@ -153,7 +153,7 @@ export default function ShowSuspentionData() {
     let isExecuted = window.confirm("Are you sure to execute this action?");
     console.log(isExecuted);
     if(isExecuted){
-    axios.delete(`https://backoil.herokuapp.com/api/Suspention/${id}`).then( () =>{
+    axios.delete(`https://backendapioill.herokuapp.com/api/Suspention/${id}`).then( () =>{
       alert('delete done')
       
     window.location.reload(false);
@@ -162,7 +162,7 @@ export default function ShowSuspentionData() {
   useEffect(async()=>{
     getOptionsunit();
     getOptionsOrigin();
-   await axios.get(`https://backoil.herokuapp.com/api/Suspention/Suspentions/get`).then( (allSuspentions) =>{
+   await axios.get(`https://backendapioill.herokuapp.com/api/Suspention/Suspentions/get`).then( (allSuspentions) =>{
       setSuspentionList(allSuspentions.data);
       setRows(allSuspentions.data);
 
@@ -269,7 +269,7 @@ export default function ShowSuspentionData() {
     }
   }
   const sendDataToAPI = () => {
-    axios.put(`https://backoil.herokuapp.com/api/Suspention/${_id}`, {
+    axios.put(`https://backendapioill.herokuapp.com/api/Suspention/${_id}`, {
  
       StockQuantity:StockQuantity,
       UnitPrice:UnitPrice,

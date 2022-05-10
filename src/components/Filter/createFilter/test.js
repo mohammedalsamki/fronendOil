@@ -45,7 +45,7 @@ export default class Test extends Component {
   }
   async getOptionsunit(){
 
-    const res = await axios.get('https://backoil.herokuapp.com/api/oil/unit')
+    const res = await axios.get('https://backendapioill.herokuapp.com/api/oil/unit')
     const data = res.data
     const options = data.map(d => ({
       "value" : d._id,
@@ -57,7 +57,7 @@ export default class Test extends Component {
   }
  async getOptions(){
 
-    const res = await axios.get('https://backoil.herokuapp.com/api/filter/filter/usage')
+    const res = await axios.get('https://backendapioill.herokuapp.com/api/filter/filter/usage')
     const data = res.data
     
     const options = data.map(d => ({
@@ -70,7 +70,7 @@ export default class Test extends Component {
   }
   async getOptionsBrand(){
 
-    const res = await axios.get('https://backoil.herokuapp.com/api/oil/Brand')
+    const res = await axios.get('https://backendapioill.herokuapp.com/api/oil/Brand')
     const data = res.data
    this.setState({ID:data._id})
 
@@ -149,7 +149,7 @@ export default class Test extends Component {
 
     }
     alert("item added")
-   await axios.post('https://backoil.herokuapp.com/api/filter/filter',x).then( () => {
+   await axios.post('https://backendapioill.herokuapp.com/api/filter/filter',x).then( () => {
       window.location.reload(false);
 
     })

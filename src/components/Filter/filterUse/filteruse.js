@@ -88,7 +88,7 @@ export default function CreateFilterUsge() {
   
 
   const deleteFilter=(id)=>{
-    axios.delete(`https://backoil.herokuapp.com/api/filter/filter/usage/${id}`).then( () =>{
+    axios.delete(`https://backendapioill.herokuapp.com/api/filter/filter/usage/${id}`).then( () =>{
       window.location.reload(false);
     } )
   }
@@ -100,7 +100,7 @@ export default function CreateFilterUsge() {
 
     setOpen(false)};
   useEffect(()=>{
-    axios.get(`https://backoil.herokuapp.com/api/filter/filter/usage`).then( (allOilsUseg) =>{
+    axios.get(`https://backendapioill.herokuapp.com/api/filter/filter/usage`).then( (allOilsUseg) =>{
       setFilterUsgelList(allOilsUseg.data);
     })
   },[]);
@@ -123,12 +123,12 @@ const setID=(id,FilterUsageAr,FilterUsageEn)=>{
 }
        
   const creatOilusgefun = ()=>{
-    axios.post('https://backoil.herokuapp.com/api/filter/filter/usage',{FilterUsageAr,FilterUsageEn}).then( () => {
+    axios.post('https://backendapioill.herokuapp.com/api/filter/filter/usage',{FilterUsageAr,FilterUsageEn}).then( () => {
       window.location.reload(false);
     })
   }
   const sendDataToAPI = () => {
-    axios.put(`https://backoil.herokuapp.com/api/filter/filter/usage/${_id}`, {
+    axios.put(`https://backendapioill.herokuapp.com/api/filter/filter/usage/${_id}`, {
  
         FilterUsageAr,
         FilterUsageEn

@@ -46,7 +46,7 @@ export default class Createbearing extends Component {
  
  async getOptions(){
 
-    const res = await axios.get('https://backoil.herokuapp.com/api/bearing/use/get')
+    const res = await axios.get('https://backendapioill.herokuapp.com/api/bearing/use/get')
     const data = res.data
     
     const options = data.map(d => ({
@@ -59,7 +59,7 @@ export default class Createbearing extends Component {
   }
   async getOptionsBrand(){
 
-    const res = await axios.get('https://backoil.herokuapp.com/api/oil/Brand')
+    const res = await axios.get('https://backendapioill.herokuapp.com/api/oil/Brand')
     const data = res.data
    this.setState({ID:data._id})
 
@@ -134,7 +134,7 @@ export default class Createbearing extends Component {
 
     }
     console.log(x)
-   await axios.post('https://backoil.herokuapp.com/api/bearing/Bearings/create',x).then( () => {
+   await axios.post('https://backendapioill.herokuapp.com/api/bearing/Bearings/create',x).then( () => {
     alert("item added")
 
       window.location.reload(false);

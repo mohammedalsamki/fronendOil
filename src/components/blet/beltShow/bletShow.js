@@ -118,7 +118,7 @@ export default function ShowbeltData() {
 
   const getOptionsOrigin=async()=>{
 
-    const res = await axios.get('https://backoil.herokuapp.com/api/belt/belt/usage')
+    const res = await axios.get('https://backendapioill.herokuapp.com/api/belt/belt/usage')
     const data = res.data
     const options = data.map(d => ({
       "value" : d._id,
@@ -154,7 +154,7 @@ export default function ShowbeltData() {
     let isExecuted = window.confirm("Are you sure to execute this action?");
     console.log(isExecuted);
     if(isExecuted){
-    axios.delete(`https://backoil.herokuapp.com/api/belt/belt/${id}`).then( () =>{
+    axios.delete(`https://backendapioill.herokuapp.com/api/belt/belt/${id}`).then( () =>{
       alert('delete done')
       
     window.location.reload(false);
@@ -163,7 +163,7 @@ export default function ShowbeltData() {
   useEffect(async()=>{
     getOptionsunit();
     getOptionsOrigin();
-    await axios.get(`https://backoil.herokuapp.com/api/belt/belt/`).then( (allbelts) =>{
+    await axios.get(`https://backendapioill.herokuapp.com/api/belt/belt/`).then( (allbelts) =>{
       setbeltList(allbelts.data);
       setRows(allbelts.data);
 
@@ -270,7 +270,7 @@ export default function ShowbeltData() {
     }
   }
   const sendDataToAPI = () => {
-    axios.put(`https://backoil.herokuapp.com/api/belt/belt/${_id}`, {
+    axios.put(`https://backendapioill.herokuapp.com/api/belt/belt/${_id}`, {
  
       StockQuantity:StockQuantity,
       UnitPrice:UnitPrice,

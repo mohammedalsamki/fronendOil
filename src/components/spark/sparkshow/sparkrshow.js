@@ -118,7 +118,7 @@ export default function ShowsparkData() {
 
   const getOptionsOrigin=async()=>{
 
-    const res = await axios.get('https://backoil.herokuapp.com/api/spark/spark/usage')
+    const res = await axios.get('https://backendapioill.herokuapp.com/api/spark/spark/usage')
     const data = res.data
     const options = data.map(d => ({
       "value" : d._id,
@@ -154,7 +154,7 @@ export default function ShowsparkData() {
     let isExecuted = window.confirm("Are you sure to execute this action?");
     console.log(isExecuted);
     if(isExecuted){
-    axios.delete(`https://backoil.herokuapp.com/api/spark/spark/${id}`).then( () =>{
+    axios.delete(`https://backendapioill.herokuapp.com/api/spark/spark/${id}`).then( () =>{
       alert('delete done')
       
     window.location.reload(false);
@@ -163,7 +163,7 @@ export default function ShowsparkData() {
   useEffect(async()=>{
     getOptionsunit();
     getOptionsOrigin();
-   await axios.get(`https://backoil.herokuapp.com/api/spark/spark/`).then( (allsparks) =>{
+   await axios.get(`https://backendapioill.herokuapp.com/api/spark/spark/`).then( (allsparks) =>{
       setsparkList(allsparks.data);
       setRows(allsparks.data);
 
@@ -270,7 +270,7 @@ export default function ShowsparkData() {
     }
   }
   const sendDataToAPI = () => {
-    axios.put(`https://backoil.herokuapp.com/api/spark/spark/${_id}`, {
+    axios.put(`https://backendapioill.herokuapp.com/api/spark/spark/${_id}`, {
  
       StockQuantity:StockQuantity,
       UnitPrice:UnitPrice,

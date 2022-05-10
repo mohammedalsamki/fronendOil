@@ -127,7 +127,7 @@ export default function ShowWiperData() {
     let isExecuted = window.confirm("Are you sure to execute this action?");
     console.log(isExecuted);
     if(isExecuted){
-    axios.delete(`https://backoil.herokuapp.com/api/Wiper/Wiper/${id}`).then( () =>{
+    axios.delete(`https://backendapioill.herokuapp.com/api/Wiper/Wiper/${id}`).then( () =>{
       alert('delete done')
       
     window.location.reload(false);
@@ -135,7 +135,7 @@ export default function ShowWiperData() {
   }
   useEffect(async()=>{
     getOptionsunit();
-   await axios.get(`https://backoil.herokuapp.com/api/Wiper/Wiper`).then( (allWipers) =>{
+   await axios.get(`https://backendapioill.herokuapp.com/api/Wiper/Wiper`).then( (allWipers) =>{
       setWiperList(allWipers.data);
       setRows(allWipers.data);
 
@@ -242,7 +242,7 @@ export default function ShowWiperData() {
     }
   }
   const sendDataToAPI = () => {
-    axios.put(`https://backoil.herokuapp.com/api/Wiper/Wiper/${_id}`, {
+    axios.put(`https://backendapioill.herokuapp.com/api/Wiper/Wiper/${_id}`, {
  
       StockQuantiti:StockQuantiti,
       UnitPrice:UnitPrice,

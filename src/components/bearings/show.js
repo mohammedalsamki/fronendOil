@@ -117,7 +117,7 @@ export default function ShowbearingData() {
 
   const getOptionsOrigin=async()=>{
 
-    const res = await axios.get('https://backoil.herokuapp.com/api/bearing/use/get')
+    const res = await axios.get('https://backendapioill.herokuapp.com/api/bearing/use/get')
     const data = res.data
     const options = data.map(d => ({
       "value" : d._id,
@@ -153,7 +153,7 @@ export default function ShowbearingData() {
     let isExecuted = window.confirm("Are you sure to execute this action?");
     console.log(isExecuted);
     if(isExecuted){
-    axios.delete(`https://backoil.herokuapp.com/api/bearing/${id}`).then( () =>{
+    axios.delete(`https://backendapioill.herokuapp.com/api/bearing/${id}`).then( () =>{
       alert('delete done')
       
     window.location.reload(false);
@@ -162,7 +162,7 @@ export default function ShowbearingData() {
   useEffect(async()=>{
     getOptionsunit();
     getOptionsOrigin();
-   await axios.get(`https://backoil.herokuapp.com/api/bearing/Bearings/get`).then( (allbearings) =>{
+   await axios.get(`https://backendapioill.herokuapp.com/api/bearing/Bearings/get`).then( (allbearings) =>{
       setbearingList(allbearings.data);
       setRows(allbearings.data);
 
@@ -269,7 +269,7 @@ export default function ShowbearingData() {
     }
   }
   const sendDataToAPI = () => {
-    axios.put(`https://backoil.herokuapp.com/api/bearing/${_id}`, {
+    axios.put(`https://backendapioill.herokuapp.com/api/bearing/${_id}`, {
  
       StockQuantity:StockQuantity,
       UnitPrice:UnitPrice,

@@ -89,13 +89,13 @@ export default function LampsUsgeNew() {
     setOpen(false)};
 
   const deletelampsUsge=(id)=>{
-    axios.delete(`https://backoil.herokuapp.com/api/lamps/lamps/usage/${id}`).then( () =>{
+    axios.delete(`https://backendapioill.herokuapp.com/api/lamps/lamps/usage/${id}`).then( () =>{
       window.location.reload(false);
     } )
   }
 
   useEffect(()=>{
-    axios.get(`https://backoil.herokuapp.com/api/lamps/lamps/usage`).then( (alllampssUseg) =>{
+    axios.get(`https://backendapioill.herokuapp.com/api/lamps/lamps/usage`).then( (alllampssUseg) =>{
       setlampslList(alllampssUseg.data);
     })
   },[]);
@@ -115,13 +115,13 @@ setlampsUsageEn(localStorage.getItem('lampsUsageEn'))
 setid(localStorage.getItem('ID'))
 }      
   const creatlampsusgefun = ()=>{
-    axios.post('https://backoil.herokuapp.com/api/lamps/lamps/usage',{lampsUsageAr,lampsUsageEn}).then( () => {
+    axios.post('https://backendapioill.herokuapp.com/api/lamps/lamps/usage',{lampsUsageAr,lampsUsageEn}).then( () => {
       window.location.reload(false);
     })
   }
 
   const sendDataToAPI = () => {
-    axios.put(`https://backoil.herokuapp.com/api/lamps/lamps/usage/${id}`, {
+    axios.put(`https://backendapioill.herokuapp.com/api/lamps/lamps/usage/${id}`, {
  
         lampsUsageAr:lampsUsageAr,
         lampsUsageEn:lampsUsageEn

@@ -91,13 +91,13 @@ export default function CreatebeltUsge() {
 
 
   const deletebeltUsge=(id)=>{
-    axios.delete(`https://backoil.herokuapp.com/api/belt/belt/usage/${id}`).then( () =>{
+    axios.delete(`https://backendapioill.herokuapp.com/api/belt/belt/usage/${id}`).then( () =>{
       window.location.reload(false);
     } )
   }
 
   useEffect(()=>{
-    axios.get(`https://backoil.herokuapp.com/api/belt/belt/usage`).then( (allbeltsUseg) =>{
+    axios.get(`https://backendapioill.herokuapp.com/api/belt/belt/usage`).then( (allbeltsUseg) =>{
       setOiUsgelList(allbeltsUseg.data);
     })
   },[]);
@@ -118,13 +118,13 @@ const setID=(id,originatedAr,originatedEn,Specs)=>{
 }
        
   const creatbeltusgefun = ()=>{
-    axios.post('https://backoil.herokuapp.com/api/belt/belt/usage',{originatedAr,originatedEn}).then( () => {
+    axios.post('https://backendapioill.herokuapp.com/api/belt/belt/usage',{originatedAr,originatedEn}).then( () => {
       window.location.reload(false);
     })
   }
 
   const sendDataToAPI = () => {
-    axios.put(`https://backoil.herokuapp.com/api/belt/belt/usage/${id}`, {
+    axios.put(`https://backendapioill.herokuapp.com/api/belt/belt/usage/${id}`, {
  
       originatedAr:originatedAr,
       originatedEn:originatedEn

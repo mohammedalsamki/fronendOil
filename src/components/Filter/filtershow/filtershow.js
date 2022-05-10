@@ -136,7 +136,7 @@ export default function ShowFilterData() {
     let isExecuted = window.confirm("Are you sure to execute this action?");
     console.log(isExecuted);
     if(isExecuted){
-    axios.delete(`https://backoil.herokuapp.com/api/filter/filter/${id}`).then( () =>{
+    axios.delete(`https://backendapioill.herokuapp.com/api/filter/filter/${id}`).then( () =>{
       alert('delete done')
       
     window.location.reload(false);
@@ -144,7 +144,7 @@ export default function ShowFilterData() {
   }
   useEffect(async()=>{
     getOptionsunit();
-   await axios.get(`https://backoil.herokuapp.com/api/filter/filter/`).then( (allOils) =>{
+   await axios.get(`https://backendapioill.herokuapp.com/api/filter/filter/`).then( (allOils) =>{
       setOilList(allOils.data);
       setRows(allOils.data);
 
@@ -251,7 +251,7 @@ export default function ShowFilterData() {
     }
   }
   const sendDataToAPI = () => {
-    axios.put(`https://backoil.herokuapp.com/api/filter/filter/${_id}`, {
+    axios.put(`https://backendapioill.herokuapp.com/api/filter/filter/${_id}`, {
  
       StockQuantity:StockQuantity,
       UnitPrice:UnitPrice,

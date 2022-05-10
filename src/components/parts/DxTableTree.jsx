@@ -121,7 +121,7 @@ const getChildRows = (row, rootRows) => {
 
 };
 function  currentloginid() {
-    return fetch('https://backoil.herokuapp.com/api/category/get', {
+    return fetch('https://backendapioill.herokuapp.com/api/category/get', {
         method: 'GET',
       })
       .then(function(response) {
@@ -136,7 +136,7 @@ function  currentloginid() {
   
   console.log(currentloginid());
 const  getOptions= async()=>{
-    const res = await axios.get('https://backoil.herokuapp.com/api/category/get')
+    const res = await axios.get('https://backendapioill.herokuapp.com/api/category/get')
     let data = res.data
     return data;
     }
@@ -170,7 +170,7 @@ export default () => {
     let nameEn =nameEN
 
 console.log(name,parent,nameEN)
-    axios.post('https://backoil.herokuapp.com/api/category',{
+    axios.post('https://backendapioill.herokuapp.com/api/category',{
         parent:parent,
         name:name,
         ItemImage: ItemImage, 
@@ -189,7 +189,7 @@ console.log(name,parent,nameEN)
     useEffect( () => { 
         async function fetchData() {
             try {
-                const res = await axios.get('https://backoil.herokuapp.com/api/category/get'); 
+                const res = await axios.get('https://backendapioill.herokuapp.com/api/category/get'); 
                 setRows(res.data);
             } catch (err) {
                 console.log(err);
@@ -246,7 +246,7 @@ const test=()=>{
         let nameEn =added[0].nameEn
 
 
-        axios.post('https://backoil.herokuapp.com/api/category',{
+        axios.post('https://backendapioill.herokuapp.com/api/category',{
             parent:parent,
             name:name,
             ItemImage: ItemImage, 
@@ -289,7 +289,7 @@ const test=()=>{
                         }
           }
       }
-        axios.put(`https://backoil.herokuapp.com/api/category/update/${id}`, {
+        axios.put(`https://backendapioill.herokuapp.com/api/category/update/${id}`, {
  
             category_name:name,
             ItemImage: ItemImage, 
@@ -316,7 +316,7 @@ const test=()=>{
 
       const deletedSet = new Set(deleted);
       console.log(deletedSet);
-      axios.delete(`https://backoil.herokuapp.com/api/category/delete/${deleted}`).then( () =>{
+      axios.delete(`https://backendapioill.herokuapp.com/api/category/delete/${deleted}`).then( () =>{
       window.location.reload(false);    } )
       changedRows = rows.filter(row => !deletedSet.has(row._id));
     }
@@ -373,7 +373,7 @@ const test=()=>{
     async function fetchData() {
       if(parent0.length===24){
         try {
-          const res = await axios.post('https://backoil.herokuapp.com/api/partName/product/cat/',{category:idNew}); 
+          const res = await axios.post('https://backendapioill.herokuapp.com/api/partName/product/cat/',{category:idNew}); 
           setpartData(res.data);
           setpartData(res.data)
           console.log(partData)

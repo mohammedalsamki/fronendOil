@@ -226,7 +226,7 @@ export default function vehicles(props) {
     useEffect(async () => { 
         async function fetchData() {
             try {
-                const res = await axios.get('https://backoil.herokuapp.com/api/vehicles/Manufacturer/get/'); 
+                const res = await axios.get('https://backendapioill.herokuapp.com/api/vehicles/Manufacturer/get/'); 
                 setpropsdata(res.data);
                 console.log(propsdata)
             } catch (err) {
@@ -248,7 +248,7 @@ export default function vehicles(props) {
       let nameEN =name0
       let ItemImage =ItemImage
       let nameAr =nameEN0
-        axios.post('https://backoil.herokuapp.com/api/vehicles/Manufacturer/create',{
+        axios.post('https://backendapioill.herokuapp.com/api/vehicles/Manufacturer/create',{
             nameEn:nameEN,
             nameAr: nameAr, 
             logo:ItemImage
@@ -266,7 +266,7 @@ export default function vehicles(props) {
      const ItemDataToAPIUpdate = () => {
       setparent(localStorage.getItem('catID'));
       setcatName(localStorage.getItem('catName'));
-        axios.put(`https://backoil.herokuapp.com/api/vehicles/Modale/${idEdit}`,{
+        axios.put(`https://backendapioill.herokuapp.com/api/vehicles/Modale/${idEdit}`,{
           ModelAr:NameAr,
           ModelEn:NameEn,
           ModelLogo:ItemImage
@@ -286,7 +286,7 @@ export default function vehicles(props) {
       setparent(localStorage.getItem('catID'));
       console.log(ItemImage)
       setcatName(localStorage.getItem('catName'));
-        axios.put(`https://backoil.herokuapp.com/api/vehicles/Vehicles/${idEdit}`,{
+        axios.put(`https://backendapioill.herokuapp.com/api/vehicles/Vehicles/${idEdit}`,{
           ModelYear:value.value,
           Fueltype:valueFule.value,
           BodyNo:BodyNo,
@@ -313,7 +313,7 @@ export default function vehicles(props) {
       setparent(localStorage.getItem('catID'));
       console.log(arr.value,value.value,valueFule.value,BodyNo,idEdit)
       setcatName(localStorage.getItem('catName'));
-        axios.post('https://backoil.herokuapp.com/api/vehicles/Vehicles/create',{
+        axios.post('https://backendapioill.herokuapp.com/api/vehicles/Vehicles/create',{
           ModelYear:value.value,
           Fueltype:valueFule.value,
           BodyNo:BodyNo,
@@ -338,7 +338,7 @@ export default function vehicles(props) {
     const ItemDataToAPI = () => {
       setparent(localStorage.getItem('catID'));
       setcatName(localStorage.getItem('catName'));
-        axios.post('https://backoil.herokuapp.com/api/vehicles/Modale/create',{
+        axios.post('https://backendapioill.herokuapp.com/api/vehicles/Modale/create',{
           ModelEn:NameEn,
           ModelAr:NameAr,
           category:partId,
@@ -359,7 +359,7 @@ export default function vehicles(props) {
 
     // ------------------------Edit Part Name api----------------
     const EditDataToAPI = () => {
-      axios.put(`https://backoil.herokuapp.com/api/vehicles/Manufacturer/${idEdit}`, {
+      axios.put(`https://backendapioill.herokuapp.com/api/vehicles/Manufacturer/${idEdit}`, {
         nameEn:name0,
         nameAr:nameEN0,
         logo:ItemImage
@@ -376,7 +376,7 @@ export default function vehicles(props) {
     let isExecuted = window.confirm("Are you sure to execute this action?");
     console.log(isExecuted);
     if(isExecuted){
-    axios.delete(`https://backoil.herokuapp.com/api/vehicles/Vehicles/${id}`).then( () =>{
+    axios.delete(`https://backendapioill.herokuapp.com/api/vehicles/Vehicles/${id}`).then( () =>{
       alert('delete done')
       window.location.reload(false);
     } )}
@@ -386,7 +386,7 @@ export default function vehicles(props) {
       let isExecuted = window.confirm("Are you sure to execute this action?");
       console.log(isExecuted);
       if(isExecuted){
-      axios.delete(`https://backoil.herokuapp.com/api/vehicles/Modale/${id}`).then( () =>{
+      axios.delete(`https://backendapioill.herokuapp.com/api/vehicles/Modale/${id}`).then( () =>{
         alert('delete done')
         window.location.reload(false);
       } )}
@@ -396,7 +396,7 @@ export default function vehicles(props) {
       let isExecuted = window.confirm("Are you sure to execute this action?");
       console.log(isExecuted);
       if(isExecuted){
-      axios.delete(`https://backoil.herokuapp.com/api/vehicles/Manufacturer/${id}`).then( () =>{
+      axios.delete(`https://backendapioill.herokuapp.com/api/vehicles/Manufacturer/${id}`).then( () =>{
         alert('delete done')
         window.location.reload(false);
       } )}
@@ -409,7 +409,7 @@ export default function vehicles(props) {
         console.log(cat)
         async function fetchData() {
             try {
-              const res = await axios.post('https://backoil.herokuapp.com/api/vehicles/Modale/get/',{category:cat}); 
+              const res = await axios.post('https://backendapioill.herokuapp.com/api/vehicles/Modale/get/',{category:cat}); 
               setitemData(res.data);
               console.log("from local",itemData)
               console.log("from api",res.data)
@@ -426,7 +426,7 @@ export default function vehicles(props) {
           console.log(cat)
           async function fetchData() {
               try {
-                const res = await axios.post('https://backoil.herokuapp.com/api/vehicles/Vehicles/get/',{category:cat}); 
+                const res = await axios.post('https://backendapioill.herokuapp.com/api/vehicles/Vehicles/get/',{category:cat}); 
                 setbranditemData(res.data);
                 console.log("from local",branditemData)
                 console.log("from api",res.data)

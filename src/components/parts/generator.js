@@ -127,7 +127,7 @@ function ProdectTable() {
 
   const getOptionsOrigin=async()=>{
 
-    const res = await axios.get('https://backoil.herokuapp.com/api/Suspention/use/get')
+    const res = await axios.get('https://backendapioill.herokuapp.com/api/Suspention/use/get')
     const data = res.data
     const options = data.map(d => ({
       "value" : d._id,
@@ -163,7 +163,7 @@ function ProdectTable() {
     let isExecuted = window.confirm("Are you sure to execute this action?");
     console.log(isExecuted);
     if(isExecuted){
-    axios.delete(`https://backoil.herokuapp.com/api/products/${id}`).then( () =>{
+    axios.delete(`https://backendapioill.herokuapp.com/api/products/${id}`).then( () =>{
       alert('delete done')
       
     window.location.reload(false);
@@ -173,7 +173,7 @@ function ProdectTable() {
   //  let x={
   //   category:catID
   //  }
-  await axios.post(`https://backoil.herokuapp.com/api/products/product/cat`,{category:catID}).then( (allproduct) =>{
+  await axios.post(`https://backendapioill.herokuapp.com/api/products/product/cat`,{category:catID}).then( (allproduct) =>{
       setSuspentionList(allproduct.data);
       console.log(allproduct)
       setRows(allproduct.data);
@@ -291,7 +291,7 @@ function ProdectTable() {
     }
   }
   const sendDataToAPI = () => {
-    axios.put(`https://backoil.herokuapp.com/api/products/${_id}`, {
+    axios.put(`https://backendapioill.herokuapp.com/api/products/${_id}`, {
  
       StockQuantity:StockQuantity,
       UnitPrice:UnitPrice,

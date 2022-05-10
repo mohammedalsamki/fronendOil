@@ -48,7 +48,7 @@ export default class CreateSuspention extends Component {
  
  async getOptions(){
 
-    const res = await axios.get('https://backoil.herokuapp.com/api/Suspention/use/get')
+    const res = await axios.get('https://backendapioill.herokuapp.com/api/Suspention/use/get')
     const data = res.data
     
     const options = data.map(d => ({
@@ -61,7 +61,7 @@ export default class CreateSuspention extends Component {
   }
   async getOptionsBrand(){
 
-    const res = await axios.get('https://backoil.herokuapp.com/api/oil/Brand')
+    const res = await axios.get('https://backendapioill.herokuapp.com/api/oil/Brand')
     const data = res.data
    this.setState({ID:data._id})
 
@@ -138,7 +138,7 @@ export default class CreateSuspention extends Component {
 
     }
     console.log(x)
-   await axios.post('https://backoil.herokuapp.com/api/products/product/create',x).then( () => {
+   await axios.post('https://backendapioill.herokuapp.com/api/products/product/create',x).then( () => {
     alert("item added")
 
       // window.location.reload(false);

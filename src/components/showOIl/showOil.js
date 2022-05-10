@@ -110,7 +110,7 @@ export default function ShowOilsData() {
   const [unitList, setunitList] = React.useState(false);
   const getOptionsunit=async()=>{
 
-    const res = await axios.get('https://backoil.herokuapp.com/api/oil/unit')
+    const res = await axios.get('https://backendapioill.herokuapp.com/api/oil/unit')
     const data = res.data
     const options = data.map(d => ({
       "value" : d._id,
@@ -151,7 +151,7 @@ export default function ShowOilsData() {
     let isExecuted = window.confirm("Are you sure to execute this action?");
     console.log(isExecuted);
     if(isExecuted){
-    axios.delete(`https://backoil.herokuapp.com/api/oil/${id}`).then( () =>{
+    axios.delete(`https://backendapioill.herokuapp.com/api/oil/${id}`).then( () =>{
       alert('delete done')
       window.location.reload(false);
     } )}
@@ -159,7 +159,7 @@ export default function ShowOilsData() {
   }
    useEffect(()=>{
     getOptionsunit();
-    axios.get(`https://backoil.herokuapp.com/api/oil/`).then( (allOils) =>{
+    axios.get(`https://backendapioill.herokuapp.com/api/oil/`).then( (allOils) =>{
       setOilList(allOils.data);
       setRows(allOils.data);
 
@@ -247,7 +247,7 @@ export default function ShowOilsData() {
 
   };
   const sendDataToAPI = () => {
-    axios.put(`https://backoil.herokuapp.com/api/oil/${_id}`, {
+    axios.put(`https://backendapioill.herokuapp.com/api/oil/${_id}`, {
  
       StockQuantiti:StockQuantiti,
       UnitPrice,

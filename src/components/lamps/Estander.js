@@ -88,13 +88,13 @@ export default function LampsEStander() {
     setOpen(false)};
 
   const deletelampsUsge=(id)=>{
-    axios.delete(`https://backoil.herokuapp.com/api/lamps/lamps/EStander/${id}`).then( () =>{
+    axios.delete(`https://backendapioill.herokuapp.com/api/lamps/lamps/EStander/${id}`).then( () =>{
       window.location.reload(false);
     } )
   }
 
   useEffect(()=>{
-    axios.get(`https://backoil.herokuapp.com/api/lamps/lamps/EStander`).then( (alllampssUseg) =>{
+    axios.get(`https://backendapioill.herokuapp.com/api/lamps/lamps/EStander`).then( (alllampssUseg) =>{
       setlampslList(alllampssUseg.data);
     })
   },[]);
@@ -118,13 +118,13 @@ const setID=(id,EStanderAr,EStanderEn)=>{
 }
        
   const creatlampsusgefun = ()=>{
-    axios.post('https://backoil.herokuapp.com/api/lamps/lamps/EStander',{EStanderAr,EStanderEn}).then( () => {
+    axios.post('https://backendapioill.herokuapp.com/api/lamps/lamps/EStander',{EStanderAr,EStanderEn}).then( () => {
       window.location.reload(false);
     })
   }
 
   const sendDataToAPI = () => {
-    axios.put(`https://backoil.herokuapp.com/api/lamps/lamps/EStander/${id}`, {
+    axios.put(`https://backendapioill.herokuapp.com/api/lamps/lamps/EStander/${id}`, {
  
         EStanderAr:EStanderAr,
         EStanderEn:EStanderEn

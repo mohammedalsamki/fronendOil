@@ -48,7 +48,7 @@ export default class Test extends Component {
   }
   async getOptionsunit(){
 
-    const res = await axios.get('https://backoil.herokuapp.com/api/oil/unit')
+    const res = await axios.get('https://backendapioill.herokuapp.com/api/oil/unit')
     const data = res.data
     const options = data.map(d => ({
       "value" : d._id,
@@ -60,7 +60,7 @@ export default class Test extends Component {
   }
  async getOptions(){
 
-    const res = await axios.get('https://backoil.herokuapp.com/api/bumps/use/get')
+    const res = await axios.get('https://backendapioill.herokuapp.com/api/bumps/use/get')
     const data = res.data
     
     const options = data.map(d => ({
@@ -74,7 +74,7 @@ export default class Test extends Component {
   }
   async getOptionsBrand(){
 
-    const res = await axios.get('https://backoil.herokuapp.com/api/oil/Brand')
+    const res = await axios.get('https://backendapioill.herokuapp.com/api/oil/Brand')
     const data = res.data
    this.setState({ID:data._id})
 
@@ -154,7 +154,7 @@ export default class Test extends Component {
 
     }
     console.log(x)
-   await axios.post('https://backoil.herokuapp.com/api/bumps/bumps/create',x).then( () => {
+   await axios.post('https://backendapioill.herokuapp.com/api/bumps/bumps/create',x).then( () => {
     alert("item added")
 
       window.location.reload(false);

@@ -91,13 +91,13 @@ export default function  CreateSuspentionUse() {
     setOpen(false)};
 
   const deleteSuspentionsUsge=(id)=>{
-    axios.delete(`https://backoil.herokuapp.com/api/Suspention/use/${id}`).then( () =>{
+    axios.delete(`https://backendapioill.herokuapp.com/api/Suspention/use/${id}`).then( () =>{
       window.location.reload(false);
     } )
   }
 
   useEffect(()=>{
-    axios.get(`https://backoil.herokuapp.com/api/Suspention/use/get/`).then( (allSuspentionssUseg) =>{
+    axios.get(`https://backendapioill.herokuapp.com/api/Suspention/use/get/`).then( (allSuspentionssUseg) =>{
       setOiUsgelList(allSuspentionssUseg.data);
     })
   },[]);
@@ -116,13 +116,13 @@ setSuspentionsUsageEn(localStorage.getItem('SuspentionsUsageEn'))
 setid(localStorage.getItem('ID'))
 }    
   const creatSuspentionsusgefun = ()=>{
-    axios.post('https://backoil.herokuapp.com/api/Suspention/use/',{SuspentionsUsageAr,SuspentionsUsageEn}).then( () => {
+    axios.post('https://backendapioill.herokuapp.com/api/Suspention/use/',{SuspentionsUsageAr,SuspentionsUsageEn}).then( () => {
       window.location.reload(false);
     })
   }
 
   const sendDataToAPI = () => {
-    axios.put(`https://backoil.herokuapp.com/api/Suspention/use/${id}`, {
+    axios.put(`https://backendapioill.herokuapp.com/api/Suspention/use/${id}`, {
  
       SuspentionsUsageAr:SuspentionsUsageAr,
       SuspentionsUsageEn:SuspentionsUsageEn

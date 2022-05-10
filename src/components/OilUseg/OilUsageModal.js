@@ -59,7 +59,7 @@ export default function AddSpec() {
   
     const [IDSpec, setIDSpec] = useState(null);
     const sendDataToAPI = () => {
-        axios.put(`https://backoil.herokuapp.com/api/oil/spec/${IDSpec}`, {
+        axios.put(`https://backendapioill.herokuapp.com/api/oil/spec/${IDSpec}`, {
           OilUsageEn,
           Specs
         }).then(() => {
@@ -75,7 +75,7 @@ export default function AddSpec() {
       let isExecuted = window.confirm("Are you sure to execute this action?");
     console.log(isExecuted);
     if(isExecuted){
-      axios.put(`https://backoil.herokuapp.com/api/oil/specDelete/${IDSpec}`, {
+      axios.put(`https://backendapioill.herokuapp.com/api/oil/specDelete/${IDSpec}`, {
         OilUsageEn,
         SpecsChiled:name
       }).then(() => {
@@ -88,7 +88,7 @@ export default function AddSpec() {
     }
 
     useEffect(() => {
-      axios.get(`https://backoil.herokuapp.com/api/oil/tours/${IDSpec}`).then( (allOilsUseg) =>{
+      axios.get(`https://backendapioill.herokuapp.com/api/oil/tours/${IDSpec}`).then( (allOilsUseg) =>{
         setOiUsgelList(allOilsUseg.data.Specs);
         setlist(allOilsUseg.data.Specs);
       })

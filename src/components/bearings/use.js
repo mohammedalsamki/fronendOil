@@ -91,13 +91,13 @@ export default function     () {
     setOpen(false)};
 
   const deleteBearingsUsge=(id)=>{
-    axios.delete(`https://backoil.herokuapp.com/api/bearing/use/${id}`).then( () =>{
+    axios.delete(`https://backendapioill.herokuapp.com/api/bearing/use/${id}`).then( () =>{
       window.location.reload(false);
     } )
   }
 
   useEffect(()=>{
-    axios.get(`https://backoil.herokuapp.com/api/bearing/use/get/`).then( (allBearingssUseg) =>{
+    axios.get(`https://backendapioill.herokuapp.com/api/bearing/use/get/`).then( (allBearingssUseg) =>{
       setOiUsgelList(allBearingssUseg.data);
     })
   },[]);
@@ -116,13 +116,13 @@ setBearingsUsageEn(localStorage.getItem('BearingsUsageEn'))
 setid(localStorage.getItem('ID'))
 }    
   const creatBearingsusgefun = ()=>{
-    axios.post('https://backoil.herokuapp.com/api/bearing/use/',{BearingsUsageAr,BearingsUsageEn}).then( () => {
+    axios.post('https://backendapioill.herokuapp.com/api/bearing/use/',{BearingsUsageAr,BearingsUsageEn}).then( () => {
       window.location.reload(false);
     })
   }
 
   const sendDataToAPI = () => {
-    axios.put(`https://backoil.herokuapp.com/api/bearing/use/${id}`, {
+    axios.put(`https://backendapioill.herokuapp.com/api/bearing/use/${id}`, {
  
       BearingsUsageAr:BearingsUsageAr,
       BearingsUsageEn:BearingsUsageEn

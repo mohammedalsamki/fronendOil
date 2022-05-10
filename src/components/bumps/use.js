@@ -91,13 +91,13 @@ export default function CreatebumpsUsge() {
     setOpen(false)};
 
   const deletebumpsUsge=(id)=>{
-    axios.delete(`https://backoil.herokuapp.com/api/bumps/use/${id}`).then( () =>{
+    axios.delete(`https://backendapioill.herokuapp.com/api/bumps/use/${id}`).then( () =>{
       window.location.reload(false);
     } )
   }
 
   useEffect(()=>{
-    axios.get(`https://backoil.herokuapp.com/api/bumps/use/get`).then( (allbumpssUseg) =>{
+    axios.get(`https://backendapioill.herokuapp.com/api/bumps/use/get`).then( (allbumpssUseg) =>{
       setOiUsgelList(allbumpssUseg.data);
     })
   },[]);
@@ -116,13 +116,13 @@ setpumpsUsageEn(localStorage.getItem('pumpsUsageEn'))
 setid(localStorage.getItem('ID'))
 }    
   const creatbumpsusgefun = ()=>{
-    axios.post('https://backoil.herokuapp.com/api/bumps/use',{pumpsUsageAr,pumpsUsageEn}).then( () => {
+    axios.post('https://backendapioill.herokuapp.com/api/bumps/use',{pumpsUsageAr,pumpsUsageEn}).then( () => {
       window.location.reload(false);
     })
   }
 
   const sendDataToAPI = () => {
-    axios.put(`https://backoil.herokuapp.com/api/bumps/use/${id}`, {
+    axios.put(`https://backendapioill.herokuapp.com/api/bumps/use/${id}`, {
  
       pumpsUsageAr:pumpsUsageAr,
       pumpsUsageEn:pumpsUsageEn

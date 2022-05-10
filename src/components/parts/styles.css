@@ -89,7 +89,14 @@
   border-radius: 50%
 }
 
-
+.parent {
+  margin: 1rem;
+  text-align: center;
+}
+.child {
+  display: inline-block;
+  vertical-align: middle;
+}
 
 
 

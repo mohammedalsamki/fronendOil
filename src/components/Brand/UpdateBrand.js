@@ -28,7 +28,7 @@ export default function UpdateBrand() {
 
     const [ID, setID] = useState(null);
     const sendDataToAPI = () => {
-        axios.put(`https://backoil.herokuapp.com/api/oil/brand/${ID}`, {
+        axios.put(`https://backendapioill.herokuapp.com/api/oil/brand/${ID}`, {
             BrandAr,
             BrandEn,
             BrandDiscr,

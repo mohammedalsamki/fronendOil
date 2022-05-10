@@ -86,14 +86,14 @@ export default function CreatesparkUsge() {
     setOpen(false)};
 
   const deletesparkUsge=(id)=>{
-    axios.delete(`https://backoil.herokuapp.com/api/spark/spark/usage/${id}`).then( () =>{
+    axios.delete(`https://backendapioill.herokuapp.com/api/spark/spark/usage/${id}`).then( () =>{
       window.location.reload(false);
     } )
   }
   const [id, setid]= React.useState('');
 
   useEffect(()=>{
-    axios.get(`https://backoil.herokuapp.com/api/spark/spark/usage`).then( (allsparksUseg) =>{
+    axios.get(`https://backendapioill.herokuapp.com/api/spark/spark/usage`).then( (allsparksUseg) =>{
       setOiUsgelList(allsparksUseg.data);
     })
   },[]);
@@ -113,13 +113,13 @@ setid(localStorage.getItem('ID'))
   setoriginatedAr(localStorage.getItem('originatedAr'))
 }     
   const creatsparkusgefun = ()=>{
-    axios.post('https://backoil.herokuapp.com/api/spark/spark/usage',{originatedAr,originatedEn}).then( () => {
+    axios.post('https://backendapioill.herokuapp.com/api/spark/spark/usage',{originatedAr,originatedEn}).then( () => {
       window.location.reload(false);
     })
   }
 
   const sendDataToAPI = () => {
-    axios.put(`https://backoil.herokuapp.com/api/spark/spark/usage/${id}`, {
+    axios.put(`https://backendapioill.herokuapp.com/api/spark/spark/usage/${id}`, {
  
       originatedAr:originatedAr,
       originatedEn:originatedEn

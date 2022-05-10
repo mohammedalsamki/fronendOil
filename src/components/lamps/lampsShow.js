@@ -127,7 +127,7 @@ export default function ShowlampsData() {
   const [unitList, setunitList] = React.useState(false);
   const getOptionsunit=async()=>{
 
-    const res = await axios.get('https://backoil.herokuapp.com/api/oil/unit')
+    const res = await axios.get('https://backendapioill.herokuapp.com/api/oil/unit')
     const data = res.data
     const options = data.map(d => ({
       "value" : d._id,
@@ -141,7 +141,7 @@ export default function ShowlampsData() {
   }
   const getOptionsES=async()=>{
 
-    const res = await axios.get('https://backoil.herokuapp.com/api/lamps/lamps/EStander')
+    const res = await axios.get('https://backendapioill.herokuapp.com/api/lamps/lamps/EStander')
     const data = res.data
     const options = data.map(d => ({
       "value" : d._id,
@@ -167,7 +167,7 @@ export default function ShowlampsData() {
     let isExecuted = window.confirm("Are you sure to execute this action?");
     console.log(isExecuted);
     if(isExecuted){
-    axios.delete(`https://backoil.herokuapp.com/api/lamps/lamps/${id}`).then( () =>{
+    axios.delete(`https://backendapioill.herokuapp.com/api/lamps/lamps/${id}`).then( () =>{
       alert('delete done')
       
     window.location.reload(false);
@@ -176,7 +176,7 @@ export default function ShowlampsData() {
   useEffect(async()=>{
     getOptionsunit();
     getOptionsES();
-    await axios.get(`https://backoil.herokuapp.com/api/lamps/lamps/`).then( (alllampss) =>{
+    await axios.get(`https://backendapioill.herokuapp.com/api/lamps/lamps/`).then( (alllampss) =>{
       setlampsList(alllampss.data);
       setRows(alllampss.data);
 
@@ -282,7 +282,7 @@ export default function ShowlampsData() {
     }
   }
   const sendDataToAPI = () => {
-    axios.put(`https://backoil.herokuapp.com/api/lamps/lamps/${_id}`, {
+    axios.put(`https://backendapioill.herokuapp.com/api/lamps/lamps/${_id}`, {
  
       StockQuantiti:StockQuantiti,
       UnitPrice:UnitPrice,

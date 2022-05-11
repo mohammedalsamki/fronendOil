@@ -378,7 +378,7 @@ export default function vehicles(props) {
     if(isExecuted){
     axios.delete(`https://backendapioill.herokuapp.com/api/vehicles/Vehicles/${id}`).then( () =>{
       alert('delete done')
-      window.location.reload(false);
+      // window.location.reload(false);
     } )}
   }
     // ----------------------Delete Part Brand--------------------
@@ -486,7 +486,7 @@ export default function vehicles(props) {
                                                                              <h5 style={{  display:"inline-block",border: "5px solid gray" }}>.  BodyNo# : {item0.BodyNo}  .</h5>
                                                                              <h5 style={{  display:"inline-block",border: "5px solid gray" }}>.  EngVol# : {item0.EngVol}  .</h5>
                                                                              <h5 style={{  display:"inline-block",border: "5px solid gray" }}>.  EngNo# : {item0.EngNo} .</h5>
-                                      <button style={{  display:"inline-block" }} className="remove" onClick={()=> DeleteVehicles(item._id)} ><RestoreFromTrashIcon/></button>
+                                      <button style={{  display:"inline-block" }} className="remove" onClick={()=> DeleteVehicles(item0._id)} ><RestoreFromTrashIcon/></button>
                           <button style={{  display:"inline-block" }} className="edit" onClick={()=> handleEditVehicles(item0.ModelYear,item0._id,item0.Notes,item0.ModelImage,item0.BodyNo,item0.EngVol,item0.EngNo,item0.Fueltype)}><EditIcon/></button></div>}  >
                              </TreeItem>
                              )}

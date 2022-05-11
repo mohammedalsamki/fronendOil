@@ -378,7 +378,7 @@ export default function vehicles(props) {
     if(isExecuted){
     axios.delete(`https://backendapioill.herokuapp.com/api/vehicles/Vehicles/${id}`).then( () =>{
       alert('delete done')
-      // window.location.reload(false);
+      window.location.reload(false);
     } )}
   }
     // ----------------------Delete Part Brand--------------------

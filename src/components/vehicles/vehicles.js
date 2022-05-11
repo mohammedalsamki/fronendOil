@@ -321,7 +321,7 @@ export default function vehicles(props) {
           EngVol:EngVol,
           Notes:Note,
           category:idEdit,
-          logo:ItemImage
+          ModelImage:ItemImage
 
          
         }).then( (response) => {

@@ -548,7 +548,7 @@ const test=()=>{
       <AppBar>
         <toolbar>
           <h1>Category: {catName} </h1>
-          <h2>Add Chailed</h2>
+          <h2>Add Child</h2>
         </toolbar>
       </AppBar>
 <br></br>
@@ -582,7 +582,7 @@ const test=()=>{
 
         <br />
         <Button variant="contained" color="primary" onClick={sendDataToAPI}>
-        Add Sup Category for {catName} 
+        Add Sub Category for {catName} 
         </Button>
       </form>
     </div>

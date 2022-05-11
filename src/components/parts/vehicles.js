@@ -126,9 +126,21 @@ const allVehcles=()=>{
   arrVhcles.push(Vehcle[i].value)
     
   }
+}
+
+  try {
+    axios.put(`https://backendapioill.herokuapp.com/api/products/spec/${props.partID}`,{
+      vehicles:arrVhcles,
+    })
+    alert("Vehicles Added")
+    window.location.reload(false);
+
+  } catch (error) {
+    
+  }
+
   
 
-  }
   console.log(arrVhcles)
 
 }
